@@ -1,6 +1,9 @@
 function Home() {
   return (<div>
-    <h1>Welcome</h1>
+    <div>
+      <h1>Welcome to Gym apppp</h1>
+      <p>Gym app helps you track your strength progress over time</p>
+    </div>
   </div>);
 }
 

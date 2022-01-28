@@ -1,4 +1,7 @@
 import { Link, redirect } from "remix";
+import {db } from '~/utils/db.server'
+
+
 
 export const action = async ({ request }) => {
   const form = await request.formData();
@@ -7,8 +10,11 @@ export const action = async ({ request }) => {
 
   const fields = { title, body };
 
-  console.log(fields);
-  return redirect("/exercises");
+  const exercise = await db.exercise.create({
+      data: fields
+  })
+
+  return redirect(`/exercises/${exercise.id}`);
 };
 
 function NewExercise() {

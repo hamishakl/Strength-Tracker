@@ -6,7 +6,7 @@ function Exercise() {
 const params = useParams()
 
 return <div>
-      <h1>Exercise {params.postId}</h1>
+      <h1>Exercise {params.exerciseId}</h1>
   </div>;
 }
 

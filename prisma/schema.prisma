@@ -16,4 +16,16 @@ model Exercise {
   body      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Pr        Pr[]
+}
+
+model Pr {
+  id         String   @id @default(uuid())
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  weight     Int
+  reps       Int
+  sets       Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  exerciseId String
 }

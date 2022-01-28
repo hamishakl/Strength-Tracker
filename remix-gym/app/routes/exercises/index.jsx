@@ -15,8 +15,11 @@ function ExerciseItems() {
   const { exercises } = useLoaderData();
   return (
     <div>
-        <div className="page-header"></div>
+        <div className="page-header">
+
       <h1>Exercises</h1>
+      <Link to='/exercises/new' className="btn">New exercise</Link>
+        </div>
       <ul className="exercise-list">
         {exercises.map((exercise) => (
           <li key={exercise.id}>

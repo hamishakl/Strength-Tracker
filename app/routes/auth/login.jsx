@@ -6,15 +6,15 @@ function badRequest(data) {
   return json(data, { status: 400 });
 }
 
-function validatePassword(title) {
-  if (typeof title !== "string" || title.length < 2) {
-    return "Title should be atleast 2 characters long";
+function validateUsername(username) {
+  if (typeof username !== 'string' || username.length < 3) {
+    return 'Username must be at least 3 characters'
   }
 }
 
-function validateUsername(body) {
-  if (typeof title !== "string" || title.length < 10) {
-    return "Body should be atleast 2 characters long";
+function validatePassword(password) {
+  if (typeof password !== 'string' || password.length < 6) {
+    return 'Password must be at least 6 characters'
   }
 }
 

@@ -12,9 +12,16 @@ function validateUsername(username) {
   }
 }
 
+
 function validatePassword(password) {
   if (typeof password !== 'string' || password.length < 6) {
     return 'Password must be at least 6 characters'
+  }
+  else if (typeof password !== 'string' || password.search(/[0-9]/) == -1) {
+    return 'Password must contain atleast 1 number'
+  }
+  else if (typeof password !== 'string' || password.search(/[A-Z]/) == -1) {
+    return 'Password must contain atleast 1 upper case letter'
   }
 }
 

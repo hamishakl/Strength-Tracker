@@ -1,6 +1,6 @@
 import { useActionData, json, redirect } from "remix";
 import { db } from "~/utils/db.server";
-import {login, createUserSession} from '~/utils/session.server'
+import {login, register, createUserSession} from '~/utils/session.server'
 
 function badRequest(data) {
   return json(data, { status: 400 });
@@ -51,11 +51,34 @@ export const action = async ({ request }) => {
                 fieldErrors: {username: 'Invalid Credentials'}
             })
         }
-        return createUserSession(user.id, '/posts')
+        return createUserSession(user.id, '/exercises')
     }
     case "register": {
-      break;
+      const userExists = await db.user.findFirst({
+        where: {
+          username
+        }
+      })
+      if(userExists) {
+        return badRequest({
+          fields, 
+          fieldErrors: {userName: `User ${username} already exists`},
+        })
+      }
+
+      const user = await register({ username, password })
+      if(!user) {
+        return badRequest({
+          fields,
+          formError: 'Something went wrong'
+        })
+      }
+
+      return createUserSession(user.id, '/exercises')
+
     }
+
+
     default: {
       return badRequest({ fields, formError: "Login type is not valid" });
     }

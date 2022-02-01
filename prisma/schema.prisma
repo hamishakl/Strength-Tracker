@@ -17,11 +17,22 @@ model Exercise {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Pr        Pr[]
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+}
+
+model User {
+  id           String     @id @default(uuid())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  username     String     @unique
+  passwordHash String
+  exercises    Exercise[]
 }
 
 model Pr {
   id         String   @id @default(uuid())
-  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
   weight     Int
   reps       Int
   sets       Int

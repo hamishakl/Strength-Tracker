@@ -1,5 +1,8 @@
 import { redirect, useLoaderData, Link } from "remix";
 import { db } from "~/utils/db.server";
+import Pr from "./prId";
+import { useState } from 'react';
+
 
 export const loader = async ({ params }) => {
   const exercise = await db.exercise.findUnique({
@@ -31,10 +34,13 @@ export const action = async ({ request, params }) => {
 
 function Exercise() {
   const { exercise } = useLoaderData();
+  // const [data, setData] = useState("");
+  const exerciseId = exercise.id
   return (
     <div>
       <div className="page-header">
         <h1>{exercise.title}</h1>
+        <Pr id={exerciseId} />
         <Link to="/exercises" className="btn btn-reverse">
           Back
         </Link>
@@ -47,6 +53,7 @@ function Exercise() {
       </div>
     </div>
   );
-}
+  
+};
 
-export default Exercise;
+export default Exercise

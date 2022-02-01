@@ -1,7 +1,17 @@
-import { Link, redirect } from "remix";
-import {db } from '~/utils/db.server'
+import { Link, redirect, useActionData, json } from "remix";
+import { db } from "~/utils/db.server";
 
+function validateTitle(title) {
+  if (typeof title !== "string" || title.length < 2) {
+    return "Title should be atleast 2 characters long";
+  }
+}
 
+function validateTitle(body) {
+  if (typeof title !== "string" || title.length < 10) {
+    return "Body should be atleast 2 characters long";
+  }
+}
 
 export const action = async ({ request }) => {
   const form = await request.formData();
@@ -10,14 +20,26 @@ export const action = async ({ request }) => {
 
   const fields = { title, body };
 
+  const fieldErrors = {
+    title: validateTitle(title),
+    body: validateTitle(title),
+  };
+
+  if (Object.values(fieldErrors).some(Boolean)) {
+    console.log(fieldErrors);
+    return json({ fieldErrors, fields }, { status: 400 });
+  }
+
   const exercise = await db.exercise.create({
-      data: fields
-  })
+    data: fields,
+  });
 
   return redirect(`/exercises/${exercise.id}`);
 };
 
 function NewExercise() {
+  const actionData = useActionData();
+
   return (
     <>
       <div className="page-header">
@@ -30,11 +52,23 @@ function NewExercise() {
         <form method="POST">
           <div className="form-control">
             <label htmlFor="title">Title</label>
-            <input type="text" name="title" id="title" />
+                <input type="text" name="title" id="title" defaultValue={actionData?.fields?.title}/>
+            <div className="error">
+              <p>
+                {actionData?.fieldErrors?.title &&
+                  actionData?.fieldErrors?.title}
+              </p>
+            </div>
           </div>
           <div className="form-control">
             <label htmlFor="body">Exercise Body</label>
-            <input type="text" name="body" id="body" />
+            <input type="text" name="body" id="body" defaultValue={actionData?.fields?.title} />
+            <div className="error">
+              <p>
+                {actionData?.fieldErrors?.body &&
+                  actionData?.fieldErrors?.body}
+              </p>
+            </div>
           </div>
           <button type="submit" className="btn btn-block">
             Add exercise

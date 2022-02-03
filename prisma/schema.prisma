@@ -8,20 +8,51 @@ datasource db {
 }
 
 model User {
-  id      String   @id @default(uuid())
-  username  String  @unique
-  passwordHash  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  exercises Exercise[]
+  id           String     @id @default(uuid())
+  username     String     @unique
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  exercises    Exercise[]
+  Pr           Pr[]       @relation("userid")
 }
 
 model Exercise {
-  id      String   @id @default(uuid())
-  userId  String
-  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  title   String
-  body    String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id        String   @id @default(uuid())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String?
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pr        Pr?      @relation(fields: [prId], references: [id], onDelete: Cascade)
+  prId      String?
 }
+
+model Pr {
+  userId     String?
+  id         String     @id @default(uuid())
+  weight     Int
+  reps       Int
+  sets       Int
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  exercises  Exercise[]
+  User       User?      @relation(name: "userid", fields: [userId], references: [id])
+}
+
+// model User {
+//   id           Int     @id @default(autoincrement())
+//   name         String?
+//   writtenPosts Post[]  @relation("WrittenPosts")
+//   pinnedPost   Post?   @relation("PinnedPost")
+// }
+
+// model Post {
+//   id         Int     @id @default(autoincrement())
+//   title      String?
+//   author     User    @relation("WrittenPosts", fields: [authorId], references: [id])
+//   authorId   Int
+//   pinnedBy   User?   @relation(name: "PinnedPost", fields: [pinnedById], references: [id])
+//   pinnedById Int?
+// }

@@ -42,7 +42,7 @@ export const action = async ({ request, params }) => {
 };
 
 function Exercise() {
-  const { exercise } = useLoaderData();
+  const { exercise, user } = useLoaderData();
   // const [data, setData] = useState("");
   // const exerciseId = exercise.id
   return (
@@ -54,11 +54,13 @@ function Exercise() {
           Back
         </Link>
       </div>
-      <div className="page-footer">
-        <form method="POST">
-          <input type="hidden" name="_method" value="delete" />
-          <button className="btn btn-delete">Delete</button>
-        </form>
+      <div className='page-footer'>
+        {user.id === exercise.userId && (
+          <form method='POST'>
+            <input type='hidden' name='_method' value='delete' />
+            <button className='btn btn-delete'>Delete</button>
+          </form>
+        )}
       </div>
     </div>
   );

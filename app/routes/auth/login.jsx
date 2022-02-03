@@ -85,7 +85,7 @@ export const action = async ({ request }) => {
   }
 };
 
-function Login(params) {
+function Login() {
   const actionData = useActionData();
 
   return (

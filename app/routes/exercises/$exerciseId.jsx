@@ -1,10 +1,13 @@
 import { redirect, useLoaderData, Link } from "remix";
 import { db } from "~/utils/db.server";
-import Pr from "./prId";
-import { useState } from 'react';
+// import Pr from "./prId";
+// import { useState } from 'react';
+import { getUser } from '~/utils/session.server'
 
 
-export const loader = async ({ params }) => {
+
+export const loader = async ({ request, params }) => {
+  const user = await getUser(request)
   const exercise = await db.exercise.findUnique({
     where: { id: params.exerciseId },
   });
@@ -13,13 +16,15 @@ export const loader = async ({ params }) => {
     throw new Error("Exercise not found");
   }
 
-  const data = { exercise };
+  const data = { exercise, user };
   return data;
 };
 
 export const action = async ({ request, params }) => {
   const form = await request.formData();
   if (form.get("_method") === "delete") {
+    const user = await getUser(request)
+
     const exercise = await db.exercise.findUnique({
       where: { id: params.exerciseId },
     });
@@ -27,7 +32,11 @@ export const action = async ({ request, params }) => {
     if (!exercise) {
       throw new Error("Exercise not found");
     }
-    await db.exercise.delete({ where: { id: params.exerciseId } });
+
+    if (user && exercise.userId === user.id) {
+      await db.exercise.delete({ where: { id: params.exerciseId } })
+    }
+
     return redirect("/exercises");
   }
 };
@@ -35,12 +44,12 @@ export const action = async ({ request, params }) => {
 function Exercise() {
   const { exercise } = useLoaderData();
   // const [data, setData] = useState("");
-  const exerciseId = exercise.id
+  // const exerciseId = exercise.id
   return (
     <div>
       <div className="page-header">
         <h1>{exercise.title}</h1>
-        <Pr id={exerciseId} />
+        {/* <Pr id={exerciseId} /> */}
         <Link to="/exercises" className="btn btn-reverse">
           Back
         </Link>

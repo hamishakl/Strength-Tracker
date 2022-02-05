@@ -1,29 +1,30 @@
-import { useLoaderData, Link } from "remix";
-import { db } from "~/utils/db.server";
+import { Link, useLoaderData } from 'remix'
+import { db } from '~/utils/db.server'
 
 export const loader = async () => {
   const data = {
     exercises: await db.exercise.findMany({
       take: 20,
       select: { id: true, title: true, createdAt: true },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: 'desc' },
     }),
-  };
+  }
 
-  return data;
-};
+  return data
+}
 
 function ExerciseItems() {
-  const { exercises } = useLoaderData();
+  const { exercises } = useLoaderData()
+
   return (
     <>
-      <div className="page-header">
-        <h1>Exercises</h1>
-        <Link to="/exercises/new" className="btn">
+      <div className='page-header'>
+        <h1>exercises</h1>
+        <Link to='/exercises/new' className='btn'>
           New exercise
         </Link>
       </div>
-      <ul className="exercise-list">
+      <ul className='exercises-list'>
         {exercises.map((exercise) => (
           <li key={exercise.id}>
             <Link to={exercise.id}>
@@ -34,7 +35,7 @@ function ExerciseItems() {
         ))}
       </ul>
     </>
-  );
+  )
 }
 
-export default ExerciseItems;
+export default ExerciseItems

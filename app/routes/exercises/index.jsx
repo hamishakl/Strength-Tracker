@@ -1,9 +1,19 @@
 import { Link, useLoaderData } from 'remix'
 import { db } from '~/utils/db.server'
 
-export const loader = async () => {
+import { getUser } from "~/utils/session.server";
+
+
+export const loader = async ({ request }) => {
+
+  const user = await getUser(request);
+
+
   const data = {
     exercises: await db.exercise.findMany({
+      where: { userId: {
+        equals: `${user.id}`
+      } },
       take: 20,
       select: { id: true, title: true, createdAt: true },
       orderBy: { createdAt: 'desc' },

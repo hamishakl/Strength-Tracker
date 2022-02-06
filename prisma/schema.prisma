@@ -35,7 +35,6 @@ model Pr {
   id         String    @id @default(uuid())
   weight     Int
   reps       Int
-  sets       Int
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   exercises  Exercise? @relation(name: "exerciseid", fields: [exerciseId], references: [id])

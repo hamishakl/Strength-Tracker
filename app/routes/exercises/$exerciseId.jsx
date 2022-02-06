@@ -4,8 +4,6 @@ import { getUser } from "~/utils/session.server";
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
-  console.log("sadsad");
-  // console.log(params);
   const exercise = await db.exercise.findUnique({
     where: { id: params.exerciseId },
   });
@@ -48,6 +46,10 @@ export const action = async ({ request, params }) => {
 
 function exercise() {
   const { exercise, user, pr } = useLoaderData();
+  const OneRmEstimate = (weight, reps) => {
+    const unRounded1RM = ((weight * reps)*0.0333)+weight
+    return Math.round(unRounded1RM, 2.5)
+  }
 
   return (
     <div>
@@ -60,13 +62,12 @@ function exercise() {
 
       <ul className="pr-list">
         {pr.map((pr) => (
+          
           <li key={pr.id}>
-            <Link to={pr.id}>
               <h3>{pr.weight}</h3>
               <h3>{pr.reps}</h3>
-              <h3>{pr.sets}</h3>
+              <h3>{OneRmEstimate(pr.weight, pr.reps)}</h3>
               {new Date(pr.createdAt).toLocaleString()}
-            </Link>
           </li>
         ))}
       </ul>

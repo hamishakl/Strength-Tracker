@@ -3,7 +3,6 @@ import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 
 function validateWeight(weight) {
-  console.log(typeof weight);
   if (typeof weight !== "number") {
     return "weight should be atleast 2 characters long";
   }
@@ -20,7 +19,6 @@ function badRequest(data) {
 }
 
 export const action = async ({ request, params }) => {
-  console.log(params);
   const form = await request.formData();
   const weightStr = form.get("weight");
   const repsStr = form.get("reps");

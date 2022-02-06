@@ -1,11 +1,11 @@
 import { Link, redirect, useLoaderData } from "remix";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
-import PrItems from "./pr";
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
-  console.log(params.exerciseId);
+  console.log('sadsad');
+  // console.log(params);
   const exercise = await db.exercise.findUnique({
     where: { id: params.exerciseId },
   });
@@ -70,6 +70,10 @@ function exercise() {
           </li>
         ))}
       </ul>
+
+      <Link to='./pr'>
+          New  PR
+        </Link>
 
       <div className="page-content">{exercise.body}</div>
       <div className="page-footer">

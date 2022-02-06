@@ -28,3 +28,4 @@ function getExercises() {
     { title: "Deadlift", body: "Barbell conventional deadlift" },
   ];
 }
+

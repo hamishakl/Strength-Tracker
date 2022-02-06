@@ -25,20 +25,23 @@ model Exercise {
   body      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  pr        Pr?      @relation(fields: [prId], references: [id], onDelete: Cascade)
+  pr        Pr[]
   prId      String?
+  Pr        Pr[]     @relation("exerciseid")
 }
 
 model Pr {
   userId     String?
-  id         String     @id @default(uuid())
+  id         String    @id @default(uuid())
   weight     Int
   reps       Int
   sets       Int
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  exercises  Exercise[]
-  User       User?      @relation(name: "userid", fields: [userId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  exercises  Exercise? @relation(name: "exerciseid", fields: [exerciseId], references: [id])
+  exerciseId String?
+  User       User?     @relation(name: "userid", fields: [userId], references: [id])
+  Exercise   Exercise? @relation(fields: [exerciseId], references: [id])
 }
 
 // model User {

@@ -2,9 +2,9 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 async function seed() {
-  const adminz = await prisma.user.create({
+  const bruno = await prisma.user.create({
     data: {
-      username: 'adminz',
+      username: 'bruno',
       passwordHash:
         '$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u',
     },
@@ -13,7 +13,7 @@ async function seed() {
 
   await Promise.all(
     getExercises().map((exercise) => {
-      const data = { userId: adminz.id, ...exercise }
+      const data = { userId: bruno.id, ...exercise }
       return prisma.exercise.create({ data })
     })
   )

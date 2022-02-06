@@ -47,14 +47,16 @@ export const action = async ({ request, params }) => {
 function exercise() {
   const { exercise, user, pr } = useLoaderData();
   const OneRmEstimate = (weight, reps) => {
-    const unRounded1RM = ((weight * reps)*0.0333)+weight
-    return Math.round(unRounded1RM, 2.5)
-  }
+    const unRounded1RM = weight * reps * 0.0333 + weight;
+
+    return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5;
+  };
 
   return (
     <div>
       <div className="page-header">
         <h1>{exercise.title}</h1>
+        <div className="page-content">{exercise.body}</div>
         <Link to="/exercises" className="btn btn-reverse">
           Back
         </Link>
@@ -62,19 +64,31 @@ function exercise() {
 
       <ul className="pr-list">
         {pr.map((pr) => (
-          
-          <li key={pr.id}>
-              <h3>{pr.weight}</h3>
-              <h3>{pr.reps}</h3>
-              <h3>{OneRmEstimate(pr.weight, pr.reps)}</h3>
-              {new Date(pr.createdAt).toLocaleString()}
-          </li>
+          <table key={pr.id}>
+            <tbody>
+              <tr>
+                <td>Weight</td>
+                <td>{pr.weight}</td>
+              </tr>
+              <tr>
+                <td>Reps</td>
+                <td>{pr.reps}</td>
+              </tr>
+              <tr>
+                <td>Projected 1rm</td>
+                <td>{OneRmEstimate(pr.weight, pr.reps)}</td>
+              </tr>
+              <tr>
+                <td>Date</td>
+                <td>{new Date(pr.createdAt).toLocaleString()}</td>
+              </tr>
+            </tbody>
+          </table>
         ))}
       </ul>
 
       <Link to="./pr">New PR</Link>
 
-      <div className="page-content">{exercise.body}</div>
       <div className="page-footer">
         {user.id === exercise.userId && (
           <form method="POST">

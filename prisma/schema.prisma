@@ -42,19 +42,3 @@ model Pr {
   User       User?     @relation(name: "userid", fields: [userId], references: [id])
   Exercise   Exercise? @relation(fields: [exerciseId], references: [id])
 }
-
-// model User {
-//   id           Int     @id @default(autoincrement())
-//   name         String?
-//   writtenPosts Post[]  @relation("WrittenPosts")
-//   pinnedPost   Post?   @relation("PinnedPost")
-// }
-
-// model Post {
-//   id         Int     @id @default(autoincrement())
-//   title      String?
-//   author     User    @relation("WrittenPosts", fields: [authorId], references: [id])
-//   authorId   Int
-//   pinnedBy   User?   @relation(name: "PinnedPost", fields: [pinnedById], references: [id])
-//   pinnedById Int?
-// }

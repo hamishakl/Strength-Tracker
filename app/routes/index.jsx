@@ -1,10 +1,12 @@
 function Home() {
-  return (<div>
+  return (
     <div>
-      <h1>Welcome to Gym apppp</h1>
-      <p>Gym app helps you track your strength progress over time</p>
+      <div>
+        <h1>Welcome to Gym apppp</h1>
+        <p>Gym app helps you track your strength progress over time</p>
+      </div>
     </div>
-  </div>);
+  );
 }
 
 export default Home;

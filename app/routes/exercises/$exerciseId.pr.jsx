@@ -1,10 +1,9 @@
 import { Link, redirect, useActionData, json } from "remix";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
-// import exercise from "./$exerciseId";
 
 function validateWeight(weight) {
-  console.log(typeof weight)
+  console.log(typeof weight);
   if (typeof weight !== "number") {
     return "weight should be atleast 2 characters long";
   }
@@ -20,27 +19,14 @@ function badRequest(data) {
   return json(data, { status: 400 });
 }
 
-// export const loader = async ({ request, params}) => {
-//   // console.log(request);
-//   console.log(params.exerciseId);
-//   const user = await getUser(request);
-
-//   const exercise = await db.exercise.findUnique({
-//     where: { id:  params.exerciseId },
-//   });
-
-//   const data = { exercise};
-//   return data;
-// };
-
 export const action = async ({ request, params }) => {
   console.log(params);
   const form = await request.formData();
   const weightStr = form.get("weight");
   const repsStr = form.get("reps");
-  const weight = parseInt(weightStr)
-  const reps = parseInt(repsStr)
-  const exerciseId = params.exerciseId
+  const weight = parseInt(weightStr);
+  const reps = parseInt(repsStr);
+  const exerciseId = params.exerciseId;
 
   const user = await getUser(request);
 
@@ -60,15 +46,11 @@ export const action = async ({ request, params }) => {
     data: { ...fields, userId: user.id, exerciseId: exerciseId },
   });
 
-  // const exercise = await db.exercise.create({ data: data })
-
-
   return redirect(`/exercises/${exerciseId}`);
 };
 
 function NewPr() {
   const actionData = useActionData();
-  // const { exercises } = useLoaderData();
 
   return (
     <>
@@ -82,12 +64,7 @@ function NewPr() {
         <form method="POST">
           <div className="form-control">
             <label htmlFor="weight">weight</label>
-            <input
-              type="text"
-              name="weight"
-              id="weight"
-              // defaultValue={actionData?.fields?.weight}
-            />
+            <input type="text" name="weight" id="weight" />
             <div className="error">
               <p>
                 {actionData?.fieldErrors?.weight &&
@@ -97,12 +74,7 @@ function NewPr() {
           </div>
           <div className="form-control">
             <label htmlFor="reps">Exercise reps</label>
-            <input
-              type="text"
-              name="reps"
-              id="reps"
-              // defaultValue={actionData?.fields?.weight}
-            />
+            <input type="text" name="reps" id="reps" />
             <div className="error">
               <p>
                 {actionData?.fieldErrors?.reps && actionData?.fieldErrors?.reps}

@@ -4,7 +4,7 @@ import { getUser } from "~/utils/session.server";
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
-  console.log('sadsad');
+  console.log("sadsad");
   // console.log(params);
   const exercise = await db.exercise.findUnique({
     where: { id: params.exerciseId },
@@ -71,9 +71,7 @@ function exercise() {
         ))}
       </ul>
 
-      <Link to='./pr'>
-          New  PR
-        </Link>
+      <Link to="./pr">New PR</Link>
 
       <div className="page-content">{exercise.body}</div>
       <div className="page-footer">

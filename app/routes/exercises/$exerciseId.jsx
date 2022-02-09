@@ -8,6 +8,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
 } from "recharts";
 
 export const loader = async ({ request, params }) => {
@@ -52,16 +53,16 @@ export const action = async ({ request, params }) => {
   }
 };
 
+export const OneRmEstimate = (weight, reps) => {
+  const unRounded1RM = weight * reps * 0.0333 + weight;
+  return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5;
+};
 function exercise() {
   const { exercise, user, pr } = useLoaderData();
 
-  const OneRmEstimate = (weight, reps) => {
-    const unRounded1RM = weight * reps * 0.0333 + weight;
-    return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5;
-  };
 
   const dateConvertor = (prDate) => {
-    return new Date(prDate).toLocaleString();
+    return new Date(prDate).toDateString();
   };
 
   const data = pr.map((item) => {
@@ -102,24 +103,37 @@ function exercise() {
               <tr>
                 <td>Date</td>
                 <td>{new Date(pr.createdAt).toLocaleString()}</td>
+                <Link to={pr.id}>View</Link>
               </tr>
             </tbody>
           </table>
         ))}
       </ul>
 
-      <Link to="./pr">New PR</Link>
+      <Link to="./pr-new">New PR</Link>
       <LineChart
-        width={600}
+        width={500}
         height={300}
         data={data}
-        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
       >
-        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+        <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
+        <Legend />
+        <Line
+          type="monotone"
+          dataKey="pv"
+          stroke="#8884d8"
+          activeDot={{ r: 8 }}
+        />
+        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
       </LineChart>
       <div className="page-footer">
         {user.id === exercise.userId && (

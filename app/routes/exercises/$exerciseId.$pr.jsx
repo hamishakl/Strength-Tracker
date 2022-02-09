@@ -3,12 +3,8 @@ import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 import { OneRmEstimate } from './$exerciseId'
 
-export const loader = async ({ request, params }) => {
-  // console.log(params);
-  const user = await getUser(request);
-  const exercise = await db.exercise.findUnique({
-    where: { id: params.exerciseId },
-  });
+export const loader = async ({ params }) => {
+  const exercise = params.exerciseId
 
   if (!exercise) throw new Error("exercise not found");
 
@@ -18,14 +14,15 @@ export const loader = async ({ request, params }) => {
     },
   });
 
-  const data = { exercise, user, pr };
+  const data = { exercise, pr };
   return data;
 };
 
 function prPage() {
-  const { exercise, user, pr } = useLoaderData();
+  const { exercise, pr } = useLoaderData();
   console.log(pr);
   return (
+    <>
     <table>
       <tbody>
         <tr>
@@ -46,6 +43,8 @@ function prPage() {
         </tr>
       </tbody>
     </table>
+    <Link to={`../${exercise}`}>Back</Link>
+    </>
   );
 }
 

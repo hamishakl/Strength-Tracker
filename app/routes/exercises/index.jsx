@@ -31,23 +31,23 @@ function ExerciseItems() {
         <h1>
           My exercises
           <Link to="/exercises/new" className="btn">
-            <span class="badge bg-secondary">New</span>
+            <span className="badge bg-secondary">New</span>
           </Link>
         </h1>
       </div>
-      <div class="container">
-        <div class="row">
+      <div className="container">
+        <div className="row">
           {exercises.map((exercise) => (
-            <div class="card" style={{ flex: "0 0 33.333333%" }}>
-              <div class="card-body" key={exercise.id}>
+            <div key={exercise.id} className="card" style={{ flex: "0 0 33.333333%" }}>
+              <div className="card-body" key={exercise.id}>
                 <Link to={exercise.id}>
-                  <h5 class="card-title">{exercise.title}</h5>
+                  <h5 className="card-title">{exercise.title}</h5>
                 </Link>
-                <h6 class="card-subtitle mb-2 text-muted">
+                <h6 className="card-subtitle mb-2 text-muted">
                   {/* {new Date(exercise.createdAt).toLocaleString()} */}
                 </h6>
-                <p class="card-text">{exercise.body}</p>
-                <Link to={`./${exercise.id}/pr-new`} class="btn btn-primary">
+                <p className="card-text">{exercise.body}</p>
+                <Link to={`./${exercise.id}/pr-new`} className="btn btn-primary">
                   New PR
                 </Link>
               </div>

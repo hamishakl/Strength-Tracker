@@ -30,11 +30,9 @@ function ExerciseItems() {
       <div className="page-header">
         <h1>
           My exercises
-            <Link to="/exercises/new" className="btn">
-          <span class="badge bg-secondary">
-              New
-          </span>
-            </Link>
+          <Link to="/exercises/new" className="btn">
+            <span class="badge bg-secondary">New</span>
+          </Link>
         </h1>
       </div>
       <div class="container">
@@ -42,7 +40,9 @@ function ExerciseItems() {
           {exercises.map((exercise) => (
             <div class="card" style={{ flex: "0 0 33.333333%" }}>
               <div class="card-body" key={exercise.id}>
-                <h5 class="card-title">{exercise.title}</h5>
+                <Link to={exercise.id}>
+                  <h5 class="card-title">{exercise.title}</h5>
+                </Link>
                 <h6 class="card-subtitle mb-2 text-muted">
                   {/* {new Date(exercise.createdAt).toLocaleString()} */}
                 </h6>

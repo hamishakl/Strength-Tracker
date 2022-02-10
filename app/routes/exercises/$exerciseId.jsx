@@ -59,6 +59,7 @@ export const OneRmEstimate = (weight, reps) => {
   const unRounded1RM = weight * reps * 0.0333 + weight;
   return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5;
 };
+
 function exercise() {
   const { exercise, user, pr } = useLoaderData();
 

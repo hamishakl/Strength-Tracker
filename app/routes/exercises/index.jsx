@@ -28,21 +28,36 @@ function ExerciseItems() {
   return (
     <>
       <div className="page-header">
-        <h1>exercises</h1>
-        <Link to="/exercises/new" className="btn">
-          New exercise
-        </Link>
-      </div>
-      <ul className="exercises-list">
-        {exercises.map((exercise) => (
-          <li key={exercise.id}>
-            <Link to={exercise.id}>
-              <h3>{exercise.title}</h3>
-              {new Date(exercise.createdAt).toLocaleString()}
+        <h1>
+          My exercises
+            <Link to="/exercises/new" className="btn">
+          <span class="badge bg-secondary">
+              New
+          </span>
             </Link>
-          </li>
-        ))}
-      </ul>
+        </h1>
+      </div>
+      <div class="container">
+        <div class="row">
+          {exercises.map((exercise) => (
+            <div class="card" style={{ width: "18rem" }}>
+              <div class="card-body" key={exercise.id}>
+                <h5 class="card-title">{exercise.title}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  {new Date(exercise.createdAt).toLocaleString()}
+                </h6>
+                <p class="card-text">{exercise.body}</p>
+                <Link to={exercise.id} class="card-link">
+                  View PR's
+                </Link>
+                <Link to={`./${exercise.id}/pr-new`} class="card-link">
+                  New PR
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 }

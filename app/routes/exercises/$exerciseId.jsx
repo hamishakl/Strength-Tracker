@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import PrTable from '../../components/PrTable'
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
@@ -84,31 +85,7 @@ function exercise() {
         </Link>
       </div>
 
-      <ul className="pr-list">
-        {pr.map((pr) => (
-          <table key={pr.id}>
-            <tbody>
-              <tr>
-                <td>Weight</td>
-                <td>{pr.weight}</td>
-              </tr>
-              <tr>
-                <td>Reps</td>
-                <td>{pr.reps}</td>
-              </tr>
-              <tr>
-                <td>Projected 1rm</td>
-                <td>{OneRmEstimate(pr.weight, pr.reps)}</td>
-              </tr>
-              <tr>
-                <td>Date</td>
-                <td>{new Date(pr.createdAt).toLocaleString()}</td>
-                <Link to={pr.id}>View</Link>
-              </tr>
-            </tbody>
-          </table>
-        ))}
-      </ul>
+      <PrTable rows={pr}/>
 
       <Link to="./pr-new">New PR</Link>
       <LineChart

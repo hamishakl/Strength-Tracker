@@ -8,7 +8,7 @@ export const links = () => [
     rel: "stylesheet",
     integrity:
       "sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3",
-    crossorigin: "anonymous",
+    crossOrigin: "anonymous",
   },
 ];
 
@@ -50,25 +50,25 @@ function Layout({ children }) {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <Link class="navbar-brand" to="/">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/">
             Strength Tracker
           </Link>
           {user ? (
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <Link class="nav-item nav-link" to="/exercises">
+            <div className="collapse navbar-collapse" id="navbarText">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <Link className="nav-item nav-link" to="/exercises">
                   New PR
                 </Link>
-                <Link class="nav-item nav-link" to="/exercises">
+                <Link className="nav-item nav-link" to="/exercises">
                   My Exercises
                 </Link>
               </ul>
             </div>
           ) : (
-            <div class="collapse navbar-collapse" id="navbarText">
-              <Link class="nav-item nav-link" to="/auth/register">
+            <div className="collapse navbar-collapse" id="navbarText">
+              <Link className="nav-item nav-link" to="/auth/register">
                 Register
               </Link>
             </div>
@@ -76,7 +76,7 @@ function Layout({ children }) {
         </div>
         {user ? (
           <form action="/auth/logout" method="POST">
-            <button class="btn btn-primary" type="submit">
+            <button className="btn btn-primary" type="submit">
               Logout {user.username}
             </button>
           </form>

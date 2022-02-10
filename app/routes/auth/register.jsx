@@ -105,14 +105,14 @@ function Login() {
         </form>
       </div> */}
       <form method="POST">
-        <div class="mb-3">
-          <label htmlFor="username" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
             Username
           </label>
           <input
             type="text"
             name="username"
-            class="form-control"
+            className="form-control"
             id="username"
             defaultValue={actionData?.fields.username}
           />
@@ -121,12 +121,12 @@ function Login() {
               actionData?.fieldErrors?.username}
           </div>
         </div>
-        <div class="mb-3">
-          <label htmlFor="password" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
             Password
           </label>
           <input
-            class="form-control"
+            className="form-control"
             id="password"
             type="password"
             name="password"
@@ -137,7 +137,7 @@ function Login() {
           {actionData?.fieldErrors?.password &&
             actionData?.fieldErrors?.password}
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>

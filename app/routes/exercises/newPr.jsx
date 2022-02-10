@@ -1,67 +1,73 @@
-import React from "react";
-import { useLoaderData } from "remix";
+import { Form, useLoaderData } from "remix";
 import { getUser } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
-import exercise from "./$exerciseId";
+import exercise, { OneRmEstimate } from "./$exerciseId";
+import { useEffect, useState } from "react";
 
-
-export const loader = async({ request }) => {
-    const user = await getUser(request)
-    const exercises = await db.exercise.findMany({
-        where: { userId: user.id },
-      });
-      return exercises
+export const loader = async ({ request }) => {
+  const user = await getUser(request);
+  const exercises = await db.exercise.findMany({
+    where: { userId: user.id },
+  });
+  return exercises;
+};
+export const live1rmUpdate = () => {
+    const oneRm = useState(0) 
+    
 }
 
+
 export default function newPr() {
-    const exercises = useLoaderData();
-    
-    return (
-    <div class="container">
+  const exercises = useLoaderData();
+
+  const [title, setTitle] = useState('')
+
+
+  return (
+    <div className="container">
       <h1>New PR</h1>
-      <form>
+      <Form method="POST">
         <div className="mb-3">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
+        <label htmlFor="exercise" className="form-label">
+            Exercise
+          </label>
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            required
+            id="exercise"
+          >
+            <option selected disabled>
+              Pick an exercise
+            </option>
             {exercises.map((exercise) => (
-                <option key={exercise.id} value={exercise.title}>{exercise.title}</option>
+              <option key={exercise.id} value={exercise.title}>
+                {exercise.title}
+              </option>
             ))}
           </select>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
-            Email address
+        <div className="mb-3">
+          <label htmlFor="weight" className="form-label">
+            Weight
           </label>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
-          </div>
+          <input type="number" className="form-control" id="weight" />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
-            Password
+        <div className="mb-3">
+          <label htmlFor="reps" className="form-label">
+            Reps
           </label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-          />
+          <input type="number" className="form-control" id="reps" onKeyPress={event => setTitle(event.target.value)}/>
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-          <label class="form-check-label" for="exampleCheck1">
-            Check me out
-          </label>
+        <div className="mb-3 form-check">
+          <h5>Projected 1rm: </h5>
+          <p>{title}</p>
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
-      </form>
+      </Form>
+      
     </div>
   );
 }

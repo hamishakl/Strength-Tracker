@@ -1,6 +1,5 @@
 import { Link, redirect, useLoaderData } from "remix";
-import { db } from "~/utils/db.server";
-import { getUser } from "~/utils/session.server";
+import { Container } from "@mui/material";
 import {
   LineChart,
   Line,
@@ -10,7 +9,9 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import PrTable from '../../components/PrTable'
+import { db } from "~/utils/db.server";
+import { getUser } from "~/utils/session.server";
+import PrTable from "../../components/PrTable";
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
@@ -61,7 +62,6 @@ export const OneRmEstimate = (weight, reps) => {
 function exercise() {
   const { exercise, user, pr } = useLoaderData();
 
-
   const dateConvertor = (prDate) => {
     return new Date(prDate).toDateString();
   };
@@ -76,7 +76,7 @@ function exercise() {
   });
 
   return (
-    <div>
+    <Container maxWidth="md">
       <div className="page-header">
         <h1>{exercise.title}</h1>
         <div className="page-content">{exercise.body}</div>
@@ -85,7 +85,7 @@ function exercise() {
         </Link>
       </div>
 
-      <PrTable rows={pr}/>
+      <PrTable prs={pr} />
 
       <Link to="./pr-new">New PR</Link>
       <LineChart
@@ -120,7 +120,7 @@ function exercise() {
           </form>
         )}
       </div>
-    </div>
+    </Container>
   );
 }
 

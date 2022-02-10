@@ -40,17 +40,14 @@ function ExerciseItems() {
       <div class="container">
         <div class="row">
           {exercises.map((exercise) => (
-            <div class="card" style={{ width: "18rem" }}>
+            <div class="card" style={{ flex: "0 0 33.333333%" }}>
               <div class="card-body" key={exercise.id}>
                 <h5 class="card-title">{exercise.title}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">
-                  {new Date(exercise.createdAt).toLocaleString()}
+                  {/* {new Date(exercise.createdAt).toLocaleString()} */}
                 </h6>
                 <p class="card-text">{exercise.body}</p>
-                <Link to={exercise.id} class="card-link">
-                  View PR's
-                </Link>
-                <Link to={`./${exercise.id}/pr-new`} class="card-link">
+                <Link to={`./${exercise.id}/pr-new`} class="btn btn-primary">
                   New PR
                 </Link>
               </div>

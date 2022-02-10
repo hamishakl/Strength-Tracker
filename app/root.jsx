@@ -51,65 +51,39 @@ function Layout({ children }) {
 
   return (
     <>
-      {/* <nav className="navbar">
-        <Link to="/" className="logo">
-          Gym App
-        </Link>
-        <ul className="nav">
-          <li>
-            <Link to="/exercises">Exercises</Link>
-          </li>
-          {user ? (
-            <li>
-              <form action="/auth/logout" method="POST">
-                <button className="btn" type="submit">
-                  Logout {user.username}
-                </button>
-              </form>
-            </li>
-          ) : (
-            <li>
-              <Link to="/auth/login">Login</Link>
-            </li>
-          )}
-        </ul>
-      </nav> */}
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <Link class="navbar-brand" to="/">
             Strength Tracker
           </Link>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarText"
-            aria-controls="navbarText"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <Link class="nav-item nav-link" to="/exercises">
-                New PR
+          {user ? (
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <Link class="nav-item nav-link" to="/exercises">
+                  New PR
+                </Link>
+                <Link class="nav-item nav-link" to="/exercises">
+                  My Exercises
+                </Link>
+              </ul>
+            </div>
+          ) : (
+            <div class="collapse navbar-collapse" id="navbarText">
+              <Link class="nav-item nav-link" to="/auth/register">
+                Register
               </Link>
-              <Link class="nav-item nav-link" to="/exercises">
-                My Exercises
-              </Link>
-            </ul>
-          </div>
+            </div>
+          )}
         </div>
         {user ? (
-              <form action="/auth/logout" method="POST">
-                <button class="btn btn-primary" type="submit">
-                  Logout {user.username}
-                </button>
-              </form>
-          ) : (
-              <Link to="/auth/login">Login</Link>
-          )}
+          <form action="/auth/logout" method="POST">
+            <button class="btn btn-primary" type="submit">
+              Logout {user.username}
+            </button>
+          </form>
+        ) : (
+          <Link to="/auth/login">Login</Link>
+        )}
       </nav>
       <div className="container">{children}</div>
     </>

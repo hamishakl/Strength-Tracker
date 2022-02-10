@@ -1,6 +1,14 @@
-import { Link, redirect, useActionData, json } from "remix";
+import { Link, redirect, useActionData, json, useLoaderData } from "remix";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
+import { getExercises } from "../fetch/exercises";
+import FreeSoloCreateOption from '../../components/ExerciseComplete'
+
+
+export const loader = async ({ request }) => {
+  const exerciseList = getExercises()
+  return exerciseList
+}
 
 function validateTitle(title) {
   if (typeof title !== "string" || title.length < 2) {
@@ -46,6 +54,8 @@ export const action = async ({ request }) => {
 
 function NewExercise() {
   const actionData = useActionData();
+  const exerciseList = useLoaderData()
+
 
   return (
     <>
@@ -91,6 +101,7 @@ function NewExercise() {
           </button>
         </form>
       </div>
+      {FreeSoloCreateOption()}
     </>
   );
 }

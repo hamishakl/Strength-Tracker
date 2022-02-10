@@ -1,27 +1,24 @@
 import { useActionData, json, redirect } from "remix";
 import { db } from "~/utils/db.server";
-import {login, register, createUserSession} from '~/utils/session.server'
+import { login, register, createUserSession } from "~/utils/session.server";
 
 function badRequest(data) {
   return json(data, { status: 400 });
 }
 
 function validateUsername(username) {
-  if (typeof username !== 'string' || username.length < 3) {
-    return 'Username must be at least 3 characters'
+  if (typeof username !== "string" || username.length < 3) {
+    return "Username must be at least 3 characters";
   }
 }
 
-
 function validatePassword(password) {
-  if (typeof password !== 'string' || password.length < 6) {
-    return 'Password must be at least 6 characters'
-  }
-  else if (typeof password !== 'string' || password.search(/[0-9]/) == -1) {
-    return 'Password must contain atleast 1 number'
-  }
-  else if (typeof password !== 'string' || password.search(/[A-Z]/) == -1) {
-    return 'Password must contain atleast 1 upper case letter'
+  if (typeof password !== "string" || password.length < 6) {
+    return "Password must be at least 6 characters";
+  } else if (typeof password !== "string" || password.search(/[0-9]/) == -1) {
+    return "Password must contain atleast 1 number";
+  } else if (typeof password !== "string" || password.search(/[A-Z]/) == -1) {
+    return "Password must contain atleast 1 upper case letter";
   }
 }
 
@@ -44,40 +41,38 @@ export const action = async ({ request }) => {
 
   switch (loginType) {
     case "login": {
-      const user = await login({username, password})
-        if(!user){
-            return badRequest({
-                fields,
-                fieldErrors: {username: 'Invalid Credentials'}
-            })
-        }
-        return createUserSession(user.id, '/exercises')
+      const user = await login({ username, password });
+      if (!user) {
+        return badRequest({
+          fields,
+          fieldErrors: { username: "Invalid Credentials" },
+        });
+      }
+      return createUserSession(user.id, "/exercises");
     }
     case "register": {
       const userExists = await db.user.findFirst({
         where: {
-          username
-        }
-      })
-      if(userExists) {
-        return badRequest({
-          fields, 
-          fieldErrors: {userName: `User ${username} already exists`},
-        })
-      }
-
-      const user = await register({ username, password })
-      if(!user) {
+          username,
+        },
+      });
+      if (userExists) {
         return badRequest({
           fields,
-          formError: 'Something went wrong'
-        })
+          fieldErrors: { userName: `User ${username} already exists` },
+        });
       }
 
-      return createUserSession(user.id, '/exercises')
+      const user = await register({ username, password });
+      if (!user) {
+        return badRequest({
+          fields,
+          formError: "Something went wrong",
+        });
+      }
 
+      return createUserSession(user.id, "/exercises");
     }
-
 
     default: {
       return badRequest({ fields, formError: "Login type is not valid" });

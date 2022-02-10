@@ -49,17 +49,20 @@ const storage = createCookieSessionStorage({
 })
 
 export async function createUserSession(userId:string, redirectTo: string) {
+    
+    console.log('redirect');
     const session = await storage.getSession()
     session.set(
         'userId', userId
     )
     return redirect(
+        
         redirectTo, {
             headers: {
                 'Set-Cookie': await storage.commitSession(session)
             }
         }
-    )
+        )
 }
 
 export function getUserSession(request: Request) {

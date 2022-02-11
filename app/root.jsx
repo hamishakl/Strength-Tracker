@@ -58,7 +58,7 @@ function Layout({ children }) {
           {user ? (
             <div className="collapse navbar-collapse" id="navbarText">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <Link className="nav-item nav-link" to="/exercises">
+                <Link className="nav-item nav-link" to="/exercises/newPr">
                   New PR
                 </Link>
                 <Link className="nav-item nav-link" to="/exercises">

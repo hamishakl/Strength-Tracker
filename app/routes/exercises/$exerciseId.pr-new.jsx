@@ -62,7 +62,7 @@ function NewPr() {
         <form method="POST">
           <div className="form-control">
             <label htmlFor="weight">weight</label>
-            <input type="text" name="weight" id="weight" />
+            <input type="number" name="weight" id="weight" />
             <div className="error">
               <p>
                 {actionData?.fieldErrors?.weight &&
@@ -72,7 +72,7 @@ function NewPr() {
           </div>
           <div className="form-control">
             <label htmlFor="reps">Exercise reps</label>
-            <input type="text" name="reps" id="reps" />
+            <input type="number" name="reps" id="reps" />
             <div className="error">
               <p>
                 {actionData?.fieldErrors?.reps && actionData?.fieldErrors?.reps}

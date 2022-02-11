@@ -20,7 +20,6 @@ export const loader = async ({ request, params }) => {
   });
 
   if (!exercise) throw new Error("exercise not found");
-
   const pr = await db.pr.findMany({
     where: {
       userId: {
@@ -31,9 +30,17 @@ export const loader = async ({ request, params }) => {
       },
     },
   });
-
-  const data = { exercise, user, pr };
+  const oneRepMax = weightLoop(pr);
+  const data = { exercise, user, pr, oneRepMax };
   return data;
+};
+
+const weightLoop = (pr) => {
+  let arr = [];
+  for (let i = 0; i < pr.length; i++) {
+    arr.push(OneRmEstimate(pr[i].weight, pr[i].reps));
+  }
+  return Math.max(...arr);
 };
 
 export const action = async ({ request, params }) => {
@@ -61,7 +68,7 @@ export const OneRmEstimate = (weight, reps) => {
 };
 
 function exercise() {
-  const { exercise, user, pr } = useLoaderData();
+  const { exercise, user, pr, oneRepMax } = useLoaderData();
 
   const dateConvertor = (prDate) => {
     return new Date(prDate).toDateString();
@@ -80,39 +87,47 @@ function exercise() {
     <Container maxWidth="md">
       <div className="page-header">
         <h1>{exercise.title}</h1>
+        {pr.length > 0 ? (
+          <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
+        ) : null}
         <div className="page-content">{exercise.body}</div>
         <Link to="/exercises" className="btn btn-reverse">
           Back
         </Link>
       </div>
+      {pr.length > 0 ? (
+        <div>
+          <PrTable prs={pr} />
 
-      <PrTable prs={pr} />
-
-      <Link to="./pr-new">New PR</Link>
-      <LineChart
-        width={500}
-        height={300}
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="pv"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-      </LineChart>
+          <Link to="./pr-new">New PR</Link>
+          <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="pv"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+          </LineChart>
+        </div>
+      ) : (
+        <h1>no prs yet :(</h1>
+      )}
       <div className="page-footer">
         {user.id === exercise.userId && (
           <form method="POST">

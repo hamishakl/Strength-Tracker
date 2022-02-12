@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Tablerow from '@mui/material/Tablerow';
 import Paper from '@mui/material/Paper';
-import { OneRmEstimate } from '../routes/exercises/$exerciseId';
+import { OneRmEstimate } from '../routes/dashboard/$exerciseId';
 
 export default function BasicTable({prs}) {
   return (

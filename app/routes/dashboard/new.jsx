@@ -61,7 +61,7 @@ function NewExercise() {
     <>
       <div className="page-header">
         <h1>New exercise</h1>
-        <Link to="/exercises" className="btn btn-reverse">
+        <Link to="/dashboard" className="btn btn-reverse">
           Back
         </Link>
       </div>

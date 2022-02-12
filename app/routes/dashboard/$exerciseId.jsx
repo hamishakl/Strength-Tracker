@@ -91,7 +91,7 @@ function exercise() {
           <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
         ) : null}
         <div className="page-content">{exercise.body}</div>
-        <Link to="/exercises" className="btn btn-reverse">
+        <Link to="/dashboard" className="btn btn-reverse">
           Back
         </Link>
       </div>

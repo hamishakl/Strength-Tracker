@@ -1,11 +1,14 @@
+import styles from "~/styles/home.css";
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
+}
+
 function Home() {
   return (
-    <div>
-      <div>
-        <h1>Welcome to Gym apppp</h1>
-        <p>Gym app helps you track your strength progress over time</p>
-      </div>
-
+    <div className="hero">
+      <h1>Strength Tracker</h1>
+      <p>Track your personal records with ease</p>
     </div>
   );
 }

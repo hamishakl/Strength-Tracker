@@ -16,7 +16,6 @@ export const loader = async ({ request }) => {
         },
       },
       take: 20,
-      select: { id: true, title: true, createdAt: true },
       orderBy: { createdAt: "desc" },
     }),
   };

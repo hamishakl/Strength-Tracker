@@ -20,13 +20,15 @@ export default function MyExercise({ data }) {
               </Link>
               <h6 className="card-subtitle mb-2 text-muted"></h6>
               <p className="card-text">{exercise.body}</p>
-              <Link to={`./${exercise.id}/pr-new`} className="btn btn-primary">
-                New PR
-              </Link>
+              <ul className="nav">
+                <li className="nav-item">
+                  <Link to={`./${exercise.id}/pr-new`}>New PR</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={`${exercise.id}/new-goal`}>New goal</Link>
+                </li>
+              </ul>
               <Goals exercise={exercise} prs={prs} />
-              <Link to={`${exercise.id}/new-goal`} className="btn btn-primary">
-                New goal
-              </Link>
             </div>
           </div>
         ))}

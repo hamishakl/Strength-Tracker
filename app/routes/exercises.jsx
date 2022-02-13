@@ -1,11 +1,11 @@
-import {Outlet} from 'remix'
+import { Outlet } from "remix";
 
 function Exercises() {
-    return (
-        <>
-            <Outlet />
-        </>
-    )
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 }
 
-export default Exercises 
+export default Exercises;

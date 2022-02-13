@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, useLoaderData } from "remix";
 
 const findPr = (prs, exercise) => {
   for (let i = 0; i < prs.length; i++) {

@@ -38,7 +38,6 @@ function ExerciseItems() {
         </h1>
       </div>
       <MyExercise exercises={exercises}/>
-      <Goals />
     </>
   );
 }

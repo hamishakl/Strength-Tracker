@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from "remix";
 import { db } from "~/utils/db.server";
-import MyExercise  from '../../components/MyExercises'
-import Goals  from '../../components/Goals'
+import MyExercise from "../../components/MyExercises";
+import Goals from "../../components/Goals";
 
 import { getUser } from "~/utils/session.server";
 
@@ -18,7 +18,7 @@ export const loader = async ({ request }) => {
       take: 20,
       orderBy: { createdAt: "desc" },
     }),
-  }
+  };
   const prs = {
     prs: await db.pr.findMany({
       where: {
@@ -26,21 +26,18 @@ export const loader = async ({ request }) => {
           equals: `${user.id}`,
         },
       },
-      orderBy : {createdAt: "desc"}
+      orderBy: { createdAt: "desc" },
     }),
-  }
+  };
 
-  const data = { exercises, prs }
+  const data = { exercises, prs };
 
   return data;
 };
 
 function ExerciseItems() {
-  const  data  = useLoaderData();
-//   const exercises = data.exercises
-//   const prs = data.prs
-// console.log(prs)
-// console.log(exercises);
+  const data = useLoaderData();
+
   return (
     <>
       <div className="page-header">
@@ -51,7 +48,7 @@ function ExerciseItems() {
           </Link>
         </h1>
       </div>
-      <MyExercise data={data}/>
+      <MyExercise data={data} />
     </>
   );
 }

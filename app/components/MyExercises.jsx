@@ -1,13 +1,13 @@
 import { Link } from "remix";
-import Goals from './Goals'
+import Goals from "./Goals";
 
 export default function MyExercise({ data }) {
-    const exercises = data.exercises['exercises']
-    const prs = data.prs['prs']
-    // console.log(prs)
+  const exercises = data.exercises["exercises"];
+  const prs = data.prs["prs"];
+
   return (
     <div className="container">
-       <div className="row">
+      <div className="row">
         {exercises.map((exercise) => (
           <div
             key={exercise.id}
@@ -25,7 +25,7 @@ export default function MyExercise({ data }) {
               </Link>
               <Goals exercise={exercise} prs={prs} />
               <Link to={`${exercise.id}/new-goal`} className="btn btn-primary">
-                  New goal
+                New goal
               </Link>
             </div>
           </div>

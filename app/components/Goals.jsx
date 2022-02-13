@@ -1,13 +1,13 @@
-import React from "react";
-
 const findPr = (prs, exercise) => {
+  console.log(prs.length)
+  let arr = []
   for (let i = 0; i < prs.length; i++) {
     if (prs[i].exerciseId == exercise.id) {
-      return prs[i];
-    } else {
-      return null;
-    }
+      arr.push(prs[i])
+    } 
   }
+  console.log(arr[0])
+  return arr[0]
 };
 
 const calcProgress = (exercise, latestPr) => {
@@ -25,8 +25,9 @@ export default function Recommendation({ exercise, prs }) {
   const latestPr = findPr(prs, exercise);
   let percentage;
   latestPr === null
-    ? (percentage = 0)
-    : (percentage = calcProgress(exercise, latestPr));
+  ? (percentage = 0)
+  : (percentage = calcProgress(exercise, latestPr));
+  console.log(latestPr)
 
   return (
     <>

@@ -28,13 +28,13 @@ model Exercise {
   pr        Pr[]
   prId      String?
   Pr        Pr[]     @relation("exerciseid")
+  goal       Int?
 }
 
 model Pr {
   userId     String?
   id         String    @id @default(uuid())
   weight     Int
-  goal       Int?
   reps       Int
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt

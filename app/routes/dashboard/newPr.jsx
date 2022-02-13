@@ -35,7 +35,7 @@ export const action = async ({ request, params }) => {
   const weight = parseInt(weightStr);
   const reps = parseInt(repsStr);
 
-  console.log('this: ' + id);
+  // console.log('this: ' + id);
 
   const user = await getUser(request);
 
@@ -55,14 +55,25 @@ export const action = async ({ request, params }) => {
     data: { ...fields, userId: user.id, exerciseId: id },
   });
 
-  return redirect(`/exercises`);
+  // const exercise = await db.exercise.update({
+  //   where : {
+  //     id: {
+  //       id
+  //     }
+  //   }, 
+  //   data : {
+  //     prId: 
+  //   }
+  // })
+
+  return redirect(`/dashboard`);
 };
 
 export default function newPr() {
   const exercises = useLoaderData();
   const actionData = useActionData();
 
-  console.log(exercises[0].id);
+  // console.log(exercises[0].id);
 
   return (
     <div className="container">

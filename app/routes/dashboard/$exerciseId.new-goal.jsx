@@ -10,7 +10,7 @@ export const loader = async ({ params }) => {
     },
   });
 
-  console.log(exercise);
+//   console.log(exercise);
   return exercise;
 };
 

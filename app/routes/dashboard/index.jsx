@@ -8,7 +8,7 @@ import { getUser } from "~/utils/session.server";
 export const loader = async ({ request }) => {
   const user = await getUser(request);
 
-  const data = {
+  const exercises = {
     exercises: await db.exercise.findMany({
       where: {
         userId: {
@@ -18,14 +18,29 @@ export const loader = async ({ request }) => {
       take: 20,
       orderBy: { createdAt: "desc" },
     }),
-  };
+  }
+  const prs = {
+    prs: await db.pr.findMany({
+      where: {
+        userId: {
+          equals: `${user.id}`,
+        },
+      },
+      orderBy : {createdAt: "desc"}
+    }),
+  }
+
+  const data = { exercises, prs }
 
   return data;
 };
 
 function ExerciseItems() {
-  const { exercises } = useLoaderData();
-
+  const  data  = useLoaderData();
+//   const exercises = data.exercises
+//   const prs = data.prs
+// console.log(prs)
+// console.log(exercises);
   return (
     <>
       <div className="page-header">
@@ -36,7 +51,7 @@ function ExerciseItems() {
           </Link>
         </h1>
       </div>
-      <MyExercise exercises={exercises}/>
+      <MyExercise data={data}/>
     </>
   );
 }

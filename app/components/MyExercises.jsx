@@ -20,7 +20,7 @@ export default function MyExercise({ exercises }) {
               <Link to={`./${exercise.id}/pr-new`} className="btn btn-primary">
                 New PR
               </Link>
-              <Goals exercises={exercises} />
+              <Goals exercise={exercise} />
               <Link to={`${exercise.id}/new-goal`} className="btn btn-primary">
                   New goal
               </Link>

@@ -1,5 +1,5 @@
 import { db } from "~/utils/db.server";
-import { Link, redirect, useActionData, json, useLoaderData, Form } from "remix";
+import { Link, redirect, useLoaderData, Form } from "remix";
 
 export const loader = async ({ params }) => {
   console.log(params);
@@ -15,42 +15,41 @@ export const loader = async ({ params }) => {
 };
 
 export const action = async ({ request, params }) => {
-    const form = await request.formData();
-    const weightStr = form.get("weight");
-    const goal = parseInt(weightStr);
-    
+  const form = await request.formData();
+  const weightStr = form.get("weight");
+  const goal = parseInt(weightStr);
 
-  
-    const updateUser = await db.exercise.update({
-        where: {
-          id: params.exerciseId,
-        },
-        data: {
-          goal: goal,
-        },
-      })
-  
-    return redirect(`/dashboard/${params.exerciseId}`);
-  };
+  const updateUser = await db.exercise.update({
+    where: {
+      id: params.exerciseId,
+    },
+    data: {
+      goal: goal,
+    },
+  });
 
+  return redirect(`/dashboard/${params.exerciseId}`);
+};
 
 export default function NewGoal() {
   const exercise = useLoaderData();
-  return <div className="container">
+  return (
+    <div className="container">
       <h1>New goal for {exercise.title}</h1>
       <Form method="POST">
-          <div className="form-control">
-            <label htmlFor="weight">weight</label>
-            <input type="number" name="weight" id="weight" />
-          </div>
-            {/* <div className="error">
+        <div className="form-control">
+          <label htmlFor="weight">weight</label>
+          <input type="number" name="weight" id="weight" />
+        </div>
+        {/* <div className="error">
               <p>
                 {actionData?.fieldErrors?.reps && actionData?.fieldErrors?.reps}
               </p>
             </div> */}
-          <button type="submit" className="btn btn-block">
-            Add goal
-          </button>
-        </Form>
-  </div>;
+        <button type="submit" className="btn btn-block">
+          Add goal
+        </button>
+      </Form>
+    </div>
+  );
 }

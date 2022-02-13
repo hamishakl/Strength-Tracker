@@ -1,4 +1,4 @@
-import { Link, redirect, useActionData, json } from "remix";
+import { Link, redirect, useActionData, json, Form } from "remix";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 
@@ -59,7 +59,7 @@ function NewPr() {
         </Link>
       </div>
       <div className="page-content">
-        <form method="POST">
+        <Form method="POST">
           <div className="form-control">
             <label htmlFor="weight">weight</label>
             <input type="number" name="weight" id="weight" />
@@ -82,7 +82,7 @@ function NewPr() {
           <button type="submit" className="btn btn-block">
             Add exercise
           </button>
-        </form>
+        </Form>
       </div>
     </>
   );

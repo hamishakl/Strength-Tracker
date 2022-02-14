@@ -27,7 +27,8 @@ export default function Recommendation({ exercise, prs }) {
   latestPr === null
   ? (percentage = 0)
   : (percentage = calcProgress(exercise, latestPr));
-
+  const currentPr = (OneRmEstimate(latestPr.weight, latestPr.reps)).toFixed(1)
+  console.log(currentPr)
   return (
     <>
       {exercise.goal === null ? (
@@ -39,7 +40,7 @@ export default function Recommendation({ exercise, prs }) {
               {exercise.goal === null ? (
                 <p>no goal</p>
               ) : (
-                <p>Progress towards your goal of {exercise.goal}kg</p>
+                <p>Current estimated PR: {currentPr}kg<br></br>Your progress towards {exercise.goal}kg:</p>
               )}
               <div className="progress">
                 <div

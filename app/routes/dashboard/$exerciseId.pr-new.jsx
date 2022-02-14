@@ -89,7 +89,7 @@ function NewPr() {
               </p>
             </div>
           </div>
-          <button type="submit" className="btn btn-block">
+          <button type="submit" className="btn btn-primary">
             Add PR
           </button>
         </Form>

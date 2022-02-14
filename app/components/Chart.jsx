@@ -25,7 +25,6 @@ export default function Chart(pr) {
     return container;
   });
 
-  console.log(data);
 
   return (
     <LineChart

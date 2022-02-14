@@ -35,7 +35,7 @@ function Document({ children, title }) {
     <html lang="en">
       <head>
         <Links />
-        <title>Gym App</title>
+        <title>Strength Tracker</title>
       </head>
       <body>
         {children}

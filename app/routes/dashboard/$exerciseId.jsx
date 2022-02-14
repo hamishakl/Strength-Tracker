@@ -13,6 +13,7 @@ import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 import PrTable from "../../components/PrTable";
 import findPr from "../../components/Goals";
+import Chart from "../../components/Chart";
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
@@ -29,15 +30,15 @@ export const loader = async ({ request, params }) => {
       exerciseId: {
         equals: `${exercise.id}`,
       },
-    },orderBy: {
-      createdAt: 'desc'
-    }
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   const oneRepMax = weightLoop(pr);
   const data = { exercise, user, pr, oneRepMax };
   return data;
 };
-
 
 const weightLoop = (pr) => {
   let arr = [];
@@ -73,24 +74,9 @@ export const OneRmEstimate = (weight, reps) => {
 
 function exercise() {
   const { exercise, user, pr, oneRepMax } = useLoaderData();
-  // console.log(pr.length)
-  const latestPr = pr[0]
-  const currentEstimatedPr = OneRmEstimate(latestPr.weight, latestPr.reps)
 
-  // const latestPr = findPr(pr, exercise)
-
-  const dateConvertor = (prDate) => {
-    return new Date(prDate).toDateString();
-  };
-
-  const data = pr.map((item) => {
-    const container = {};
-
-    container.name = dateConvertor(item.createdAt);
-    container.uv = OneRmEstimate(item.weight, item.reps);
-
-    return container;
-  });
+  const latestPr = pr[0];
+  const currentEstimatedPr = OneRmEstimate(latestPr.weight, latestPr.reps);
 
   return (
     <Container maxWidth="md">
@@ -99,8 +85,8 @@ function exercise() {
         <div className="page-content">{exercise.body}</div>
         {pr.length > 0 ? (
           <>
-          <h5>Current estimated PR: {currentEstimatedPr}kg</h5>
-          <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
+            <h5>Current estimated PR: {currentEstimatedPr}kg</h5>
+            <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
           </>
         ) : null}
         <Link to="/dashboard" className="btn btn-reverse">
@@ -110,32 +96,8 @@ function exercise() {
       {pr.length > 0 ? (
         <div>
           <PrTable prs={pr} />
-
           <Link to="./pr-new">New PR</Link>
-          <LineChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="pv"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-            />
-            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-          </LineChart>
+          <Chart pr={pr} />
         </div>
       ) : (
         <h1>no prs yet :(</h1>

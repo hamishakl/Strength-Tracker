@@ -14,6 +14,7 @@ import { getUser } from "~/utils/session.server";
 import PrTable from "../../components/PrTable";
 import findPr from "../../components/Goals";
 import Chart from "../../components/Chart";
+import Goals from "../../components/Goals";
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
@@ -95,6 +96,7 @@ function exercise() {
       </div>
       {pr.length > 0 ? (
         <div>
+          <Goals exercise={exercise} prs={pr}/>
           <PrTable prs={pr} />
           <Link to="./pr-new">New PR</Link>
           <Chart pr={pr} />

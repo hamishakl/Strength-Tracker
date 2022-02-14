@@ -64,6 +64,9 @@ function Layout({ children }) {
                 <Link className="nav-item nav-link" to="/dashboard/newPr">
                   New PR
                 </Link>
+                <Link className="nav-item nav-link" to="/dashboard/newGoal">
+                  New Goal
+                </Link>
               </ul>
             </div>
           ) : (

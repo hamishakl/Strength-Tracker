@@ -3,22 +3,6 @@ import { getUser } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
 import { OneRmEstimate } from "./$exerciseId";
 
-function validateWeight(weight) {
-  if (typeof weight !== "number") {
-    return "weight should be a number";
-  }
-}
-
-function validateReps(reps) {
-  if (typeof reps !== "number") {
-    return "reps should be a number";
-  }
-}
-
-function badRequest(data) {
-  return json(data, { status: 400 });
-}
-
 export const loader = async ({ request }) => {
   const user = await getUser(request);
   const exercises = await db.exercise.findMany({
@@ -27,30 +11,30 @@ export const loader = async ({ request }) => {
   return exercises;
 };
 
-export const action = async ({ request, params }) => {
+export const action = async ({ request }) => {
   const form = await request.formData();
   const weightStr = form.get("weight");
-  const repsStr = form.get("reps");
   const id = form.get("exercise");
   const weight = parseInt(weightStr);
-  const reps = parseInt(repsStr);
 
-  const user = await getUser(request);
+  const fields = { weight };
 
-  const fields = { weight, reps };
+  // const fieldErrors = {
+  //   weight: validateWeight(weight),
+  // };
 
-  const fieldErrors = {
-    weight: validateWeight(weight),
-    reps: validateReps(reps),
-  };
+  // if (Object.values(fieldErrors).some(Boolean)) {
+  //   console.log(fieldErrors);
+  //   return badRequest({ fieldErrors, fields });
+  // }
 
-  if (Object.values(fieldErrors).some(Boolean)) {
-    console.log(fieldErrors);
-    return badRequest({ fieldErrors, fields });
-  }
-
-  const pr = await db.pr.create({
-    data: { ...fields, userId: user.id, exerciseId: id },
+  const goal = await db.exercise.update({
+    where: {
+      id: id,
+    },
+    data: {
+      goal: weight,
+    },
   });
 
   return redirect(`/dashboard`);
@@ -62,7 +46,7 @@ export default function newPr() {
 
   return (
     <div className="container">
-      <h1>New PR</h1>
+      <h1>New goal</h1>
       <Form method="POST">
         <div className="mb-3">
           <label htmlFor="exercise" className="form-label">
@@ -102,27 +86,6 @@ export default function newPr() {
                 actionData?.fieldErrors?.weight}
             </p>
           </div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="reps" className="form-label">
-            Reps
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            name="reps"
-            id="reps"
-            required
-          />
-          <div className="error">
-            <p>
-              {actionData?.fieldErrors?.reps && actionData?.fieldErrors?.reps}
-            </p>
-          </div>
-        </div>
-        <div className="mb-3 form-check">
-          <h5>Projected 1rm: </h5>
-          <p></p>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit

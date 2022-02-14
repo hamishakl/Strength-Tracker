@@ -12,6 +12,7 @@ import {
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 import PrTable from "../../components/PrTable";
+import findPr from "../../components/Goals";
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
@@ -28,12 +29,15 @@ export const loader = async ({ request, params }) => {
       exerciseId: {
         equals: `${exercise.id}`,
       },
-    },
+    },orderBy: {
+      createdAt: 'desc'
+    }
   });
   const oneRepMax = weightLoop(pr);
   const data = { exercise, user, pr, oneRepMax };
   return data;
 };
+
 
 const weightLoop = (pr) => {
   let arr = [];
@@ -58,7 +62,7 @@ export const action = async ({ request, params }) => {
       await db.exercise.delete({ where: { id: params.exerciseId } });
     }
 
-    return redirect("/exercises");
+    return redirect("/dashboard");
   }
 };
 
@@ -69,6 +73,11 @@ export const OneRmEstimate = (weight, reps) => {
 
 function exercise() {
   const { exercise, user, pr, oneRepMax } = useLoaderData();
+  // console.log(pr.length)
+  const latestPr = pr[0]
+  const currentEstimatedPr = OneRmEstimate(latestPr.weight, latestPr.reps)
+
+  // const latestPr = findPr(pr, exercise)
 
   const dateConvertor = (prDate) => {
     return new Date(prDate).toDateString();
@@ -88,7 +97,10 @@ function exercise() {
       <div className="page-header">
         <h1>{exercise.title}</h1>
         {pr.length > 0 ? (
+          <>
+          <h5>Current estimated PR: {currentEstimatedPr}kg</h5>
           <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
+          </>
         ) : null}
         <div className="page-content">{exercise.body}</div>
         <Link to="/dashboard" className="btn btn-reverse">

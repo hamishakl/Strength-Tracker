@@ -1,18 +1,18 @@
-const findPr = (prs, exercise) => {
-  console.log(prs.length)
+import { OneRmEstimate } from "../routes/dashboard/$exerciseId";
+
+export const findPr = (prs, exercise) => {
   let arr = []
   for (let i = 0; i < prs.length; i++) {
     if (prs[i].exerciseId == exercise.id) {
       arr.push(prs[i])
     } 
   }
-  console.log(arr[0])
   return arr[0]
 };
 
 const calcProgress = (exercise, latestPr) => {
   const goal = exercise.goal;
-  const current = latestPr.weight;
+  const current = OneRmEstimate(latestPr.weight, latestPr.reps)
   const percentage = (current / goal) * 100;
   if (exercise.goal == null) {
     return 0;
@@ -27,7 +27,6 @@ export default function Recommendation({ exercise, prs }) {
   latestPr === null
   ? (percentage = 0)
   : (percentage = calcProgress(exercise, latestPr));
-  console.log(latestPr)
 
   return (
     <>

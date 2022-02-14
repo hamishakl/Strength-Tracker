@@ -96,13 +96,13 @@ function exercise() {
     <Container maxWidth="md">
       <div className="page-header">
         <h1>{exercise.title}</h1>
+        <div className="page-content">{exercise.body}</div>
         {pr.length > 0 ? (
           <>
           <h5>Current estimated PR: {currentEstimatedPr}kg</h5>
           <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
           </>
         ) : null}
-        <div className="page-content">{exercise.body}</div>
         <Link to="/dashboard" className="btn btn-reverse">
           Back
         </Link>

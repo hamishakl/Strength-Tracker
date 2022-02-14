@@ -1,4 +1,4 @@
-import { Link, redirect, useActionData, json, Form } from "remix";
+import { Link, redirect, useActionData, json, Form, useLoaderData } from "remix";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 
@@ -16,6 +16,15 @@ function validateReps(reps) {
 
 function badRequest(data) {
   return json(data, { status: 400 });
+}
+
+export const loader = async ({params}) => {
+  const exercise = await db.exercise.findUnique({
+    where: {
+      id: params.exerciseId
+    }
+  })
+  return exercise
 }
 
 export const action = async ({ request, params }) => {
@@ -49,11 +58,12 @@ export const action = async ({ request, params }) => {
 
 function NewPr() {
   const actionData = useActionData();
+  const exercise = useLoaderData()
 
   return (
     <>
       <div className="page-header">
-        <h1>New exercise</h1>
+        <h1>New PR for {exercise.title}</h1>
         <Link to="/dashboard" className="btn btn-reverse">
           Back
         </Link>
@@ -80,7 +90,7 @@ function NewPr() {
             </div>
           </div>
           <button type="submit" className="btn btn-block">
-            Add exercise
+            Add PR
           </button>
         </Form>
       </div>

@@ -1,18 +1,19 @@
+import { Link } from "remix";
 import { OneRmEstimate } from "../routes/dashboard/$exerciseId";
 
 export const findPr = (prs, exercise) => {
-  let arr = []
+  let arr = [];
   for (let i = 0; i < prs.length; i++) {
     if (prs[i].exerciseId == exercise.id) {
-      arr.push(prs[i])
-    } 
+      arr.push(prs[i]);
+    }
   }
-  return arr[0]
+  return arr[0];
 };
 
 const calcProgress = (exercise, latestPr) => {
   const goal = exercise.goal;
-  const current = OneRmEstimate(latestPr.weight, latestPr.reps)
+  const current = OneRmEstimate(latestPr.weight, latestPr.reps);
   const percentage = (current / goal) * 100;
   if (exercise.goal == null) {
     return 0;
@@ -25,10 +26,10 @@ export default function Recommendation({ exercise, prs }) {
   const latestPr = findPr(prs, exercise);
   let percentage;
   latestPr === null
-  ? (percentage = 0)
-  : (percentage = calcProgress(exercise, latestPr));
-  const currentPr = (OneRmEstimate(latestPr.weight, latestPr.reps)).toFixed(1)
-  console.log(currentPr)
+    ? (percentage = 0)
+    : (percentage = calcProgress(exercise, latestPr));
+  const currentPr = parseInt(OneRmEstimate(latestPr.weight, latestPr.reps).toFixed(2));
+ 
   return (
     <>
       {exercise.goal === null ? (
@@ -37,10 +38,19 @@ export default function Recommendation({ exercise, prs }) {
         <div className="container">
           <div className="card" style={{ flex: "0 0 33.333333%" }}>
             <div className="card-body">
-              {exercise.goal === null ? (
-                <p>no goal</p>
+              {currentPr > exercise.goal ? (
+                <>
+                  <p>
+                    Current estimated PR: {currentPr}kg<br></br>You achieved
+                    your goal of {exercise.goal}kg!
+                  </p>
+                  <Link to={`${exercise.id}/new-goal`}>Set a new goal?</Link>
+                </>
               ) : (
-                <p>Current estimated PR: {currentPr}kg<br></br>Your progress towards {exercise.goal}kg:</p>
+                <p>
+                  Current estimated PR: {currentPr}kg<br></br>Your progress
+                  towards {exercise.goal}kg:
+                </p>
               )}
               <div className="progress">
                 <div

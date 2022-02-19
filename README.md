@@ -1,4 +1,4 @@
-#Strength tracker  
+#Strength tracker
 
 Strength tracking app I have developed with Remix JS, Prisma and SQL Lite.  
 

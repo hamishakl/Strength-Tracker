@@ -77,7 +77,13 @@ function exercise() {
   const { exercise, user, pr, oneRepMax } = useLoaderData();
 
   const latestPr = pr[0];
-  const currentEstimatedPr = OneRmEstimate(latestPr.weight, latestPr.reps);
+  const currentEstimatedPr
+
+  if (latestPr === undefined || pr.length === 0){
+    console.log('no pr')
+  } else {
+    currentEstimatedPr = OneRmEstimate(latestPr.weight, latestPr.reps);
+  }
 
   return (
     <Container maxWidth="md">

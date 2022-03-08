@@ -37,18 +37,20 @@ export const loader = async ({ request }) => {
 
 function ExerciseItems() {
   const data = useLoaderData();
-
   return (
     <>
       <div className="page-header">
         <h1>
-          My exercises
+          My Exercises
           <Link to="/dashboard/new" className="btn">
-            <span className="badge bg-secondary">New</span>
+            <span className="badge bg-secondary">New Exercise</span>
           </Link>
         </h1>
       </div>
-      <MyExercise data={data} />
+      {
+
+        <MyExercise data={data} />
+      }
     </>
   );
 }

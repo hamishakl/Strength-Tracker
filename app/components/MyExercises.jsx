@@ -4,7 +4,7 @@ import Goals from "./Goals";
 export default function MyExercise({ data }) {
   const exercises = data.exercises["exercises"];
   const prs = data.prs["prs"];
-
+  console.log(prs.length)
   return (
     <div className="container">
       <div className="row">
@@ -28,7 +28,10 @@ export default function MyExercise({ data }) {
                   <Link to={`${exercise.id}/new-goal`}>New goal</Link>
                 </li>
               </ul>
-              <Goals exercise={exercise} prs={prs} />
+              {
+                prs.length === 0 ? (<br></br>) : 
+                <Goals exercise={exercise} prs={prs} />
+              }
             </div>
           </div>
         ))}

@@ -77,7 +77,7 @@ function exercise() {
   const { exercise, user, pr, oneRepMax } = useLoaderData();
 
   const latestPr = pr[0];
-  const currentEstimatedPr
+  let currentEstimatedPr = null
 
   if (latestPr === undefined || pr.length === 0){
     console.log('no pr')

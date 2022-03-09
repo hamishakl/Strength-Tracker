@@ -40,7 +40,7 @@ function ExerciseItems() {
   return (
     <>
       <div className="page-header">
-        <h1>
+        <h1 className="text-3xl font-bold underline">
           My Exercises
           <Link to="/dashboard/new" className="btn">
             <span className="badge bg-secondary">New Exercise</span>

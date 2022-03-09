@@ -40,12 +40,12 @@ function ExerciseItems() {
   return (
     <>
       <div className="page-header">
-        <h1 className="text-3xl font-bold underline">
+        <h1 className="">
           My Exercises
-          <Link to="/dashboard/new" className="btn">
-            <span className="badge bg-secondary">New Exercise</span>
-          </Link>
         </h1>
+          <Link to="/dashboard/new" className="">
+            <span className="">New Exercise</span>
+          </Link>
       </div>
       {
 

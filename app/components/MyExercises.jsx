@@ -4,7 +4,6 @@ import Goals from "./Goals";
 export default function MyExercise({ data }) {
   const exercises = data.exercises["exercises"];
   const prs = data.prs["prs"];
-  console.log(prs.length)
   return (
     <div className="container">
       <div className="row">

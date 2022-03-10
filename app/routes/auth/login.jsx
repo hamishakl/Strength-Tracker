@@ -39,8 +39,6 @@ export const action = async ({ request }) => {
     return badRequest({ fieldErrors, fields });
   }
 
-  switch (loginType) {
-    case 'login': {
       const user = await login({ username, password });
       if (!user) {
         return badRequest({
@@ -48,36 +46,8 @@ export const action = async ({ request }) => {
           fieldErrors: { username: 'Invalid Credentials' },
         });
       }
-      return createUserSession(user.id, '/exercises');
-    }
-    case 'register': {
-      const userExists = await db.user.findFirst({
-        where: {
-          username,
-        },
-      });
-      if (userExists) {
-        return badRequest({
-          fields,
-          fieldErrors: { userName: `User ${username} already exists` },
-        });
-      }
-
-      const user = await register({ username, password });
-      if (!user) {
-        return badRequest({
-          fields,
-          formError: 'Something went wrong',
-        });
-      }
-
-      return createUserSession(user.id, '/exercises');
-    }
-
-    default: {
-      return badRequest({ fields, formError: 'Login type is not valid' });
-    }
-  }
+      return createUserSession(user.id, '/dashboard');
+  
 };
 
 function Login() {

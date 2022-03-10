@@ -57,7 +57,7 @@ function Layout({ children }) {
 
   return (
     <>
-        <nav className="container flex flex-row bg-blue-900 text-white justify-between w-screen h-20 max-w-none pl-8 pr-8 items-center ease-linear duration-100">
+        <nav className="container flex flex-row bg-space-cadet text-white justify-between w-screen border-b-2 h-20 max-w-none pl-8 pr-8 items-center ease-linear duration-100">
           {user ? (
             <>
               <Link className="font-bold" to="/dashboard">
@@ -90,7 +90,7 @@ function Layout({ children }) {
           <Link to="/auth/login">Login</Link>
         )}
         </nav>
-      <div className='container'>{children}</div>
+      <div className='w-screen h-auto max-h-none max-w-screen items-center overflow-hidden'>{children}</div>
     </>
   );
 }

@@ -57,40 +57,54 @@ function Layout({ children }) {
 
   return (
     <>
-        <nav className="container flex flex-row bg-space-cadet text-white justify-between w-screen border-b-2 h-20 max-w-none pl-8 pr-8 items-center ease-linear duration-100">
-          {user ? (
-            <>
-              <Link className="font-bold" to="/dashboard">
-                Strength Tracker
-              </Link>
-                <Link className="font-medium opacity-80 hover:opacity-100 ease-linear duration-100 " to="/dashboard/newPr">
-                  New PR
-                </Link>
-                <Link className="font-medium opacity-80 hover:opacity-100 ease-linear duration-100" to="/dashboard/newGoal">
-                  New Goal
-                </Link>
-            </>
-          ) : (
-            <>
-              <Link className="font-bold" to="/">
-                Strength Tracker
-              </Link>
-              <Link className="font-medium opacity-80 hover:opacity-100 ease-linear duration-100" to="/auth/register">
+      <nav className='container flex flex-row bg-space-cadet text-white justify-between w-screen border-b-2 h-20 max-w-none pl-8 pr-8 items-center ease-linear duration-100'>
+        {user ? (
+          <>
+            <Link className='font-bold' to='/dashboard'>
+              Strength Tracker
+            </Link>
+            <Link
+              className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100 '
+              to='/dashboard/newPr'
+            >
+              New PR
+            </Link>
+            <Link
+              className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'
+              to='/dashboard/newGoal'
+            >
+              New Goal
+            </Link>
+            <form action='/auth/logout' method='POST'>
+              <button
+                className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'
+                type='submit'
+              >
+                Logout {user.username}
+              </button>
+            </form>
+          </>
+        ) : (
+          <>
+            <Link className='font-bold' to='/'>
+              Strength Tracker
+            </Link>
+            <div className='w-1/5 flex items-center justify-between'>
+              <Link
+                className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'
+                to='/auth/register'
+              >
                 Register
               </Link>
-            </>
-          )}
-        {user ? (
-          <form action="/auth/logout" method="POST">
-            <button className="font-medium opacity-80 hover:opacity-100 ease-linear duration-100" type="submit">
-              Logout {user.username}
-            </button>
-          </form>
-        ) : (
-          <Link to="/auth/login">Login</Link>
+
+              <Link to='/auth/login'>Login</Link>
+            </div>
+          </>
         )}
-        </nav>
-      <div className='w-screen h-auto max-h-none max-w-screen items-center overflow-hidden'>{children}</div>
+      </nav>
+      <div className='w-screen h-auto max-h-none max-w-screen items-center overflow-hidden'>
+        {children}
+      </div>
     </>
   );
 }

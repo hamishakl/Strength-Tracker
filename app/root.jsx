@@ -71,14 +71,14 @@ function Layout({ children }) {
                 </Link>
             </>
           ) : (
-            <div className="" id="">
+            <>
               <Link className="font-bold" to="/">
                 Strength Tracker
               </Link>
               <Link className="font-medium opacity-80 hover:opacity-100 ease-linear duration-100" to="/auth/register">
                 Register
               </Link>
-            </div>
+            </>
           )}
         {user ? (
           <form action="/auth/logout" method="POST">

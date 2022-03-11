@@ -38,7 +38,7 @@ export const loader = async ({ request }) => {
 function ExerciseItems() {
   const data = useLoaderData();
   return (
-    <div className='h-screen w-screen max-w-none max-h-none bg-space-cadet p-0 m-0 text-white'>
+    <div className='h-screen w-screen max-w-none max-h-none bg-white p-0 m-0 text-black'>
       <div className='flex w-screen items-center justify-between'>
         <h1 className='text-3xl font-bold'>My Exercises</h1>
         <Link to='/dashboard/new' className='underline-offset-4'>

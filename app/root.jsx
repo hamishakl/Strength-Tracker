@@ -102,7 +102,7 @@ function Layout({ children }) {
           </>
         )}
       </nav>
-      <div className='w-screen h-auto max-h-none max-w-screen items-center overflow-hidden'>
+      <div className='``'>
         {children}
       </div>
     </>

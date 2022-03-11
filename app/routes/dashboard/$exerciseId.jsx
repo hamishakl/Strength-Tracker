@@ -89,7 +89,6 @@ function exercise() {
     <Container maxWidth="md">
       <div className="page-header">
         <h1>{exercise.title}</h1>
-        <div className="page-content">{exercise.body}</div>
         {pr.length > 0 ? (
           <>
             <h5>Current estimated PR: {currentEstimatedPr}kg</h5>

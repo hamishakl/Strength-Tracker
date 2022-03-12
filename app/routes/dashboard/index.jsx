@@ -1,7 +1,6 @@
 import { Link, useLoaderData } from 'remix';
 import { db } from '~/utils/db.server';
 import MyExercise from '../../components/MyExercises';
-import Goals from '../../components/Goals';
 
 import { getUser } from '~/utils/session.server';
 

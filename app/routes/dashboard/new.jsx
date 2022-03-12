@@ -83,7 +83,6 @@ function NewExercise() {
           </button>
         </form>
       </div>
-      {FreeSoloCreateOption()}
     </>
   );
 }

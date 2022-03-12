@@ -34,7 +34,6 @@ export const action = async ({ request }) => {
 
   const fieldErrors = {
     title: validateTitle(title),
-    body: validateBody(body),
   };
 
   if (Object.values(fieldErrors).some(Boolean)) {
@@ -46,7 +45,7 @@ export const action = async ({ request }) => {
     data: { ...fields, userId: user.id },
   });
 
-  return redirect(`/exercises/${exercise.id}`);
+  return redirect(`/dashboard/${exercise.id}`);
 };
 
 function NewExercise() {

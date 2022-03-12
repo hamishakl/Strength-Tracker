@@ -5,20 +5,18 @@ export default function MyExercise({ data }) {
   const exercises = data.exercises['exercises'];
   const prs = data.prs['prs'];
   return (
-    <div className='container'>
-      <div className='row'>
+    <>
         {exercises.map((exercise) => (
           <div
-            key={exercise.id}
-            className='card'
-            style={{ flex: '0 0 33.333333%' }}
+          key={exercise.id}
+          className=''
+          style={{ flex: '0 0 33.333333%' }}
           >
-            <div className='card-body' key={exercise.id}>
+            <div className='flex flex-col' key={exercise.id}>
               <Link to={exercise.id}>
-                <h5 className='card-title'>{exercise.title}</h5>
+                <h5 className='font-bold'>{exercise.title}</h5>
               </Link>
               <h6 className='card-subtitle mb-2 text-muted'></h6>
-              <p className='card-text'>{exercise.body}</p>
               <ul className='nav'>
                 <li className='nav-item'>
                   <Link to={`./${exercise.id}/pr-new`}>New PR</Link>
@@ -29,17 +27,16 @@ export default function MyExercise({ data }) {
               </ul>
               {prs.length === 0 ? (
                 <br></br>
-              ) : (
-                prs.map((pr) => {
-                  <div key={pr.id}>
+                ) : (
+                  prs.map((pr) => {
+                    <div key={pr.id}>
                     <Goals exercise={exercise} prs={pr} />
                   </div>;
                 })
-              )}
+                )}
             </div>
           </div>
         ))}
-      </div>
-    </div>
+        </>
   );
 }

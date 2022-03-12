@@ -530,10 +530,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.h-20 {
-  height: 5rem;
-}
-
 .h-screen {
   height: 100vh;
 }
@@ -542,12 +538,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2.5rem;
 }
 
-.w-screen {
-  width: 100vw;
+.h-20 {
+  height: 5rem;
 }
 
-.w-1\/5 {
-  width: 20%;
+.w-screen {
+  width: 100vw;
 }
 
 .w-full {
@@ -558,12 +554,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 10rem;
 }
 
-.max-w-none {
-  max-width: none;
+.w-1\/5 {
+  width: 20%;
 }
 
 .max-w-lg {
   max-width: 32rem;
+}
+
+.max-w-none {
+  max-width: none;
 }
 
 .appearance-none {
@@ -604,11 +604,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-width: 2px;
 }
 
-.bg-space-cadet {
-  --tw-bg-opacity: 1;
-  background-color: rgb(35 38 71 / var(--tw-bg-opacity));
-}
-
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -617,6 +612,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-cyan-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(6 182 212 / var(--tw-bg-opacity));
+}
+
+.bg-space-cadet {
+  --tw-bg-opacity: 1;
+  background-color: rgb(35 38 71 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -661,16 +661,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2.25rem;
 }
 
+.font-semibold {
+  font-weight: 600;
+}
+
 .font-bold {
   font-weight: 700;
 }
 
 .font-medium {
   font-weight: 500;
-}
-
-.font-semibold {
-  font-weight: 600;
 }
 
 .uppercase {
@@ -685,14 +685,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   letter-spacing: 0.025em;
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .text-black {

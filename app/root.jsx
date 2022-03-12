@@ -1,7 +1,7 @@
 import { Outlet, LiveReload, Link, Links, useLoaderData } from 'remix';
 import globalStylesUrl from '~/styles/global.css';
 import { getUser } from './utils/session.server';
-import tailwindUrl from './styles/tailwind.css';
+import tailwindUrl from './styles/app.css';
 
 export const links = () => {
   return [

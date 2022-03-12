@@ -20,7 +20,6 @@ export const loader = async ({ params }) => {
 
 function prPage() {
   const { exercise, pr } = useLoaderData();
-  // console.log(pr);
   return (
     <>
       <table>

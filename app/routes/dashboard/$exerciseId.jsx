@@ -1,13 +1,4 @@
 import { Link, redirect, useLoaderData } from "remix";
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "recharts";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 import PrTable from "../../components/PrTable";

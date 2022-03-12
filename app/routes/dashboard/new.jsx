@@ -28,11 +28,10 @@ function badRequest(data) {
 export const action = async ({ request }) => {
   const form = await request.formData();
   const title = form.get("title");
-  const body = form.get("body");
 
   const user = await getUser(request);
 
-  const fields = { title, body };
+  const fields = { title };
 
   const fieldErrors = {
     title: validateTitle(title),
@@ -79,21 +78,7 @@ function NewExercise() {
                   actionData?.fieldErrors?.title}
               </p>
             </div>
-          </div>
-          <div className="form-control">
-            <label htmlFor="body">Exercise Body</label>
-            <input
-              type="text"
-              name="body"
-              id="body"
-              defaultValue={actionData?.fields?.title}
-            />
-            <div className="error">
-              <p>
-                {actionData?.fieldErrors?.body && actionData?.fieldErrors?.body}
-              </p>
-            </div>
-          </div>
+          </div>  
           <button type="submit" className="btn btn-block">
             Add exercise
           </button>

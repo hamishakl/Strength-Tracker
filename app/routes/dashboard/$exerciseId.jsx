@@ -1,5 +1,4 @@
 import { Link, redirect, useLoaderData } from "remix";
-import { Container } from "@mui/material";
 import {
   LineChart,
   Line,
@@ -12,7 +11,6 @@ import {
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 import PrTable from "../../components/PrTable";
-import findPr from "../../components/Goals";
 import Chart from "../../components/Chart";
 import Goals from "../../components/Goals";
 
@@ -86,7 +84,7 @@ function exercise() {
   }
 
   return (
-    <Container maxWidth="md">
+    <>
       <div className="page-header">
         <h1>{exercise.title}</h1>
         {pr.length > 0 ? (
@@ -108,7 +106,7 @@ function exercise() {
         </div>
       ) : (
         <h1>no prs yet :(</h1>
-      )}
+          )}
       <div className="page-footer">
         {user.id === exercise.userId && (
           <form method="POST">
@@ -117,7 +115,7 @@ function exercise() {
           </form>
         )}
       </div>
-    </Container>
+        </>
   );
 }
 

@@ -2,7 +2,6 @@ import { Link, redirect, useActionData, json, useLoaderData } from "remix";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 import { getExercises } from "../fetch/exercises";
-import FreeSoloCreateOption from "../../components/ExerciseComplete";
 
 export const loader = async ({ request }) => {
   const exerciseList = getExercises();

@@ -4,6 +4,7 @@ import { getUser } from "~/utils/session.server";
 import PrTable from "../../components/PrTable";
 import Chart from "../../components/Chart";
 import Goals from "../../components/Goals";
+import { useEffect, useRef } from "react";
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
@@ -62,6 +63,7 @@ export const OneRmEstimate = (weight, reps) => {
   return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5;
 };
 
+
 function exercise() {
   const { exercise, user, pr, oneRepMax } = useLoaderData();
 
@@ -89,7 +91,7 @@ function exercise() {
         </Link>
       </div>
       {pr.length > 0 ? (
-        <div>
+        <div >
           <Goals exercise={exercise} prs={pr}/>
           <PrTable prs={pr} />
           <Link to="./pr-new">New PR</Link>

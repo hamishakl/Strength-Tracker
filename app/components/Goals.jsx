@@ -44,7 +44,7 @@ export default function Recommendation({ exercise, prs }) {
                     Current estimated PR: {currentPr}kg<br></br>You achieved
                     your goal of {exercise.goal}kg!
                   </p>
-                  <Link to={`${exercise.id}/new-goal`}>Set a new goal?</Link>
+                  <Link to={`/dashboard/${exercise.id}/new-goal`}>Set a new goal?</Link>
                 </>
               ) : (
                 <p>

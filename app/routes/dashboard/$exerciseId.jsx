@@ -104,7 +104,7 @@ function exercise() {
         {user.id === exercise.userId && (
           <form method="POST">
             <input type="hidden" name="_method" value="delete" />
-            <button className="btn btn-delete">Delete</button>
+            <button className="btn btn-delete">Delete exercise</button>
           </form>
         )}
       </div>

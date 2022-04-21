@@ -24,6 +24,9 @@ export default function MyExercise({ data }) {
                 <li className='nav-item'>
                   <Link to={`${exercise.id}/new-goal`}>New goal</Link>
                 </li>
+                <li className='nav-item'>
+                  <Link to={`${exercise.id}/volume`}>New volume</Link>
+                </li>
               </ul>
               {prs.length === 0 ? (
                 <br></br>

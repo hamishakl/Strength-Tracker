@@ -8,29 +8,29 @@ datasource db {
 }
 
 model User {
-  id           String        @id @default(uuid())
-  username     String        @unique
+  id           String     @id @default(uuid())
+  username     String     @unique
   passwordHash String
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
   exercises    Exercise[]
-  Pr           Pr[]          @relation("userid")
-  SetsAndReps  SetsAndReps[]
+  Pr           Pr[]       @relation("userid")
+  Volume       Volume[]
   Workout      Workout[]
 }
 
 model Exercise {
-  id          String        @id @default(uuid())
-  user        User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String?
-  title       String
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  pr          Pr[]
-  prId        String?
-  Pr          Pr[]          @relation("exerciseid")
-  goal        Int?
-  SetsAndReps SetsAndReps[]
+  id        String   @id @default(uuid())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String?
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pr        Pr[]
+  prId      String?
+  Pr        Pr[]     @relation("exerciseid")
+  goal      Int?
+  Volume    Volume[]
 }
 
 model Pr {
@@ -46,11 +46,12 @@ model Pr {
   Exercise   Exercise? @relation(fields: [exerciseId], references: [id])
 }
 
-model SetsAndReps {
+model Volume {
   userId     String
   id         String    @id @default(uuid())
   weight     Int
   reps       Int
+  sets       Int
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   exerciseId String?
@@ -60,11 +61,11 @@ model SetsAndReps {
 }
 
 model Workout {
-  userId        String
-  id            String      @id @default(uuid())
-  User          User        @relation(fields: [userId], references: [id])
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  exercises     SetsAndReps @relation(fields: [setsAndRepsId], references: [id])
-  setsAndRepsId String
+  userId    String
+  id        String   @id @default(uuid())
+  User      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  exercises Volume   @relation(fields: [VolumeId], references: [id])
+  VolumeId  String
 }

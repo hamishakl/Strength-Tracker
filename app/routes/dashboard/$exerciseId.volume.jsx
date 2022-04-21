@@ -21,6 +21,12 @@ function validateReps(reps) {
   }
 }
 
+function validateReps(sets) {
+  if (typeof sets !== 'number') {
+    return 'reps should be atleast 2 characters long';
+  }
+}
+
 function badRequest(data) {
   return json(data, { status: 400 });
 }
@@ -38,13 +44,15 @@ export const action = async ({ request, params }) => {
   const form = await request.formData();
   const weightStr = form.get('weight');
   const repsStr = form.get('reps');
+  const setsStr = form.get('sets');
   const weight = parseInt(weightStr);
+  const sets = parseInt(setsStr);
   const reps = parseInt(repsStr);
   const exerciseId = params.exerciseId;
 
   const user = await getUser(request);
 
-  const fields = { weight, reps };
+  const fields = { weight, reps, sets };
 
   const fieldErrors = {
     weight: validateWeight(weight),
@@ -56,7 +64,7 @@ export const action = async ({ request, params }) => {
     return badRequest({ fieldErrors, fields });
   }
 
-  const pr = await db.pr.create({
+  const volume = await db.volume.create({
     data: { ...fields, userId: user.id, exerciseId: exerciseId },
   });
 
@@ -70,15 +78,15 @@ function NewPr() {
   return (
     <>
       <div className='page-header'>
-        <h1>New volume for {exercise.title}</h1>
-        <Link to='/dashboard' className='btn btn-reverse'>
+        <h1>Add volume for the {exercise.title}</h1>
+        <Link to='/dashboard' className=''>
           Back
         </Link>
       </div>
-      <div className='page-content'>
+      <div className=''>
         <Form method='POST'>
-          <div className='form-control'>
-            <label htmlFor='weight'>weight</label>
+          <div className=''>
+            <label htmlFor='weight'>Weight</label>
             <input type='number' name='weight' id='weight' />
             <div className='error'>
               <p>
@@ -87,8 +95,8 @@ function NewPr() {
               </p>
             </div>
           </div>
-          <div className='form-control'>
-            <label htmlFor='reps'>Exercise reps</label>
+          <div className=''>
+            <label htmlFor='reps'>Reps</label>
             <input type='number' name='reps' id='reps' />
             <div className='error'>
               <p>
@@ -96,8 +104,17 @@ function NewPr() {
               </p>
             </div>
           </div>
+          <div className=''>
+            <label htmlFor='reps'>Sets</label>
+            <input type='number' name='sets' id='sets' />
+            <div className='error'>
+              <p>
+                {actionData?.fieldErrors?.sets && actionData?.fieldErrors?.sets}
+              </p>
+            </div>
+          </div>
           <button type='submit' className='btn btn-primary'>
-            Add PR
+            Add Volume
           </button>
         </Form>
       </div>

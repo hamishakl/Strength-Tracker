@@ -75,6 +75,12 @@ function Layout({ children }) {
             >
               New Goal
             </Link>
+            <Link
+              className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'
+              to='/dashboard/newWorkout'
+            >
+              New Workout
+            </Link>
             <form action='/auth/logout' method='POST'>
               <button
                 className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'

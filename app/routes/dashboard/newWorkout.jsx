@@ -91,18 +91,21 @@ export default function newWorkout() {
             </p>
           </div>
         </div>
+        <div>
+          <h5>Date of workout:</h5>
+          <input
+            type='date'
+            id='start'
+            name='trip-start'
+            value={date}
+            min={userJoinDate}
+            max={date}
+          ></input>
+        </div>
         <button type='submit' className='btn btn-primary'>
           Submit
         </button>
       </Form>
-      <input
-        type='date'
-        id='start'
-        name='trip-start'
-        value={date}
-        min={userJoinDate}
-        max={date}
-      ></input>
     </div>
   )
 }

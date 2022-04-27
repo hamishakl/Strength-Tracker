@@ -1,20 +1,18 @@
-import * as React from "react";
-import { OneRmEstimate } from "../routes/dashboard/$exerciseId";
+import * as React from 'react'
+import { OneRmEstimate } from '../routes/dashboard/$exerciseId'
 
-
-export default function BasicTable({ prs }) {
+export default function ({ prs }) {
   console.log(prs)
   return (
     <>
-    <div>
-    <p>{prs[1].weight}</p>
-    {prs.map((pr ) => {
-      <div key={pr.id}>
-
-        <p>{pr.reps}</p>
-      </div>
-    })}
-    </div>
+      {prs.map((pr) => {
+        <div>
+          <div key={pr.id}>
+            <p>{pr.weight}</p>
+            <p>{pr.reps}</p>
+          </div>
+        </div>
+      })}
     </>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-import { Outlet, LiveReload, Link, Links, useLoaderData } from 'remix';
-import globalStylesUrl from '~/styles/global.css';
-import { getUser } from './utils/session.server';
-import tailwindUrl from './styles/app.css';
+import { Outlet, LiveReload, Link, Links, useLoaderData, Scripts } from 'remix'
+import globalStylesUrl from '~/styles/global.css'
+import { getUser } from './utils/session.server'
+import tailwindUrl from './styles/app.css'
 
 export const links = () => {
   return [
@@ -16,16 +16,16 @@ export const links = () => {
       rel: 'stylesheet',
       href: tailwindUrl,
     },
-  ];
-};
+  ]
+}
 
 export const loader = async ({ request }) => {
-  const user = await getUser(request);
+  const user = await getUser(request)
   const data = {
     user,
-  };
-  return data;
-};
+  }
+  return data
+}
 
 export default function App(params) {
   return (
@@ -34,7 +34,7 @@ export default function App(params) {
         <Outlet />
       </Layout>
     </Document>
-  );
+  )
 }
 
 function Document({ children, title }) {
@@ -47,43 +47,44 @@ function Document({ children, title }) {
       <body>
         {children}
         {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+        <Scripts />
       </body>
     </html>
-  );
+  )
 }
 
 function Layout({ children }) {
-  const { user } = useLoaderData();
+  const { user } = useLoaderData()
 
   return (
     <>
-      <nav className='container flex flex-row bg-space-cadet text-white justify-between w-screen border-b-2 h-20 max-w-none pl-8 pr-8 items-center ease-linear duration-100'>
+      <nav className='container flex h-20 w-screen max-w-none flex-row items-center justify-between border-b-2 bg-space-cadet pl-8 pr-8 text-white duration-100 ease-linear'>
         {user ? (
           <>
             <Link className='font-bold' to='/dashboard'>
               Strength Tracker
             </Link>
             <Link
-              className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100 '
+              className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100 '
               to='/dashboard/newPr'
             >
               New PR
             </Link>
             <Link
-              className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'
+              className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100'
               to='/dashboard/newGoal'
             >
               New Goal
             </Link>
             <Link
-              className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'
+              className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100'
               to='/dashboard/newWorkout'
             >
               New Workout
             </Link>
             <form action='/auth/logout' method='POST'>
               <button
-                className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'
+                className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100'
                 type='submit'
               >
                 Logout {user.username}
@@ -95,9 +96,9 @@ function Layout({ children }) {
             <Link className='font-bold' to='/'>
               Strength Tracker
             </Link>
-            <div className='w-1/5 flex items-center justify-between'>
+            <div className='flex w-1/5 items-center justify-between'>
               <Link
-                className='font-medium opacity-80 hover:opacity-100 ease-linear duration-100'
+                className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100'
                 to='/auth/register'
               >
                 Register
@@ -108,9 +109,7 @@ function Layout({ children }) {
           </>
         )}
       </nav>
-      <div className='``'>
-        {children}
-      </div>
+      <div className='``'>{children}</div>
     </>
-  );
+  )
 }

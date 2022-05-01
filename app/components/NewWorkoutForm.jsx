@@ -1,5 +1,4 @@
 export default function NewWorkoutForm({ exercises, val  }) {
-  console.log(val)
   return (
     <div>
       <h5>Exercise #{val}</h5>

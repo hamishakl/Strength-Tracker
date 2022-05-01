@@ -34,9 +34,7 @@ export const action = async ({ request }) => {
 }
 
 export default function newWorkout() {
-  const [newSets, setCount] = useState(1)
-  const [previousState, setOldCount] = useState(0)
-
+  const [volumeArray, setCount] = useState([])
   const data = useLoaderData()
   const exercises = data.exercises
   let userDate = data.user.createdAt
@@ -104,19 +102,20 @@ export default function newWorkout() {
             max={date}
           ></input>
         </div>
-        {Array.from(Array(newSets)).map((i) => {
+        {volumeArray.map((i) => {
           return (
-            <NewWorkoutForm key={i} exercises={exercises} val={previousState} />
+            <NewWorkoutForm key={i} exercises={exercises} val={volumeArray[i]}/>
           )
         })}
         <div>
-        <button
+        <a
           onClick={() => (
-            setOldCount(previousState + 1), setCount(newSets + 1)
+            setCount(volumeArray => [...volumeArray, (volumeArray.length)]), 
+            console.log(volumeArray)
           )}
         >
           Click me
-        </button>
+        </a>
         </div>
         <button type='submit' className='btn btn-primary'>
           Submit

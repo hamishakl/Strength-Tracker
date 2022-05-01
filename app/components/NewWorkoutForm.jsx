@@ -1,5 +1,6 @@
 export default function NewWorkoutForm({ exercises, val  }) {
   val = val+1
+  console.log(val)
   return (
     <div>
       <h5>Exercise #{val}</h5>

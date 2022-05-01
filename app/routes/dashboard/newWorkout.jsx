@@ -46,9 +46,8 @@ export default function newWorkout() {
   const userJoinDate = arr.join('')
   const actionData = useActionData()
   const current = new Date()
-  const date = `${current.getFullYear()}-0${
-    current.getMonth() + 1
-  }-${current.getDate()}`
+  const date = `${current.getFullYear()}-0${current.getMonth() + 1
+    }-${current.getDate()}`
 
   return (
     <div className='container'>
@@ -104,18 +103,17 @@ export default function newWorkout() {
         </div>
         {volumeArray.map((i) => {
           return (
-            <NewWorkoutForm key={i} exercises={exercises} val={volumeArray[i]}/>
+            <NewWorkoutForm key={i} exercises={exercises} val={volumeArray[i]} />
           )
         })}
         <div>
-        <a
-          onClick={() => (
-            setCount(volumeArray => [...volumeArray, (volumeArray.length)]), 
-            console.log(volumeArray)
-          )}
-        >
-          Click me
-        </a>
+          <a
+            onClick={() => (
+              setCount(volumeArray => [...volumeArray, (volumeArray.length)])
+            )}
+          >
+            Click me
+          </a>
         </div>
         <button type='submit' className='btn btn-primary'>
           Submit

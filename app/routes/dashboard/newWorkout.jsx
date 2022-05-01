@@ -51,45 +51,8 @@ export default function newWorkout() {
 
   return (
     <div className='container'>
-      <h1>New goal</h1>
+      <h1>New workout</h1>
       <Form method='POST'>
-        <div className='mb-3'>
-          <label htmlFor='exercise' className='form-label'>
-            Exercise
-          </label>
-          <select
-            className='form-select'
-            aria-label='Default select example'
-            required
-            id='exercise'
-            name='exercise'
-          >
-            <option defaultValue={'none'}>Pick an exercise</option>
-            {exercises.map((exercise) => (
-              <option key={exercise.id} defaultValue={exercise.id}>
-                {exercise.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className='mb-3'>
-          <label htmlFor='weight' className='form-label'>
-            Weight
-          </label>
-          <input
-            type='number'
-            className='form-control'
-            id='weight'
-            name='weight'
-            required
-          />
-          <div className='error'>
-            <p>
-              {actionData?.fieldErrors?.weight &&
-                actionData?.fieldErrors?.weight}
-            </p>
-          </div>
-        </div>
         <div>
           <h5>Date of workout:</h5>
           <input
@@ -100,6 +63,36 @@ export default function newWorkout() {
             min={userJoinDate}
             max={date}
           ></input>
+        </div>
+        <div>
+          <h4>Only enter your working sets</h4>
+        </div>
+        <div>
+          <h5>Exercise #1</h5>
+          <select
+            aria-label='Default select example'
+            required
+            id='exercise'
+            name='exercise'
+          >
+            <option defaultValue={'none'}>
+              Pick an exercise
+            </option>
+            {exercises.map((exercise) => (
+              <>
+                <option key={exercise.id} defaultValue={exercise.id}>
+                  {exercise.title}
+                </option>
+              </>
+            ))}
+          </select>
+          <label htmlFor="weight" required>Weight</label>
+          <input type="number" name="weight" />
+          <label htmlFor="weight" required>Reps</label>
+          <input type="number" name="reps" />
+          <label htmlFor="sets" required>Sets</label>
+          <input type="number" name="sets" />
+
         </div>
         {volumeArray.map((i) => {
           return (

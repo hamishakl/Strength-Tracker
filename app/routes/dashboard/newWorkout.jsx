@@ -46,8 +46,15 @@ export default function newWorkout() {
   const userJoinDate = arr.join('')
   const actionData = useActionData()
   const current = new Date()
-  const date = `${current.getFullYear()}-0${current.getMonth() + 1
-    }-${current.getDate()}`
+  const day = current.getDate()
+  let date
+  day < 10
+    ? (date = `${current.getFullYear()}-0${
+        current.getMonth() + 1
+      }-0${current.getDate()}`)
+    : `${current.getFullYear()}-0${
+        current.getMonth() + 1
+      }-0${current.getDate()}`
 
   return (
     <div className='container'>
@@ -75,9 +82,7 @@ export default function newWorkout() {
             id='exercise'
             name='exercise'
           >
-            <option defaultValue={'none'}>
-              Pick an exercise
-            </option>
+            <option defaultValue={'none'}>Pick an exercise</option>
             {exercises.map((exercise) => (
               <>
                 <option key={exercise.id} defaultValue={exercise.id}>
@@ -86,24 +91,33 @@ export default function newWorkout() {
               </>
             ))}
           </select>
-          <label htmlFor="weight" required>Weight</label>
-          <input type="number" name="weight" />
-          <label htmlFor="weight" required>Reps</label>
-          <input type="number" name="reps" />
-          <label htmlFor="sets" required>Sets</label>
-          <input type="number" name="sets" />
-
+          <label htmlFor='weight' required>
+            Weight
+          </label>
+          <input type='number' name='weight' />
+          <label htmlFor='weight' required>
+            Reps
+          </label>
+          <input type='number' name='reps' />
+          <label htmlFor='sets' required>
+            Sets
+          </label>
+          <input type='number' name='sets' />
         </div>
         {volumeArray.map((i) => {
           return (
-            <NewWorkoutForm key={i} exercises={exercises} val={volumeArray[i]} />
+            <NewWorkoutForm
+              key={i}
+              exercises={exercises}
+              val={volumeArray[i]}
+            />
           )
         })}
         <div>
           <a
-            onClick={() => (
-              setCount(volumeArray => [...volumeArray, (volumeArray.length)])
-            )}
+            onClick={() =>
+              setCount((volumeArray) => [...volumeArray, volumeArray.length])
+            }
           >
             Click me
           </a>

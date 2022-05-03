@@ -8,25 +8,25 @@ export default function NewWorkoutForm({ exercises, val  }) {
             aria-label='Default select example'
             required
             id='exercise'
-            name='exercise'
+            name={`exercise-${val}`}
           >
             <option defaultValue={'none'}>
               Pick an exercise
             </option>
             {exercises.map((exercise) => (
               <>
-              <option key={exercise.id} defaultValue={exercise.id}>
+              <option key={exercise.id} value={exercise.id}>
                 {exercise.title}
               </option>
               </>
             ))}
           </select>
           <label htmlFor="weight" required>Weight</label>
-          <input type="number" name="weight"/>
+          <input type="number" name={`weight-${val}`}/>
           <label htmlFor="weight" required>Reps</label>
-          <input type="number" name="reps"/>
+          <input type="number" name={`reps-${val}`}/>
           <label htmlFor="sets" required>Sets</label>
-          <input type="number" name="sets"/>
+          <input type="number" name={`sets-${val}`}/>
          
     </div>
   )

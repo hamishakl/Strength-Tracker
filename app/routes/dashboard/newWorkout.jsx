@@ -22,26 +22,35 @@ export const loader = async ({ request }) => {
 
 export const action = async ({ request }) => {
   const user = await getUser(request);
-
+  let volumeBlock = []
   const form = await request.formData()
-  const keys = Object.keys(form._fields);
   const list = form._fields
+  const keys = Object.keys(list);
   let exerciseList = []
   keys.forEach((key, index) => {
     if (key.includes('exercise') === true) {
-      exerciseList.push(`${key}: ${form._fields[key]}`)
+      exerciseList.push(`${key}: ${list[key]}`)
     }
   });
-  console.log(exerciseList)
   const loopNumber = (exerciseList.length * 4) + 1
-  for (let i = 0; i < loopNumber; i++) {
-    if(keys.includes(`-${exerciseList.length}`)){
-      console.log(keys)
-    }
-    
-  }
+
+
+  
   console.log(typeof(list))
-  console.log(list)
+  // console.log(list[1])
+  console.log(list['exercise-1'] + ' it works!')
+  
+  for (let i = 0; i < (exerciseList.length+1); i++) {
+    volumeBlock[i] = []
+    keys.forEach((key, index)=> {
+      if (key.includes(`-${i}`)) {
+        volumeBlock[i].push(list[key])
+        console.log(volumeBlock[i])
+      }
+      
+    });
+  }
+  
   //workout form 
   const date = form.get('date')
 
@@ -126,11 +135,11 @@ export default function newWorkout() {
               </>
             ))}
           </select>
-          <label htmlFor="weight" required>Weight</label>
-          <input type="number" name="weight-1" />
-          <label htmlFor="weight" required>Reps</label>
-          <input type="number" name="reps-1" />
-          <label htmlFor="sets" required>Sets</label>
+          <label htmlFor="weight" >Weight</label>
+          <input type="number" required name="weight-1" />
+          <label htmlFor="weight" >Reps</label>
+          <input type="number" required name="reps-1" />
+          <label htmlFor="sets" >Sets</label>
           <input type="number" name="sets-1" />
 
         </div>

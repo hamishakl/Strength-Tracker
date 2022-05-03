@@ -3,6 +3,7 @@ import { getUser } from '~/utils/session.server'
 import { db } from '~/utils/db.server'
 import React, { useState } from 'react'
 import NewWorkoutForm from '~/components/NewWorkoutForm'
+import exercise from './$exerciseId'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -19,52 +20,60 @@ export const loader = async ({ request }) => {
 
 //create a neww exercise in the page 
 
+const dataArray = (volumeBlock, exerciseList) => {
+  let dataArr = []
+  for (let i = 0; i < (exerciseList.length+1); i++) {
+    volumeBlock[i] == [] ? (console.log('empty array')) : (
+    dataArr.push(volumeBlock[i])
+    )
+  }
+  return dataArr
+}
 
 export const action = async ({ request }) => {
   const user = await getUser(request);
   let volumeBlock = []
+  let exerciseList = []
   const form = await request.formData()
   const list = form._fields
   const keys = Object.keys(list);
-  let exerciseList = []
   keys.forEach((key, index) => {
     if (key.includes('exercise') === true) {
       exerciseList.push(`${key}: ${list[key]}`)
     }
   });
-  const loopNumber = (exerciseList.length * 4) + 1
 
-
-  
-  console.log(typeof(list))
-  // console.log(list[1])
-  console.log(list['exercise-1'] + ' it works!')
-  
   for (let i = 0; i < (exerciseList.length+1); i++) {
     volumeBlock[i] = []
     keys.forEach((key, index)=> {
-      if (key.includes(`-${i}`)) {
-        volumeBlock[i].push(list[key])
-        console.log(volumeBlock[i])
+      if (key.includes(`exercise-${i}`)) {
+        volumeBlock[i].exercise = list[key]
+      } if (key.includes(`weight-${i}`)) {
+        volumeBlock[i].weight = list[key]
+      } if (key.includes(`reps-${i}`)) {
+        volumeBlock[i].reps = list[key]
+      } if (key.includes(`sets-${i}`)) {
+        volumeBlock[i].sets = list[key]
       }
-      
     });
+    
   }
   
   //workout form 
   const date = form.get('date')
-
+  
   //volume form 
 
-
-
+  let dataBlock = dataArray(volumeBlock, exerciseList)
+  let removeEmptyArray = dataBlock.shift()
+  
   const workout = await db.workout.create({
     data: {
       date: date,
       userId: user.id,
       volume: {
         createMany: {
-          data: [{ title: 'My first post' }, { title: 'My second post' }],
+          data: dataBlock,
         },
       },
     },
@@ -129,7 +138,7 @@ export default function newWorkout() {
             <option defaultValue={'none'}>Pick an exercise</option>
             {exercises.map((exercise) => (
               <>
-                <option key={exercise.id} defaultValue={exercise.id}>
+                <option key={exercise.id} value={exercise.id}>
                   {exercise.title}
                 </option>
               </>
@@ -140,7 +149,7 @@ export default function newWorkout() {
           <label htmlFor="weight" >Reps</label>
           <input type="number" required name="reps-1" />
           <label htmlFor="sets" >Sets</label>
-          <input type="number" name="sets-1" />
+          <input type="number" required name="sets-1" />
 
         </div>
         {volumeArray.map((i) => {

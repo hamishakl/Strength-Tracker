@@ -59,6 +59,7 @@ model Volume {
   User       User      @relation(fields: [userId], references: [id])
   Workout    Workout?  @relation(fields: [workoutId], references: [id])
   workoutId  String?
+  date      DateTime?
 }
 
 model Workout {

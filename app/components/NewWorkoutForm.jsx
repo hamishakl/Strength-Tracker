@@ -25,7 +25,7 @@ export default function NewWorkoutForm({ exercises, val  }) {
           <label htmlFor="weight" >Reps</label>
           <input type="number" required name={`reps-${val}`}/>
           <label htmlFor="sets" >Sets</label>
-          <input type="number" name={`sets-${val}`}/>
+          <input type="number" required name={`sets-${val}`}/>
          
     </div>
   )

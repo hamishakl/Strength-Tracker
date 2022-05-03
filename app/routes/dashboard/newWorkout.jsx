@@ -13,20 +13,54 @@ export const loader = async ({ request }) => {
   return data
 }
 
+//create volume for each set 
+//create workout 
+//calculate any prs from volume and create that 
+
+//create a neww exercise in the page 
+
+
 export const action = async ({ request }) => {
+  const user = await getUser(request);
+
   const form = await request.formData()
-  const weightStr = form.get('weight')
-  const id = form.get('exercise')
-  const weight = parseInt(weightStr)
+  const keys = Object.keys(form._fields);
+  const list = form._fields
+  let exerciseList = []
+  keys.forEach((key, index) => {
+    if (key.includes('exercise') === true) {
+      exerciseList.push(`${key}: ${form._fields[key]}`)
+    }
+  });
+  console.log(exerciseList)
+  const loopNumber = (exerciseList.length * 4) + 1
+  for (let i = 0; i < loopNumber; i++) {
+    if(keys.includes(`-${exerciseList.length}`)){
+      console.log(keys)
+    }
+    
+  }
+  console.log(typeof(list))
+  console.log(list)
+  //workout form 
+  const date = form.get('date')
 
-  const fields = { weight }
+  //volume form 
 
-  const goal = await db.exercise.update({
-    where: {
-      id: id,
-    },
+
+
+  const workout = await db.workout.create({
     data: {
-      goal: weight,
+      date: date,
+      userId: user.id,
+      volume: {
+        createMany: {
+          data: [{ title: 'My first post' }, { title: 'My second post' }],
+        },
+      },
+    },
+    include: {
+      volume: true,
     },
   })
 
@@ -58,10 +92,11 @@ export default function newWorkout() {
           <input
             type='date'
             id='start'
-            name='trip-start'
+            name='date'
             defaultValue={date}
             min={userJoinDate}
             max={date}
+            required
           ></input>
         </div>
         <div>
@@ -73,7 +108,7 @@ export default function newWorkout() {
             aria-label='Default select example'
             required
             id='exercise'
-            name='exercise'
+            name='exercise-1'
           >
             <option defaultValue={'none'}>
               Pick an exercise
@@ -87,11 +122,11 @@ export default function newWorkout() {
             ))}
           </select>
           <label htmlFor="weight" required>Weight</label>
-          <input type="number" name="weight" />
+          <input type="number" name="weight-1" />
           <label htmlFor="weight" required>Reps</label>
-          <input type="number" name="reps" />
+          <input type="number" name="reps-1" />
           <label htmlFor="sets" required>Sets</label>
-          <input type="number" name="sets" />
+          <input type="number" name="sets-1" />
 
         </div>
         {volumeArray.map((i) => {

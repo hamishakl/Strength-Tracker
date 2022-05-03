@@ -57,7 +57,8 @@ model Volume {
   exerciseId String?
   Exercise   Exercise? @relation(fields: [exerciseId], references: [id])
   User       User      @relation(fields: [userId], references: [id])
-  Workout    Workout[]
+  Workout    Workout?  @relation(fields: [workoutId], references: [id])
+  workoutId  String?
 }
 
 model Workout {
@@ -66,6 +67,6 @@ model Workout {
   User      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  exercises Volume   @relation(fields: [VolumeId], references: [id])
-  VolumeId  String
+  volume    Volume[]
+  date      DateTime
 }

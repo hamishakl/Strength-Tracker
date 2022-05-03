@@ -1,6 +1,5 @@
 export default function NewWorkoutForm({ exercises, val  }) {
   val = val+2
-  console.log(val)
   return (
     <div>
       <h5>Exercise #{val}</h5>
@@ -21,11 +20,11 @@ export default function NewWorkoutForm({ exercises, val  }) {
               </>
             ))}
           </select>
-          <label htmlFor="weight" required>Weight</label>
-          <input type="number" name={`weight-${val}`}/>
-          <label htmlFor="weight" required>Reps</label>
-          <input type="number" name={`reps-${val}`}/>
-          <label htmlFor="sets" required>Sets</label>
+          <label htmlFor="weight" >Weight</label>
+          <input type="number" required name={`weight-${val}`}/>
+          <label htmlFor="weight" >Reps</label>
+          <input type="number" required name={`reps-${val}`}/>
+          <label htmlFor="sets" >Sets</label>
           <input type="number" name={`sets-${val}`}/>
          
     </div>

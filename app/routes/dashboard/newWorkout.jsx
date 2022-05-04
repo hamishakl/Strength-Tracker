@@ -23,6 +23,20 @@ const dataArray = (volumeBlock, exerciseList) => {
   return dataArr
 }
 
+const prArray = (dataBlock, exerciseList, user) => {
+  let prArr = []
+  for (let i = 0; i < exerciseList.length; i++) {
+    prArr[i] = {
+      exerciseId: dataBlock[i].exerciseId,
+      weight: dataBlock[i].weight,
+      reps: dataBlock[i].reps,
+      userId: String(user.id),
+    }
+    console.log(prArr[i])
+  }
+  return prArr
+}
+
 export const action = async ({ request }) => {
   const user = await getUser(request)
   let volumeBlock = {}
@@ -71,6 +85,15 @@ export const action = async ({ request }) => {
     volume.volume.create.reps = dataBlock[i].reps
     volume.volume.create.sets = dataBlock[i].sets
     volume.volume.create.userId = String(user.id)
+  }
+
+  const prArr = prArray(dataBlock, exerciseList, user)
+
+
+  for (let i = 0; i < exerciseList.length; i++) {
+     let pr = await db.pr.create({
+        data: prArr[i]
+     })
   }
 
   const workout = await db.workout.create({

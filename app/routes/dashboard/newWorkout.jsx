@@ -3,7 +3,6 @@ import { getUser } from '~/utils/session.server'
 import { db } from '~/utils/db.server'
 import React, { useState } from 'react'
 import NewWorkoutForm from '~/components/NewWorkoutForm'
-import exercise from './$exerciseId'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -14,68 +13,71 @@ export const loader = async ({ request }) => {
   return data
 }
 
-//create volume for each set 
-//create workout 
-//calculate any prs from volume and create that 
-
-//create a neww exercise in the page 
-
 const dataArray = (volumeBlock, exerciseList) => {
   let dataArr = []
-  for (let i = 0; i < (exerciseList.length+1); i++) {
-    volumeBlock[i] == [] ? (console.log('empty array')) : (
-    dataArr.push(volumeBlock[i])
-    )
+  for (let i = 0; i < exerciseList.length + 1; i++) {
+    volumeBlock[i] == []
+      ? console.log('empty array')
+      : dataArr.push(volumeBlock[i])
   }
   return dataArr
 }
 
 export const action = async ({ request }) => {
-  const user = await getUser(request);
-  let volumeBlock = []
+  const user = await getUser(request)
+  let volumeBlock = {}
   let exerciseList = []
   const form = await request.formData()
   const list = form._fields
-  const keys = Object.keys(list);
+  const keys = Object.keys(list)
   keys.forEach((key, index) => {
     if (key.includes('exercise') === true) {
       exerciseList.push(`${key}: ${list[key]}`)
     }
-  });
+  })
 
-  for (let i = 0; i < (exerciseList.length+1); i++) {
-    volumeBlock[i] = []
-    keys.forEach((key, index)=> {
+  for (let i = 0; i < exerciseList.length + 1; i++) {
+    volumeBlock[i] = {}
+    keys.forEach((key, index) => {
       if (key.includes(`exercise-${i}`)) {
-        volumeBlock[i].exercise = list[key]
-      } if (key.includes(`weight-${i}`)) {
-        volumeBlock[i].weight = list[key]
-      } if (key.includes(`reps-${i}`)) {
-        volumeBlock[i].reps = list[key]
-      } if (key.includes(`sets-${i}`)) {
-        volumeBlock[i].sets = list[key]
+        volumeBlock[i].exerciseId = String(list[key])
       }
-    });
-    
+      if (key.includes(`weight-${i}`)) {
+        volumeBlock[i].weight = Number(list[key])
+      }
+      if (key.includes(`reps-${i}`)) {
+        volumeBlock[i].reps = Number(list[key])
+      }
+      if (key.includes(`sets-${i}`)) {
+        volumeBlock[i].sets = Number(list[key])
+      }
+    })
   }
-  
-  //workout form 
-  const date = form.get('date')
-  
-  //volume form 
+
+  let date = new Date(form.get('date'))
 
   let dataBlock = dataArray(volumeBlock, exerciseList)
-  let removeEmptyArray = dataBlock.shift()
-  
+  const removeEmptyArray = dataBlock.shift()
+
+  let volume = {
+    volume: {
+      create: {},
+    },
+  }
+
+  for (let i = 0; i < exerciseList.length; i++) {
+    volume.volume.create.exerciseId = dataBlock[i].exerciseId
+    volume.volume.create.weight = dataBlock[i].weight
+    volume.volume.create.reps = dataBlock[i].reps
+    volume.volume.create.sets = dataBlock[i].sets
+    volume.volume.create.userId = String(user.id)
+  }
+
   const workout = await db.workout.create({
     data: {
-      date: date,
       userId: user.id,
-      volume: {
-        createMany: {
-          data: dataBlock,
-        },
-      },
+      date: date,
+      ...volume,
     },
     include: {
       volume: true,
@@ -96,7 +98,6 @@ export default function newWorkout() {
     arr.push(split[i])
   }
   const userJoinDate = arr.join('')
-  const actionData = useActionData()
   const current = new Date()
   const day = current.getDate()
   let date
@@ -144,13 +145,12 @@ export default function newWorkout() {
               </>
             ))}
           </select>
-          <label htmlFor="weight" >Weight</label>
-          <input type="number" required name="weight-1" />
-          <label htmlFor="weight" >Reps</label>
-          <input type="number" required name="reps-1" />
-          <label htmlFor="sets" >Sets</label>
-          <input type="number" required name="sets-1" />
-
+          <label htmlFor='weight'>Weight</label>
+          <input type='number' required name='weight-1' />
+          <label htmlFor='weight'>Reps</label>
+          <input type='number' required name='reps-1' />
+          <label htmlFor='sets'>Sets</label>
+          <input type='number' required name='sets-1' />
         </div>
         {volumeArray.map((i) => {
           return (

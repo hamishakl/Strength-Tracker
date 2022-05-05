@@ -4,7 +4,6 @@ import { getUser } from '~/utils/session.server'
 import PrTable from '../../components/PrTable'
 import Chart from '../../components/Chart'
 import Goals from '../../components/Goals'
-import { useEffect, useRef } from 'react'
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request)
@@ -26,7 +25,6 @@ export const loader = async ({ request, params }) => {
       createdAt: 'desc',
     },
   })
-  console.log(pr)
   const oneRepMax = weightLoop(pr)
   const data = { exercise, user, pr, oneRepMax }
   return data
@@ -69,7 +67,6 @@ function exercise() {
 
   const latestPr = pr[0]
   let currentEstimatedPr = null
-  console.log(pr)
 
   if (latestPr === undefined || pr.length === 0) {
     console.log('no pr')

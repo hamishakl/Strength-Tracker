@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import React from "react";
-
 import {
   LineChart,
   Line,
@@ -9,49 +6,47 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
-} from 'recharts';
+} from 'recharts'
 
 const dateConvertor = (prDate) => {
-  return new Date(prDate).toDateString();
-};
+  return new Date(prDate).toDateString()
+}
 
 export const OneRmEstimate = (weight, reps) => {
-  const unRounded1RM = weight * reps * 0.0333 + weight;
-  return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5;
-};
+  const unRounded1RM = weight * reps * 0.0333 + weight
+  return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5
+}
 
 export default function Chart(pr) {
-  const data = pr.pr.map((item) => {
-    const container = {};
-    container.name = dateConvertor(item.createdAt);
-    container.uv = OneRmEstimate(item.weight, item.reps);
-    return container;
-  });
+  const container = {}
+  let prArray = []
+  const prLength = pr.pr.length
+  const prObj = pr.pr
+  for (let i = prLength - 1; i >= 0; i--) {
+    container[i] = {}
+    container[i].name = dateConvertor(prObj[i]['createdAt'])
+    container[i]['1RM'] = OneRmEstimate(prObj[i]['weight'], prObj[i]['reps'])
+    prArray.push(container[i])
+  }
 
   return (
     <>
-       {/* <ResponsiveContainer width="100%" height="100%"> */}
-        <LineChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
-      {/* </ResponsiveContainer> */}
+      <LineChart
+        width={800}
+        height={300}
+        data={prArray}
+        margin={{
+          top: 5,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='name' />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type='monotone' dataKey='1RM' stroke='#82ca9d' />
+      </LineChart>
     </>
-  );
+  )
 }

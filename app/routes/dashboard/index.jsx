@@ -3,6 +3,7 @@ import { db } from '~/utils/db.server';
 import MyExercise from '../../components/MyExercises';
 
 import { getUser } from '~/utils/session.server';
+import MyWorkouts from '~/components/MyWorkouts';
 
 export const loader = async ({ request }) => {
   const user = await getUser(request);
@@ -55,17 +56,8 @@ export const loader = async ({ request }) => {
         ),
   };
 
-  const volume = {
-    volume: await db.volume.findMany({
-      where: {
-        userId: {
-          equals: `${user.id}`,
-        },
-      },
-      orderBy: { createdAt: 'desc' },
-    }),
-  };
-  const data = { exercises, prs, workouts, volume };
+  
+  const data = { exercises, prs, workouts};
 
   return data;
 };
@@ -73,7 +65,6 @@ export const loader = async ({ request }) => {
 function ExerciseItems() {
   const data = useLoaderData();
   const workoutData = data.workouts['workouts']
-  console.log(workoutData[0]) 
   return (
     <div className='h-screen w-screen max-w-none max-h-none bg-white p-0 m-0 text-black'>
       <div className='flex w-screen items-center justify-between'>
@@ -83,12 +74,8 @@ function ExerciseItems() {
         </Link>
       </div>
       <MyExercise exercises={data.exercises['exercises']} prs={data.prs['prs']} />
+        <MyWorkouts data={workoutData}/>
       <div>
-        {/* {
-          workoutData.map((items) => {
-            console.log(items)
-          })
-        } */}
       </div>
     </div>
   );

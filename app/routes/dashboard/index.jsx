@@ -28,14 +28,52 @@ export const loader = async ({ request }) => {
       orderBy: { createdAt: 'desc' },
     }),
   };
+  const workouts = {
+    workouts: await db.workout.findMany({
+      where: {
+        userId: {
+          equals: `${user.id}`,
+        },
+      },
+      include: {
+        date: true,
+      },
+      include: {
+            volume: {
+              select: {
+                exerciseId: true,
+                weight: true,
+                reps: true, 
+                sets: true,
+                workoutId: true,
+                id: true,
+              }
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      },
+        ),
+  };
 
-  const data = { exercises, prs };
+  const volume = {
+    volume: await db.volume.findMany({
+      where: {
+        userId: {
+          equals: `${user.id}`,
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    }),
+  };
+  const data = { exercises, prs, workouts, volume };
 
   return data;
 };
 
 function ExerciseItems() {
   const data = useLoaderData();
+  const workoutData = data.workouts['workouts']
+  console.log(workoutData[0]) 
   return (
     <div className='h-screen w-screen max-w-none max-h-none bg-white p-0 m-0 text-black'>
       <div className='flex w-screen items-center justify-between'>
@@ -44,7 +82,14 @@ function ExerciseItems() {
           <span className='underline-offset-4 underline opacity-80 hover:opacity-100 ease-linear duration-100 hover:underline-offset-2'>New Exercise</span>
         </Link>
       </div>
-      <MyExercise data={data} />
+      <MyExercise exercises={data.exercises['exercises']} prs={data.prs['prs']} />
+      <div>
+        {/* {
+          workoutData.map((items) => {
+            console.log(items)
+          })
+        } */}
+      </div>
     </div>
   );
 }

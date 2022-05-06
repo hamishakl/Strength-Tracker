@@ -8,8 +8,13 @@ import {
   Legend,
 } from 'recharts'
 
-const dateConvertor = (prDate) => {
-  return new Date(prDate).toDateString()
+const dateConvertor = (prDate, i) => {
+  let date = new Date(prDate).toDateString()
+  let dateArr = date.split(' ')
+  dateArr.shift()
+  dateArr.unshift(`#${i}`)
+
+  return dateArr.join()
 }
 
 export const OneRmEstimate = (weight, reps) => {
@@ -24,11 +29,11 @@ export default function Chart(pr) {
   const prObj = pr.pr
   for (let i = prLength - 1; i >= 0; i--) {
     container[i] = {}
-    container[i].name = dateConvertor(prObj[i]['createdAt'])
+    container[i].date = dateConvertor(prObj[i]['createdAt'], i)
     container[i]['1RM'] = OneRmEstimate(prObj[i]['weight'], prObj[i]['reps'])
     prArray.push(container[i])
   }
-
+  console.log(prArray)
   return (
     <>
       <LineChart
@@ -41,7 +46,7 @@ export default function Chart(pr) {
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
+        <XAxis dataKey='date' />
         <YAxis />
         <Tooltip />
         <Legend />

@@ -32,7 +32,6 @@ const prArray = (dataBlock, exerciseList, user) => {
       reps: dataBlock[i].reps,
       userId: String(user.id),
     }
-    console.log(prArr[i])
   }
   return prArr
 }
@@ -75,25 +74,32 @@ export const action = async ({ request }) => {
 
   let volume = {
     volume: {
-      create: {},
+      create: [],
     },
   }
 
   for (let i = 0; i < exerciseList.length; i++) {
-    volume.volume.create.exerciseId = dataBlock[i].exerciseId
-    volume.volume.create.weight = dataBlock[i].weight
-    volume.volume.create.reps = dataBlock[i].reps
-    volume.volume.create.sets = dataBlock[i].sets
-    volume.volume.create.userId = String(user.id)
+    volume.volume.create.push({
+      exerciseId:'',
+      weight: '',
+      reps: '',
+      sets: '',
+      userId: '',
+    })
+    volume.volume.create[i].exerciseId = dataBlock[i].exerciseId
+    volume.volume.create[i].weight = dataBlock[i].weight
+    volume.volume.create[i].reps = dataBlock[i].reps
+    volume.volume.create[i].sets = dataBlock[i].sets
+    volume.volume.create[i].userId = String(user.id)
+    console.log(volume.volume.create[i])
   }
 
   const prArr = prArray(dataBlock, exerciseList, user)
 
-
   for (let i = 0; i < exerciseList.length; i++) {
-     let pr = await db.pr.create({
-        data: prArr[i]
-     })
+    let pr = await db.pr.create({
+      data: prArr[i],
+    })
   }
 
   const workout = await db.workout.create({

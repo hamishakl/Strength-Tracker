@@ -1,9 +1,9 @@
 import { Link } from 'remix';
 import Goals from './Goals';
 
-export default function MyExercise({ exercises, prs }) {
-  // const exercises = data.exercises['exercises'];
-  // const prs = data.prs['prs'];
+export default function MyExercise({ data }) {
+  const exercises = data.exercises['exercises'];
+  const prs = data.prs['prs'];
   return (
     <>
         {exercises.map((exercise) => (

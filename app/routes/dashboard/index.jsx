@@ -36,21 +36,27 @@ export const loader = async ({ request }) => {
           equals: `${user.id}`,
         },
       },
-      include: {
+      select: {
         date: true,
-      },
-      include: {
-        volume: {
-          select: {
-            exerciseId: true,
-            weight: true,
-            reps: true,
-            sets: true,
-            workoutId: true,
-            id: true,
+          volume: {
+           include: {
+              exerciseId: true,
+              weight: true,
+              reps: true,
+              sets: true,
+              workoutId: true,
+              id: true,
+            },
+            include: {
+              Exercise: {
+                select: {
+                  id: true, 
+                  title: true, 
+                }
+              }
+            }
           },
         },
-      },
       orderBy: { createdAt: 'desc' },
     }),
   }
@@ -73,10 +79,10 @@ function ExerciseItems() {
           </span>
         </Link>
       </div>
-      <MyExercise
+      {/* <MyExercise
         exercises={data.exercises['exercises']}
         prs={data.prs['prs']}
-      />
+      /> */}
       <MyWorkouts data={workoutData} />
       <div></div>
     </div>

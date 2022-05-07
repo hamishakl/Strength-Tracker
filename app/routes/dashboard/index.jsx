@@ -79,10 +79,10 @@ function ExerciseItems() {
           </span>
         </Link>
       </div>
-      {/* <MyExercise
+      <MyExercise
         exercises={data.exercises['exercises']}
         prs={data.prs['prs']}
-      /> */}
+      />
       <MyWorkouts data={workoutData} />
       <div></div>
     </div>

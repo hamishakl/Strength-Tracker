@@ -8,7 +8,7 @@ export default function MyWorkouts({ data }) {
             {workouts.volume.map((workout, index) => {
               return (
                 <div>
-                  <h1>{workout['Exercise'].title}</h1>
+                  <h4>{workout['Exercise'].title}</h4>
                   <p>
                     {workout.weight}kg for {workout.reps} reps for{' '}
                     {workout.sets} sets.

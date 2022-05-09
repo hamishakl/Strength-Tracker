@@ -58,47 +58,51 @@ function Layout({ children }) {
 
   return (
     <>
-      <nav className='container flex h-20 w-screen max-w-none flex-row items-center justify-between border-b-2 bg-space-cadet pl-8 pr-8 text-white duration-100 ease-linear'>
-        {user ? (
-          <>
-            <Link className='font-bold' to='/dashboard'>
+      {user ? (
+        <container className='body-wrapper'>
+          <nav className='navbar'>
+            <Link className='' to='/dashboard'>
               Strength Tracker
             </Link>
             <Link
-              className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100 '
+              className=''
               to='/dashboard/newPr'
             >
               New PR
             </Link>
             <Link
-              className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100'
+              className=''
               to='/dashboard/newGoal'
             >
               New Goal
             </Link>
             <Link
-              className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100'
+              className=''
               to='/dashboard/newWorkout'
             >
               New Workout
             </Link>
             <form action='/auth/logout' method='POST'>
               <button
-                className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100'
+                className=''
                 type='submit'
               >
                 Logout {user.username}
               </button>
             </form>
-          </>
-        ) : (
-          <>
-            <Link className='font-bold' to='/'>
+          </nav>
+          <div className='body'>{children}</div>
+        </container>
+      ) : (
+        <>
+          <nav>
+
+            <Link className='' to='/'>
               Strength Tracker
             </Link>
-            <div className='flex w-1/5 items-center justify-between'>
+            <div className=''>
               <Link
-                className='font-medium opacity-80 duration-100 ease-linear hover:opacity-100'
+                className=''
                 to='/auth/register'
               >
                 Register
@@ -106,10 +110,11 @@ function Layout({ children }) {
 
               <Link to='/auth/login'>Login</Link>
             </div>
-          </>
-        )}
-      </nav>
-      <div className='``'>{children}</div>
+          </nav>
+          <div className=''>{children}</div>
+
+        </>
+      )}
     </>
   )
 }

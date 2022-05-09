@@ -33,7 +33,6 @@ export default function Chart(pr) {
     container[i]['1RM'] = OneRmEstimate(prObj[i]['weight'], prObj[i]['reps'])
     prArray.push(container[i])
   }
-  console.log(prArray)
   return (
     <>
       <LineChart

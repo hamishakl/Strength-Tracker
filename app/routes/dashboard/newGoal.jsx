@@ -19,15 +19,6 @@ export const action = async ({ request }) => {
 
   const fields = { weight };
 
-  // const fieldErrors = {
-  //   weight: validateWeight(weight),
-  // };
-
-  // if (Object.values(fieldErrors).some(Boolean)) {
-  //   console.log(fieldErrors);
-  //   return badRequest({ fieldErrors, fields });
-  // }
-
   const goal = await db.exercise.update({
     where: {
       id: id,
@@ -45,15 +36,15 @@ export default function newPr() {
   const actionData = useActionData();
 
   return (
-    <div className="container">
+    <div className="">
       <h1>New goal</h1>
       <Form method="POST">
-        <div className="mb-3">
-          <label htmlFor="exercise" className="form-label">
+        <div className="">
+          <label htmlFor="exercise" className="">
             Exercise
           </label>
           <select
-            className="form-select"
+            className=""
             aria-label="Default select example"
             required
             id="exercise"
@@ -69,25 +60,25 @@ export default function newPr() {
             ))}
           </select>
         </div>
-        <div className="mb-3">
-          <label htmlFor="weight" className="form-label">
+        <div className="">
+          <label htmlFor="weight" className="">
             Weight
           </label>
           <input
             type="number"
-            className="form-control"
+            className=""
             id="weight"
             name="weight"
             required
           />
-          <div className="error">
+          <div className="">
             <p>
               {actionData?.fieldErrors?.weight &&
                 actionData?.fieldErrors?.weight}
             </p>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="">
           Submit
         </button>
       </Form>

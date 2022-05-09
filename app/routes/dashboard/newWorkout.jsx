@@ -139,7 +139,7 @@ export default function newWorkout() {
       }-0${current.getDate()}`
 
   return (
-    <div className='container'>
+    <div className=''>
       <h1>New workout</h1>
       <Form method='POST'>
         <div>
@@ -199,7 +199,7 @@ export default function newWorkout() {
             Click me
           </a>
         </div>
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' className=''>
           Submit
         </button>
       </Form>

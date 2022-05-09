@@ -70,11 +70,11 @@ function ExerciseItems() {
   const data = useLoaderData()
   const workoutData = data.workouts['workouts']
   return (
-    <div className='max-h-none m-0 h-screen w-screen max-w-none bg-white p-0 text-black'>
-      <div className='flex w-screen items-center justify-between'>
-        <h1 className='text-3xl font-bold'>My Exercises</h1>
-        <Link to='/dashboard/new' className='underline-offset-4'>
-          <span className='underline underline-offset-4 opacity-80 duration-100 ease-linear hover:underline-offset-2 hover:opacity-100'>
+    <div className=''>
+      <div className=''>
+        <h1 className=''>My Exercises</h1>
+        <Link to='/dashboard/new' className=''>
+          <span className=''>
             New Exercise
           </span>
         </Link>

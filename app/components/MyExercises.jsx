@@ -10,19 +10,19 @@ export default function MyExercise({ exercises, prs }) {
           className=''
           style={{ flex: '0 0 33.333333%' }}
           >
-            <div className='flex flex-col' key={exercise.id}>
+            <div className='' key={exercise.id}>
               <Link to={exercise.id}>
-                <h5 className='font-bold'>{exercise.title}</h5>
+                <h5 className=''>{exercise.title}</h5>
               </Link>
-              <h6 className='card-subtitle mb-2 text-muted'></h6>
-              <ul className='nav'>
-                <li className='nav-item'>
+              <h6 className=''></h6>
+              <ul className=''>
+                <li className=''>
                   <Link to={`./${exercise.id}/pr-new`}>New PR</Link>
                 </li>
-                <li className='nav-item'>
+                <li className=''>
                   <Link to={`${exercise.id}/new-goal`}>New goal</Link>
                 </li>
-                <li className='nav-item'>
+                <li className=''>
                   <Link to={`${exercise.id}/volume`}>New volume</Link>
                 </li>
               </ul>

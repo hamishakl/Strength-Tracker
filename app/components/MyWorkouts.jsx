@@ -1,10 +1,16 @@
 export default function MyWorkouts({ data }) {
+
   return (
     <>
+      <h2 className="subheading">Workouts</h2>
+    <div className="workout-wrapper">
       {data.map((workouts) => {
+        let dateStr = new Date(`${workouts.date}`);
+        let dateArr = dateStr.toDateString().split(' ');
+        let date = dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
         return (
-          <>
-            <h2>Workout date: {workouts.date}</h2>
+          <div className="workout-card">
+            <h2>{date}</h2>
             {workouts.volume.map((workout, index) => {
               return (
                 <div>
@@ -16,9 +22,10 @@ export default function MyWorkouts({ data }) {
                 </div>
               )
             })}
-          </>
+          </div>
         )
       })}
-    </>
+    </div>
+      </>
   )
 }

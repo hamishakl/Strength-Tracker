@@ -35,9 +35,9 @@ export default function Recommendation({ exercise, prs }) {
       {exercise.goal === null ? (
         <p>No goal set</p>
       ) : (
-        <div className="container">
-          <div className="card" style={{ flex: "0 0 33.333333%" }}>
-            <div className="card-body">
+        <div className="">
+          <div className="" style={{ flex: "0 0 33.333333%" }}>
+            <div className="">
               {currentPr > exercise.goal ? (
                 <>
                   <p>
@@ -52,9 +52,9 @@ export default function Recommendation({ exercise, prs }) {
                   towards {exercise.goal}kg:
                 </p>
               )}
-              <div className="progress">
+              <div className="">
                 <div
-                  className="progress-bar"
+                  className=""
                   role="progressbar"
                   style={{ width: `${percentage}%` }}
                   aria-valuenow="25"

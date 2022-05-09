@@ -76,7 +76,7 @@ function exercise() {
 
   return (
     <>
-      <div className='page-header'>
+      <div className=''>
         <h1>{exercise.title}</h1>
         {pr.length > 0 ? (
           <>
@@ -84,7 +84,7 @@ function exercise() {
             <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
           </>
         ) : null}
-        <Link to='/dashboard' className='btn btn-reverse'>
+        <Link to='/dashboard' className=''>
           Back
         </Link>
       </div>
@@ -102,7 +102,7 @@ function exercise() {
         {user.id === exercise.userId && (
           <form method='POST'>
             <input type='hidden' name='_method' value='delete' />
-            <button className='btn btn-delete'>Delete exercise</button>
+            <button className=''>Delete exercise</button>
           </form>
         )}
       </div>

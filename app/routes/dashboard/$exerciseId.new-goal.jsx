@@ -37,7 +37,7 @@ export default function NewGoal() {
     <div className="container">
       <h1>New goal for {exercise.title}</h1>
       <Form method="POST">
-        <div className="form-control">
+        <div className="">
           <label htmlFor="weight">weight</label>
           <input type="number" name="weight" id="weight" />
         </div>
@@ -46,7 +46,7 @@ export default function NewGoal() {
                 {actionData?.fieldErrors?.reps && actionData?.fieldErrors?.reps}
               </p>
             </div> */}
-        <button type="submit" className="btn btn-block">
+        <button type="submit" className="">
           Add goal
         </button>
       </Form>

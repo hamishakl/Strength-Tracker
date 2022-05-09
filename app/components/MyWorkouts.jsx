@@ -1,18 +1,18 @@
 export default function MyWorkouts({ data }) {
-
+  // console.log(data)
   return (
     <>
       <h2 className="subheading">Workouts</h2>
     <div className="workout-wrapper">
+      {data.reduce((acc, current) => {
+        // acc.push(current['Exercise'].title)
+        console.log(current.volume)
+      }, [])}
       {data.map((workouts) => {
         let dateStr = new Date(`${workouts.date}`);
         let dateArr = dateStr.toDateString().split(' ');
         let date = dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
         
-          workouts.volume.reduce((acc, current) => {
-            acc.push(current['Exercise'].title)
-            console.log(acc)
-          }, [])
 
         return (
           <div className="workout-card">

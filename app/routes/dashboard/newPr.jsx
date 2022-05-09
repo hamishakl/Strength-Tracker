@@ -61,10 +61,10 @@ export default function newPr() {
   const actionData = useActionData();
 
   return (
-    <div className="container">
+    <div className="">
       <h1>New PR</h1>
       <Form method="POST">
-        <div className="mb-3">
+        <div className="">
           <label htmlFor="exercise" className="">
             Exercise
           </label>
@@ -86,7 +86,7 @@ export default function newPr() {
           </select>
         </div>
         <div className="">
-          <label htmlFor="weight" className="form-label">
+          <label htmlFor="weight" className="">
             Weight
           </label>
           <input
@@ -96,14 +96,14 @@ export default function newPr() {
             name="weight"
             required
           />
-          <div className="error">
+          <div className="">
             <p>
               {actionData?.fieldErrors?.weight &&
                 actionData?.fieldErrors?.weight}
             </p>
           </div>
         </div>
-        <div className="mb-3">
+        <div className="">
           <label htmlFor="reps" className="">
             Reps
           </label>
@@ -120,6 +120,7 @@ export default function newPr() {
             </p>
           </div>
         </div>
+        
         <div className="">
           <h5>Projected 1rm: </h5>
           <p></p>

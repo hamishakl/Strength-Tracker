@@ -61,7 +61,7 @@ export const loader = async ({ request }) => {
     }),
   }
 
-  const data = { exercises, prs, workouts }
+  const data = { exercises, prs, workouts, user }
 
   return data
 }
@@ -71,6 +71,7 @@ function ExerciseItems() {
   const workoutData = data.workouts['workouts']
   return (
     <div className=''>
+      <h1>Hi {data.user.username}!</h1>
       <div className=''>
         <h1 className=''>My Exercises</h1>
         <Link to='/dashboard/new' className=''>

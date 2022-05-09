@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+}
+.navbar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 20vw;
+  background-color: gainsboro;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+}
+
+.body-wrapper {
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;  
+}
+
+.body {
+  margin-left: 22vw;
+}

@@ -8,10 +8,19 @@ export default function MyWorkouts({ data }) {
         let dateStr = new Date(`${workouts.date}`);
         let dateArr = dateStr.toDateString().split(' ');
         let date = dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
+        
+          workouts.volume.reduce((acc, current) => {
+            acc.push(current['Exercise'].title)
+            console.log(acc)
+          }, [])
+
         return (
           <div className="workout-card">
             <h2>{date}</h2>
+            
+            
             {workouts.volume.map((workout, index) => {
+             
               return (
                 <div>
                   <h4>{workout['Exercise'].title}</h4>

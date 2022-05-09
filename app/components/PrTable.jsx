@@ -5,12 +5,15 @@ export default function ({ prs }) {
   return (
     <>
       {prs.map((pr) => {
-        <div>
+        console.log(pr)
+        return (
+          <div>
           <div key={pr.id}>
             <p>{pr.weight}</p>
             <p>{pr.reps}</p>
           </div>
         </div>
+          )
       })}
     </>
   )

@@ -64,32 +64,32 @@ function NewPr() {
     <>
       <div className="page-header">
         <h1>New PR for {exercise.title}</h1>
-        <Link to="/dashboard" className="btn btn-reverse">
+        <Link to="/dashboard" className="">
           Back
         </Link>
       </div>
-      <div className="page-content">
+      <div className="">
         <Form method="POST">
-          <div className="form-control">
+          <div className="">
             <label htmlFor="weight">weight</label>
             <input type="number" name="weight" id="weight" />
-            <div className="error">
+            <div className="">
               <p>
                 {actionData?.fieldErrors?.weight &&
                   actionData?.fieldErrors?.weight}
               </p>
             </div>
           </div>
-          <div className="form-control">
+          <div className="">
             <label htmlFor="reps">Exercise reps</label>
             <input type="number" name="reps" id="reps" />
-            <div className="error">
+            <div className="">
               <p>
                 {actionData?.fieldErrors?.reps && actionData?.fieldErrors?.reps}
               </p>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="">
             Add PR
           </button>
         </Form>

@@ -65,11 +65,11 @@ export default function newPr() {
       <h1>New PR</h1>
       <Form method="POST">
         <div className="mb-3">
-          <label htmlFor="exercise" className="form-label">
+          <label htmlFor="exercise" className="">
             Exercise
           </label>
           <select
-            className="form-select"
+            className=""
             aria-label="Default select example"
             required
             id="exercise"
@@ -85,13 +85,13 @@ export default function newPr() {
             ))}
           </select>
         </div>
-        <div className="mb-3">
+        <div className="">
           <label htmlFor="weight" className="form-label">
             Weight
           </label>
           <input
             type="number"
-            className="form-control"
+            className=""
             id="weight"
             name="weight"
             required
@@ -104,27 +104,27 @@ export default function newPr() {
           </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="reps" className="form-label">
+          <label htmlFor="reps" className="">
             Reps
           </label>
           <input
             type="number"
-            className="form-control"
+            className=""
             name="reps"
             id="reps"
             required
           />
-          <div className="error">
+          <div className="">
             <p>
               {actionData?.fieldErrors?.reps && actionData?.fieldErrors?.reps}
             </p>
           </div>
         </div>
-        <div className="mb-3 form-check">
+        <div className="">
           <h5>Projected 1rm: </h5>
           <p></p>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="">
           Submit
         </button>
       </Form>

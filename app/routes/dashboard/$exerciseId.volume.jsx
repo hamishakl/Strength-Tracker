@@ -88,7 +88,7 @@ function NewPr() {
           <div className=''>
             <label htmlFor='weight'>Weight</label>
             <input type='number' name='weight' id='weight' />
-            <div className='error'>
+            <div className=''>
               <p>
                 {actionData?.fieldErrors?.weight &&
                   actionData?.fieldErrors?.weight}
@@ -98,7 +98,7 @@ function NewPr() {
           <div className=''>
             <label htmlFor='reps'>Reps</label>
             <input type='number' name='reps' id='reps' />
-            <div className='error'>
+            <div className=''>
               <p>
                 {actionData?.fieldErrors?.reps && actionData?.fieldErrors?.reps}
               </p>
@@ -107,13 +107,13 @@ function NewPr() {
           <div className=''>
             <label htmlFor='reps'>Sets</label>
             <input type='number' name='sets' id='sets' />
-            <div className='error'>
+            <div className=''>
               <p>
                 {actionData?.fieldErrors?.sets && actionData?.fieldErrors?.sets}
               </p>
             </div>
           </div>
-          <button type='submit' className='btn btn-primary'>
+          <button type='submit' className=''>
             Add Volume
           </button>
         </Form>

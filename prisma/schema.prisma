@@ -44,6 +44,8 @@ model Pr {
   exerciseId String?
   User       User?     @relation(name: "userid", fields: [userId], references: [id])
   Exercise   Exercise? @relation(fields: [exerciseId], references: [id])
+    date      DateTime?
+
 }
 
 model Volume {

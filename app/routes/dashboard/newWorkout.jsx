@@ -3,6 +3,7 @@ import { getUser } from '~/utils/session.server'
 import { db } from '~/utils/db.server'
 import React, { useState } from 'react'
 import NewWorkoutForm from '~/components/NewWorkoutForm'
+// import convertDate from '../../library/frontEnd'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -134,12 +135,14 @@ export default function newWorkout() {
     ? (date = `${current.getFullYear()}-0${
         current.getMonth() + 1
       }-0${current.getDate()}`)
-    : `${current.getFullYear()}-0${
+    : (date = `${current.getFullYear()}-0${
         current.getMonth() + 1
-      }-0${current.getDate()}`
+      }-0${current.getDate()}`)
+
+    //  console.log( convertDate(data.user.createdAt))
 
   return (
-    <div className='container'>
+    <div className=''>
       <h1>New workout</h1>
       <Form method='POST'>
         <div>
@@ -199,7 +202,7 @@ export default function newWorkout() {
             Click me
           </a>
         </div>
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' className=''>
           Submit
         </button>
       </Form>

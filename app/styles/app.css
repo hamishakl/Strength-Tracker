@@ -98,6 +98,13 @@ body {
 
 /* exercise page */
 
+.rename-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
 .exercise-header {
     display: flex;
     flex-direction: row;

@@ -2,6 +2,8 @@ import { Outlet, LiveReload, Link, Links, useLoaderData, Scripts } from 'remix'
 import globalStylesUrl from '~/styles/global.css'
 import { getUser } from './utils/session.server'
 import tailwindUrl from './styles/app.css'
+import UserCard from './components/UserCard'
+import Medal from '../public/images/navbar/medal.png'
 
 export const links = () => {
   return [
@@ -62,35 +64,32 @@ function Layout({ children }) {
       {user ? (
         <container className='body-wrapper'>
           <nav className='navbar'>
-            <Link className='' to='/dashboard'>
-              Strength Tracker
-            </Link>
-            <Link
-              className=''
-              to='/dashboard/newPr'
-            >
-              New PR
-            </Link>
-            <Link
-              className=''
-              to='/dashboard/newGoal'
-            >
-              New Goal
-            </Link>
-            <Link
-              className=''
-              to='/dashboard/newWorkout'
-            >
-              New Workout
-            </Link>
-            <form action='/auth/logout' method='POST'>
-              <button
+            <div className='navbar-link-wrapper'>
+              <Link className='logo' to='/dashboard'>
+                Strength Tracker
+              </Link>
+              {/* <img src={Medal}/> */}
+              <Link
                 className=''
-                type='submit'
+                to='/dashboard/newPr'
               >
-                Logout {user.username}
-              </button>
-            </form>
+                Set a new PR
+              </Link>
+              
+              <Link
+                className=''
+                to='/dashboard/newGoal'
+              >
+                Set a new goal
+              </Link>
+              <Link
+                className=''
+                to='/dashboard/newWorkout'
+              >
+                record a new workout
+              </Link>
+            </div>
+            <UserCard user={user} />
           </nav>
           <div className='body'>{children}</div>
         </container>

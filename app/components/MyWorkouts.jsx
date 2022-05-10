@@ -14,16 +14,21 @@ export default function MyWorkouts({ data }) {
                 index++
                 let previousArrTitle = arr[index - 1]
                 let arrTitle = arr[index]
+                console.log(arrTitle)
+                console.log('arr above')
+                console.log(previousArrTitle)
+                console.log('previous above');
                 return (
                   <div key={index}>
                     {
+                      
                       arrTitle != undefined && previousArrTitle != undefined ?
 
                         (
                           arrTitle['Exercise'].title === previousArrTitle['Exercise'].title ?
                             (
                               <>
-                                <h4>{previousArrTitle['Exercise'].title}</h4>
+                                <h4>{arrTitle['Exercise'].title}</h4>
                                 <p>
                                   {previousArrTitle.weight}kg for {previousArrTitle.reps} reps for{' '}
                                   {previousArrTitle.sets} sets.
@@ -37,17 +42,22 @@ export default function MyWorkouts({ data }) {
                             :
                             (
                               <>
-                                <h4>{arrTitle['Exercise'].title}</h4>
+                                <h4>{workout['Exercise'].title}</h4>
+                                <p>
+                                  {workout.weight}kg for {workout.reps} reps for{' '}
+                                  {workout.sets} sets.
+                                </p>
+                                {/* <h4>{arrTitle['Exercise'].title}</h4>
                                 <p>
                                   {arrTitle.weight}kg for {arrTitle.reps} reps for{' '}
                                   {arrTitle.sets} sets.
-                                </p>
+                                </p> */}
                               </>
                             )
                         )
                         :
                         (
-                          console.log()
+                          null
                         )
                     }
                   </div>

@@ -5,12 +5,15 @@ export function links() {
 }
 
 function Home() {
+
+
+
   return (
     <div className="">
       <h1>Strength Tracker</h1>
       <p>Track your personal records with ease</p>
     </div>
-  );
+  )
 }
     
 export default Home;

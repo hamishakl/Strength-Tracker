@@ -97,7 +97,7 @@ function exercise() {
 
   return (
     <>
-      <div className=''>
+      <div className='heading-wrapper'>
         {count === 1 && (<div>
           <form method='POST' className='rename-form'>
             <input className='input' name='_rename' type="text" placeholder={exercise.title}/>

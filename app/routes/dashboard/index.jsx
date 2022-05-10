@@ -38,25 +38,25 @@ export const loader = async ({ request }) => {
       },
       select: {
         date: true,
-          volume: {
-           include: {
-              exerciseId: true,
-              weight: true,
-              reps: true,
-              sets: true,
-              workoutId: true,
-              id: true,
-            },
-            include: {
-              Exercise: {
-                select: {
-                  id: true, 
-                  title: true, 
-                }
+        volume: {
+          include: {
+            exerciseId: true,
+            weight: true,
+            reps: true,
+            sets: true,
+            workoutId: true,
+            id: true,
+          },
+          include: {
+            Exercise: {
+              select: {
+                id: true,
+                title: true,
               }
             }
-          },
+          }
         },
+      },
       orderBy: { date: 'desc' },
     }),
   }
@@ -72,11 +72,11 @@ function ExerciseItems() {
   return (
     <div className=''>
       <h1 className='heading'>Hi {data.user.username}!</h1>
-      <div className=''>
+      <div className='exercises-heading--wrapper'>
         <h2 className='subheading'>My Exercises</h2>
-        <Link to='/dashboard/new' className=''>
-          <span className=''>
-            New Exercise
+        <Link to='/dashboard/new' className='new-exercise--link'>
+          <span>
+            New
           </span>
         </Link>
       </div>

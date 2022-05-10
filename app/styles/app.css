@@ -1,56 +1,113 @@
 body {
-  margin: 0;
-  font-family: degular, sans-serif;
+    margin: 0;
+    font-family: degular, sans-serif;
 }
+
+
+/* navbar */
+
 .navbar {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 20vw;
-  background-color: gainsboro;
-  align-items: center;
-  justify-content: space-around;
-  position: fixed;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 20vw;
+    background-color: gainsboro;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    /* padding-top: 2em; */
+    /* padding-bottom: 2em; */
+}
+
+.logo {
+    font-family: degular-display, sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 1.2em;
+    text-align: center;
+    color: black;
+}
+
+.navbar-link-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-transform: capitalize;
+    margin-top: 2em;
+}
+
+/* user card */
+
+.user-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.user-wrapper h4 {
+    margin: 0;
+    /* padding: 0; */
 }
 
 .body-wrapper {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
 }
 
 .body {
-  margin-left: 22vw;
+    margin-left: 22vw;
 }
 
 .heading {
-  font-family: degular-display, sans-serif;
-  font-weight: 800;
-  font-style: normal;
-  text-transform: capitalize;
-
+    font-family: degular-display, sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    text-transform: capitalize;
 }
 
+
 /* exercise list */
+
 .exerciseList-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
     width: 80%;
 }
 
 .exerciseList-card {
-  width: 30%;
-
+    width: 30%;
 }
 
+
 /* workout list */
+
 .workout-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .workout-card {
-  width: 30%;
+    width: 30%;
+}
 
+/* exercise page */
+
+.exercise-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* pr table */
+.pr-table td, th {
+    border: 1px solid #999;
+    padding: 0.5rem;
 }

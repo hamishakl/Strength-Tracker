@@ -7,14 +7,10 @@ export default function MyWorkouts({ data }) {
           let dateStr = new Date(`${workouts.date}`);
           let dateArr = dateStr.toDateString().split(' ');
           let date = dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
-
-          console.log('look here')
-
           return (
             <div className="workout-card" key={index}>
               <h2>{date}</h2>
               {workouts.volume.map((workout, index, arr) => {
-                console.log(workout)
                 index++
                 let previousArrTitle = arr[index - 1]
                 let arrTitle = arr[index]

@@ -8,13 +8,12 @@ import {
   Legend,
 } from 'recharts'
 
-const dateConvertor = (prDate, i) => {
+export const dateConvertor = (prDate) => {
   let date = new Date(prDate).toDateString()
   let dateArr = date.split(' ')
   dateArr.shift()
-  dateArr.unshift(`#${i}`)
-
-  return dateArr.join()
+  // console.log(dateArr)
+  return dateArr.join(" ")
 }
 
 export const OneRmEstimate = (weight, reps) => {
@@ -33,7 +32,6 @@ export default function Chart(pr) {
     container[i]['1RM'] = OneRmEstimate(prObj[i]['weight'], prObj[i]['reps'])
     prArray.push(container[i])
   }
-  console.log(prArray)
   return (
     <>
       <LineChart

@@ -54,16 +54,16 @@ function Login() {
   const actionData = useActionData();
 
   return (
-    <div className='w-screen h-screen flex justify-center items-center flex-col'>
-      <div className='page-header'>
-        <h1 className='text-xl font-semibold'>Login</h1>
+    <div className=''>
+      <div className=''>
+        <h1 className=''>Login</h1>
       </div>
-      <div className='w-full max-w-lg flex flex-col'>
+      <div className=''>
         <form method='POST'>
-          <div className='form-control'>
+          <div className=''>
             <label
               htmlFor='username'
-              className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+              className=''
             >
               Username
             </label>
@@ -71,26 +71,26 @@ function Login() {
               type='text'
               name='username'
               id='username'
-              className='appearance-none block w-full bg-gray-200 text-gray-700 border py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+              className=''
               defaultValue={actionData?.fields.username}
               placeholder='username'
             />
-            <div className='error'>
+            <div className=''>
               {actionData?.fieldErrors?.username &&
                 actionData?.fieldErrors?.username}
             </div>
           </div>
-          <div className='form-control'>
+          <div className=''>
             <label
               htmlFor='password'
-              className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+              className=''
             >
               Password
             </label>
             <input
               type='password'
               name='password'
-              className='appearance-none block w-full bg-gray-200 text-gray-700 border py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+              className=''
               id='password'
               defaultValue={actionData?.fields.password}
               placeholder='Password'
@@ -102,7 +102,7 @@ function Login() {
           </div>
           <button
             type='submit'
-            className='ease-linear duration-100 rounded-lg bg-cyan-500 hover:bg-blue-500 w-40 h-10 font-bold text-white '
+            className=''
           >
             Login
           </button>

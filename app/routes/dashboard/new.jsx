@@ -56,13 +56,13 @@ function NewExercise() {
     <>
       <div className="page-header">
         <h1>New exercise</h1>
-        <Link to="/dashboard" className="btn btn-reverse">
+        <Link to="/dashboard" className="">
           Back
         </Link>
       </div>
       <div className="page-content">
         <form method="POST">
-          <div className="form-control">
+          <div className="">
             <label htmlFor="title">Title</label>
             <input
               type="text"
@@ -70,14 +70,14 @@ function NewExercise() {
               id="title"
               defaultValue={actionData?.fields?.title}
             />
-            <div className="error">
+            <div className="">
               <p>
                 {actionData?.fieldErrors?.title &&
                   actionData?.fieldErrors?.title}
               </p>
             </div>
           </div>  
-          <button type="submit" className="btn btn-block">
+          <button type="submit" className="">
             Add exercise
           </button>
         </form>

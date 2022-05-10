@@ -76,21 +76,21 @@ function exercise() {
 
   return (
     <>
-      <div className='page-header'>
+      <div className='exercise-header'>
         <h1>{exercise.title}</h1>
-        {pr.length > 0 ? (
-          <>
-            <h5>Current estimated PR: {currentEstimatedPr}kg</h5>
-            <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
-          </>
-        ) : null}
-        <Link to='/dashboard' className='btn btn-reverse'>
-          Back
+        <Link to='/dashboard' className=''>
+          Back to Dashboard
         </Link>
       </div>
       {pr.length > 0 ? (
+        <>
+          <h3>Current estimated PR: {currentEstimatedPr}kg</h3>
+          <h3>Best estimated PR recorded: {oneRepMax}kg</h3>
+        </>
+      ) : null}
+      {pr.length > 0 ? (
         <div>
-          <Goals exercise={exercise} prs={pr} />
+          {/* <Goals exercise={exercise} prs={pr} /> */}
           <PrTable prs={pr} />
           <Link to='./pr-new'>New PR</Link>
           <Chart pr={pr} />
@@ -102,7 +102,7 @@ function exercise() {
         {user.id === exercise.userId && (
           <form method='POST'>
             <input type='hidden' name='_method' value='delete' />
-            <button className='btn btn-delete'>Delete exercise</button>
+            <button className=''>Delete exercise</button>
           </form>
         )}
       </div>

@@ -66,22 +66,22 @@ function Login() {
   const actionData = useActionData();
 
   return (
-    <div className='w-screen h-screen flex justify-center items-center flex-col'>
-      <div className='page-header'>
-        <h1 className='text-xl font-semibold'>Register</h1>
+    <div className=''>
+      <div className=''>
+        <h1 className=''>Register</h1>
       </div>
-      <form method='POST' className='w-full max-w-lg flex flex-col'>
+      <form method='POST' className=''>
         <div className=''>
           <label
             htmlFor='username'
-            className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+            className=''
           >
             Username
           </label>
           <input
             type='text'
             name='username'
-            className='appearance-none block w-full bg-gray-200 text-gray-700 border py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+            className=''
             id='username'
             placeholder='Username'
             defaultValue={actionData?.fields.username}
@@ -94,12 +94,12 @@ function Login() {
         <div className='mb-3'>
           <label
             htmlFor='password'
-            className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+            className=''
           >
             Password
           </label>
           <input
-            className='appearance-none block w-full bg-gray-200 text-gray-700 border py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+            className=''
             id='password'
             type='password'
             name='password'
@@ -111,7 +111,7 @@ function Login() {
           {actionData?.fieldErrors?.password &&
             actionData?.fieldErrors?.password}
         </div>
-        <button type='submit' className='ease-linear duration-100 rounded-lg bg-cyan-500 hover:bg-blue-500 w-40 h-10 font-bold text-white '>
+        <button type='submit' className=''>
           Submit
         </button>
       </form>

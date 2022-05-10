@@ -4,6 +4,8 @@ import { getUser } from '~/utils/session.server'
 import PrTable from '../../components/PrTable'
 import Chart from '../../components/Chart'
 import Goals from '../../components/Goals'
+import { useState } from 'react'
+
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request)
@@ -74,23 +76,36 @@ function exercise() {
     currentEstimatedPr = OneRmEstimate(latestPr.weight, latestPr.reps)
   }
 
+  let [count, setPage] = useState(0)
+
   return (
     <>
-      <div className='exercise-header'>
-        <h1>{exercise.title}</h1>
+      <div className=''>
+        {count === 1 && (<div>
+          <form>
+            <input className='input' type="text" placeholder={exercise.title} />
+          </form>
+          <a className="menu-item" onClick={() => setPage(count === 1 ? count - 1 : count = 0)}>Cancel</a>
+          <a className="menu-item" onClick={() => setPage(count === 1 ? count - 1 : count = 0)}>Save</a>
+        </div>)}
+        {count === 0 && (<div>
+          <h1 className='exercise-heading'>{exercise.title}</h1>
+          <a className="menu-item" onClick={() => setPage(count === 0 ? count + 1 : count = 1)}>Rename</a>
+        </div>)}
+
+        {pr.length > 0 ? (
+          <>
+            <h5>Current estimated PR: {currentEstimatedPr}kg</h5>
+            <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
+          </>
+        ) : null}
         <Link to='/dashboard' className=''>
-          Back to Dashboard
+          Back
         </Link>
       </div>
       {pr.length > 0 ? (
-        <>
-          <h3>Current estimated PR: {currentEstimatedPr}kg</h3>
-          <h3>Best estimated PR recorded: {oneRepMax}kg</h3>
-        </>
-      ) : null}
-      {pr.length > 0 ? (
         <div>
-          {/* <Goals exercise={exercise} prs={pr} /> */}
+          <Goals exercise={exercise} prs={pr} />
           <PrTable prs={pr} />
           <Link to='./pr-new'>New PR</Link>
           <Chart pr={pr} />

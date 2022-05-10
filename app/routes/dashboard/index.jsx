@@ -57,7 +57,7 @@ export const loader = async ({ request }) => {
             }
           },
         },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { date: 'desc' },
     }),
   }
 

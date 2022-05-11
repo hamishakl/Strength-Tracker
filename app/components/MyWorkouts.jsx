@@ -1,8 +1,7 @@
 export default function MyWorkouts({ data }) {
   return (
     <>
-      <h2 className="subheading">Workouts</h2>
-      <div className="workout-wrapper">
+      <h2 className="workouts-heading">My Workouts</h2>
         {data.map((workouts, index) => {
           let dateStr = new Date(`${workouts.date}`);
           let dateArr = dateStr.toDateString().split(' ');
@@ -62,7 +61,6 @@ export default function MyWorkouts({ data }) {
             </div>
           )
         })}
-      </div>
     </>
   )
 }

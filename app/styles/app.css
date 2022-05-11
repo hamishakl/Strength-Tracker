@@ -65,7 +65,7 @@ body {
 }
 
 .new-exercise--link :hover {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* user card */
@@ -90,9 +90,9 @@ body {
     flex-direction: row;
 }
 
-.body {
+/* .body {
     margin-left: 22vw;
-}
+} */
 
 .heading {
     font-family: degular-display, sans-serif;
@@ -112,6 +112,8 @@ body {
 
 .exerciseList-card {
     width: 30%;
+    border: black 1px solid;
+    border-radius: 5px;
 }
 
 
@@ -165,4 +167,30 @@ body {
 .pr-table td, th {
     border: 1px solid #999;
     padding: 0.5rem;
+}
+
+/* grid  */
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 0.3fr repeat(4, 1fr);
+    grid-column-gap: 3em;
+    grid-row-gap: 0px;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 6 / 2;
+}
+
+.div2 {
+    grid-area: 1 / 2 / 2 / 6;
+}
+
+.div3 {
+    grid-area: 2 / 2 / 4 / 6;
+}
+
+.div4 {
+    grid-area: 4 / 2 / 6 / 6;
 }

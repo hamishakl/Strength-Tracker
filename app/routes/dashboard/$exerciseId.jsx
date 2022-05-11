@@ -6,7 +6,6 @@ import Chart from '../../components/Chart'
 import Goals from '../../components/Goals'
 import { useState } from 'react'
 
-
 export const loader = async ({ request, params }) => {
   const user = await getUser(request)
   const exercise = await db.exercise.findUnique({
@@ -56,8 +55,26 @@ export const action = async ({ request, params }) => {
     }
 
     return redirect('/dashboard')
-  }
+  } 
+    let data = form.get('_rename')
+    if (data != undefined) {
+      
+      const exercise = await db.exercise.findUnique({
+        where: { id: params.exerciseId },
+      })
+      
+      await db.exercise.update({
+        where: { id: params.exerciseId },
+        data: {
+          title: data,
+        },
+      })
+    }
+    
+    return redirect(`/dashboard/${params.exerciseId}`)
+  
 }
+
 
 export const OneRmEstimate = (weight, reps) => {
   const unRounded1RM = weight * reps * 0.0333 + weight
@@ -80,23 +97,22 @@ function exercise() {
 
   return (
     <>
-      <div className=''>
+      <div className='heading-wrapper'>
         {count === 1 && (<div>
-          <form>
-            <input className='input' type="text" placeholder={exercise.title} />
+          <form method='POST' className='rename-form'>
+            <input className='input' name='_rename' type="text" placeholder={exercise.title}/>
+            <button type='submit' className="menu-item" >Save</button>
           </form>
-          <a className="menu-item" onClick={() => setPage(count === 1 ? count - 1 : count = 0)}>Cancel</a>
-          <a className="menu-item" onClick={() => setPage(count === 1 ? count - 1 : count = 0)}>Save</a>
         </div>)}
         {count === 0 && (<div>
-          <h1 className='exercise-heading'>{exercise.title}</h1>
-          <a className="menu-item" onClick={() => setPage(count === 0 ? count + 1 : count = 1)}>Rename</a>
+          <h1 className='exercise-heading' onClick={() => setPage(count = 1)}>{exercise.title}</h1>
+          <a className="menu-item" onClick={() => setPage(count = 1)}>Rename</a>
         </div>)}
 
         {pr.length > 0 ? (
           <>
-            <h5>Current estimated PR: {currentEstimatedPr}kg</h5>
-            <h5>Best estimated PR recorded: {oneRepMax}kg</h5>
+            <h4>Current estimated PR: {currentEstimatedPr}kg</h4>
+            <h4>Best estimated PR recorded: {oneRepMax}kg</h4>
           </>
         ) : null}
         <Link to='/dashboard' className=''>

@@ -38,25 +38,25 @@ export const loader = async ({ request }) => {
       },
       select: {
         date: true,
-          volume: {
-           include: {
-              exerciseId: true,
-              weight: true,
-              reps: true,
-              sets: true,
-              workoutId: true,
-              id: true,
-            },
-            include: {
-              Exercise: {
-                select: {
-                  id: true, 
-                  title: true, 
-                }
+        volume: {
+          include: {
+            exerciseId: true,
+            weight: true,
+            reps: true,
+            sets: true,
+            workoutId: true,
+            id: true,
+          },
+          include: {
+            Exercise: {
+              select: {
+                id: true,
+                title: true,
               }
             }
-          },
+          }
         },
+      },
       orderBy: { date: 'desc' },
     }),
   }
@@ -70,23 +70,27 @@ function ExerciseItems() {
   const data = useLoaderData()
   const workoutData = data.workouts['workouts']
   return (
-    <div className=''>
-      <h1 className='heading'>Hi {data.user.username}!</h1>
-      <div className=''>
-        <h2 className='subheading'>My Exercises</h2>
-        <Link to='/dashboard/new' className=''>
-          <span className=''>
-            New Exercise
-          </span>
-        </Link>
+    <>
+      <div className='div2'>
+        <h1 className='heading'>Hi {data.user.username}!</h1>
       </div>
-      <MyExercise
-        exercises={data.exercises['exercises']}
-        prs={data.prs['prs']}
-      />
-      <MyWorkouts data={workoutData} />
-      <div></div>
-    </div>
+        <div className='div3 exercises-heading--wrapper'>
+          <h2 className='subheading'>My Exercises</h2>
+          <Link to='/dashboard/new' className='new-exercise--link'>
+            <span>
+              New
+            </span>
+          </Link>
+        </div>
+        <MyExercise
+          exercises={data.exercises['exercises']}
+          prs={data.prs['prs']}
+        />
+      <div className='div5'>
+        <MyWorkouts data={workoutData} />
+
+      </div>
+    </>
   )
 }
 

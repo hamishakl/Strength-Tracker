@@ -14,14 +14,10 @@ export default function MyWorkouts({ data }) {
                 index++
                 let previousArrTitle = arr[index - 1]
                 let arrTitle = arr[index]
-                console.log(arrTitle)
-                console.log('arr above')
-                console.log(previousArrTitle)
-                console.log('previous above');
                 return (
                   <div key={index}>
                     {
-                      
+
                       arrTitle != undefined && previousArrTitle != undefined ?
 
                         (

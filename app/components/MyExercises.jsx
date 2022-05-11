@@ -3,7 +3,7 @@ import Goals from './Goals'
 
 export default function MyExercise({ exercises, prs }) {
   return (
-    <div className='exerciseList-wrapper'>
+    <div className='div4'>
       {exercises.map((exercise) => (
         <div key={exercise.id} className='exerciseList-card'>
           <div className='' key={exercise.id}>

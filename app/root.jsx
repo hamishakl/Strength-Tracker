@@ -62,7 +62,7 @@ function Layout({ children }) {
   return (
     <>
       {user ? (
-        <container className='body-wrapper'>
+        <container className='parent'>
           <nav className='navbar'>
             <div className='navbar-link-wrapper'>
               <Link className='logo' to='/dashboard'>
@@ -91,7 +91,7 @@ function Layout({ children }) {
             </div>
             <UserCard user={user} />
           </nav>
-          <div className='body'>{children}</div>
+          {children}
         </container>
       ) : (
         <>

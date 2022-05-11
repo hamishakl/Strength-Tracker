@@ -3,7 +3,13 @@ import Goals from './Goals'
 
 export default function MyExercise({ exercises, prs }) {
   return (
-    <div className='div4'>
+    <>
+    <div className='exercises-heading'>
+      <h2 className='subheading'>My Exercises</h2>
+      <Link to='/dashboard/new' className='new-exercise--link'>
+        <span>New</span>
+      </Link>
+    </div>
       {exercises.map((exercise) => (
         <div key={exercise.id} className='exerciseList-card'>
           <div className='' key={exercise.id}>
@@ -34,6 +40,6 @@ export default function MyExercise({ exercises, prs }) {
           </div>
         </div>
       ))}
-    </div>
+    </>
   )
 }

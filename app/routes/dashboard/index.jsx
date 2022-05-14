@@ -4,6 +4,7 @@ import MyExercise from '../../components/MyExercises'
 
 import { getUser } from '~/utils/session.server'
 import MyWorkouts from '~/components/MyWorkouts'
+import MyGoals from '~/components/MyGoals'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -52,9 +53,9 @@ export const loader = async ({ request }) => {
               select: {
                 id: true,
                 title: true,
-              }
-            }
-          }
+              },
+            },
+          },
         },
       },
       orderBy: { date: 'desc' },
@@ -71,24 +72,20 @@ function ExerciseItems() {
   const workoutData = data.workouts['workouts']
   return (
     <>
-      <div className='div2'>
+      <div className='header'>
         <h1 className='heading'>Hi {data.user.username}!</h1>
       </div>
-        <div className='div3 exercises-heading--wrapper'>
-          <h2 className='subheading'>My Exercises</h2>
-          <Link to='/dashboard/new' className='new-exercise--link'>
-            <span>
-              New
-            </span>
-          </Link>
-        </div>
+      <div className='exercises'>
         <MyExercise
           exercises={data.exercises['exercises']}
           prs={data.prs['prs']}
         />
-      <div className='div5'>
+      </div>
+      <div className='workouts'>
         <MyWorkouts data={workoutData} />
-
+      </div>
+      <div className='goals'>
+        <MyGoals />
       </div>
     </>
   )

@@ -1,4 +1,4 @@
-import { Form, useLoaderData, useActionData, redirect } from "remix";
+import { Form, useLoaderData, useActionData, redirect, Link} from "remix";
 import { getUser } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
 
@@ -7,27 +7,29 @@ export default function MyGoals(goals) {
   // console.log(data)
   return (
     <>
-      <h3>My Goals</h3>
-      {data.map((goal) => {
-        let dateSplit = goal.achievementGoalDate.split("")
-        let dateStr = dateSplit.slice(0, 10)
-        let newDate = new Date(`${dateStr.join('')}`);
-        let dateArr = newDate.toDateString().split(' ');
-        let date = dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
-        const weight = goal.weight
-        const reps = goal.reps
-        const sets = goal.sets
-        console.log({weight, reps, sets})
-        return (
-          <div>
-            <h4>{goal.Exercise.title}</h4>
-            <p>I will {goal.Exercise.title} {goal.weight}kg for 
-            {reps < 2 ? (` 1 rep`) : (` ${reps} reps`)} 
-            {sets < 2 ? (``): (` and ${sets} sets`)} by {date}</p>
-          </div>
+      <h2>My Goals</h2>
+      <ul>
+        {data.map((goal) => {
+          let dateSplit = goal.achievementGoalDate.split("")
+          let dateStr = dateSplit.slice(0, 10)
+          let newDate = new Date(`${dateStr.join('')}`);
+          let dateArr = newDate.toDateString().split(' ');
+          let date = dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
+          const weight = goal.weight
+          const reps = goal.reps
+          const sets = goal.sets
+          console.log(goal)
+          return (
+            <li>
+              {/* <h3>{goal.Exercise.title}</h3> */}
+              <p><Link to={`${goal.exerciseId}`}>{goal.Exercise.title}</Link> <b>{goal.weight}kg</b> for <b>
+                {reps < 2 ? (` 1 rep`) : (` ${reps} reps`)}
+                {sets < 2 ? (``) : (` x ${sets} sets`)}</b> by {date}</p>
+            </li>
 
-        )
-      })}
+          )
+        })}
+      </ul>
     </>
   )
 }

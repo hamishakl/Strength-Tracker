@@ -19,11 +19,18 @@ export const action = async ({ request }) => {
   const id = form.get('exercise')
   const weight = parseInt(weightStr)
   const user = await getUser(request);
-  const reps = parseInt(repsStr)
-  const sets = parseInt(setsStr)
+  let reps = parseInt(repsStr)
+  let sets = parseInt(setsStr)
   const achievementGoalDateStr = form.get('date')
   const achievementGoalDate = new Date(achievementGoalDateStr)
 
+  console.log(repsStr)
+
+  if (repsStr === null) {
+    reps = 1
+  } if (setsStr === null) {
+    sets = 1
+  }
 
   const fields = { weight, reps, sets, achievementGoalDate }
 

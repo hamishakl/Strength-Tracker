@@ -29,6 +29,24 @@ export const loader = async ({ request }) => {
       orderBy: { createdAt: 'desc' },
     }),
   }
+  const goals = {
+    goals: await db.goals.findMany({
+      where: {
+        userId: {
+          equals: `${user.id}`,
+        }, 
+      },
+      include:{
+        Exercise:{
+          select: {
+
+            title: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    }),
+  }
   const workouts = {
     workouts: await db.workout.findMany({
       where: {
@@ -61,7 +79,7 @@ export const loader = async ({ request }) => {
     }),
   }
 
-  const data = { exercises, prs, workouts, user }
+  const data = { exercises, prs, workouts, goals, user }
 
   return data
 }
@@ -84,7 +102,7 @@ function ExerciseItems() {
         <MyWorkouts data={workoutData} />
       </div>
       <div className='goals'>
-        <MyGoals />
+        <MyGoals goals={data.goals['goals']}/>
       </div>
     </>
   )

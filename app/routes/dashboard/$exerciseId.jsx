@@ -3,7 +3,7 @@ import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 import PrTable from '../../components/PrTable'
 import Chart from '../../components/Chart'
-import Goals from '../../components/Goals'
+// import Goals from '../../components/Goals'
 import { useState } from 'react'
 
 export const loader = async ({ request, params }) => {
@@ -121,7 +121,7 @@ function exercise() {
       </div>
       {pr.length > 0 ? (
         <div>
-          <Goals exercise={exercise} prs={pr} />
+          {/* <Goals exercise={exercise} prs={pr} /> */}
           <PrTable prs={pr} />
           <Link to='./pr-new'>New PR</Link>
           <Chart pr={pr} />

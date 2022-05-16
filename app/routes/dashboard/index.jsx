@@ -16,7 +16,6 @@ export const loader = async ({ request }) => {
           equals: `${user.id}`,
         },
       },
-      take: 20,
       orderBy: { createdAt: 'desc' },
     }),
   }

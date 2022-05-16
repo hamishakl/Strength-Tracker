@@ -180,36 +180,63 @@ th {
   gap: 0px 1em;
   grid-template-areas:
     'navbar header header header'
-    'navbar exercises exercises exercises'
-    'navbar exercises exercises exercises'
-    'navbar workouts workouts workouts'
-    'navbar workouts workouts workouts'
-    'navbar goals goals goals';
+    'navbar body1 body1 body1'
+    'navbar body1 body1 body1'
+    'navbar body2 body2 body2'
+    'navbar body2 body2 body2'
+    'navbar body3 body3 body3'
+    'navbar body3 body3 body3'
+    'navbar footer footer footer';
 }
 
-.navbar { grid-area: navbar; }
-.goals { grid-area: goals; }
-.header { grid-area: header; }
+.navbar {
+  grid-area: navbar;
+}
+
+.goals {
+  grid-area: body3;
+}
+
+.header {
+  grid-area: header;
+}
+
 .exercises {
-  display: grid; 
+  display: grid;
   /* grid-template-columns: 1fr 1fr 1fr;  */
-  grid-template-rows: repeat(auto-fit, minmax(500px));  gap: 10px 10px; 
-  grid-template-areas: 
+  grid-template-rows: repeat(auto-fit, minmax(500px));
+  gap: 10px 10px;
+  grid-template-areas:
     "exercises-heading exercises-heading exercises-heading"
     ". . ."
-    ". . ."; 
-  grid-area: exercises; 
+    ". . .";
+  grid-area: body1;
 }
-.exercises-heading { grid-area: exercises-heading; }
+
+.exercises-heading {
+  grid-area: exercises-heading;
+}
+
 .workouts {
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr; 
-  grid-template-rows: 1fr 1fr 1fr; 
-  gap: 0px 0px; 
-  grid-template-areas: 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
     "workouts-heading workouts-heading workouts-heading"
     ". . ."
-    ". . ."; 
-  grid-area: workouts; 
+    ". . .";
+  grid-area: body2;
 }
-.workouts-heading { grid-area: workouts-heading; }
+
+.workouts-heading {
+  grid-area: workouts-heading;
+}
+
+.new-goal--header {
+grid-area: header;
+}
+
+.new-goal--body {
+grid-area: body1;
+}

@@ -1,5 +1,5 @@
 import { Link } from 'remix'
-import Goals from './Goals'
+// import Goals from './Goals'
 
 export default function MyExercise({ exercises, prs }) {
   return (
@@ -28,15 +28,15 @@ export default function MyExercise({ exercises, prs }) {
                 <Link to={`${exercise.id}/volume`}>New volume</Link>
               </li>
             </ul>
-            {prs.length === 0 ? (
+            {/* {prs.length === 0 ? (
               <br></br>
             ) : (
               prs.map((pr) => {
                 ;<div key={pr.id}>
-                  <Goals exercise={exercise} prs={pr} />
+                  // <Goals exercise={exercise} prs={pr} />
                 </div>
               })
-            )}
+            )} */}
           </div>
         </div>
       ))}

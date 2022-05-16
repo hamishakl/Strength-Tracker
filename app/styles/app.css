@@ -194,7 +194,7 @@ th {
 }
 
 .goals {
-  grid-area: body3;
+  grid-area: body1;
 }
 
 .header {
@@ -210,7 +210,7 @@ th {
     "exercises-heading exercises-heading exercises-heading"
     ". . ."
     ". . .";
-  grid-area: body1;
+  grid-area: body2;
 }
 
 .exercises-heading {
@@ -226,7 +226,7 @@ th {
     "workouts-heading workouts-heading workouts-heading"
     ". . ."
     ". . .";
-  grid-area: body2;
+  grid-area: body3;
 }
 
 .workouts-heading {

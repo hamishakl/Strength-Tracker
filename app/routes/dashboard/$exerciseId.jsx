@@ -96,16 +96,16 @@ function exercise() {
   let [count, setPage] = useState(0)
 
   return (
-    <>
-      <div className='heading-wrapper'>
+    <div className=''>
+      <div className=''>
         {count === 1 && (<div>
-          <form method='POST' className='rename-form'>
-            <input className='input' name='_rename' type="text" placeholder={exercise.title}/>
-            <button type='submit' className="menu-item" >Save</button>
+          <form method='POST' className=''>
+            <input className='' name='_rename' type="text" placeholder={exercise.title}/>
+            <button type='submit' className="" >Save</button>
           </form>
         </div>)}
         {count === 0 && (<div>
-          <h1 className='exercise-heading' onClick={() => setPage(count = 1)}>{exercise.title}</h1>
+          <h1 className='' onClick={() => setPage(count = 1)}>{exercise.title}</h1>
           <a className="menu-item" onClick={() => setPage(count = 1)}>Rename</a>
         </div>)}
 
@@ -129,7 +129,7 @@ function exercise() {
       ) : (
         <h1>no prs yet :(</h1>
       )}
-      <div className='page-footer'>
+      <div className=''>
         {user.id === exercise.userId && (
           <form method='POST'>
             <input type='hidden' name='_method' value='delete' />
@@ -137,7 +137,7 @@ function exercise() {
           </form>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

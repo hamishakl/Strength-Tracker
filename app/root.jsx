@@ -60,10 +60,10 @@ function Layout({ children }) {
   return (
     <>
       {user ? (
-        <container className='parent'>
-          <nav className='navbar'>
-            <div className='navbar-link-wrapper'>
-              <Link className='logo' to='/dashboard'>
+        <container className=''>
+          <nav className=''>
+            <div className=''>
+              <Link className='' to='/dashboard'>
                 Strength Tracker
               </Link>
               {/* <img src={Medal}/> */}

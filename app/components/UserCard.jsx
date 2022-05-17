@@ -1,6 +1,6 @@
 export default function UserCard(user) {
     return (
-        <div className='user-wrapper'>
+        <div className=''>
             <h4>
                 {user.user.username}
             </h4>

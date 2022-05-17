@@ -1,9 +1,7 @@
 import { Outlet, LiveReload, Link, Links, useLoaderData, Scripts } from 'remix'
-import globalStylesUrl from '~/styles/global.css'
 import { getUser } from './utils/session.server'
 import tailwindUrl from './styles/app.css'
 import UserCard from './components/UserCard'
-import Medal from '../public/images/navbar/medal.png'
 
 export const links = () => {
   return [

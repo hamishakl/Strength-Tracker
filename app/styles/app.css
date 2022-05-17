@@ -176,7 +176,7 @@ th {
 .parent {
   display: grid;
   grid-template-columns: 15vw 1fr 1fr 1fr;
-  grid-template-rows: 25vh 50vh 50vh 50vh 50vh 50vh;
+  grid-template-rows: repeat(auto-fit, minmax(500px));
   gap: 0px 1em;
   grid-template-areas:
     'navbar header header header'
@@ -220,7 +220,7 @@ th {
 .workouts {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: repeat(auto-fit, minmax(500px));
   gap: 0px 0px;
   grid-template-areas:
     "workouts-heading workouts-heading workouts-heading"
@@ -240,3 +240,4 @@ grid-area: header;
 .new-goal--body {
 grid-area: body1;
 }
+

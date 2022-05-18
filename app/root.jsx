@@ -59,45 +59,45 @@ function Layout({ children }) {
   return (
     <>
       {user ? (
-        <div class='app'>
-          <div class='app-body'>
-            <div class='app-body-navigation'>
-              <div class='app-header-logo'>
-                <div class='logo'>
-                  <h1 class='logo-title'>
+        <div className={'app'}>
+          <div className={'app-body'}>
+            <div className={'app-body-navigation'}>
+              <div className={'app-header-logo'}>
+                <div className={'logo'}>
+                  <h1 className={'logo-title'}>
                     <span>Strength</span>
                     <span>Tracker</span>
                   </h1>
                 </div>
               </div>
-              <nav class='navigation'>
+              <nav className={'navigation'}>
                 <Link to='/dashboard'>
-                  <i class='ph-browsers'></i>
+                  <i className={'ph-browsers'}></i>
                   <span>Dashboard</span>
                 </Link>
                 <Link to=''>
-                  <i class='ph-check-square'></i>
+                  <i className={'ph-check-square'}></i>
                   <span>Personal Records</span>
                 </Link>
                 <Link to=''>
-                  <i class='ph-swap'></i>
+                  <i className={'ph-swap'}></i>
                   <span>Workouts</span>
                 </Link>
                 <Link to=''>
-                  <i class='ph-file-text'></i>
+                  <i className={'ph-file-text'}></i>
                   <span>Exercises</span>
                 </Link>
                 <Link to=''>
-                  <i class='ph-globe'></i>
+                  <i className={'ph-globe'}></i>
                   <span>User</span>
                 </Link>
                 <Link to=''>
-                  <i class='ph-clipboard-text'></i>
+                  <i className={'ph-clipboard-text'}></i>
                   <span>Exchange</span>
                 </Link>
               </nav>
-              <footer class='footer'>
-                <button class='user-profile'>
+              <footer className={'footer'}>
+                <button className={'user-profile'}>
                   <span>{user.username}</span>
                   <span>
                     <img src='https://assets.codepen.io/285131/almeria-avatar.jpeg' />
@@ -105,7 +105,7 @@ function Layout({ children }) {
                 </button>
               </footer>
             </div>
-            <div class='app-body-main-content'>{children}</div>
+            <div className={'app-body-main-content'}>{children}</div>
           </div>
         </div>
       ) : (

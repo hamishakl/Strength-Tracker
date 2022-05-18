@@ -2,6 +2,10 @@ import { Outlet, LiveReload, Link, Links, useLoaderData, Scripts } from 'remix'
 import { getUser } from './utils/session.server'
 import tailwindUrl from './styles/app.css'
 import UserCard from './components/UserCard'
+import WorkoutIcon from '../public/images/navbar/gym.svg'
+import PrIcon from '../public/images/navbar/medal.svg'
+import GoalIcon from '../public/images/navbar/tick.svg'
+import DashboardIcon from '../public/images/navbar/chart.svg'
 
 export const links = () => {
   return [
@@ -60,41 +64,65 @@ function Layout({ children }) {
   return (
     <>
       {user ? (
-        <container className=''>
-          <nav className=''>
-            <div className=''>
-              <Link className='' to='/dashboard'>
-                Strength Tracker
+        <container className='root__container'>
+          <nav className='navbar'>
+            <div className='navbar__div'>
+              <Link className='navbar__logo' to='/dashboard'>
+                <h3>
+                  Strength Tracker
+                </h3>
               </Link>
-              {/* <img src={Medal}/> */}
-              <Link
-                className=''
-                to='/dashboard/newPr'
-              >
-                Set a new PR
-              </Link>
-              
-              <Link
-                className=''
-                to='/dashboard/newGoal'
-              >
-                Set a new goal
-              </Link>
-              <Link
-                className=''
-                to='/dashboard/newWorkout'
-              >
-                record a new workout
-              </Link>
+              <div className='navbar__links-wrapper'>
+                <div className='navbar__links-card'>
+                  <img src={DashboardIcon} />
+                  <Link
+                    className=''
+                    to='/dashboard'
+                  >
+                    Dashboard
+                  </Link>
+
+                </div>
+                <div className='navbar__links-card'>
+                  <img src={PrIcon} />
+                  <Link
+                    className=''
+                    to='/dashboard'
+                  >
+                    personal records
+                  </Link>
+                </div>
+                <div className='navbar__links-card'>
+                  <img src={GoalIcon} />
+                  <Link
+                    className=''
+                    to='/dashboard'
+                  >
+                    goals
+                  </Link>
+                </div>
+                <div className='navbar__links-card'>
+                  <img src={WorkoutIcon} />
+                  <Link
+                    className=''
+                    to='/dashboard'
+                  >
+                    workouts
+                  </Link>
+                </div>
+              </div>
+              <div className='navbar__whitespace'>
+              </div>
+              <UserCard user={user} />
             </div>
-            <UserCard user={user} />
           </nav>
-          {children}
+          <div className='root-children__container'>
+            {children}
+          </div>
         </container>
       ) : (
         <>
           <nav>
-
             <Link className='' to='/'>
               Strength Tracker
             </Link>

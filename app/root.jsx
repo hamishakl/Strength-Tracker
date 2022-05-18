@@ -74,7 +74,7 @@ function Layout({ children }) {
               </Link>
               <div className='navbar__links-wrapper'>
                 <div className='navbar__links-card'>
-                  <img src={DashboardIcon} />
+                  <img src={DashboardIcon} className="navbar__images"/>
                   <Link
                     className=''
                     to='/dashboard'
@@ -84,7 +84,7 @@ function Layout({ children }) {
 
                 </div>
                 <div className='navbar__links-card'>
-                  <img src={PrIcon} />
+                  <img src={PrIcon} className="navbar__images"/>
                   <Link
                     className=''
                     to='/dashboard'
@@ -93,7 +93,7 @@ function Layout({ children }) {
                   </Link>
                 </div>
                 <div className='navbar__links-card'>
-                  <img src={GoalIcon} />
+                  <img src={GoalIcon} className="navbar__images"/>
                   <Link
                     className=''
                     to='/dashboard'
@@ -102,7 +102,7 @@ function Layout({ children }) {
                   </Link>
                 </div>
                 <div className='navbar__links-card'>
-                  <img src={WorkoutIcon} />
+                  <img src={WorkoutIcon} className="navbar__images"/>
                   <Link
                     className=''
                     to='/dashboard'

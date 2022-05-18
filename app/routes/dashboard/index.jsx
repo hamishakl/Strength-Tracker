@@ -21,11 +21,12 @@ export const loader = async ({ request }) => {
           select: {
             weight: true,
             reps: true,
-          }, orderBy: { weight: 'desc' },
-        }
+          },
+          orderBy: { weight: 'desc' },
+        },
       },
       orderBy: { updatedAt: 'desc' },
-      take: 6
+      take: 6,
     }),
   }
   const prs = {
@@ -48,7 +49,6 @@ export const loader = async ({ request }) => {
       include: {
         Exercise: {
           select: {
-
             title: true,
           },
         },
@@ -98,16 +98,19 @@ function ExerciseItems() {
   const workoutData = data.workouts['workouts']
   return (
     <>
-      <header class="app-header">
-        <div class="app-header-navigation">
-          <div class="tabs">
+      <header class='app-header'>
+        <div class='app-header-navigation'>
+          <div class='tabs'>
             <h1 className=''>Welcome, {data.user.username}!</h1>
-            <p>Here's what's happening with your strength progress so far. Well done!</p>
+            <p>
+              Here's what's happening with your strength progress so far. Well
+              done!
+            </p>
           </div>
         </div>
-        <div class="app-header-mobile">
-          <button class="icon-button large">
-            <i class="ph-list"></i>
+        <div class='app-header-mobile'>
+          <button class='icon-button large'>
+            <i class='ph-list'></i>
           </button>
         </div>
       </header>

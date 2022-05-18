@@ -1,26 +1,24 @@
-import { Link, redirect, useLoaderData } from "remix";
-import { db } from "~/utils/db.server";
-import { getUser } from "~/utils/session.server";
-import { OneRmEstimate } from "./$exerciseId";
+import { Link, useLoaderData } from 'remix'
+import { db } from '~/utils/db.server'
+import { OneRmEstimate } from './$exerciseId'
 
 export const loader = async ({ params }) => {
-  const exercise = params.exerciseId;
+  const exercise = params.exerciseId
 
-  if (!exercise) throw new Error("exercise not found");
+  if (!exercise) throw new Error('exercise not found')
 
   const pr = await db.pr.findUnique({
     where: {
       id: params.pr,
     },
-  });
+  })
 
-  const data = { exercise, pr };
-  return data;
-};
+  const data = { exercise, pr }
+  return data
+}
 
 function prPage() {
-  
-  const { exercise, pr } = useLoaderData();
+  const { exercise, pr } = useLoaderData()
   return (
     <>
       <table>
@@ -45,7 +43,7 @@ function prPage() {
       </table>
       <Link to={`../${exercise}`}>Back</Link>
     </>
-  );
+  )
 }
 
-export default prPage;
+export default prPage

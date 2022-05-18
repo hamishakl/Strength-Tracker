@@ -1,7 +1,6 @@
 import { Form, useLoaderData, useActionData, redirect } from "remix";
 import { getUser } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
-import { OneRmEstimate } from "./$exerciseId";
 
 function validateWeight(weight) {
   if (typeof weight !== "number") {

@@ -85,6 +85,7 @@ export const loader = async ({ request }) => {
         },
       },
       orderBy: { date: 'desc' },
+      take: 6,
     }),
   }
 
@@ -130,7 +131,6 @@ function ExerciseItems() {
         </div>
         <MyExercise
           exercises={data.exercises['exercises']}
-          prs={data.prs['prs']}
         />
       </div>
       <div className=''>

@@ -34,10 +34,10 @@ export const loader = async ({ request }) => {
       where: {
         userId: {
           equals: `${user.id}`,
-        }, 
+        },
       },
-      include:{
-        Exercise:{
+      include: {
+        Exercise: {
           select: {
 
             title: true,
@@ -89,20 +89,26 @@ function ExerciseItems() {
   const workoutData = data.workouts['workouts']
   return (
     <>
-      <div className='header'>
-        <h1 className='heading'>Hi {data.user.username}!</h1>
+      <div className=''>
+        <h1 className=''>Hi {data.user.username}!</h1>
       </div>
-      <div className='exercises'>
+      <div className=''>
+        <MyGoals goals={data.goals['goals']} />
+      </div>
+      <div className=''>
+        <div className=''>
+          <h2 className=''>My Exercises</h2>
+          <Link to='/dashboard/new' className=''>
+            <span>New</span>
+          </Link>
+        </div>
         <MyExercise
           exercises={data.exercises['exercises']}
           prs={data.prs['prs']}
         />
       </div>
-      <div className='workouts'>
+      <div className=''>
         <MyWorkouts data={workoutData} />
-      </div>
-      <div className='goals'>
-        <MyGoals goals={data.goals['goals']}/>
       </div>
     </>
   )

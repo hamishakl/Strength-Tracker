@@ -77,7 +77,7 @@ function NewPr() {
 
   return (
     <>
-      <div className='page-header'>
+      <div className=''>
         <h1>Add volume for the {exercise.title}</h1>
         <Link to='/dashboard' className=''>
           Back

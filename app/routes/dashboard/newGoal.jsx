@@ -65,10 +65,10 @@ export default function newPr() {
 
   return (
     <>
-      <div className='new-goal--header'>
+      <div className=''>
         <h1>New goal</h1>
       </div>
-      <div className='new-goal--body'>
+      <div className=''>
         <Form method='POST'>
           <div className=''>
             <label htmlFor='exercise' className=''>

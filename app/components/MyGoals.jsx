@@ -18,8 +18,7 @@ export default function MyGoals(goals) {
           const weight = goal.weight
           const reps = goal.reps
           const sets = goal.sets
-          console.log(goal)
-          return (
+         return (
             <li>
               {/* <h3>{goal.Exercise.title}</h3> */}
               <p><Link to={`${goal.exerciseId}`}>{goal.Exercise.title}</Link> <b>{goal.weight}kg</b> for <b>

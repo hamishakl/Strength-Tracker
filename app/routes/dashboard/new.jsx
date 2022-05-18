@@ -1,89 +1,83 @@
-import { Link, redirect, useActionData, json, useLoaderData } from "remix";
-import { db } from "~/utils/db.server";
-import { getUser } from "~/utils/session.server";
-import { getExercises } from "../fetch/exercises";
-
-export const loader = async ({ request }) => {
-  const exerciseList = getExercises();
-  return exerciseList;
-};
+import { Link, redirect, useActionData, json, useLoaderData } from 'remix'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
 
 function validateTitle(title) {
-  if (typeof title !== "string" || title.length < 2) {
-    return "Title should be atleast 2 characters long";
+  if (typeof title !== 'string' || title.length < 2) {
+    return 'Title should be atleast 2 characters long'
   }
 }
 
 function validateBody(body) {
-  if (typeof body !== "string") {
-    return "Body should be atleast 2 characters long";
+  if (typeof body !== 'string') {
+    return 'Body should be atleast 2 characters long'
   }
 }
 
 function badRequest(data) {
-  return json(data, { status: 400 });
+  return json(data, { status: 400 })
 }
 
 export const action = async ({ request }) => {
-  const form = await request.formData();
-  const title = form.get("title");
+  const form = await request.formData()
+  const title = form.get('title')
 
-  const user = await getUser(request);
+  const user = await getUser(request)
 
-  const fields = { title };
+  const fields = { title }
 
   const fieldErrors = {
     title: validateTitle(title),
-  };
+  }
 
   if (Object.values(fieldErrors).some(Boolean)) {
-    console.log(fieldErrors);
-    return badRequest({ fieldErrors, fields });
+    console.log(fieldErrors)
+    return badRequest({ fieldErrors, fields })
   }
 
   const exercise = await db.exercise.create({
     data: { ...fields, userId: user.id },
-  });
+  })
 
-  return redirect(`/dashboard/${exercise.id}`);
-};
+  return redirect(`/dashboard/${exercise.id}`)
+}
 
 function NewExercise() {
-  const actionData = useActionData();
-  const exerciseList = useLoaderData();
+  const actionData = useActionData()
+  const exerciseList = useLoaderData()
 
   return (
     <>
-      <div className="page-header">
+      <div className='page-header'>
         <h1>New exercise</h1>
-        <Link to="/dashboard" className="">
+        <Link to='/dashboard' className=''>
           Back
         </Link>
       </div>
-      <div className="page-content">
-        <form method="POST">
-          <div className="">
-            <label htmlFor="title">Title</label>
+      <div className='page-content'>
+        <form method='POST'>
+          <div className=''>
+            <label htmlFor='title'>Title</label>
             <input
-              type="text"
-              name="title"
-              id="title"
+              type='text'
+              name='title'
+              id='title'
               defaultValue={actionData?.fields?.title}
             />
-            <div className="">
+            <div className=''>
               <p>
                 {actionData?.fieldErrors?.title &&
                   actionData?.fieldErrors?.title}
               </p>
             </div>
-          </div>  
-          <button type="submit" className="">
+          </div>
+          <button type='submit' className=''>
             Add exercise
           </button>
         </form>
       </div>
     </>
-  );
+  )
 }
 
-export default NewExercise;
+export default NewExercise

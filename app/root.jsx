@@ -60,7 +60,6 @@ function Document({ children, title }) {
 
 function Layout({ children }) {
   const { user } = useLoaderData()
-  console.log(user)
   return (
     <>
 

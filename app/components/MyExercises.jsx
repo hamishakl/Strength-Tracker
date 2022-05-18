@@ -9,12 +9,19 @@ export const OneRmEstimate = (weight, reps) => {
 
 export default function MyExercise({ exercises, prs }) {
   return (
-    <>
-      {exercises.map((exercise) => {
+    <div className='exercise-list__div'>
+      {exercises.map((exercise, index) => {
+          let dateSplit = exercise.updatedAt.split("")
+          let dateStr = dateSplit.slice(0, 10)
+          let newDate = new Date(`${dateStr.join('')}`);
+          let dateArr = newDate.toDateString().split(' ');
+          let date = dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
+
+
         let oneRm
         let weight
         let reps
-        exercise['Pr'].length === 0 ? oneRm = 'no' : (
+        exercise['Pr'].length === 0 ? oneRm = null : (
          weight = exercise['Pr'][0]['weight'],
          reps = exercise['Pr'][0]['reps'],
           oneRm = OneRmEstimate(weight, reps)
@@ -25,14 +32,14 @@ export default function MyExercise({ exercises, prs }) {
             <div class="transfer" key={exercise.id}>
               <dl class="transfer-details">
                 <div>
-                  <dt>{exercise.title}</dt>
+                  <Link to={`/dashboard/${exercise.id}`}>{exercise.title}</Link>
                 </div>
                 <div>
-                  <dt>{oneRm}kg</dt>
+                  <dt>{oneRm === null ? ('No PR') : oneRm + 'kg'}</dt>
                   <dd>Best 1RM Estimate</dd>
                 </div>
                 <div>
-                  <dt>{exercise.updatedAt}</dt>
+                  <dt>{date}</dt>
                   <dd>Last updated</dd>
                 </div>
               </dl>
@@ -41,6 +48,6 @@ export default function MyExercise({ exercises, prs }) {
         )
 
       })}
-    </>
+    </div>
   )
 }

@@ -16,7 +16,7 @@ export default function MyGoals(goals) {
           const reps = goal.reps
           const sets = goal.sets
           return (
-            <li>
+            <li key={goal.exerciseId}>
               {/* <h3>{goal.Exercise.title}</h3> */}
               <p>
                 <Link to={`${goal.exerciseId}`}>{goal.Exercise.title}</Link>{' '}

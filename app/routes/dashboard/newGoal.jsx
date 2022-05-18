@@ -1,7 +1,6 @@
 import { Form, useLoaderData, useActionData, redirect } from 'remix'
 import { getUser } from '~/utils/session.server'
 import { db } from '~/utils/db.server'
-import { OneRmEstimate } from './$exerciseId'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -18,17 +17,16 @@ export const action = async ({ request }) => {
   const setsStr = form.get('sets')
   const id = form.get('exercise')
   const weight = parseInt(weightStr)
-  const user = await getUser(request);
+  const user = await getUser(request)
   let reps = parseInt(repsStr)
   let sets = parseInt(setsStr)
   const achievementGoalDateStr = form.get('date')
   const achievementGoalDate = new Date(achievementGoalDateStr)
 
-  console.log(repsStr)
-
   if (repsStr === null) {
     reps = 1
-  } if (setsStr === null) {
+  }
+  if (setsStr === null) {
     sets = 1
   }
 
@@ -44,7 +42,6 @@ export const action = async ({ request }) => {
 export default function newPr() {
   const data = useLoaderData()
   const actionData = useActionData()
-  // console.log(data)
 
   let userDate = data.user.createdAt
   let split = userDate.split('')
@@ -57,11 +54,12 @@ export default function newPr() {
   const day = current.getDate()
   let date
   day < 10
-    ? (date = `${current.getFullYear()}-0${current.getMonth() + 1
+    ? (date = `${current.getFullYear()}-0${
+        current.getMonth() + 1
       }-0${current.getDate()}`)
-    : (date = `${current.getFullYear()}-0${current.getMonth() + 1
+    : (date = `${current.getFullYear()}-0${
+        current.getMonth() + 1
       }-0${current.getDate()}`)
-
 
   return (
     <>
@@ -113,23 +111,13 @@ export default function newPr() {
             <label htmlFor='weight' className=''>
               Reps
             </label>
-            <input
-              type='number'
-              className=''
-              id='reps'
-              name='reps'
-            />
+            <input type='number' className='' id='reps' name='reps' />
           </div>
           <div className=''>
             <label htmlFor='weight' className=''>
               Sets
             </label>
-            <input
-              type='number'
-              className=''
-              id='sets'
-              name='sets'
-            />
+            <input type='number' className='' id='sets' name='sets' />
           </div>
           <div>
             <h5>Date to accomplish your new goal:</h5>

@@ -3,7 +3,6 @@ import { getUser } from '~/utils/session.server'
 import { db } from '~/utils/db.server'
 import React, { useState } from 'react'
 import NewWorkoutForm from '~/components/NewWorkoutForm'
-// import convertDate from '../../library/frontEnd'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -81,7 +80,7 @@ export const action = async ({ request }) => {
 
   for (let i = 0; i < exerciseList.length; i++) {
     volume.volume.create.push({
-      exerciseId:'',
+      exerciseId: '',
       weight: '',
       reps: '',
       sets: '',
@@ -92,7 +91,6 @@ export const action = async ({ request }) => {
     volume.volume.create[i].reps = dataBlock[i].reps
     volume.volume.create[i].sets = dataBlock[i].sets
     volume.volume.create[i].userId = String(user.id)
-    console.log(volume.volume.create[i])
   }
 
   const prArr = prArray(dataBlock, exerciseList, user)
@@ -138,8 +136,6 @@ export default function newWorkout() {
     : (date = `${current.getFullYear()}-0${
         current.getMonth() + 1
       }-0${current.getDate()}`)
-
-    //  console.log( convertDate(data.user.createdAt))
 
   return (
     <div className=''>

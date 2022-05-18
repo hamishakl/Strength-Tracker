@@ -625,8 +625,9 @@ a {
 .transfer {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 70%;
   font-size: 0.875rem;
+  border-bottom: white 1px solid ;
 }
 @media (max-width: 1000px) {
   .transfer {
@@ -825,4 +826,24 @@ textarea:focus,
 button:focus {
   outline: 0;
   box-shadow: 0 0 0 2px var(--c-gray-800), 0 0 0 4px var(--c-gray-300);
+}
+
+dd {
+  margin-inline-start: 0px;
+}
+
+
+
+.my-exercises__navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 70%;
+  align-items: center;
+}
+
+.my-exercises__links {
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
 }

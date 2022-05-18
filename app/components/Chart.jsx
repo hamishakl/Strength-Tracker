@@ -12,8 +12,7 @@ export const dateConvertor = (prDate) => {
   let date = new Date(prDate).toDateString()
   let dateArr = date.split(' ')
   dateArr.shift()
-  // console.log(dateArr)
-  return dateArr.join(" ")
+  return dateArr.join(' ')
 }
 
 export const OneRmEstimate = (weight, reps) => {

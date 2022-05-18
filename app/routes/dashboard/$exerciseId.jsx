@@ -3,7 +3,6 @@ import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 import PrTable from '../../components/PrTable'
 import Chart from '../../components/Chart'
-// import Goals from '../../components/Goals'
 import { useState } from 'react'
 
 export const loader = async ({ request, params }) => {
@@ -55,26 +54,23 @@ export const action = async ({ request, params }) => {
     }
 
     return redirect('/dashboard')
-  } 
-    let data = form.get('_rename')
-    if (data != undefined) {
-      
-      const exercise = await db.exercise.findUnique({
-        where: { id: params.exerciseId },
-      })
-      
-      await db.exercise.update({
-        where: { id: params.exerciseId },
-        data: {
-          title: data,
-        },
-      })
-    }
-    
-    return redirect(`/dashboard/${params.exerciseId}`)
-  
-}
+  }
+  let data = form.get('_rename')
+  if (data != undefined) {
+    const exercise = await db.exercise.findUnique({
+      where: { id: params.exerciseId },
+    })
 
+    await db.exercise.update({
+      where: { id: params.exerciseId },
+      data: {
+        title: data,
+      },
+    })
+  }
+
+  return redirect(`/dashboard/${params.exerciseId}`)
+}
 
 export const OneRmEstimate = (weight, reps) => {
   const unRounded1RM = weight * reps * 0.0333 + weight
@@ -98,16 +94,31 @@ function exercise() {
   return (
     <div className=''>
       <div className=''>
-        {count === 1 && (<div>
-          <form method='POST' className=''>
-            <input className='' name='_rename' type="text" placeholder={exercise.title}/>
-            <button type='submit' className="" >Save</button>
-          </form>
-        </div>)}
-        {count === 0 && (<div>
-          <h1 className='' onClick={() => setPage(count = 1)}>{exercise.title}</h1>
-          <a className="menu-item" onClick={() => setPage(count = 1)}>Rename</a>
-        </div>)}
+        {count === 1 && (
+          <div>
+            <form method='POST' className=''>
+              <input
+                className=''
+                name='_rename'
+                type='text'
+                placeholder={exercise.title}
+              />
+              <button type='submit' className=''>
+                Save
+              </button>
+            </form>
+          </div>
+        )}
+        {count === 0 && (
+          <div>
+            <h1 className='' onClick={() => setPage((count = 1))}>
+              {exercise.title}
+            </h1>
+            <a className='menu-item' onClick={() => setPage((count = 1))}>
+              Rename
+            </a>
+          </div>
+        )}
 
         {pr.length > 0 ? (
           <>
@@ -121,7 +132,6 @@ function exercise() {
       </div>
       {pr.length > 0 ? (
         <div>
-          {/* <Goals exercise={exercise} prs={pr} /> */}
           <PrTable prs={pr} />
           <Link to='./pr-new'>New PR</Link>
           <Chart pr={pr} />

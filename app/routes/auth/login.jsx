@@ -1,57 +1,55 @@
-import { useActionData, json, redirect } from 'remix';
-import { db } from '~/utils/db.server';
-import { login, register, createUserSession } from '~/utils/session.server';
+import { useActionData, json, redirect } from 'remix'
+import { login, register, createUserSession } from '~/utils/session.server'
 
 function badRequest(data) {
-  return json(data, { status: 400 });
+  return json(data, { status: 400 })
 }
 
 function validateUsername(username) {
   if (typeof username !== 'string' || username.length < 3) {
-    return 'Username must be at least 3 characters';
+    return 'Username must be at least 3 characters'
   }
 }
 
 function validatePassword(password) {
   if (typeof password !== 'string' || password.length < 6) {
-    return 'Password must be at least 6 characters';
+    return 'Password must be at least 6 characters'
   } else if (typeof password !== 'string' || password.search(/[0-9]/) == -1) {
-    return 'Password must contain atleast 1 number';
+    return 'Password must contain atleast 1 number'
   } else if (typeof password !== 'string' || password.search(/[A-Z]/) == -1) {
-    return 'Password must contain atleast 1 upper case letter';
+    return 'Password must contain atleast 1 upper case letter'
   }
 }
 
 export const action = async ({ request }) => {
-  const form = await request.formData();
-  const loginType = form.get('loginType');
-  const username = form.get('username');
-  const password = form.get('password');
+  const form = await request.formData()
+  const loginType = form.get('loginType')
+  const username = form.get('username')
+  const password = form.get('password')
 
-  const fields = { loginType, username, password };
+  const fields = { loginType, username, password }
 
   const fieldErrors = {
     username: validateUsername(username),
     password: validatePassword(password),
-  };
-
-  if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({ fieldErrors, fields });
   }
 
-      const user = await login({ username, password });
-      if (!user) {
-        return badRequest({
-          fields,
-          fieldErrors: { username: 'Invalid Credentials' },
-        });
-      }
-      return createUserSession(user.id, '/dashboard');
-  
-};
+  if (Object.values(fieldErrors).some(Boolean)) {
+    return badRequest({ fieldErrors, fields })
+  }
+
+  const user = await login({ username, password })
+  if (!user) {
+    return badRequest({
+      fields,
+      fieldErrors: { username: 'Invalid Credentials' },
+    })
+  }
+  return createUserSession(user.id, '/dashboard')
+}
 
 function Login() {
-  const actionData = useActionData();
+  const actionData = useActionData()
 
   return (
     <div className=''>
@@ -61,10 +59,7 @@ function Login() {
       <div className=''>
         <form method='POST'>
           <div className=''>
-            <label
-              htmlFor='username'
-              className=''
-            >
+            <label htmlFor='username' className=''>
               Username
             </label>
             <input
@@ -81,10 +76,7 @@ function Login() {
             </div>
           </div>
           <div className=''>
-            <label
-              htmlFor='password'
-              className=''
-            >
+            <label htmlFor='password' className=''>
               Password
             </label>
             <input
@@ -100,16 +92,13 @@ function Login() {
                 actionData?.fieldErrors?.password}
             </div>
           </div>
-          <button
-            type='submit'
-            className=''
-          >
+          <button type='submit' className=''>
             Login
           </button>
         </form>
       </div>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

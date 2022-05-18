@@ -1,12 +1,6 @@
 import { Link, redirect, useActionData, json, useLoaderData } from 'remix'
 import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
-import { getExercises } from '../fetch/exercises'
-
-export const loader = async ({ request }) => {
-  const exerciseList = getExercises()
-  return exerciseList
-}
 
 function validateTitle(title) {
   if (typeof title !== 'string' || title.length < 2) {

@@ -1,39 +1,53 @@
 import { Link } from 'remix'
 // import Goals from './Goals'
+// import { OneRmEstimate } from '../routes/dashboard/$exerciseId'
+
+export const OneRmEstimate = (weight, reps) => {
+  const unRounded1RM = weight * reps * 0.0333 + weight
+  return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5
+}
 
 export default function MyExercise({ exercises, prs }) {
   return (
-    <>
-      {exercises.map((exercise) => (
-        <div key={exercise.id} className=''>
-          <div className='' key={exercise.id}>
-            <Link to={exercise.id}>
-              <h5 className=''>{exercise.title}</h5>
-            </Link>
-            <h6 className=''></h6>
-            <ul className=''>
-              <li className=''>
-                <Link to={`./${exercise.id}/pr-new`}>New PR</Link>
-              </li>
-              <li className=''>
-                <Link to={`${exercise.id}/new-goal`}>New goal</Link>
-              </li>
-              <li className=''>
-                <Link to={`${exercise.id}/volume`}>New volume</Link>
-              </li>
-            </ul>
-            {/* {prs.length === 0 ? (
-              <br></br>
-            ) : (
-              prs.map((pr) => {
-                ;<div key={pr.id}>
-                  // <Goals exercise={exercise} prs={pr} />
+    <div className='exercise-list__div'>
+      {exercises.map((exercise, index) => {
+          let dateSplit = exercise.updatedAt.split("")
+          let dateStr = dateSplit.slice(0, 10)
+          let newDate = new Date(`${dateStr.join('')}`);
+          let dateArr = newDate.toDateString().split(' ');
+          let date = dateArr[2] + ' ' + dateArr[1] + ' ' + dateArr[3];
+
+
+        let oneRm
+        let weight
+        let reps
+        exercise['Pr'].length === 0 ? oneRm = null : (
+         weight = exercise['Pr'][0]['weight'],
+         reps = exercise['Pr'][0]['reps'],
+          oneRm = OneRmEstimate(weight, reps)
+        )
+        
+        return (
+          <>
+            <div class="transfer" key={exercise.id}>
+              <dl class="transfer-details">
+                <div>
+                  <Link to={`/dashboard/${exercise.id}`}>{exercise.title}</Link>
                 </div>
-              })
-            )} */}
-          </div>
-        </div>
-      ))}
-    </>
+                <div>
+                  <dt>{oneRm === null ? ('No PR') : oneRm + 'kg'}</dt>
+                  <dd>Best 1RM Estimate</dd>
+                </div>
+                <div>
+                  <dt>{date}</dt>
+                  <dd>Last updated</dd>
+                </div>
+              </dl>
+            </div>
+          </>
+        )
+
+      })}
+    </div>
   )
 }

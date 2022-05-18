@@ -16,7 +16,16 @@ export const loader = async ({ request }) => {
           equals: `${user.id}`,
         },
       },
-      orderBy: { createdAt: 'desc' },
+      include: {
+        Pr: {
+          select: {
+            weight: true,
+            reps: true,
+          }, orderBy: { weight: 'desc' },
+        }
+      },
+      orderBy: { updatedAt: 'desc' },
+      take: 6
     }),
   }
   const prs = {
@@ -89,18 +98,31 @@ function ExerciseItems() {
   const workoutData = data.workouts['workouts']
   return (
     <>
-      <div className=''>
-        <h1 className=''>Hi {data.user.username}!</h1>
-      </div>
+      <header class="app-header">
+        <div class="app-header-navigation">
+          <div class="tabs">
+            <h1 className=''>Welcome, {data.user.username}!</h1>
+            <p>Here's what's happening with your strength progress so far. Well done!</p>
+          </div>
+        </div>
+        <div class="app-header-mobile">
+          <button class="icon-button large">
+            <i class="ph-list"></i>
+          </button>
+        </div>
+      </header>
       <div className=''>
         <MyGoals goals={data.goals['goals']} />
       </div>
       <div className=''>
-        <div className=''>
+        <div className='my-exercises__navigation'>
           <h2 className=''>My Exercises</h2>
-          <Link to='/dashboard/new' className=''>
-            <span>New</span>
-          </Link>
+          <div className='my-exercises__links'>
+            <Link to='/dashboard/new' className=''>
+              <span>New</span>
+            </Link>
+            <Link to={'/exercises'}>View all</Link>
+          </div>
         </div>
         <MyExercise
           exercises={data.exercises['exercises']}

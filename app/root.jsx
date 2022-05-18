@@ -60,66 +60,65 @@ function Document({ children, title }) {
 
 function Layout({ children }) {
   const { user } = useLoaderData()
-
+  console.log(user)
   return (
     <>
-      {user ? (
-        <container className='root__container'>
-          <nav className='navbar'>
-            <div className='navbar__div'>
-              <Link className='navbar__logo' to='/dashboard'>
-                <h3>
-                  Strength Tracker
-                </h3>
-              </Link>
-              <div className='navbar__links-wrapper'>
-                <div className='navbar__links-card'>
-                  <img src={DashboardIcon} className="navbar__images"/>
-                  <Link
-                    className=''
-                    to='/dashboard'
-                  >
-                    Dashboard
-                  </Link>
 
-                </div>
-                <div className='navbar__links-card'>
-                  <img src={PrIcon} className="navbar__images"/>
-                  <Link
-                    className=''
-                    to='/dashboard'
-                  >
-                    personal records
-                  </Link>
-                </div>
-                <div className='navbar__links-card'>
-                  <img src={GoalIcon} className="navbar__images"/>
-                  <Link
-                    className=''
-                    to='/dashboard'
-                  >
-                    goals
-                  </Link>
-                </div>
-                <div className='navbar__links-card'>
-                  <img src={WorkoutIcon} className="navbar__images"/>
-                  <Link
-                    className=''
-                    to='/dashboard'
-                  >
-                    workouts
-                  </Link>
+      {user ? (
+        <div class="app">
+          <div class="app-body">
+            <div class="app-body-navigation">
+              <div class="app-header-logo">
+                <div class="logo">
+                  {/* <span class="logo-icon">
+                  <img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+                </span> */}
+                  <h1 class="logo-title">
+                    <span>Strength</span>
+                    <span>Tracker</span>
+                  </h1>
                 </div>
               </div>
-              <div className='navbar__whitespace'>
-              </div>
-              <UserCard user={user} />
+              <nav class="navigation">
+                <Link to='/dashboard'>
+                  <i class="ph-browsers"></i>
+                  <span>Dashboard</span>
+                </Link>
+                <Link to=''>
+                  <i class="ph-check-square"></i>
+                  <span>Personal Records</span>
+                </Link>
+                <Link to=''>
+                  <i class="ph-swap"></i>
+                  <span>Workouts</span>
+                </Link>
+                <Link to=''>
+                  <i class="ph-file-text"></i>
+                  <span>Exercises</span>
+                </Link>
+                <Link to=''>
+                  <i class="ph-globe"></i>
+                  <span>User</span>
+                </Link>
+                <Link to=''>
+                  <i class="ph-clipboard-text"></i>
+                  <span>Exchange</span>
+                </Link>
+              </nav>
+              <footer class="footer">
+                <button class="user-profile">
+                  <span>{user.username}</span>
+                  <span>
+                    <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
+                  </span>
+                </button>
+              </footer>
             </div>
-          </nav>
-          <div className='root-children__container'>
-            {children}
+            <div class="app-body-main-content">
+              {children}
+            </div>
           </div>
-        </container>
+        </div>
       ) : (
         <>
           <nav>

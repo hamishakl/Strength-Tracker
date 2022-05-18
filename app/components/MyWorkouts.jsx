@@ -2,6 +2,7 @@ export default function MyWorkouts({ data }) {
   return (
     <>
       <h2 className="workouts-heading">My Workouts</h2>
+      <div className="workout-cards__wrapper">
         {data.map((workouts, index) => {
           let dateStr = new Date(`${workouts.date}`);
           let dateArr = dateStr.toDateString().split(' ');
@@ -16,9 +17,7 @@ export default function MyWorkouts({ data }) {
                 return (
                   <div key={index}>
                     {
-
                       arrTitle != undefined && previousArrTitle != undefined ?
-
                         (
                           arrTitle['Exercise'].title === previousArrTitle['Exercise'].title ?
                             (
@@ -42,11 +41,6 @@ export default function MyWorkouts({ data }) {
                                   {workout.weight}kg for {workout.reps} reps for{' '}
                                   {workout.sets} sets.
                                 </p>
-                                {/* <h4>{arrTitle['Exercise'].title}</h4>
-                                <p>
-                                  {arrTitle.weight}kg for {arrTitle.reps} reps for{' '}
-                                  {arrTitle.sets} sets.
-                                </p> */}
                               </>
                             )
                         )
@@ -61,6 +55,7 @@ export default function MyWorkouts({ data }) {
             </div>
           )
         })}
+      </div>
     </>
   )
 }

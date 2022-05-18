@@ -7,7 +7,7 @@ export const OneRmEstimate = (weight, reps) => {
   return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5
 }
 
-export default function MyExercise({ exercises, prs }) {
+export default function MyExercise({ exercises }) {
   return (
     <div className='exercise-list__div'>
       {exercises.map((exercise, index) => {

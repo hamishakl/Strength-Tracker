@@ -1,4 +1,3 @@
-import styles from '~/styles/home.css'
 import { redirect, useLoaderData } from 'remix'
 import { getUser } from '../utils/session.server'
 

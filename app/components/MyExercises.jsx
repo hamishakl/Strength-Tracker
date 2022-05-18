@@ -4,14 +4,8 @@ import { Link } from 'remix'
 export default function MyExercise({ exercises, prs }) {
   return (
     <>
-    <div className='exercises-heading'>
-      <h2 className='subheading'>My Exercises</h2>
-      <Link to='/dashboard/new' className='new-exercise--link'>
-        <span>New</span>
-      </Link>
-    </div>
       {exercises.map((exercise) => (
-        <div key={exercise.id} className='exerciseList-card'>
+        <div key={exercise.id} className=''>
           <div className='' key={exercise.id}>
             <Link to={exercise.id}>
               <h5 className=''>{exercise.title}</h5>

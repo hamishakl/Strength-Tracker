@@ -16,17 +16,17 @@ export const loader = async ({ request }) => {
           equals: `${user.id}`,
         },
       },
+      orderBy: { createdAt: 'desc' },
       include: {
         Pr: {
           select: {
             weight: true,
             reps: true,
-          },
-          orderBy: { weight: 'desc' },
-        },
+          }, orderBy: { weight: 'desc' },
+        }
       },
       orderBy: { updatedAt: 'desc' },
-      take: 6,
+      take: 6
     }),
   }
   const prs = {
@@ -88,6 +88,7 @@ export const loader = async ({ request }) => {
     }),
   }
 
+
   const data = { exercises, prs, workouts, goals, user }
 
   return data
@@ -98,27 +99,27 @@ function ExerciseItems() {
   const workoutData = data.workouts['workouts']
   return (
     <>
-      <header class='app-header'>
-        <div class='app-header-navigation'>
-          <div class='tabs'>
-            <h1 className=''>Welcome, {data.user.username}!</h1>
+      <header className={'app-header'}>
+        <div className={'app-header-navigation'}>
+          <div className={'tabs'}>
+            <h1 className={''}>Welcome, {data.user.username}!</h1>
             <p>
               Here's what's happening with your strength progress so far. Well
               done!
             </p>
           </div>
         </div>
-        <div class='app-header-mobile'>
-          <button class='icon-button large'>
-            <i class='ph-list'></i>
+        <div className={'app-header-mobile'}>
+          <button className={'icon-button large'}>
+            <i className={'ph-list'}></i>
           </button>
         </div>
       </header>
       <div className=''>
         <MyGoals goals={data.goals['goals']} />
       </div>
-      <div className=''>
-        <div className='my-exercises__navigation'>
+      <div className={''}>
+        <div className={'my-exercises__navigation'}>
           <h2 className=''>My Exercises</h2>
           <div className='my-exercises__links'>
             <Link to='/dashboard/new' className=''>

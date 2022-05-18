@@ -18,7 +18,7 @@ export default function ({ prs }) {
 
   return (
     <>
-      <table class='pr-table'>
+      <table className={'pr-table'}>
         <thead>
           <tr>
             <th>Date</th>

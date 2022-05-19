@@ -1,7 +1,5 @@
 export default function MyWorkouts({ data }) {
   return (
-    <>
-      <h2 className="workouts-heading">My Workouts</h2>
       <div className="workout-cards__wrapper">
         {data.map((workouts, index) => {
           let dateStr = new Date(`${workouts.date}`);
@@ -56,6 +54,5 @@ export default function MyWorkouts({ data }) {
           )
         })}
       </div>
-    </>
   )
 }

@@ -6,6 +6,8 @@ import { getUser } from '~/utils/session.server'
 import MyWorkouts from '~/components/MyWorkouts'
 import MyGoals from '~/components/MyGoals'
 
+import Navbar from '~/components/ui/DashboardContentNavbar'
+
 export const loader = async ({ request }) => {
   const user = await getUser(request)
 
@@ -22,11 +24,12 @@ export const loader = async ({ request }) => {
           select: {
             weight: true,
             reps: true,
-          }, orderBy: { weight: 'desc' },
-        }
+          },
+          orderBy: { weight: 'desc' },
+        },
       },
       orderBy: { updatedAt: 'desc' },
-      take: 6
+      take: 6,
     }),
   }
   const prs = {
@@ -89,7 +92,6 @@ export const loader = async ({ request }) => {
     }),
   }
 
-
   const data = { exercises, prs, workouts, goals, user }
 
   return data
@@ -117,23 +119,15 @@ function ExerciseItems() {
         </div>
       </header>
       <div className=''>
+        <Navbar data={['My Goals', 'new-goal', 'all-goals']} />
         <MyGoals goals={data.goals['goals']} />
       </div>
       <div className={''}>
-        <div className={'my-exercises__navigation'}>
-          <h2 className=''>My Exercises</h2>
-          <div className='my-exercises__links'>
-            <Link to='/dashboard/new' className=''>
-              <span>New</span>
-            </Link>
-            <Link to={'/exercises'}>View all</Link>
-          </div>
-        </div>
-        <MyExercise
-          exercises={data.exercises['exercises']}
-        />
+        <Navbar data={['My Exercises', 'new-exercise', 'all-exercises']} />
+        <MyExercise exercises={data.exercises['exercises']} />
       </div>
       <div className=''>
+        <Navbar data={['My Workouts', 'new-workout', 'all-workouts']} />
         <MyWorkouts data={workoutData} />
       </div>
     </>

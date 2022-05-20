@@ -103,25 +103,61 @@ function Layout({ children }) {
                     <img src='https://assets.codepen.io/285131/almeria-avatar.jpeg' />
                   </span>
                 </button>
+                <button>
+                  <form action='/auth/logout' method='POST'>
+                    <button className="btn" type="submit">
+                      Logout {user.username}
+                    </button>
+                  </form>
+                </button>
               </footer>
             </div>
             <div className={'app-body-main-content'}>{children}</div>
           </div>
         </div>
       ) : (
-        <>
-          <nav>
-            <Link className='' to='/'>
+        <container className='homepage-container'>
+          <nav className='homepage__navbar'>
+            <Link className='home-logo logo--animation' to='/'>
               Strength Tracker
             </Link>
-            <div className=''>
+            <div className='navbar-buttons__div'>
               <Link className='' to='/auth/register'>
                 Register
+              </Link>
+              <Link className='' to='/auth/login'>
+                Login
               </Link>
             </div>
           </nav>
           <div className=''>{children}</div>
-        </>
+          <footer className='homepage__footer'>
+            <div className="footer__contents">
+              <h3>Strength Tracker</h3>
+              <p>Track your workouts, exercises, personal records, exercise goals and volume.</p>
+              <Link className='' to='/auth/register'>
+                Register
+              </Link>
+              <Link className='' to='/auth/login'>
+                Login
+              </Link>
+            </div>
+            <div className="footer__contents">
+              <blockquote className='quote'>
+                “No man has the right to be an amateur in the matter of physical training. It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable.”
+                ― Socrates
+              </blockquote>
+            </div>
+            <div className="footer__contents">
+              <p>Strength Tracker is a project designed and developed by ‎
+                <a target={'blank'} href={'https://www.hamishhenare.com'}>
+                  Hamish Henare.
+                </a>
+              </p>
+              <p>hello@strengthtracker.com</p>
+            </div>
+          </footer>
+        </container>
       )}
     </>
   )

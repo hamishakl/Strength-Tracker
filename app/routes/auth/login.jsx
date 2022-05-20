@@ -1,6 +1,29 @@
 import { useActionData, json, redirect } from 'remix'
 import { login, register, createUserSession } from '~/utils/session.server'
 
+import cssSheet from '~/styles/app.css'
+import homepageCssSheet from '~/styles/homepage.css'
+
+
+export const links = () => {
+  return [
+    {
+      rel: 'stylesheet',
+      href: cssSheet,
+    },
+    {
+      rel: 'stylesheet',
+      href: homepageCssSheet,
+    },
+    {
+      rel: "stylesheet",
+      href: 'https://fonts.googleapis.com/css?family=Noto Serif'
+    }
+
+  ]
+}
+
+
 function badRequest(data) {
   return json(data, { status: 400 })
 }
@@ -52,11 +75,8 @@ function Login() {
   const actionData = useActionData()
 
   return (
-    <div className=''>
-      <div className=''>
+    <div className='auth-wrapper'>
         <h1 className=''>Login</h1>
-      </div>
-      <div className=''>
         <form method='POST'>
           <div className=''>
             <label htmlFor='username' className=''>
@@ -96,7 +116,6 @@ function Login() {
             Login
           </button>
         </form>
-      </div>
     </div>
   )
 }

@@ -103,25 +103,35 @@ function Layout({ children }) {
                     <img src='https://assets.codepen.io/285131/almeria-avatar.jpeg' />
                   </span>
                 </button>
+                <button>
+                  <form action='/auth/logout' method='POST'>
+                    <button className="btn" type="submit">
+                      Logout {user.username}
+                    </button>
+                  </form>
+                </button>
               </footer>
             </div>
             <div className={'app-body-main-content'}>{children}</div>
           </div>
         </div>
       ) : (
-        <>
-          <nav>
-            <Link className='' to='/'>
+        <container className='homepage-container'>
+          <nav className='homepage__navbar'>
+            <Link className='home-logo logo--animation' to='/'>
               Strength Tracker
             </Link>
-            <div className=''>
+            <div className='navbar-buttons__div'>
               <Link className='' to='/auth/register'>
                 Register
+              </Link>
+              <Link className='' to='/auth/login'>
+                Login
               </Link>
             </div>
           </nav>
           <div className=''>{children}</div>
-        </>
+        </container>
       )}
     </>
   )

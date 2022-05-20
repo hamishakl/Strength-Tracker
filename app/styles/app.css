@@ -62,21 +62,13 @@ a {
 .app {
   min-height: 80vh;
   width: 100%;
-  max-width: 1600px;
+  /* max-width: 1600px; */
   background-color: var(--c-gray-800);
   padding: 2vw 4vw 6vw;
   display: flex;
   flex-direction: column;
 }
 
-.app-header {
-  display: grid;
-  grid-template-columns: minmax(-webkit-min-content, 175px) minmax(-webkit-max-content, 1fr) minmax(-webkit-max-content, 400px);
-  grid-template-columns: minmax(min-content, 175px) minmax(max-content, 1fr) minmax(max-content, 400px);
-  -moz-column-gap: 4rem;
-       column-gap: 4rem;
-  align-items: flex-end;
-}
 @media (max-width: 1200px) {
   .app-header {
     display: flex;
@@ -123,11 +115,11 @@ a {
 
 .app-body {
   height: 100%;
-  display: grid;
+  /* display: grid;
   grid-template-columns: minmax(-webkit-min-content, 175px) minmax(-webkit-max-content, 1fr) minmax(-webkit-min-content, 400px);
   grid-template-columns: minmax(min-content, 175px) minmax(max-content, 1fr) minmax(min-content, 400px);
   -moz-column-gap: 4rem;
-       column-gap: 4rem;
+       column-gap: 4rem; */
   padding-top: 2.5rem;
 }
 @media (max-width: 1200px) {
@@ -140,8 +132,8 @@ a {
 }
 
 .app-body-main-content {
-  width: 100%;
-  margin-left: 12vw;
+  /* width: 100%; */
+  margin-left: 20vw;
   overflow: hidden;
 }
 
@@ -834,16 +826,18 @@ dd {
 
 
 
-.my-exercises__navigation {
+.dashboard-section-navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 70%;
   align-items: center;
+  border-bottom: #ffffff solid 1px;
+  margin-bottom: 2em;
 }
 
-.my-exercises__links {
-  width: 90px;
+.dashboard-section-navbar__links {
+  width: 120px;
   display: flex;
   justify-content: space-between;
 }
@@ -851,7 +845,8 @@ dd {
 .workout-cards__wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
+  column-gap: 1em;
   width: 70%;
 }
 

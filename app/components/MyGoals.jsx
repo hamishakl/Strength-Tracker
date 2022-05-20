@@ -4,7 +4,6 @@ export default function MyGoals(goals) {
   const data = goals.goals
   return (
     <>
-      <h2>My Goals</h2>
       <ul>
         {data.map((goal) => {
           let dateSplit = goal.achievementGoalDate.split('')

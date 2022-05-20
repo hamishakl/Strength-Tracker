@@ -1,6 +1,7 @@
 import { Outlet, LiveReload, Link, Links, useLoaderData, Scripts } from 'remix'
 import { getUser } from './utils/session.server'
 import cssSheet from './styles/app.css'
+import HomepageFooter from './components/ui/HomepageFooter'
 // import UserCard from './components/UserCard'
 // import WorkoutIcon from '../public/images/navbar/gym.svg'
 // import PrIcon from '../public/images/navbar/medal.svg'
@@ -131,32 +132,7 @@ function Layout({ children }) {
             </div>
           </nav>
           <div className=''>{children}</div>
-          <footer className='homepage__footer'>
-            <div className="footer__contents">
-              <h3>Strength Tracker</h3>
-              <p>Track your workouts, exercises, personal records, exercise goals and volume.</p>
-              <Link className='' to='/auth/register'>
-                Register
-              </Link>
-              <Link className='' to='/auth/login'>
-                Login
-              </Link>
-            </div>
-            <div className="footer__contents">
-              <blockquote className='quote'>
-                “No man has the right to be an amateur in the matter of physical training. It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable.”
-                ― Socrates
-              </blockquote>
-            </div>
-            <div className="footer__contents">
-              <p>Strength Tracker is a project designed and developed by ‎
-                <a target={'blank'} href={'https://www.hamishhenare.com'}>
-                  Hamish Henare.
-                </a>
-              </p>
-              <p>hello@strengthtracker.com</p>
-            </div>
-          </footer>
+          <HomepageFooter />
         </container>
       )}
     </>

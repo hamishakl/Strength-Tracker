@@ -145,7 +145,7 @@ body {
 
 .homepage__footer {
     border-top: 1px black solid;
-    height: 40vh;
+    height: 100vh;
     background-color: #ffffff;
     width: 80vw;
     color: #151920;
@@ -195,4 +195,12 @@ body {
 .feature__copy {
     margin: 0;
     font-size: 1.1em;
+}
+
+.auth-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

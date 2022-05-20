@@ -1,0 +1,125 @@
+.homepage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+.homepage__navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 10vh;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    position: fixed;
+    z-index: 100;
+    width: 100vw;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border-bottom: 1px black solid;
+}
+
+.navbar-buttons__div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 10%;
+}
+
+
+
+.home-logo {
+    font-family: degular, sans-serif;
+
+    font-weight: 700;
+
+    font-style: italic;
+    text-decoration: none;
+    transition: ease;
+    transition-duration: 100ms;
+    font-size: 2em;
+    
+}
+.hero__logo {
+    font-family: degular-display, sans-serif;
+
+    font-weight: 700;
+    
+    font-style: italic;
+    font-size: 4em;
+    line-height: 0.9em;
+    text-decoration: none;
+    transition: ease;
+    transition-duration: 100ms;
+    color: black;
+    margin: 0;
+}
+
+.logo--animation:hover {
+    letter-spacing: 2px;
+}
+
+.hero-contents__div {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 50%;
+}
+
+.hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    width: 80vw;
+    background-color: rgb(255, 255, 255);
+}
+
+.hero img{
+    height: 50%;
+    /* width: 50%; */
+}
+
+.hero-buttons__wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero__buttons {
+    background: none;
+	color: inherit;
+	border: 1px solid rgb(0, 0, 0);
+	padding: 0.5em 1em 0.5em 1em;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    color: black;
+}
+
+.hero__copy {
+    color: black;
+    font-size: 1.5em;
+}
+
+.intro {
+    background-color: #1f1f1f;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

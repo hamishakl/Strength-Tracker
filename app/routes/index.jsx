@@ -1,10 +1,12 @@
 import { redirect, useLoaderData } from 'remix'
 import { getUser } from '../utils/session.server'
-import WorkoutIcon from '../../public/images/hero-img.jpeg'
+import heroImg from '../../public/images/hero-img.jpeg'
+import introImg from '../../public/images/intro.jpeg'
 
 
 import cssSheet from '~/styles/app.css'
 import homepageCssSheet from '~/styles/homepage.css'
+
 
 export const links = () => {
   return [
@@ -16,6 +18,11 @@ export const links = () => {
       rel: 'stylesheet',
       href: homepageCssSheet,
     },
+    {
+      rel: "stylesheet",
+      href: 'https://fonts.googleapis.com/css?family=Noto Serif'
+    }
+
   ]
 }
 export const loader = async ({ request }) => {
@@ -43,13 +50,13 @@ function Home() {
             <button className='hero__buttons login'>Login</button>
           </div>
         </div>
-        <img src={WorkoutIcon} alt="" />
+        <img src={heroImg} alt="" />
       </container>
       <container className='intro'>
-          <p id='test'>
-            Log your workouts and reach new PRs with Strength Tracker. With just a few clicks, track personal records from past workouts, set goals for future ones, monitor exercise progress, explore new exercises—all on one screen.
-          </p>
-            <img src="" alt="" />
+        <img src={introImg} alt="" />
+        <p className='hero__copy white'>
+          Log your workouts and reach new PRs with Strength Tracker. With just a few clicks, track personal records from past workouts, set goals for future ones, monitor exercise progress, explore new exercises—all on one screen.
+        </p>
       </container>
     </div>
   )

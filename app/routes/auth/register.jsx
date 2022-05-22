@@ -54,7 +54,7 @@ export const action = async ({ request }) => {
   const email = form.get('email')
   const password = form.get('password')
   const name = form.get('name')
-
+  
   const fields = { loginType, email, name, password }
 
   const fieldErrors = {
@@ -74,7 +74,7 @@ export const action = async ({ request }) => {
   if (emailExists) {
     return badRequest({
       fields,
-      fieldErrors: { email: `User ${email} already exists, did you want to ${<Link to={'/auth/login'}>Login</Link>}?` },
+      fieldErrors: {email: `the email address: ${email} already exists.`},
     })
   }
 
@@ -107,6 +107,10 @@ function Login() {
         <div>
           <label htmlFor="email">Email address</label>
           <input type="email" name="email" placeholder='Please enter your email address' id="" />
+        </div>
+        <div className='error'>
+          {actionData?.fieldErrors?.email &&
+            actionData?.fieldErrors?.email}
         </div>
 
         <div className=''>

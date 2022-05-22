@@ -3,10 +3,10 @@ import {db} from './db.server'
 import { createCookieSessionStorage, redirect } from 'remix'
 
 
-export async function login({username, password}) {
+export async function login({email, password}) {
     const user = await db.user.findUnique({
         where: {
-            username
+            email
         }
     })
 
@@ -21,11 +21,12 @@ export async function login({username, password}) {
     return user
 }
 
-export async function register({ username, password }){
+export async function register({ email, password, name }){
     const passwordHash = await bcrypt.hash(password, 10)
     return db.user.create({
         data: {
-            username,
+            name,
+            email,
             passwordHash
         }
     })

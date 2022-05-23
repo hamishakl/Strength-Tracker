@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt'
-import {db} from './db.server'
+import { db } from './db.server'
 import { createCookieSessionStorage, redirect } from 'remix'
 
 
-export async function login({email, password}) {
+export async function login({ email, password }) {
     const user = await db.user.findUnique({
         where: {
             email
@@ -11,17 +11,17 @@ export async function login({email, password}) {
     })
 
     if (!user) {
-        return null 
+        return null
     }
 
     const isCorrectPassword = await bcrypt.compare(password, user.passwordHash)
 
-    if(!isCorrectPassword) return null
+    if (!isCorrectPassword) return null
 
     return user
 }
 
-export async function register({ email, password, name }){
+export async function register({ email, password, name }) {
     const passwordHash = await bcrypt.hash(password, 10)
     return db.user.create({
         data: {
@@ -32,14 +32,14 @@ export async function register({ email, password, name }){
     })
 }
 
-const sessionSecret = process.env.SESSION_SECRET 
-if(!sessionSecret) {
+const sessionSecret = process.env.SESSION_SECRET
+if (!sessionSecret) {
     throw new Error('No session secret')
 }
 
 const storage = createCookieSessionStorage({
     cookie: {
-        name: 'remixblog_session', 
+        name: 'remixblog_session',
         secure: process.env.NODE_ENV === 'production',
         secrets: [sessionSecret],
         sameSite: 'lax',
@@ -49,31 +49,31 @@ const storage = createCookieSessionStorage({
     }
 })
 
-export async function createUserSession(userId:string, redirectTo: string) {
-    
+export async function createUserSession(userId: string, redirectTo: string) {
+
     console.log('redirect');
     const session = await storage.getSession()
     session.set(
         'userId', userId
     )
     return redirect(
-        
+
         redirectTo, {
-            headers: {
-                'Set-Cookie': await storage.commitSession(session)
-            }
+        headers: {
+            'Set-Cookie': await storage.commitSession(session)
         }
-        )
+    }
+    )
 }
 
 export function getUserSession(request: Request) {
     return storage.getSession(request.headers.get('Cookie'))
 }
 
-export async function getUser(request:Request) {
+export async function getUser(request: Request) {
     const session = await getUserSession(request)
     const userId = session.get('userId')
-    if(!userId || typeof userId !== 'string'){
+    if (!userId || typeof userId !== 'string') {
         return null
     }
 

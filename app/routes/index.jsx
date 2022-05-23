@@ -2,7 +2,7 @@ import { redirect, useLoaderData } from 'remix'
 import { getUser } from '../utils/session.server'
 
 import heroImg from '../../public/images/hero-img.jpeg'
-import introImg from '../../public/images/intro.jpeg'
+// import introImg from '../../public/images/intro.jpeg'
 import featureImg1 from '../../public/images/feature-1.jpeg'
 import featureImg2 from '../../public/images/feature-2.jpeg'
 import featureImg3 from '../../public/images/feature-3.jpeg'
@@ -57,7 +57,7 @@ function Home() {
         <img src={heroImg} alt="" />
       </container>
       <container className='intro'>
-        <img src={introImg} alt="" />
+        {/* <img src={introImg} alt="" /> */}
         <p className='hero__copy white'>
           Log your workouts and reach new PRs with Strength Tracker. With just a few clicks, track personal records from past workouts, set goals for future ones, monitor exercise progress, explore new exercises—all on one screen.
         </p>

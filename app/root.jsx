@@ -14,6 +14,8 @@ export const links = () => {
       rel: 'stylesheet',
       href: cssSheet,
     },
+
+
   ]
 }
 
@@ -45,11 +47,14 @@ function Document({ children, title }) {
           rel='stylesheet'
           href='https://use.typekit.net/jwz3lmi.css'
         ></link>
+
       </head>
       <body>
         {children}
         {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
         <Scripts />
+        <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
+        </script>
       </body>
     </html>
   )
@@ -107,7 +112,7 @@ function Layout({ children }) {
                 <button>
                   <form action='/auth/logout' method='POST'>
                     <button className="btn" type="submit">
-                      Logout {user.username}
+                      Logout {user.name}
                     </button>
                   </form>
                 </button>

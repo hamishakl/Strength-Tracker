@@ -104,10 +104,7 @@ function Layout({ children }) {
               </nav>
               <footer className={'footer'}>
                 <button className={'user-profile'}>
-                  <span>{user.username}</span>
-                  <span>
-                    <img src='https://assets.codepen.io/285131/almeria-avatar.jpeg' />
-                  </span>
+                  <Link to={`/dashboard/${user.id}/profile`}>{user.name}</Link>
                 </button>
                 <button>
                   <form action='/auth/logout' method='POST'>

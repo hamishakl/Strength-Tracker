@@ -28,9 +28,9 @@ function badRequest(data) {
   return json(data, { status: 400 })
 }
 
-function validateUsername(username) {
-  if (typeof username !== 'string' || username.length < 3) {
-    return 'Username must be at least 3 characters'
+function validateEmail(email) {
+  if (typeof email !== 'string' || email.length < 3) {
+    return 'email must be at least 3 characters'
   }
 }
 
@@ -47,13 +47,13 @@ function validatePassword(password) {
 export const action = async ({ request }) => {
   const form = await request.formData()
   const loginType = form.get('loginType')
-  const username = form.get('username')
+  const email = form.get('email')
   const password = form.get('password')
 
-  const fields = { loginType, username, password }
+  const fields = { loginType, email, password }
 
   const fieldErrors = {
-    username: validateUsername(username),
+    email: validateEmail(email),
     password: validatePassword(password),
   }
 
@@ -61,11 +61,11 @@ export const action = async ({ request }) => {
     return badRequest({ fieldErrors, fields })
   }
 
-  const user = await login({ username, password })
+  const user = await login({ email, password })
   if (!user) {
     return badRequest({
       fields,
-      fieldErrors: { username: 'Invalid Credentials' },
+      fieldErrors: { email: 'Invalid Credentials' },
     })
   }
   return createUserSession(user.id, '/dashboard')
@@ -79,20 +79,20 @@ function Login() {
         <h1 className=''>Login</h1>
         <form method='POST'>
           <div className=''>
-            <label htmlFor='username' className=''>
-              Username
+            <label htmlFor='email' className=''>
+              email
             </label>
             <input
               type='text'
-              name='username'
-              id='username'
+              name='email'
+              id='email'
               className=''
-              defaultValue={actionData?.fields.username}
-              placeholder='username'
+              defaultValue={actionData?.fields.email}
+              placeholder='email'
             />
             <div className=''>
-              {actionData?.fieldErrors?.username &&
-                actionData?.fieldErrors?.username}
+              {actionData?.fieldErrors?.email &&
+                actionData?.fieldErrors?.email}
             </div>
           </div>
           <div className=''>

@@ -18,7 +18,7 @@ export const loader = async ({ request }) => {
           equals: `${user.id}`,
         },
       },
-      orderBy: { createdAt: 'desc' },
+      // orderBy: { createdAt: 'desc' },
       include: {
         Pr: {
           select: {
@@ -105,7 +105,7 @@ function ExerciseItems() {
       <header className={'app-header'}>
         <div className={'app-header-navigation'}>
           <div className={'tabs'}>
-            <h1 className={''}>Welcome, {data.user.username}!</h1>
+            <h1 className={''}>Welcome, {data.user.name}!</h1>
             <p>
               Here's what's happening with your strength progress so far. Well
               done!

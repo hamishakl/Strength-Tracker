@@ -1,4 +1,4 @@
-import { useActionData, json, redirect } from 'remix'
+import { useActionData, json, redirect, Link } from 'remix'
 import { db } from '~/utils/db.server'
 import { register, createUserSession } from '~/utils/session.server'
 
@@ -29,12 +29,15 @@ function badRequest(data) {
   return json(data, { status: 400 })
 }
 
-function validateUsername(username) {
-  if (typeof username !== 'string' || username.length < 3) {
-    return 'Username must be at least 3 characters'
+function validateEmail(email) {
+  if (typeof email !== 'string' || email.length < 6) {
+    return 'Email must be at least 7 characters'
+  } else if (typeof email !== 'string' || email.search(/[@]/) == -1) {
+    return 'Password must contain atleast 1 @ character'
+  } else if (typeof email !== 'string' || email.search(/[.]/) == -1) {
+    return 'Password must contain atleast 1 .'
   }
 }
-
 function validatePassword(password) {
   if (typeof password !== 'string' || password.length < 6) {
     return 'Password must be at least 6 characters'
@@ -48,13 +51,14 @@ function validatePassword(password) {
 export const action = async ({ request }) => {
   const form = await request.formData()
   const loginType = form.get('loginType')
-  const username = form.get('username')
+  const email = form.get('email')
   const password = form.get('password')
-
-  const fields = { loginType, username, password }
+  const name = form.get('name')
+  
+  const fields = { loginType, email, name, password }
 
   const fieldErrors = {
-    username: validateUsername(username),
+    email: validateEmail(email),
     password: validatePassword(password),
   }
 
@@ -62,19 +66,19 @@ export const action = async ({ request }) => {
     return badRequest({ fieldErrors, fields })
   }
 
-  const userExists = await db.user.findFirst({
+  const emailExists = await db.user.findFirst({
     where: {
-      username,
+      email,
     },
   })
-  if (userExists) {
+  if (emailExists) {
     return badRequest({
       fields,
-      fieldErrors: { userName: `User ${username} already exists` },
+      fieldErrors: {email: `the email address: ${email} already exists.`},
     })
   }
 
-  const user = await register({ username, password })
+  const user = await register({ email, password, name })
   if (!user) {
     return badRequest({
       fields,
@@ -94,23 +98,21 @@ function Login() {
         <h1 className=''>Register</h1>
       </div>
       <form method='POST' className=''>
-        <div className=''>
-          <label htmlFor='username' className=''>
-            Username
-          </label>
-          <input
-            type='text'
-            name='username'
-            className=''
-            id='username'
-            placeholder='Username'
-            defaultValue={actionData?.fields.username}
-          />
-          <div className='error'>
-            {actionData?.fieldErrors?.username &&
-              actionData?.fieldErrors?.username}
-          </div>
+        <div>
+          <label htmlFor="name">First name</label>
+          <input type="text" name="name" id="" placeholder='What is your first name?' />
         </div>
+
+
+        <div>
+          <label htmlFor="email">Email address</label>
+          <input type="email" name="email" placeholder='Please enter your email address' id="" />
+        </div>
+        <div className='error'>
+          {actionData?.fieldErrors?.email &&
+            actionData?.fieldErrors?.email}
+        </div>
+
         <div className=''>
           <label htmlFor='password' className=''>
             Password
@@ -120,7 +122,7 @@ function Login() {
             id='password'
             type='password'
             name='password'
-            placeholder='Password'
+            placeholder='Please choose a password'
             defaultValue={actionData?.fields.password}
           />
         </div>

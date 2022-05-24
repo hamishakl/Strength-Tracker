@@ -14,6 +14,8 @@ export const links = () => {
       rel: 'stylesheet',
       href: cssSheet,
     },
+
+
   ]
 }
 
@@ -45,11 +47,14 @@ function Document({ children, title }) {
           rel='stylesheet'
           href='https://use.typekit.net/jwz3lmi.css'
         ></link>
+
       </head>
       <body>
         {children}
         {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
         <Scripts />
+        <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
+        </script>
       </body>
     </html>
   )
@@ -99,15 +104,12 @@ function Layout({ children }) {
               </nav>
               <footer className={'footer'}>
                 <button className={'user-profile'}>
-                  <span>{user.username}</span>
-                  <span>
-                    <img src='https://assets.codepen.io/285131/almeria-avatar.jpeg' />
-                  </span>
+                  <Link to={`/dashboard/${user.id}/profile`}>{user.name}</Link>
                 </button>
                 <button>
                   <form action='/auth/logout' method='POST'>
                     <button className="btn" type="submit">
-                      Logout {user.username}
+                      Logout {user.name}
                     </button>
                   </form>
                 </button>

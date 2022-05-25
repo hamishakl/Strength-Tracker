@@ -1,8 +1,8 @@
 import { Link, redirect, useLoaderData } from 'remix'
 import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
-import PrTable from '../../components/PrTable'
-import Chart from '../../components/Chart'
+import PrTable from '../../../components/PrTable'
+import Chart from '../../../components/Chart'
 import { useState } from 'react'
 
 export const loader = async ({ request, params }) => {

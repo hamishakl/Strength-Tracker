@@ -18,7 +18,7 @@ export default function MyGoals(goals) {
             <li key={goal.exerciseId}>
               {/* <h3>{goal.Exercise.title}</h3> */}
               <p>
-                <Link to={`${goal.exerciseId}`}>{goal.Exercise.title}</Link>{' '}
+                <Link to={`exercises/${goal.exerciseId}`}>{goal.Exercise.title}</Link>{' '}
                 <b>{goal.weight}kg</b> for{' '}
                 <b>
                   {reps < 2 ? ` 1 rep` : ` ${reps} reps`}

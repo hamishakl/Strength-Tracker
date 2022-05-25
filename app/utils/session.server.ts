@@ -21,7 +21,7 @@ export async function login({ email, password }) {
   return user;
 }
 
-export async function changePassword({ email, password }) {
+export async function changePassword({ email, oldPassword, newPassword }) {
   const user = await db.user.findUnique({
     where: {
       email,
@@ -32,10 +32,21 @@ export async function changePassword({ email, password }) {
     return null;
   }
 
-  const isCorrectPassword = await bcrypt.compare(password, user.passwordHash);
+  const isCorrectPassword = await bcrypt.compare(oldPassword, user.passwordHash);
+  const passwordHash = await bcrypt.hash(newPassword, 10);
 
-  if (!isCorrectPassword) return null;
+  if (!isCorrectPassword) {
+    console.log('wrong password')
+    return null  
+  }
 
+  await db.user.update({
+    where: { id: user.id },
+    data: {
+      passwordHash: passwordHash,
+    },
+  });
+  console.log('password true`')
   return true;
 }
 

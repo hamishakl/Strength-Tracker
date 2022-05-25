@@ -3,18 +3,39 @@ import { useLoaderData, json, useActionData } from "remix";
 import { getUser } from "~/utils/session.server";
 import { useState } from "react";
 import { db } from "~/utils/db.server";
-import bcrypt from "bcrypt";
 
 import { changePassword } from "~/utils/session.server";
 
 function badRequest(data) {
   return json(data, { status: 400 });
 }
+function goodRequest(data) {
+  return json(data, { status: 200 });
+}
 
 export const loader = async ({ request }) => {
   const user = await getUser(request);
   return user;
 };
+
+function validatePassword(password) {
+  if (typeof password !== 'string' || password.length < 6) {
+    return 'Password must be at least 6 characters'
+  } else if (typeof password !== 'string' || password.search(/[0-9]/) == -1) {
+    return 'Password must contain atleast 1 number'
+  } else if (typeof password !== 'string' || password.search(/[A-Z]/) == -1) {
+    return 'Password must contain atleast 1 upper case letter'
+  }
+}
+
+// function passwordMatch(a, b, state) {
+//   if (a != b) {
+//     return 'Confirmed password does not match'
+//   } else {
+//     state = 4
+//     return 'passwords match'
+//   }
+// }
 
 export const action = async ({ request, params }) => {
   const form = await request.formData();
@@ -55,42 +76,52 @@ export const action = async ({ request, params }) => {
       },
     });
 
-    if (form.get("_method") === "password") {
-      const password = form.get("");
-      const passwordHash = await bcrypt.hash(password, 10);
-
-      const passwordTrue = await changePassword({ email, password });
-      if (!passwordTrue) {
-        return badRequest({
-          fields,
-          fieldErrors: { password: "Invalid Credentials" },
-        });
-      }
-      // return createUserSession(user.id, "/dashboard");
-
-      await db.user.update({
-        where: { id: user.id },
-        data: {
-          passwordHash: passwordHash,
-        },
-      });
-    }
 
     return null;
   }
 
-  let data = form.get("_rename");
-  if (data != undefined) {
-    const exercise = await db.exercise.findUnique({
-      where: { id: params.exerciseId },
+  if (form.get("_method") === "password") {
+
+    const user = await getUser(request);
+    const email = user.email
+    console.log(user)
+    console.log(email)
+    const oldPassword = form.get("old-password")
+    const newPassword = form.get("new-password")
+    const confirmNewPassword = form.get("confirm-new-password")
+
+    
+    // const passwordHash = await bcrypt.hash(password, 10);
+    const fields = { oldPassword };
+    
+    if (confirmNewPassword != newPassword){
+      return badRequest({
+        fields,
+        fieldErrors: { password: "Passwords don't match" },
+      })
+    }
+    
+    const fieldErrors = {
+      password: validatePassword(newPassword),
+    }
+
+    if (Object.values(fieldErrors).some(Boolean)) {
+      return badRequest({ fieldErrors, fields })
+    }
+
+    const passwordTrue = await changePassword({ email, oldPassword, newPassword });
+    if (!passwordTrue) {
+      return badRequest({
+        fields,
+        fieldErrors: { password: "Invalid Credentials" },
+      })
+    }
+
+    return goodRequest({
+      fields,
+      fieldErrors: { password: "Password changed successfully" },
     });
 
-    await db.exercise.update({
-      where: { id: params.exerciseId },
-      data: {
-        title: data,
-      },
-    });
   }
 
   return null;
@@ -152,7 +183,14 @@ export default function register() {
               Edit email
             </a>
           </div>
+          <div className="error">
+            {actionData?.fieldErrors?.email &&
+              actionData?.fieldErrors?.email}
+          </div>
           <button onClick={() => setPage((count = 3))}>Change password</button>
+          <div className="error">
+            {actionData?.fieldErrors?.password && actionData?.fieldErrors?.password}
+          </div>
         </>
       )}
 
@@ -186,6 +224,9 @@ export default function register() {
             </form>
           </div>
           <button onClick={() => setPage((count = 3))}>Change password</button>
+          <div className="error">
+            {actionData?.fieldErrors?.password && actionData?.fieldErrors?.password}
+          </div>
         </>
       )}
 
@@ -207,7 +248,7 @@ export default function register() {
               Edit email
             </a>
           </div>
-          <form action="POST">
+          <form method="POST">
             <input type="hidden" name="_method" value="password" />
             <label htmlFor="old-password">Old password</label>
             <div className="error">

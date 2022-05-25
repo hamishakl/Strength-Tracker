@@ -76,20 +76,19 @@ export const loader = async ({ request }) => {
             sets: true,
             workoutId: true,
             id: true,
-          },
-          include: {
+    
             Exercise: {
               select: {
                 id: true,
                 title: true,
               },
             },
-          },
+
         },
       },
       orderBy: { date: 'desc' },
       take: 6,
-    }),
+   } }),
   }
 
   const data = { exercises, prs, workouts, goals, user }

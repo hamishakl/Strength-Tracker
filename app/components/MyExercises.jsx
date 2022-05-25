@@ -28,7 +28,7 @@ export default function MyExercise({ exercises }) {
             <div className={'transfer'} key={exercise.id}>
               <dl className={'transfer-details'}>
                 <div>
-                  <Link to={`/dashboard/${exercise.id}`}>{exercise.title}</Link>
+                  <Link to={`/dashboard/exercises/${exercise.id}`}>{exercise.title}</Link>
                 </div>
                 <div>
                   <dt>{oneRm === null ? 'No PR' : oneRm + 'kg'}</dt>

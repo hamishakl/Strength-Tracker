@@ -59,6 +59,7 @@ export const loader = async ({ request }) => {
       orderBy: { createdAt: 'desc' },
     }),
   }
+
   const workouts = {
     workouts: await db.workout.findMany({
       where: {
@@ -66,29 +67,29 @@ export const loader = async ({ request }) => {
           equals: `${user.id}`,
         },
       },
-      select: {
-        date: true,
+      include: {
         volume: {
-          include: {
+          select: {
+
+            date: true,
             exerciseId: true,
             weight: true,
             reps: true,
             sets: true,
             workoutId: true,
             id: true,
-    
             Exercise: {
               select: {
                 id: true,
                 title: true,
               },
             },
-
+          },
         },
       },
       orderBy: { date: 'desc' },
       take: 6,
-   } }),
+    }),
   }
 
   const data = { exercises, prs, workouts, goals, user }

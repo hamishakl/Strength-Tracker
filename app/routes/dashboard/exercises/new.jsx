@@ -8,12 +8,6 @@ function validateTitle(title) {
   }
 }
 
-function validateBody(body) {
-  if (typeof body !== 'string') {
-    return 'Body should be atleast 2 characters long'
-  }
-}
-
 function badRequest(data) {
   return json(data, { status: 400 })
 }
@@ -39,12 +33,11 @@ export const action = async ({ request }) => {
     data: { ...fields, userId: user.id },
   })
 
-  return redirect(`/dashboard/${exercise.id}`)
+  return redirect(`/dashboard/exercises/${exercise.id}`)
 }
 
 function NewExercise() {
   const actionData = useActionData()
-  const exerciseList = useLoaderData()
 
   return (
     <>

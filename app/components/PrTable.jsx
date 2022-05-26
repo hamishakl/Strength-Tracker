@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { OneRmEstimate } from '../routes/dashboard/$exerciseId'
+import { OneRmEstimate } from '../routes/dashboard/exercises/$exerciseId'
 
 export default function ({ prs }) {
   const dateConvertor = (prDate) => {

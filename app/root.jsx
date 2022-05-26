@@ -81,31 +81,28 @@ function Layout({ children }) {
                   <i className={'ph-browsers'}></i>
                   <span>Dashboard</span>
                 </Link>
-                <Link to=''>
+                <Link to='/dashboard/prs'>
                   <i className={'ph-check-square'}></i>
                   <span>Personal Records</span>
                 </Link>
-                <Link to=''>
+                <Link to='dashboard/workouts'>
                   <i className={'ph-swap'}></i>
                   <span>Workouts</span>
                 </Link>
-                <Link to=''>
+                <Link to='/dashboard/exercises'>
                   <i className={'ph-file-text'}></i>
                   <span>Exercises</span>
                 </Link>
-                <Link to=''>
-                  <i className={'ph-globe'}></i>
-                  <span>User</span>
+                <Link to='/dashboard/goals'>
+                  <i className={'ph-file-text'}></i>
+                  <span>Goals</span>
                 </Link>
-                <Link to=''>
-                  <i className={'ph-clipboard-text'}></i>
-                  <span>Exchange</span>
+                <Link to={`/dashboard/${user.id}/profile`}>
+                  <i className={'ph-globe'}></i>
+                  <span>Account Settings</span>
                 </Link>
               </nav>
               <footer className={'footer'}>
-                <button className={'user-profile'}>
-                  <Link to={`/dashboard/${user.id}/profile`}>{user.name}</Link>
-                </button>
                 <button>
                   <form action='/auth/logout' method='POST'>
                     <button className="btn" type="submit">

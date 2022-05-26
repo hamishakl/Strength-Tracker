@@ -19,7 +19,7 @@ model User {
   Volume       Volume[]
   Workout      Workout[]
   Goals        Goals[]
-  picture      Int      @default(1)
+  picture      Int        @default(1)
 }
 
 model Exercise {
@@ -49,7 +49,7 @@ model Goals {
   exerciseId          String
   Exercise            Exercise  @relation(fields: [exerciseId], references: [id])
   achievementDate     DateTime?
-  achieved            Boolean?
+  achieved            Boolean   @default(false)
 }
 
 model Pr {

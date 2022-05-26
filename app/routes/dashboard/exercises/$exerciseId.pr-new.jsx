@@ -4,13 +4,13 @@ import { getUser } from '~/utils/session.server'
 
 function validateWeight(weight) {
   if (typeof weight !== 'number') {
-    return 'weight should be atleast 2 characters long'
+    return 'weight should be a number'
   }
 }
 
 function validateReps(reps) {
   if (typeof reps !== 'number') {
-    return 'reps should be atleast 2 characters long'
+    return 'reps should be a number'
   }
 }
 

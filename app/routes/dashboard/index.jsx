@@ -119,15 +119,15 @@ function ExerciseItems() {
         </div>
       </header>
       <div className=''>
-        <Navbar data={['My Goals', 'new-goal', 'all-goals']} />
+        <Navbar data={['My Goals', 'goals/new', 'goals']} />
         <MyGoals goals={data.goals['goals']} />
       </div>
       <div className={''}>
-        <Navbar data={['My Exercises', 'new-exercise', 'all-exercises']} />
+        <Navbar data={['My Exercises', 'exercises/new', 'exercises']} />
         <MyExercise exercises={data.exercises['exercises']} />
       </div>
       <div className=''>
-        <Navbar data={['My Workouts', 'new-workout', 'all-workouts']} />
+        <Navbar data={['My Workouts', 'workouts/new', 'workouts']} />
         <MyWorkouts data={workoutData} />
       </div>
     </>

@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "remix"
+import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server"
 import { getUser } from "~/utils/session.server"
 import MyExercise from '../../../components/MyExercises'

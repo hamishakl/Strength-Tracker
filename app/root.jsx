@@ -1,4 +1,4 @@
-import { Outlet, LiveReload, Link, Links, useLoaderData, Scripts } from 'remix'
+import { Link, Links, LiveReload, Outlet, Scripts, useLoaderData } from "@remix-run/react";
 import { getUser } from './utils/session.server'
 import cssSheet from './styles/app.css'
 import HomepageFooter from './components/ui/HomepageFooter'

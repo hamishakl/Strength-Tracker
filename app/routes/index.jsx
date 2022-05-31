@@ -1,4 +1,5 @@
-import { redirect, useLoaderData } from 'remix'
+import { redirect } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { getUser } from '../utils/session.server'
 
 import heroImg from '../../public/images/hero-img.jpeg'

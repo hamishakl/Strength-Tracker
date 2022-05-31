@@ -14,12 +14,6 @@ function validateReps(reps) {
   }
 }
 
-function validateReps(sets) {
-  if (typeof sets !== 'number') {
-    return 'reps should be atleast 2 characters long'
-  }
-}
-
 function badRequest(data) {
   return json(data, { status: 400 })
 }

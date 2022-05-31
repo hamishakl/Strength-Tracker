@@ -1,4 +1,4 @@
-import { useLoaderData } from "remix"
+import { Link, useLoaderData } from "remix"
 import { db } from "~/utils/db.server"
 import { getUser } from "~/utils/session.server"
 
@@ -76,6 +76,7 @@ export default function index() {
     <>
       <div>
         <h1>My Personal Records</h1>
+        <Link to={'/dashboard/prs/new'}>New PR</Link>
         {prArray.map((pr)=> {
           // console.log(pr)
           return(

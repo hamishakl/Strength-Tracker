@@ -3,8 +3,6 @@ import MyGoals from "~/components/MyGoals";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 import NewGoal from "./newGoal";
-import Navbar from '~/components/ui/PagesNavbar'
-
 
 export const loader = async ({ request }) => {
   const user = await getUser(request);
@@ -45,7 +43,7 @@ export default function index() {
   return (
     <>
       <div>
-      <Navbar data={['My Goals', 'goals/new', 'Goal']} />
+        <h1>My goals</h1>
         <MyGoals data={notAchieved} />
         {achievedArr.length != 0 ? (
           <>

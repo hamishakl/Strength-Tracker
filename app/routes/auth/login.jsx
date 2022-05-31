@@ -1,4 +1,5 @@
-import { useActionData, json, redirect } from 'remix'
+import { json, redirect } from "@remix-run/node";
+import { useActionData } from "@remix-run/react";
 import { login, register, createUserSession } from '~/utils/session.server'
 
 import cssSheet from '~/styles/app.css'

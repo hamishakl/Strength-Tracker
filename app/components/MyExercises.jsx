@@ -1,4 +1,4 @@
-import { Link } from "remix"
+import { Link } from "@remix-run/react";
 
 export const OneRmEstimate = (weight, reps) => {
   const unRounded1RM = weight * reps * 0.0333 + weight

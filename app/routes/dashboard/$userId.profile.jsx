@@ -1,5 +1,6 @@
 import React from "react";
-import { useLoaderData, json, useActionData } from "remix";
+import { json } from "@remix-run/node";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import { getUser } from "~/utils/session.server";
 import { useState } from "react";
 import { db } from "~/utils/db.server";

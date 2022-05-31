@@ -2,6 +2,7 @@ import { Link, useLoaderData } from "remix"
 import { db } from "~/utils/db.server"
 import { getUser } from "~/utils/session.server"
 import MyExercise from '../../../components/MyExercises'
+import Navbar from '~/components/ui/PagesNavbar'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -34,7 +35,7 @@ export default function index() {
   console.log(data)
   return (
     <>
-      <h1>My exercises</h1>
+      <Navbar data={['My Exercises', 'exercises/new', 'Exercise']} />
       <MyExercise exercises={data['exercises']} />
     </>
   )

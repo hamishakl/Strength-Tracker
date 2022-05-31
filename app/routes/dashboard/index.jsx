@@ -4,7 +4,7 @@ import MyExercise from '../../components/MyExercises'
 
 import { getUser } from '~/utils/session.server'
 import MyWorkouts from '~/components/MyWorkouts'
-import MyGoals from '~/components/MyGoals'
+// import MyGoals from '~/components/MyGoals'
 
 import Navbar from '~/components/ui/DashboardContentNavbar'
 
@@ -120,7 +120,7 @@ function ExerciseItems() {
       </header>
       <div className=''>
         <Navbar data={['My Goals', 'goals/new', 'goals']} />
-        <MyGoals goals={data.goals['goals']} />
+        {/* <MyGoals goals={data.goals['goals']} /> */}
       </div>
       <div className={''}>
         <Navbar data={['My Exercises', 'exercises/new', 'exercises']} />

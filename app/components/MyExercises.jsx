@@ -6,9 +6,11 @@ export const OneRmEstimate = (weight, reps) => {
 }
 
 export default function MyExercise({ exercises }) {
+  console.log(exercises)
   return (
     <div className='exercise-list__div'>
       {exercises.map((exercise, index) => {
+        console.log(exercise)
         let dateSplit = exercise.updatedAt.split("")
         let dateStr = dateSplit.slice(0, 10)
         let newDate = new Date(`${dateStr.join("")}`)

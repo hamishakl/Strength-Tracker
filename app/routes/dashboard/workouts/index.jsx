@@ -125,7 +125,7 @@ export default function index() {
   })
   return (
     <>
-      <Navbar data={["My Workouts", "workouts/new", "Workout"]} />
+      <Navbar data={["My Workouts", "workouts/new", "New Workout"]} />
       <Masonry
         breakpointCols={3}
         className='my-masonry-grid'

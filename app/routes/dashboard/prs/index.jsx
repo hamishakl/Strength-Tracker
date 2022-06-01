@@ -68,7 +68,6 @@ export default function index() {
   return (
     <>
       <div>
-        <h1>My Personal Records</h1>
         <Navbar data={['My Personal Records', 'prs/new', 'New PR']} />
         {prArray.map((pr)=> {
           // console.log(pr)

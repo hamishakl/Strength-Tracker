@@ -1,9 +1,10 @@
-import { redirect } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
-import { getUser } from '~/utils/session.server'
-import { db } from '~/utils/db.server'
-import React, { useState } from 'react'
-import NewWorkoutForm from '~/components/NewWorkoutForm'
+import { redirect } from "@remix-run/node"
+import { Form, useActionData, useLoaderData } from "@remix-run/react"
+import { getUser } from "~/utils/session.server"
+import { db } from "~/utils/db.server"
+import React, { useState } from "react"
+import NewWorkoutForm from "~/components/NewWorkoutForm"
+import Navbar from "../../../components/ui/PagesNavbar"
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -18,7 +19,7 @@ const dataArray = (volumeBlock, exerciseList) => {
   let dataArr = []
   for (let i = 0; i < exerciseList.length + 1; i++) {
     volumeBlock[i] == []
-      ? console.log('empty array')
+      ? console.log("empty array")
       : dataArr.push(volumeBlock[i])
   }
   return dataArr
@@ -45,7 +46,7 @@ export const action = async ({ request }) => {
   const list = form._fields
   const keys = Object.keys(list)
   keys.forEach((key, index) => {
-    if (key.includes('exercise') === true) {
+    if (key.includes("exercise") === true) {
       exerciseList.push(`${key}: ${list[key]}`)
     }
   })
@@ -68,7 +69,7 @@ export const action = async ({ request }) => {
     })
   }
 
-  let date = new Date(form.get('date'))
+  let date = new Date(form.get("date"))
 
   let dataBlock = dataArray(volumeBlock, exerciseList)
   const removeEmptyArray = dataBlock.shift()
@@ -81,11 +82,11 @@ export const action = async ({ request }) => {
 
   for (let i = 0; i < exerciseList.length; i++) {
     volume.volume.create.push({
-      exerciseId: '',
-      weight: '',
-      reps: '',
-      sets: '',
-      userId: '',
+      exerciseId: "",
+      weight: "",
+      reps: "",
+      sets: "",
+      userId: "",
     })
     volume.volume.create[i].exerciseId = dataBlock[i].exerciseId
     volume.volume.create[i].weight = dataBlock[i].weight
@@ -121,12 +122,12 @@ export default function newWorkout() {
   const data = useLoaderData()
   const exercises = data.exercises
   let userDate = data.user.createdAt
-  let split = userDate.split('')
+  let split = userDate.split("")
   let arr = []
   for (let i = 0; i < 10; i++) {
     arr.push(split[i])
   }
-  const userJoinDate = arr.join('')
+  const userJoinDate = arr.join("")
   const current = new Date()
   const day = current.getDate()
   let date
@@ -140,7 +141,7 @@ export default function newWorkout() {
 
   return (
     <div className=''>
-      <h1>New workout</h1>
+      <Navbar data={["New Workout", "workouts", "Back"]} />
       <Form method='POST'>
         <div>
           <h5>Date of workout:</h5>
@@ -165,7 +166,7 @@ export default function newWorkout() {
             id='exercise'
             name='exercise-1'
           >
-            <option defaultValue={'none'}>Pick an exercise</option>
+            <option defaultValue={"none"}>Pick an exercise</option>
             {exercises.map((exercise) => (
               <>
                 <option key={exercise.id} value={exercise.id}>

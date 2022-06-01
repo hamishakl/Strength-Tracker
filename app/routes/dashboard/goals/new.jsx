@@ -1,6 +1,8 @@
-import { Form, useLoaderData, useActionData, redirect } from 'remix'
-import { getUser } from '~/utils/session.server'
-import { db } from '~/utils/db.server'
+import { redirect } from "@remix-run/node"
+import { Form, useActionData, useLoaderData } from "@remix-run/react"
+import { getUser } from "~/utils/session.server"
+import { db } from "~/utils/db.server"
+import Navbar from "../../../components/ui/PagesNavbar"
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -12,15 +14,15 @@ export const loader = async ({ request }) => {
 
 export const action = async ({ request }) => {
   const form = await request.formData()
-  const weightStr = form.get('weight')
-  const repsStr = form.get('reps')
-  const setsStr = form.get('sets')
-  const id = form.get('exercise')
+  const weightStr = form.get("weight")
+  const repsStr = form.get("reps")
+  const setsStr = form.get("sets")
+  const id = form.get("exercise")
   const weight = parseInt(weightStr)
   const user = await getUser(request)
   let reps = parseInt(repsStr)
   let sets = parseInt(setsStr)
-  const achievementGoalDateStr = form.get('date')
+  const achievementGoalDateStr = form.get("date")
   const achievementGoalDate = new Date(achievementGoalDateStr)
 
   if (repsStr === null) {
@@ -44,12 +46,12 @@ export default function newPr() {
   const actionData = useActionData()
 
   let userDate = data.user.createdAt
-  let split = userDate.split('')
+  let split = userDate.split("")
   let arr = []
   for (let i = 0; i < 10; i++) {
     arr.push(split[i])
   }
-  const userJoinDate = arr.join('')
+  const userJoinDate = arr.join("")
   const current = new Date()
   const day = current.getDate()
   let date
@@ -63,9 +65,7 @@ export default function newPr() {
 
   return (
     <>
-      <div className=''>
-        <h1>New goal</h1>
-      </div>
+      <Navbar data={["New Goal", "goals", "Back"]} />
       <div className=''>
         <Form method='POST'>
           <div className=''>

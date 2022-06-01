@@ -1,4 +1,5 @@
-import { Form, useLoaderData, useActionData, redirect } from "remix"
+import { redirect } from "@remix-run/node";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { getUser } from "~/utils/session.server"
 import { db } from "~/utils/db.server"
 

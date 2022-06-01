@@ -1,4 +1,4 @@
-import { useLoaderData } from "remix";
+import { useLoaderData } from "@remix-run/react";
 import MyGoals from "~/components/MyGoals";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";

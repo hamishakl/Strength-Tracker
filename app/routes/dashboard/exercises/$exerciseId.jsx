@@ -1,4 +1,5 @@
-import { Link, redirect, useLoaderData } from "remix";
+import { redirect } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
 import PrTable from "../../../components/PrTable";

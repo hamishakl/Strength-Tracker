@@ -6,9 +6,8 @@ export default function Navbar(data) {
         <h2 className=''>{data.data[0]}</h2>
         <div className='dashboard-section-navbar__links'>
           <Link to={`/dashboard/${data.data[1]}`} className=''>
-            <span>New</span>
+            <span>New {data.data[2]}</span>
           </Link>
-          <Link to={`/dashboard/${data.data[2]}`}>View all</Link>
         </div>
       </div>
   )

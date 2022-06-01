@@ -1,4 +1,4 @@
-import { useLoaderData } from "remix"
+import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server"
 import { getUser } from "~/utils/session.server"
 
@@ -30,21 +30,12 @@ export const OneRmEstimate = (weight, reps) => {
   return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5
 }
 
-export function createGroups(arr, numGroups) {
-  const perGroup = Math.ceil(arr.length / numGroups);
-  return new Array(numGroups)
-    .fill('')
-    .map((_, i) => arr.slice(i * perGroup, (i + 1) * perGroup));
-}
-
 export default function index() {
   const data = useLoaderData()
-  const user = data.user
   const prData = data.prs
-  const exercises = data.exercises
   let prTempArray = []
 
-  var prs = prData.filter(pr => pr['Exercise'] != null)
+  let prs = prData.filter(pr => pr['Exercise'] != null)
 
   prs.map((pr, i) => {
     prTempArray.push(pr["Exercise"].title)
@@ -117,4 +108,4 @@ export default function index() {
   )
 }
 
-//got the data.. sort by exercise.. chuck into individual array.. map over that array and output the weight into a table
+//get the data.. sort by exercise.. chuck into individual array.. map over that array and output the weight into a table

@@ -31,7 +31,11 @@ export const loader = async ({ request }) => {
 }
 
 export default function index() {
+  const data = useLoaderData()
   return (
-    <div>All exercises</div>
+    <>
+      <Navbar data={['My Exercises', 'exercises/new', 'Exercise']} />
+      <MyExercise exercises={data['exercises']} />
+    </>
   )
 }

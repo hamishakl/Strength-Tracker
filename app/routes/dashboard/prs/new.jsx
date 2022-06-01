@@ -35,7 +35,6 @@ export const action = async ({ request, params }) => {
   const id = form.get("exercise");
   const weight = parseInt(weightStr);
   const reps = parseInt(repsStr);
-  console.log(id)
   const user = await getUser(request);
 
   const fields = { weight, reps };

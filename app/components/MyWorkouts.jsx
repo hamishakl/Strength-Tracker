@@ -14,7 +14,6 @@ export default function MyWorkouts({ data }) {
     }
     workoutArray.push(obj)
     workout.volume.map((vol) => {
-      //  console.log(obj.volume)
       if (obj.volume[0] != vol.Exercise.title) {
         let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
         obj.volume.push(vol.Exercise.title)

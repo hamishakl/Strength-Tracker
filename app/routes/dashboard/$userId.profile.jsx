@@ -85,8 +85,6 @@ export const action = async ({ request, params }) => {
 
     const user = await getUser(request);
     const email = user.email
-    console.log(user)
-    console.log(email)
     const oldPassword = form.get("old-password")
     const newPassword = form.get("new-password")
     const confirmNewPassword = form.get("confirm-new-password")
@@ -134,7 +132,6 @@ export default function register() {
   let [count, setPage] = useState(0);
 
   const user = useLoaderData();
-  console.log(user);
   return (
     <div>
       {count === 1 && (
@@ -147,7 +144,6 @@ export default function register() {
                 name="name"
                 type="text"
                 placeholder={user.name}
-                onBlur={console.log("blurrr")}
               />
               <button type="submit" className="">
                 Save
@@ -213,7 +209,6 @@ export default function register() {
                 name="email"
                 type="text"
                 placeholder={user.email}
-                onBlur={console.log("blurrremail")}
               />
               <div className="error">
                 {actionData?.fieldErrors?.email &&

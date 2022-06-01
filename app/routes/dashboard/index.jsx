@@ -29,7 +29,7 @@ export const loader = async ({ request }) => {
         },
       },
       orderBy: { updatedAt: 'desc' },
-      take: 6,
+      take: 4,
     }),
   }
   const prs = {

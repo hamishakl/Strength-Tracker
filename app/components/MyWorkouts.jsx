@@ -1,50 +1,89 @@
+import Masonry from "react-masonry-css"
+
 export default function MyWorkouts({ data }) {
-  return (
-    <div className="workout-cards__wrapper">
-      {data.map((workouts, index) => {
-        let dateStr = new Date(`${workouts.date}`);
-        let dateArr = dateStr.toDateString().split(" ");
-        let date = dateArr[2] + " " + dateArr[1] + " " + dateArr[3];
-        return (
-          <div className="workout-card" key={index}>
-            <h2>{date}</h2>
-            {workouts.volume.map((workout, index, arr) => {
-              index++;
-              let previousArrTitle = arr[index - 1];
-              let arrTitle = arr[index];
+  const workoutData = data
+
+  let workoutArray = []
+  let workoutMasonryArray = []
+  let arr = []
+
+  workoutData.map((workout, i) => {
+    var obj = {
+      date: workout.date,
+      volume: [],
+    }
+    workoutArray.push(obj)
+    workout.volume.map((vol) => {
+      //  console.log(obj.volume)
+      if (obj.volume[0] != vol.Exercise.title) {
+        let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
+        obj.volume.push(vol.Exercise.title)
+        obj.volume.push(arr)
+      } else {
+        let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
+        obj.volume.push(arr)
+      }
+    })
+  })
+
+  workoutArray.map((workout) => {
+    arr = [
+      <div>
+        <h2>{workout.date}</h2>
+        <table>
+          {workout.volume.map((vol, i) => {
+            if (typeof vol != "object") {
               return (
-                <div key={index}>
-                  {arrTitle != undefined && previousArrTitle != undefined ? (
-                    arrTitle["Exercise"].title ===
-                    previousArrTitle["Exercise"].title ? (
-                      <>
-                        <h4>{arrTitle["Exercise"].title}</h4>
-                        <p>
-                          {previousArrTitle.weight}kg for{" "}
-                          {previousArrTitle.reps} reps for{" "}
-                          {previousArrTitle.sets} sets.
-                        </p>
-                        <p>
-                          {arrTitle.weight}kg for {arrTitle.reps} reps for{" "}
-                          {arrTitle.sets} sets.
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        <h4>{workout["Exercise"].title}</h4>
-                        <p>
-                          {workout.weight}kg for {workout.reps} reps for{" "}
-                          {workout.sets} sets.
-                        </p>
-                      </>
-                    )
-                  ) : null}
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
-    </div>
-  );
+                <tr>
+                  {vol}
+                  <td>
+                    <th>
+                      <h3>weight</h3>
+                    </th>
+                  </td>
+                  <td>
+                    <th>
+                      <h3>reps</h3>
+                    </th>
+                  </td>
+                  <td>
+                    <th>
+                      <h3>sets</h3>
+                    </th>
+                  </td>
+                </tr>
+              )
+            } else {
+              return (
+                <tr>
+                  <td>
+                    <p></p>
+                  </td>
+                  <td>
+                    <p>{vol.weight}</p>
+                  </td>
+                  <td>
+                    <p>{vol.reps}</p>
+                  </td>
+                  <td>
+                    <p>{vol.sets}</p>
+                  </td>
+                </tr>
+              )
+            }
+          })}
+        </table>
+      </div>,
+    ]
+    workoutMasonryArray.push(arr)
+  })
+  return (
+    <Masonry
+      breakpointCols={3}
+      className='my-masonry-grid'
+      columnClassName='my-masonry-grid_column'
+    >
+      {workoutMasonryArray}
+    </Masonry>
+  )
 }

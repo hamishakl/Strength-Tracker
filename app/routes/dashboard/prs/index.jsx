@@ -1,6 +1,8 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server"
 import { getUser } from "~/utils/session.server"
+import Navbar from '~/components/ui/PagesNavbar'
+
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -67,6 +69,7 @@ export default function index() {
     <>
       <div>
         <h1>My Personal Records</h1>
+        <Navbar data={['My Personal Records', 'prs/new', 'PR']} />
         {prArray.map((pr)=> {
           // console.log(pr)
           return(

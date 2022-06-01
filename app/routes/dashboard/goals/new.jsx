@@ -1,7 +1,8 @@
-import { redirect } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { redirect } from "@remix-run/node"
+import { Form, useActionData, useLoaderData } from "@remix-run/react"
 import { getUser } from "~/utils/session.server"
 import { db } from "~/utils/db.server"
+import Navbar from "../../../components/ui/PagesNavbar"
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -40,10 +41,11 @@ export const action = async ({ request }) => {
   return redirect(`/dashboard`)
 }
 
-export default function NewGoal(data) {
+export default function newPr() {
+  const data = useLoaderData()
   const actionData = useActionData()
 
-  let userDate = data.data[0].createdAt
+  let userDate = data.user.createdAt
   let split = userDate.split("")
   let arr = []
   for (let i = 0; i < 10; i++) {
@@ -63,9 +65,7 @@ export default function NewGoal(data) {
 
   return (
     <>
-      <div className=''>
-        <h1>New goal</h1>
-      </div>
+      <Navbar data={["New Goal", "goals", "Back"]} />
       <div className=''>
         <Form method='POST'>
           <div className=''>
@@ -82,7 +82,7 @@ export default function NewGoal(data) {
               <option selected disabled>
                 Pick an exercise
               </option>
-              {data.data[1].map((exercise) => (
+              {data.exercises.map((exercise) => (
                 <option key={exercise.id} value={exercise.id}>
                   {exercise.title}
                 </option>

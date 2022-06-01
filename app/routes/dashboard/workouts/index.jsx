@@ -1,7 +1,6 @@
 import React from "react"
 import Navbar from "~/components/ui/PagesNavbar"
 import Masonry from "react-masonry-css"
-import MyWorkouts from "../../../components/MyWorkouts"
 
 import { Link, useLoaderData } from "@remix-run/react"
 import { db } from "~/utils/db.server"
@@ -81,9 +80,8 @@ export default function index() {
           {workout.volume.map((vol, i) => {
             if (typeof vol != "object") {
               return (
-                
                 <tr>
-          {vol}
+                  {vol}
                   <td>
                     <th>
                       <h3>weight</h3>
@@ -121,17 +119,10 @@ export default function index() {
             }
           })}
         </table>
-
-        {/* {workout.volume.map((vol) => {
-      // console.log(vol)
-    })} */}
       </div>,
     ]
     workoutMasonryArray.push(arr)
   })
-
-  console.log(arr)
-
   return (
     <>
       <Navbar data={["My Workouts", "workouts/new", "Workout"]} />

@@ -34,7 +34,7 @@ export default function index() {
   const data = useLoaderData()
   return (
     <>
-      <Navbar data={['My Exercises', 'exercises/new', 'Exercise']} />
+      <Navbar data={['My Exercises', 'exercises/new', 'New Exercise']} />
       <MyExercise exercises={data['exercises']} />
     </>
   )

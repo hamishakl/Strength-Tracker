@@ -2,6 +2,7 @@ import { redirect } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { getUser } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
+import Navbar from '~/components/ui/PagesNavbar'
 
 function validateWeight(weight) {
   if (typeof weight !== "number") {
@@ -62,7 +63,7 @@ export default function newPr() {
 
   return (
     <div className="">
-      <h1>New PR</h1>
+      <Navbar data={['New PR', 'prs', 'Back']} />
       <Form method="POST">
         <div className="">
           <label htmlFor="exercise" className="">

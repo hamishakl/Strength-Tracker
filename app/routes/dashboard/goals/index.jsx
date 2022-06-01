@@ -30,7 +30,6 @@ export default function index() {
   const user = data.user
   const goals = data.goals
   const exercises = data.exercises
-    // console.log(data.user)
   const newGoalData = [user,exercises]
 
   let achievedArr = [];

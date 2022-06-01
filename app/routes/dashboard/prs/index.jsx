@@ -70,7 +70,6 @@ export default function index() {
       <div>
         <Navbar data={['My Personal Records', 'prs/new', 'New PR']} />
         {prArray.map((pr)=> {
-          // console.log(pr)
           return(
             <>
               <h5>{pr[0]}</h5>
@@ -90,7 +89,6 @@ export default function index() {
                   </td>
                 </tr>
                 {pr.map((individualPrs) => {
-                  console.log(individualPrs)
                   return(
 
                     <tr>

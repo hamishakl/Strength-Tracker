@@ -31,12 +31,7 @@ export const loader = async ({ request }) => {
 }
 
 export default function index() {
-  const data = useLoaderData()
-  console.log(data)
   return (
-    <>
-      <Navbar data={['My Exercises', 'exercises/new', 'Exercise']} />
-      <MyExercise exercises={data['exercises']} />
-    </>
+    <div>All exercises</div>
   )
 }

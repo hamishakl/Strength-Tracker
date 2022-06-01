@@ -4,7 +4,7 @@ import MyExercise from '../../components/MyExercises'
 
 import { getUser } from '~/utils/session.server'
 import MyWorkouts from '~/components/MyWorkouts'
-// import MyGoals from '~/components/MyGoals'
+import MyGoals from '~/components/MyGoals'
 
 import Navbar from '~/components/ui/DashboardContentNavbar'
 
@@ -42,23 +42,16 @@ export const loader = async ({ request }) => {
       orderBy: { createdAt: 'desc' },
     }),
   }
-  const goals = {
-    goals: await db.goals.findMany({
-      where: {
-        userId: {
-          equals: `${user.id}`,
+  const goals = await db.goals.findMany({
+    where: { userId: user.id },
+    include: {
+      Exercise: {
+        select: {
+          title: true,
         },
       },
-      include: {
-        Exercise: {
-          select: {
-            title: true,
-          },
-        },
-      },
-      orderBy: { createdAt: 'desc' },
-    }),
-  }
+    },
+  });
 
   const workouts = {
     workouts: await db.workout.findMany({
@@ -100,6 +93,8 @@ export const loader = async ({ request }) => {
 function ExerciseItems() {
   const data = useLoaderData()
   const workoutData = data.workouts['workouts']
+  const notAchieved = [data.goals, false];
+  console.log(data.goals)
   return (
     <>
       <header className={'app-header'}>
@@ -120,7 +115,7 @@ function ExerciseItems() {
       </header>
       <div className=''>
         <Navbar data={['My Goals', 'goals/new', 'goals']} />
-        {/* <MyGoals goals={data.goals['goals']} /> */}
+        <MyGoals data={notAchieved} />
       </div>
       <div className={''}>
         <Navbar data={['My Exercises', 'exercises/new', 'exercises']} />

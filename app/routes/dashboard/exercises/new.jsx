@@ -1,11 +1,12 @@
-import { json, redirect } from "@remix-run/node";
-import { Link, useActionData, useLoaderData } from "@remix-run/react";
-import { db } from '~/utils/db.server'
-import { getUser } from '~/utils/session.server'
+import { json, redirect } from "@remix-run/node"
+import { Link, useActionData, useLoaderData } from "@remix-run/react"
+import { db } from "~/utils/db.server"
+import { getUser } from "~/utils/session.server"
+import Navbar from "../../../components/ui/PagesNavbar"
 
 function validateTitle(title) {
-  if (typeof title !== 'string' || title.length < 2) {
-    return 'Title should be atleast 2 characters long'
+  if (typeof title !== "string" || title.length < 2) {
+    return "Title should be atleast 2 characters long"
   }
 }
 
@@ -15,7 +16,7 @@ function badRequest(data) {
 
 export const action = async ({ request }) => {
   const form = await request.formData()
-  const title = form.get('title')
+  const title = form.get("title")
 
   const user = await getUser(request)
 
@@ -43,7 +44,7 @@ function NewExercise() {
   return (
     <>
       <div className='page-header'>
-        <h1>New exercise</h1>
+        <Navbar data={["New Exercise", "exercises", "Back"]} />
         <Link to='/dashboard' className=''>
           Back
         </Link>

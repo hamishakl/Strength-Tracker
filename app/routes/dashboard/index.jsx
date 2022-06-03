@@ -8,6 +8,7 @@ import MyGoals from '~/components/MyGoals'
 
 import Navbar from '~/components/ui/DashboardContentNavbar'
 
+
 export function getSunday(d) {
   d = new Date(d)
   let day = d.getDay(),
@@ -24,9 +25,6 @@ export function getEndOfWeek(d, week) {
 
 export const loader = async ({ request }) => {
   let today = new Date()
-
-  console.log(getSunday(today))
-  console.log(getEndOfWeek(today, 7))
 
   const user = await getUser(request)
 
@@ -115,7 +113,6 @@ function ExerciseItems() {
   const data = useLoaderData()
   const workoutData = data.workouts['workouts']
   const notAchieved = [data.goals, false]
-  console.log(workoutData)
 
   return (
     <>

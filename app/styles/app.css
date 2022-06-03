@@ -830,7 +830,7 @@ dd {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 70%;
+  width: 100%;
   align-items: center;
   border-bottom: #ffffff solid 1px;
   margin-bottom: 2em;
@@ -880,6 +880,11 @@ dd {
 
 /* Style your items */
 .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
-  background: grey;
   margin-bottom: 30px;
+  border: solid white 1px;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }

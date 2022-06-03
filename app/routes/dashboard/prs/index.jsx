@@ -1,8 +1,8 @@
-import { Link, useLoaderData } from "@remix-run/react";
-import { db } from "~/utils/db.server"
-import { getUser } from "~/utils/session.server"
+import { Link, useLoaderData } from '@remix-run/react'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
 import Navbar from '~/components/ui/PagesNavbar'
-
+import { dateStr } from '../../../components/MyGoals'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -16,7 +16,7 @@ export const loader = async ({ request }) => {
       },
     },
     orderBy: {
-      exerciseId: "desc",
+      exerciseId: 'desc',
     },
   })
   const exercises = await db.exercise.findMany({
@@ -37,19 +37,19 @@ export default function index() {
   const prData = data.prs
   let prTempArray = []
 
-  let prs = prData.filter(pr => pr['Exercise'] != null)
+  let prs = prData.filter((pr) => pr['Exercise'] != null)
 
   prs.map((pr, i) => {
-    prTempArray.push(pr["Exercise"].title)
+    prTempArray.push(pr['Exercise'].title)
   })
-  
+
   let prArray = [...new Set(prTempArray)]
-  
+
   for (let i = 0; i < prArray.length; i++) {
     let name = prArray[i]
     prArray[i] = [name]
   }
-  
+
   prs.map((pr) => {
     for (let i = 0; i < prArray.length; i++) {
       if (pr['Exercise'].title === prArray[i][0]) {
@@ -57,11 +57,10 @@ export default function index() {
           date: pr.createdAt,
           weight: pr.weight,
           reps: pr.reps,
-          oneRm: OneRmEstimate(pr.weight, pr.reps)
+          oneRm: OneRmEstimate(pr.weight, pr.reps),
         }
         prArray[i].push(obj)
       }
-      
     }
   })
 
@@ -69,8 +68,8 @@ export default function index() {
     <>
       <div>
         <Navbar data={['My Personal Records', 'prs/new', 'New PR']} />
-        {prArray.map((pr)=> {
-          return(
+        {prArray.map((pr) => {
+          return (
             <>
               <h5>{pr[0]}</h5>
               <table>
@@ -89,15 +88,18 @@ export default function index() {
                   </td>
                 </tr>
                 {pr.map((individualPrs) => {
-                  return(
-
+                  return (
                     <tr>
-                    <td>{individualPrs.date}</td>
-                    <td>{individualPrs.weight}</td>
-                    <td>{individualPrs.reps}</td>
-                    <td>{individualPrs.oneRm}</td>
-                  </tr>
-                    )
+                      <td>
+                        {individualPrs.date === undefined
+                          ? null
+                          : dateStr(new String(individualPrs.date))}
+                      </td>
+                      <td>{individualPrs.weight}</td>
+                      <td>{individualPrs.reps}</td>
+                      <td>{individualPrs.oneRm}</td>
+                    </tr>
+                  )
                 })}
               </table>
             </>

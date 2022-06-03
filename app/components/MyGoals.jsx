@@ -1,4 +1,14 @@
-import { Link } from "@remix-run/react";
+import { Link } from '@remix-run/react'
+
+export const dateStr = (a) => {
+  let dateSplit = a.split('')
+  let dateStr = dateSplit.slice(0, 10)
+  let newDate = new Date(`${dateStr.join('')}`)
+  let dateArr = newDate.toDateString().split(' ')
+  // console.log(dateArr[3] - 2000)
+  let date = dateArr[2] + ' ' + dateArr[1] + ' ' + (dateArr[3]-2000)
+  return date
+}
 
 export default function MyGoals(data) {
   const goals = data.data[0]
@@ -7,12 +17,7 @@ export default function MyGoals(data) {
     <>
       <ul>
         {goals.map((goal) => {
-          let dateSplit = goal.achievementGoalDate.split("")
-          let dateStr = dateSplit.slice(0, 10)
-          let newDate = new Date(`${dateStr.join("")}`)
-          let dateArr = newDate.toDateString().split(" ")
-          let date = dateArr[2] + " " + dateArr[1] + " " + dateArr[3]
-          const weight = goal.weight
+          const date = dateStr(goal.achievementGoalDate)
           const reps = goal.reps
           const sets = goal.sets
           if (achieved === false && goal.achieved === false) {
@@ -22,12 +27,12 @@ export default function MyGoals(data) {
                   <p>
                     <Link to={`exercises/${goal.exerciseId}`}>
                       {goal.Exercise.title}
-                    </Link>{" "}
-                    <b>{goal.weight}kg</b> for{" "}
+                    </Link>{' '}
+                    <b>{goal.weight}kg</b> for{' '}
                     <b>
                       {reps < 2 ? ` 1 rep` : ` ${reps} reps`}
                       {sets < 2 ? `` : ` x ${sets} sets`}
-                    </b>{" "}
+                    </b>{' '}
                     by {date}
                   </p>
                 </li>
@@ -40,12 +45,12 @@ export default function MyGoals(data) {
                   <p>
                     <Link to={`exercises/${goal.exerciseId}`}>
                       {goal.Exercise.title}
-                    </Link>{" "}
-                    <b>{goal.weight}kg</b> for{" "}
+                    </Link>{' '}
+                    <b>{goal.weight}kg</b> for{' '}
                     <b>
                       {reps < 2 ? ` 1 rep` : ` ${reps} reps`}
                       {sets < 2 ? `` : ` x ${sets} sets`}
-                    </b>{" "}
+                    </b>{' '}
                     by {date}
                   </p>
                 </li>

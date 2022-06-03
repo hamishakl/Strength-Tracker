@@ -1,15 +1,15 @@
-import Masonry from "react-masonry-css"
+import Masonry from 'react-masonry-css'
+import { wordDate } from '../routes/dashboard/workouts'
 
 export default function MyWorkouts({ data }) {
   const workoutData = data
   if (data === undefined) {
     return null
   } else {
-
     let workoutArray = []
     let workoutMasonryArray = []
     let arr = []
-    
+
     workoutData.map((workout, i) => {
       var obj = {
         date: workout.date,
@@ -27,68 +27,67 @@ export default function MyWorkouts({ data }) {
         }
       })
     })
-    
+
     workoutArray.map((workout) => {
       arr = [
         <div>
-        <h2>{workout.date}</h2>
-        <table>
-          {workout.volume.map((vol, i) => {
-            if (typeof vol != "object") {
-              return (
-                <tr>
-                  {vol}
-                  <td>
-                    <th>
-                      <h3>weight</h3>
-                    </th>
-                  </td>
-                  <td>
-                    <th>
-                      <h3>reps</h3>
-                    </th>
-                  </td>
-                  <td>
-                    <th>
-                      <h3>sets</h3>
-                    </th>
-                  </td>
-                </tr>
-              )
-            } else {
-              return (
-                <tr>
-                  <td>
-                    <p></p>
-                  </td>
-                  <td>
-                    <p>{vol.weight}</p>
-                  </td>
-                  <td>
-                    <p>{vol.reps}</p>
-                  </td>
-                  <td>
-                    <p>{vol.sets}</p>
-                  </td>
-                </tr>
-              )
-            }
-          })}
-        </table>
-      </div>,
-    ]
-    workoutMasonryArray.push(arr)
-  })
+          <h2>{wordDate(workout.date)}</h2>
+          <table>
+            {workout.volume.map((vol, i) => {
+              if (typeof vol != 'object') {
+                return (
+                  <tr>
+                    {vol}
+                    <td>
+                      <th>
+                        <h3>weight</h3>
+                      </th>
+                    </td>
+                    <td>
+                      <th>
+                        <h3>reps</h3>
+                      </th>
+                    </td>
+                    <td>
+                      <th>
+                        <h3>sets</h3>
+                      </th>
+                    </td>
+                  </tr>
+                )
+              } else {
+                return (
+                  <tr>
+                    <td>
+                      <p></p>
+                    </td>
+                    <td>
+                      <p>{vol.weight}</p>
+                    </td>
+                    <td>
+                      <p>{vol.reps}</p>
+                    </td>
+                    <td>
+                      <p>{vol.sets}</p>
+                    </td>
+                  </tr>
+                )
+              }
+            })}
+          </table>
+        </div>,
+      ]
+      workoutMasonryArray.push(arr)
+    })
 
-  return (
-    <Masonry
-    breakpointCols={3}
-    className='my-masonry-grid'
-    columnClassName='my-masonry-grid_column'
-    >
-      {workoutMasonryArray}
-    </Masonry>
-  
-  )
-}
+    return (
+      <Masonry
+        breakpointCols={3}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {workoutMasonryArray}
+      </Masonry>
+    )
+  }
 }

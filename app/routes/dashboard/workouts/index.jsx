@@ -66,7 +66,7 @@ export default function index() {
     weeksArray.push(newWeek);
   }
 
-  weeksArray.reverse()
+  weeksArray.reverse();
 
   return (
     <>
@@ -82,10 +82,14 @@ export default function index() {
         }
         return (
           <div>
-            <h4>{new String(week)}</h4>
-            <div>
-              <MyWorkouts data={workoutArray} />
-            </div>
+            {workoutArray.length === 0 ? (
+              null
+            ) : (
+              <>
+                <h4>{new String(startOfWeek)} - {new String(endOfWeek)}</h4>
+                <MyWorkouts data={workoutArray} />
+              </>
+            )}
           </div>
         );
       })}

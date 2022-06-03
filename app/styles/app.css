@@ -904,3 +904,17 @@ dd {
   max-height: 200px;
   overflow-y:scroll;
 }
+
+.goal-pie-chart__div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 33%;
+  align-items: flex-start;
+  /* border: 1px solid white; */
+}
+
+.goal-pie-chart__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}

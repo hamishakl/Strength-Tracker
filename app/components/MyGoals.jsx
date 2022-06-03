@@ -5,8 +5,7 @@ export const dateStr = (a) => {
   let dateStr = dateSplit.slice(0, 10)
   let newDate = new Date(`${dateStr.join('')}`)
   let dateArr = newDate.toDateString().split(' ')
-  // console.log(dateArr[3] - 2000)
-  let date = dateArr[2] + ' ' + dateArr[1] + ' ' + (dateArr[3]-2000)
+  let date = dateArr[2] + ' ' + dateArr[1] + ' ' + (dateArr[3] - 2000)
   return date
 }
 

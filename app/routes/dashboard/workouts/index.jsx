@@ -45,6 +45,8 @@ export const loader = async ({ request }) => {
   return [workouts, user];
 };
 
+//test
+
 export function weeksBetween(d1, d2) {
   let weeks = Math.round((d2 - d1) / (7 * 24 * 60 * 60 * 1000));
   return weeks;

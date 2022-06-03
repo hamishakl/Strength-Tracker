@@ -899,3 +899,8 @@ dd {
   color: black;
   padding: 0.5em;
 }
+
+.pr-table {
+  max-height: 200px;
+  overflow-y:scroll;
+}

@@ -76,13 +76,14 @@ export default function index() {
   })
 
   return (
-      <div>
-        <Navbar data={['My Personal Records', 'prs/new', 'New PR']} />
-        
-        {prArray.map((pr) => {
-          return (
-            <>
-              <PrNavbar data={[pr[0]]} />
+    <div>
+      <Navbar data={['My Personal Records', 'prs/new', 'New PR']} />
+
+      {prArray.map((pr) => {
+        return (
+          <>
+            <PrNavbar data={[pr[0]]} />
+            <div className="pr-table">
               <table>
                 <tr>
                   <td>
@@ -113,9 +114,10 @@ export default function index() {
                   )
                 })}
               </table>
-            </>
-          )
-        })}
-      </div>
+            </div>
+          </>
+        )
+      })}
+    </div>
   )
 }

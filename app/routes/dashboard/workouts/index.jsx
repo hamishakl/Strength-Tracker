@@ -138,8 +138,11 @@ export default function index() {
         let workoutArray = []
         for (let i = 0; i < workouts.length; i++) {
           if (workouts[i].date > startOfWeek && workouts[i].date < endOfWeek) {
+            // console.log(workouts[i])
             workoutArray.push(workouts[i])
+            // console.log(workouts[i])
           }
+          // console.log(workoutArray)
         }
         return (
           <div>

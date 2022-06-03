@@ -2,11 +2,6 @@ import { Link, Links, LiveReload, Outlet, Scripts, useLoaderData } from "@remix-
 import { getUser } from './utils/session.server'
 import cssSheet from './styles/app.css'
 import HomepageFooter from './components/ui/HomepageFooter'
-// import UserCard from './components/UserCard'
-// import WorkoutIcon from '../public/images/navbar/gym.svg'
-// import PrIcon from '../public/images/navbar/medal.svg'
-// import GoalIcon from '../public/images/navbar/tick.svg'
-// import DashboardIcon from '../public/images/navbar/chart.svg'
 
 export const links = () => {
   return [

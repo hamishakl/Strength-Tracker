@@ -888,3 +888,33 @@ dd {
   justify-content: flex-start;
   align-items: center;
 }
+
+.workout-chart__div {
+  width: 100%;
+  height: 500px;
+}
+
+.custom-tooltip {
+  background-color: white;
+  color: black;
+  padding: 0.5em;
+}
+
+.pr-table {
+  max-height: 200px;
+  overflow-y:scroll;
+}
+
+.goal-pie-chart__div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 33%;
+  align-items: flex-start;
+  /* border: 1px solid white; */
+}
+
+.goal-pie-chart__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}

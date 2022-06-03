@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import Navbar from '~/components/ui/PagesNavbar'
 
 import { Link, useLoaderData } from '@remix-run/react'
@@ -9,6 +9,7 @@ import MyWorkouts from '../../../components/MyWorkouts'
 
 import { getSunday, getEndOfWeek } from '../index'
 import WorkoutNavbar from '../../../components/ui/WorkoutDateNav'
+import WorkoutChart from '../../../components/ui/WorkoutChart'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -84,7 +85,6 @@ export function wordDate(isoDate) {
   const day = date.getDate()
   const year = date.getFullYear()
   const month = date.getMonth()
-  console.log(month)
   const dateStr = nth(day) + ' ' + months[month]
   return dateStr
 }
@@ -105,17 +105,44 @@ export default function index() {
 
   weeksArray.reverse()
 
+  const chartData = []
+
+  {weeksArray.map((week) => {
+    let startOfWeek = getEndOfWeek(week, 0).toISOString()
+    let endOfWeek = getEndOfWeek(week, 6).toISOString()
+    let count = 0
+    for (let i = 0; i < workouts.length; i++) {
+      if (workouts[i].date > startOfWeek && workouts[i].date < endOfWeek) {
+        count++
+      }
+    }
+      let obj = {
+        date: wordDate(startOfWeek),
+        ['Workouts Per Week']: count
+      }
+      chartData.push(obj)
+  })}
+
+  chartData.reverse()
+
   return (
     <>
       <Navbar data={['My Workouts', 'workouts/new', 'New Workout']} />
+      <div className='workout-chart__div'>
+        <h3>Workouts per week</h3>
+      <WorkoutChart data={chartData} />
+      </div>
       {weeksArray.map((week) => {
         let startOfWeek = getEndOfWeek(week, 0).toISOString()
         let endOfWeek = getEndOfWeek(week, 6).toISOString()
         let workoutArray = []
         for (let i = 0; i < workouts.length; i++) {
           if (workouts[i].date > startOfWeek && workouts[i].date < endOfWeek) {
+            // console.log(workouts[i])
             workoutArray.push(workouts[i])
+            // console.log(workouts[i])
           }
+          // console.log(workoutArray)
         }
         return (
           <div>

@@ -57,7 +57,7 @@ export const action = async ({ request, params }) => {
     return redirect("/dashboard");
   }
   let data = form.get("_rename");
-  if (data != undefined) {
+  if (data != undefined || data !='' || data.length != 1) {
     const exercise = await db.exercise.findUnique({
       where: { id: params.exerciseId },
     });
@@ -70,7 +70,7 @@ export const action = async ({ request, params }) => {
     });
   }
 
-  return redirect(`/dashboard/${params.exerciseId}`);
+  return redirect(`/dashboard/exercises/${params.exerciseId}`);
 };
 
 export const OneRmEstimate = (weight, reps) => {

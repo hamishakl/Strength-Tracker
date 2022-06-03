@@ -53,7 +53,7 @@ export const action = async ({ request, params }) => {
     data: { ...fields, userId: user.id, exerciseId: id },
   });
 
-  return redirect(`/dashboard`);
+  return redirect(`../dashboard/exercises/${id}`);
 };
 
 export default function newPr() {

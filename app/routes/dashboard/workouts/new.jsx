@@ -1,10 +1,10 @@
-import { redirect } from "@remix-run/node"
-import { Form, useActionData, useLoaderData } from "@remix-run/react"
-import { getUser } from "~/utils/session.server"
-import { db } from "~/utils/db.server"
-import React, { useState } from "react"
-import NewWorkoutForm from "~/components/NewWorkoutForm"
-import Navbar from "../../../components/ui/PagesNavbar"
+import { redirect } from '@remix-run/node'
+import { Form, useActionData, useLoaderData } from '@remix-run/react'
+import { getUser } from '~/utils/session.server'
+import { db } from '~/utils/db.server'
+import React, { useState } from 'react'
+import NewWorkoutForm from '~/components/NewWorkoutForm'
+import Navbar from '../../../components/ui/PagesNavbar'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -19,7 +19,7 @@ const dataArray = (volumeBlock, exerciseList) => {
   let dataArr = []
   for (let i = 0; i < exerciseList.length + 1; i++) {
     volumeBlock[i] == []
-      ? console.log("empty array")
+      ? console.log('empty array')
       : dataArr.push(volumeBlock[i])
   }
   return dataArr
@@ -46,7 +46,7 @@ export const action = async ({ request }) => {
   const list = form._fields
   const keys = Object.keys(list)
   keys.forEach((key, index) => {
-    if (key.includes("exercise") === true) {
+    if (key.includes('exercise') === true) {
       exerciseList.push(`${key}: ${list[key]}`)
     }
   })
@@ -69,7 +69,7 @@ export const action = async ({ request }) => {
     })
   }
 
-  let date = new Date(form.get("date"))
+  let date = new Date(form.get('date'))
 
   let dataBlock = dataArray(volumeBlock, exerciseList)
   const removeEmptyArray = dataBlock.shift()
@@ -82,11 +82,11 @@ export const action = async ({ request }) => {
 
   for (let i = 0; i < exerciseList.length; i++) {
     volume.volume.create.push({
-      exerciseId: "",
-      weight: "",
-      reps: "",
-      sets: "",
-      userId: "",
+      exerciseId: '',
+      weight: '',
+      reps: '',
+      sets: '',
+      userId: '',
     })
     volume.volume.create[i].exerciseId = dataBlock[i].exerciseId
     volume.volume.create[i].weight = dataBlock[i].weight
@@ -122,12 +122,12 @@ export default function newWorkout() {
   const data = useLoaderData()
   const exercises = data.exercises
   let userDate = data.user.createdAt
-  let split = userDate.split("")
+  let split = userDate.split('')
   let arr = []
   for (let i = 0; i < 10; i++) {
     arr.push(split[i])
   }
-  const userJoinDate = arr.join("")
+  const userJoinDate = arr.join('')
   const current = new Date()
   const day = current.getDate()
   let date
@@ -140,15 +140,15 @@ export default function newWorkout() {
       }-0${current.getDate()}`)
 
   return (
-    <div className=''>
-      <Navbar data={["New Workout", "workouts", "Back"]} />
-      <Form method='POST'>
+    <div className="">
+      <Navbar data={['New Workout', 'workouts', 'Back']} />
+      <Form method="POST">
         <div>
           <h5>Date of workout:</h5>
           <input
-            type='date'
-            id='start'
-            name='date'
+            type="date"
+            id="start"
+            name="date"
             defaultValue={date}
             min={userJoinDate}
             max={date}
@@ -161,12 +161,12 @@ export default function newWorkout() {
         <div>
           <h5>Exercise #1</h5>
           <select
-            aria-label='Default select example'
+            aria-label="Default select example"
             required
-            id='exercise'
-            name='exercise-1'
+            id="exercise"
+            name="exercise-1"
           >
-            <option defaultValue={"none"}>Pick an exercise</option>
+            <option defaultValue={'none'}>Pick an exercise</option>
             {exercises.map((exercise) => (
               <>
                 <option key={exercise.id} value={exercise.id}>
@@ -175,12 +175,12 @@ export default function newWorkout() {
               </>
             ))}
           </select>
-          <label htmlFor='weight'>Weight</label>
-          <input type='number' required name='weight-1' />
-          <label htmlFor='weight'>Reps</label>
-          <input type='number' required name='reps-1' />
-          <label htmlFor='sets'>Sets</label>
-          <input type='number' required name='sets-1' />
+          <label htmlFor="weight">Weight</label>
+          <input type="number" required name="weight-1" />
+          <label htmlFor="weight">Reps</label>
+          <input type="number" required name="reps-1" />
+          <label htmlFor="sets">Sets</label>
+          <input type="number" required name="sets-1" />
         </div>
         {volumeArray.map((i) => {
           return (
@@ -200,7 +200,7 @@ export default function newWorkout() {
             Click me
           </a>
         </div>
-        <button type='submit' className=''>
+        <button type="submit" className="">
           Submit
         </button>
       </Form>

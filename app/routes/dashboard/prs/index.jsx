@@ -3,7 +3,6 @@ import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 import Navbar from '~/components/ui/PagesNavbar'
 import { dateStr } from '../../../components/MyGoals'
-import WorkoutNavbar from '../../../components/ui/WorkoutDateNav'
 import PrNavbar from '../../../components/ui/PrNav'
 
 export const loader = async ({ request }) => {
@@ -14,7 +13,7 @@ export const loader = async ({ request }) => {
       Exercise: {
         select: {
           title: true,
-          id:true,
+          id: true,
         },
       },
     },
@@ -54,16 +53,16 @@ export default function index() {
 
   prs.map((pr) => {
     for (let i = 0; i < prArray.length; i++) {
-      let strSplit = prArray[i][0].split(" ")
+      let strSplit = prArray[i][0].split(' ')
       let titleArr
       let title
       if (strSplit.length > 3) {
         titleArr = strSplit.slice(0, strSplit.length - 2)
-       title = titleArr.join(" ")
+        title = titleArr.join(' ')
       } else {
         title = strSplit[0]
       }
-      
+
       if (pr['Exercise'].title === title) {
         let obj = {
           date: pr.createdAt,
@@ -76,16 +75,15 @@ export default function index() {
     }
   })
 
-  console.log(prArray)
-
   return (
-    <>
-      <div>
-        <Navbar data={['My Personal Records', 'prs/new', 'New PR']} />
-        {prArray.map((pr) => {
-          return (
-            <>
-              <PrNavbar data={[pr[0]]} />
+    <div>
+      <Navbar data={['My Personal Records', 'prs/new', 'New PR']} />
+
+      {prArray.map((pr) => {
+        return (
+          <>
+            <PrNavbar data={[pr[0]]} />
+            <div className="pr-table">
               <table>
                 <tr>
                   <td>
@@ -102,7 +100,6 @@ export default function index() {
                   </td>
                 </tr>
                 {pr.map((individualPrs) => {
-                  console.log(individualPrs)
                   return (
                     <tr>
                       <td>
@@ -117,12 +114,10 @@ export default function index() {
                   )
                 })}
               </table>
-            </>
-          )
-        })}
-      </div>
-    </>
+            </div>
+          </>
+        )
+      })}
+    </div>
   )
 }
-
-//get the data.. sort by exercise.. chuck into individual array.. map over that array and output the weight into a table

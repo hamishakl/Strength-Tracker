@@ -1,5 +1,7 @@
 import Masonry from 'react-masonry-css'
 import { wordDate } from '../routes/dashboard/workouts'
+import { Link } from '@remix-run/react'
+
 
 export default function MyWorkouts({ data }) {
   const workoutData = data
@@ -18,7 +20,7 @@ export default function MyWorkouts({ data }) {
       workoutArray.push(obj)
       workout.volume.map((vol) => {
         if (obj.volume[0] != vol.Exercise.title) {
-          let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
+          let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets, id: vol.Exercise.id}
           obj.volume.push(vol.Exercise.title)
           obj.volume.push(arr)
         } else {
@@ -34,6 +36,8 @@ export default function MyWorkouts({ data }) {
           <h2>{wordDate(workout.date)}</h2>
           <table>
             {workout.volume.map((vol, i) => {
+              let id = vol.id
+              // console.log(id)
               if (typeof vol != 'object') {
                 return (
                   <tr>

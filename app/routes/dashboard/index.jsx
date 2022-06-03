@@ -8,17 +8,17 @@ import MyGoals from "~/components/MyGoals"
 
 import Navbar from "~/components/ui/DashboardContentNavbar"
 
-function getSunday(d) {
+export function getSunday(d) {
   d = new Date(d);
-  var day = d.getDay(),
+  let day = d.getDay(),
       diff = d.getDate() - day + (day == 0 ? -6:1)
   return new Date(d.setDate(diff));
 }
 
-function getEndOfWeek(d) {
+export function getEndOfWeek(d, week) {
   d = new Date(d);
-  var day = d.getDay(),
-      diff = d.getDate() - day + (day == 0 ? -6:1) + 7
+  let day = d.getDay(),
+      diff = d.getDate() - day + (day == 0 ? -6:1) + week
   return new Date(d.setDate(diff));
 }
 
@@ -28,7 +28,8 @@ export const loader = async ({ request }) => {
   
 
   console.log(getSunday(today))
-  console.log(getEndOfWeek(today))
+  console.log(getEndOfWeek(today, 7))
+  
   const user = await getUser(request)
 
   const exercises = {
@@ -81,7 +82,7 @@ export const loader = async ({ request }) => {
         },
         createdAt: {
           gt: getSunday(today),
-          lte: getEndOfWeek(today),
+          lte: getEndOfWeek(today, 7),
         },
       },
       include: {
@@ -118,7 +119,7 @@ function ExerciseItems() {
   const data = useLoaderData()
   const workoutData = data.workouts["workouts"]
   const notAchieved = [data.goals, false]
-  
+  console.log(workoutData)
 
   return (
     <>

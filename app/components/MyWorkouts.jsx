@@ -2,32 +2,35 @@ import Masonry from "react-masonry-css"
 
 export default function MyWorkouts({ data }) {
   const workoutData = data
+  if (data === undefined) {
+    return null
+  } else {
 
-  let workoutArray = []
-  let workoutMasonryArray = []
-  let arr = []
-
-  workoutData.map((workout, i) => {
-    var obj = {
-      date: workout.date,
-      volume: [],
-    }
-    workoutArray.push(obj)
-    workout.volume.map((vol) => {
-      if (obj.volume[0] != vol.Exercise.title) {
-        let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
-        obj.volume.push(vol.Exercise.title)
-        obj.volume.push(arr)
-      } else {
-        let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
-        obj.volume.push(arr)
+    let workoutArray = []
+    let workoutMasonryArray = []
+    let arr = []
+    
+    workoutData.map((workout, i) => {
+      var obj = {
+        date: workout.date,
+        volume: [],
       }
+      workoutArray.push(obj)
+      workout.volume.map((vol) => {
+        if (obj.volume[0] != vol.Exercise.title) {
+          let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
+          obj.volume.push(vol.Exercise.title)
+          obj.volume.push(arr)
+        } else {
+          let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
+          obj.volume.push(arr)
+        }
+      })
     })
-  })
-
-  workoutArray.map((workout) => {
-    arr = [
-      <div>
+    
+    workoutArray.map((workout) => {
+      arr = [
+        <div>
         <h2>{workout.date}</h2>
         <table>
           {workout.volume.map((vol, i) => {
@@ -76,13 +79,16 @@ export default function MyWorkouts({ data }) {
     ]
     workoutMasonryArray.push(arr)
   })
+
   return (
     <Masonry
-      breakpointCols={3}
-      className='my-masonry-grid'
-      columnClassName='my-masonry-grid_column'
+    breakpointCols={3}
+    className='my-masonry-grid'
+    columnClassName='my-masonry-grid_column'
     >
       {workoutMasonryArray}
     </Masonry>
+  
   )
+}
 }

@@ -71,7 +71,6 @@ export default function index() {
 
   return (
     <>
-      <GoalChart chartData={goalData}/>
       <div>
         <Navbar data={['My Goals', 'goals/new', 'New Goal']} />
         <MyGoals data={notAchieved} />
@@ -82,7 +81,9 @@ export default function index() {
           </>
         ) : null}
       </div>
-      <div>{/* <NewGoal data={newGoalData}/> */}</div>
+    <div className='goal-pie-chart__wrapper'>
+      <GoalChart chartData={goalData}/>
+    </div>
     </>
   )
 }

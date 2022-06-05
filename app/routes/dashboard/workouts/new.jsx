@@ -30,8 +30,8 @@ const prArray = (dataBlock, exerciseList, user) => {
   for (let i = 0; i < exerciseList.length; i++) {
     prArr[i] = {
       exerciseId: dataBlock[i].exerciseId,
-      weight: dataBlock[i].weight,
-      reps: dataBlock[i].reps,
+      weight: parseInt(dataBlock[i].weight),
+      reps: parseInt(dataBlock[i].reps),
       userId: String(user.id),
     }
   }
@@ -42,16 +42,29 @@ export const action = async ({ request }) => {
   const user = await getUser(request)
   let volumeBlock = {}
   let exerciseList = []
+  let volumeArray = []
   const form = await request.formData()
   
   // const list = form._fields
   console.log(...form)
   let list = [...form] 
-  list.map((arr) => {
-    if(arr[0].includes('exercise')){
-      exerciseList.push(arr[1])
+  console.log('here is form');
+  console.log(list[1]);
+  console.log(list[1][1]);
+
+  for (let i = 0; i < list.length; i++) {
+    if(list[i][0].includes('exercise')){
+      let obj = {
+        exerciseId: list[i][1],
+        weight: list[i+1][1],
+        reps: list[i+2][1],
+        sets: list[i+3][1]
+      }
+      volumeArray.push(obj)
+      exerciseList.push(list[i][1])
     }
-  })
+  }
+  
   
   // const keys = Object.keys(...form)
   // console.log('keys here')
@@ -66,32 +79,34 @@ export const action = async ({ request }) => {
   //     return null
   //   }
   // })
-
+console.log('exerciselist');
   console.log(exerciseList)
+  console.log('volume array');
+  console.log(volumeArray);
 
 
-  for (let i = 0; i < exerciseList.length + 1; i++) {
-    volumeBlock[i] = {}
-   list.forEach((key, index) => {
-      if (key.includes(`exercise-${i}`)) {
-        volumeBlock[i].exerciseId = String(list[key])
-      }
-      if (key.includes(`weight-${i}`)) {
-        volumeBlock[i].weight = Number(list[key])
-      }
-      if (key.includes(`reps-${i}`)) {
-        volumeBlock[i].reps = Number(list[key])
-      }
-      if (key.includes(`sets-${i}`)) {
-        volumeBlock[i].sets = Number(list[key])
-      }
-    })
-  }
+  // for (let i = 0; i < exerciseList.length + 1; i++) {
+  //   volumeBlock[i] = {}
+  //  list.forEach((key, index) => {
+  //     if (key.includes(`exercise-${i}`)) {
+  //       volumeBlock[i].exerciseId = String(list[key])
+  //     }
+  //     if (key.includes(`weight-${i}`)) {
+  //       volumeBlock[i].weight = Number(list[key])
+  //     }
+  //     if (key.includes(`reps-${i}`)) {
+  //       volumeBlock[i].reps = Number(list[key])
+  //     }
+  //     if (key.includes(`sets-${i}`)) {
+  //       volumeBlock[i].sets = Number(list[key])
+  //     }
+  //   })
+  // }
 
   let date = new Date(form.get("date"))
 
-  let dataBlock = dataArray(volumeBlock, exerciseList)
-  const removeEmptyArray = dataBlock.shift()
+  // let dataBlock = dataArray(volumeBlock, exerciseList)
+  // const removeEmptyArray = dataBlock.shift()
 
   let volume = {
     volume: {
@@ -107,20 +122,23 @@ export const action = async ({ request }) => {
       sets: "",
       userId: "",
     })
-    volume.volume.create[i].exerciseId = dataBlock[i].exerciseId
-    volume.volume.create[i].weight = dataBlock[i].weight
-    volume.volume.create[i].reps = dataBlock[i].reps
-    volume.volume.create[i].sets = dataBlock[i].sets
+    volume.volume.create[i].exerciseId = String(volumeArray[i].exerciseId)
+    volume.volume.create[i].weight = parseInt(volumeArray[i].weight)
+    volume.volume.create[i].reps = parseInt(volumeArray[i].reps)
+    volume.volume.create[i].sets = parseInt(volumeArray[i].sets)
     volume.volume.create[i].userId = String(user.id)
   }
 
-  const prArr = prArray(dataBlock, exerciseList, user)
+  const prArr = prArray(volumeArray, exerciseList, user)
 
   for (let i = 0; i < exerciseList.length; i++) {
     let pr = await db.pr.create({
       data: prArr[i],
     })
   }
+
+  console.log('volume')
+  console.log(volume)
 
   const workout = await db.workout.create({
     data: {

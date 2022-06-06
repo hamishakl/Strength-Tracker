@@ -53,7 +53,7 @@ export const action = async ({ request }) => {
   console.log(list[1][1]);
 
   for (let i = 0; i < list.length; i++) {
-    if(list[i][0].includes('exercise')){
+    if(list[i][0].includes('exercise') && !list[i][1].includes('Pick an exercise')){
       let obj = {
         exerciseId: list[i][1],
         weight: list[i+1][1],
@@ -176,6 +176,7 @@ export default function newWorkout() {
         current.getMonth() + 1
       }-0${current.getDate()}`)
 
+
   return (
     <div className=''>
       <Navbar data={["New Workout", "workouts", "Back"]} />
@@ -234,7 +235,7 @@ export default function newWorkout() {
               setCount((volumeArray) => [...volumeArray, volumeArray.length])
             }
           >
-            Click me
+            New exercise or weight
           </a>
         </div>
         <button type='submit' className=''>

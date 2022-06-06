@@ -5,7 +5,7 @@ export default function NewWorkoutForm({ exercises, val }) {
       <h5>Exercise #{val}</h5>
       <select
         aria-label='Default select example'
-        required
+        
         id='exercise'
         name={`exercise-${val}`}
       >
@@ -19,11 +19,12 @@ export default function NewWorkoutForm({ exercises, val }) {
         ))}
       </select>
       <label htmlFor='weight'>Weight</label>
-      <input type='number' required name={`weight-${val}`} />
+      <input type='number'  name={`weight-${val}`} />
       <label htmlFor='weight'>Reps</label>
-      <input type='number' required name={`reps-${val}`} />
+      <input type='number'  name={`reps-${val}`} />
       <label htmlFor='sets'>Sets</label>
-      <input type='number' required name={`sets-${val}`} />
+      <input type='number'  name={`sets-${val}`} />
+      <a href="blank">Cancel</a>
     </div>
   )
 }

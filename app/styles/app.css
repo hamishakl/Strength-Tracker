@@ -918,3 +918,31 @@ dd {
   display: flex;
   flex-wrap: wrap;
 }
+
+/* progress bar  */
+.progress-bar__goal {
+  width: 200px;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  
+  position: relative;
+  color: #000000;
+}
+
+.progress-bar__current {
+  height: 100%;
+  background-color: green;
+  position: absolute;
+}
+
+.progress-bar__goal p {
+  position: absolute;
+  margin-left: 150px;
+  z-index: 100;
+}
+.progress-bar__current p {
+  position: absolute;
+  margin-left: 10px;
+}
+

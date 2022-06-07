@@ -6,6 +6,7 @@ import NewGoal from './new'
 import Navbar from '../../../components/ui/PagesNavbar'
 import GoalChart from '../../../components/ui/GoalChart'
 import { OneRmEstimate } from '../prs'
+import ProgressBar from '../../../components/ui/ProgressBar'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -66,8 +67,7 @@ export default function index() {
       current: OneRmEstimate(weight, reps),
     }
     goalData.push(obj)
-  })
-  
+  })  
 
   return (
     <>
@@ -82,8 +82,17 @@ export default function index() {
         ) : null}
       </div>
     <div className='goal-pie-chart__wrapper'>
-      <GoalChart chartData={goalData}/>
     </div>
+    {
+      goalData.map((data) => {
+        let goal = data.goal
+        let current = data.current
+        let name = data.name
+        return(
+          <ProgressBar data={[goal, current, name]} />
+        )
+      })
+    }
     </>
   )
 }

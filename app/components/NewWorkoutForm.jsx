@@ -2,7 +2,7 @@ export default function NewWorkoutForm({ exercises, val }) {
   val = val + 2
   return (
     <div>
-      <h5>Exercise #{val}</h5>
+      <h5>Block #{val}</h5>
       <select
         aria-label='Default select example'
         
@@ -24,7 +24,6 @@ export default function NewWorkoutForm({ exercises, val }) {
       <input type='number'  name={`reps-${val}`} />
       <label htmlFor='sets'>Sets</label>
       <input type='number'  name={`sets-${val}`} />
-      <a href="blank">Cancel</a>
     </div>
   )
 }

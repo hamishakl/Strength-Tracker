@@ -59,14 +59,19 @@ export default function index() {
   const achieved = [goals, true]
   let goalData = []
   goals.map((goal) => {
-    let weight = goal.Exercise.Pr[0].weight
-    let reps = goal.Exercise.Pr[0].reps
-    let obj = {
-      name: goal.Exercise.title,
-      goal: goal.weight,
-      current: OneRmEstimate(weight, reps),
+    console.log(goal)
+    if (goal.achieved === false) {
+      let weight = goal.Exercise.Pr[0].weight
+      let reps = goal.Exercise.Pr[0].reps
+      let obj = {
+        name: goal.Exercise.title,
+        goal: goal.weight,
+        current: OneRmEstimate(weight, reps),
+      }
+      goalData.push(obj)
+    } else {
+      null
     }
-    goalData.push(obj)
   })  
 
   return (

@@ -111,15 +111,11 @@ a {
   .app-header-mobile {
     display: flex;
   }
+
 }
 
 .app-body {
   height: 100%;
-  /* display: grid;
-  grid-template-columns: minmax(-webkit-min-content, 175px) minmax(-webkit-max-content, 1fr) minmax(-webkit-min-content, 400px);
-  grid-template-columns: minmax(min-content, 175px) minmax(max-content, 1fr) minmax(min-content, 400px);
-  -moz-column-gap: 4rem;
-       column-gap: 4rem; */
   padding-top: 2.5rem;
 }
 @media (max-width: 1200px) {
@@ -656,6 +652,9 @@ a {
     flex-wrap: wrap;
     margin-left: 0;
     margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 }
 .transfer-details div {
@@ -663,7 +662,7 @@ a {
 }
 @media (max-width: 1000px) {
   .transfer-details div {
-    width: 100%;
+    /* width: 100%; */
   }
 }
 .transfer-details div + div {
@@ -946,3 +945,28 @@ dd {
   margin-left: 10px;
 }
 
+@media (max-width: 1000px) {
+  .app-body-main-content{
+    margin-left: 0;
+  }
+
+  .app-header-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .transfer {
+    width: 100%;
+  }
+
+  .my-masonry-grid {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .my-masonry-grid_column {
+    width: 45%;
+  }
+}

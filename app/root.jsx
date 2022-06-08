@@ -13,6 +13,7 @@ import mobileCssSheet from "~/styles/mobile.css"
 import MobileNav from "./components/ui/MobileNav"
 import { useState } from "react"
 
+
 export const links = () => {
   return [
     {
@@ -126,9 +127,9 @@ function Layout({ children }) {
             </div>
             <div className={"app-body-main-content"}>
               {count === 1 ? (
-                <MobileNav>
+                <MobileNav user={user}>
                   <div
-                    className='mobile-nav__button'
+                    className='mobile-nav__button--close'
                     onClick={() => setPage((count = 0))}
                   ></div>
                 </MobileNav>

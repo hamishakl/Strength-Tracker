@@ -1,13 +1,12 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { db } from '~/utils/db.server'
-import MyExercise from '../../components/MyExercises'
+import { Link, useLoaderData } from "@remix-run/react"
+import { db } from "~/utils/db.server"
+import MyExercise from "../../components/MyExercises"
 
-import { getUser } from '~/utils/session.server'
-import MyWorkouts from '~/components/MyWorkouts'
-import MyGoals from '~/components/MyGoals'
+import { getUser } from "~/utils/session.server"
+import MyWorkouts from "~/components/MyWorkouts"
+import MyGoals from "~/components/MyGoals"
 
-import Navbar from '~/components/ui/DashboardContentNavbar'
-
+import Navbar from "~/components/ui/DashboardContentNavbar"
 
 export function getSunday(d) {
   d = new Date(d)
@@ -42,10 +41,10 @@ export const loader = async ({ request }) => {
             weight: true,
             reps: true,
           },
-          orderBy: { weight: 'desc' },
+          orderBy: { weight: "desc" },
         },
       },
-      orderBy: { updatedAt: 'desc' },
+      orderBy: { updatedAt: "desc" },
       take: 4,
     }),
   }
@@ -56,7 +55,7 @@ export const loader = async ({ request }) => {
           equals: `${user.id}`,
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
     }),
   }
   const goals = await db.goals.findMany({
@@ -100,7 +99,7 @@ export const loader = async ({ request }) => {
           },
         },
       },
-      orderBy: { date: 'desc' },
+      orderBy: { date: "desc" },
       take: 6,
     }),
   }
@@ -111,39 +110,39 @@ export const loader = async ({ request }) => {
 
 function ExerciseItems() {
   const data = useLoaderData()
-  const workoutData = data.workouts['workouts']
+  const workoutData = data.workouts["workouts"]
   const notAchieved = [data.goals, false]
 
   return (
     <>
-      <header className={'app-header'}>
-        <div className={'app-header-navigation'}>
-          <div className={'tabs'}>
-            <h1 className={''}>Welcome, {data.user.name}!</h1>
+      <header className={"app-header"}>
+        <div className={"app-header-navigation"}>
+          <div className={"tabs"}>
+            <h1 className={""}>Welcome, {data.user.name}!</h1>
             <p>
               Here's what's happening with your strength progress so far. Well
               done!
             </p>
           </div>
         </div>
-        <div className={'app-header-mobile'}>
-          <button className={'icon-button large'}>
-            <i className={'ph-list'}></i>
-          </button>
+        <div className={"app-header-mobile"}>
+          <h1 className={""}>Welcome, {data.user.name}!</h1>
+          <p>
+            Here's what's happening with your strength progress so far. Well
+            done!
+          </p>
         </div>
       </header>
-      <div className="">
-        <Navbar data={['My Goals', 'goals/new', 'goals']} />
+      <div className=''>
+        <Navbar data={["My Goals", "goals/new", "goals"]} />
         <MyGoals data={notAchieved} />
       </div>
-      <div className={''}>
-        <Navbar data={['My Exercises', 'exercises/new', 'exercises']} />
-        <MyExercise exercises={data.exercises['exercises']} />
+      <div className={""}>
+        <Navbar data={["My Exercises", "exercises/new", "exercises"]} />
+        <MyExercise exercises={data.exercises["exercises"]} />
       </div>
-      <div className="">
-        <Navbar
-          data={['My Workouts This Week So Far..', 'workouts/new', 'workouts']}
-        />
+      <div className=''>
+        <Navbar data={["My Workouts This Week", "workouts/new", "workouts"]} />
         <MyWorkouts data={workoutData} />
       </div>
     </>

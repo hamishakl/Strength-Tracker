@@ -1,7 +1,6 @@
-import Masonry from 'react-masonry-css'
-import { wordDate } from '../routes/dashboard/workouts'
-import { Link } from '@remix-run/react'
-
+import Masonry from "react-masonry-css"
+import { wordDate } from "../routes/dashboard/workouts"
+import { Link } from "@remix-run/react"
 
 export default function MyWorkouts({ data }) {
   const workoutData = data
@@ -18,9 +17,15 @@ export default function MyWorkouts({ data }) {
         volume: [],
       }
       workoutArray.push(obj)
-      workout.volume.map((vol) => {
-        if (obj.volume[0] != vol.Exercise.title) {
-          let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets, id: vol.Exercise.id}
+      workout.volume.map((vol, i) => {
+        console.log(obj.volume[i]);
+        if (obj.volume[i] != vol.Exercise.title || obj.volume[i] === undefined) {
+          let arr = {
+            weight: vol.weight,
+            reps: vol.reps,
+            sets: vol.sets,
+            id: vol.Exercise.id,
+          }
           obj.volume.push(vol.Exercise.title)
           obj.volume.push(arr)
         } else {
@@ -37,11 +42,13 @@ export default function MyWorkouts({ data }) {
           <table>
             {workout.volume.map((vol, i) => {
               let id = vol.id
-              // console.log(id)
-              if (typeof vol != 'object') {
+              // console.log(vol)
+              if (typeof vol != "object") {
                 return (
                   <tr>
-                    {vol}
+                    <td>
+                      <th>{vol}</th>
+                    </td>
                     <td>
                       <th>
                         <h3>weight</h3>
@@ -87,8 +94,8 @@ export default function MyWorkouts({ data }) {
     return (
       <Masonry
         breakpointCols={3}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
+        className='my-masonry-grid'
+        columnClassName='my-masonry-grid_column'
       >
         {workoutMasonryArray}
       </Masonry>

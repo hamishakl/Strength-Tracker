@@ -1,0 +1,35 @@
+.mobile-nav__button {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+}
+
+.mobile-title {
+    flex-direction: row;
+}
+
+.mobile-title span {
+    margin-right: 0.2em;
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-nav-menu__wrapper {
+    height: 100vh;
+    position: fixed;
+    width: 80%;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 800px) {
+    .app-body {
+        padding-top: 0;
+    }
+}

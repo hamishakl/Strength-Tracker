@@ -17,6 +17,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid white;
 }
 
 .mobile-nav-menu__wrapper {
@@ -35,7 +36,7 @@
 .mobile-navigation {
     background-color: black;
     width: 80%;
-    height: 85vh;
+    height: 100vh;
     justify-content: space-between;
     align-items: flex-end;
     padding-right: 1em;
@@ -54,6 +55,10 @@
 
 @media (min-width: 800px){
     .mobile-nav__button{
+        display: none;
+    }
+
+    .mobile-nav {
         display: none;
     }
 }

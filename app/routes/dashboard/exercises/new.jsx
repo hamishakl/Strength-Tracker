@@ -45,9 +45,6 @@ function NewExercise() {
     <>
       <div className='page-header'>
         <Navbar data={["New Exercise", "exercises", "Back"]} />
-        <Link to='/dashboard' className=''>
-          Back
-        </Link>
       </div>
       <div className='page-content'>
         <form method='POST'>

@@ -11,85 +11,107 @@ export default function MyWorkouts({ data }) {
     let workoutMasonryArray = []
     let arr = []
 
-    workoutData.map((workout, i) => {
+    workoutData.map((workout) => {
       var obj = {
         date: workout.date,
-        volume: [],
+        volume: {},
+      }
+      let exerciseArr = []
+      for (let i = 0; i < workout.volume.length; i++) {
+        let exercise = workout.volume[i].Exercise.title
+        if (!exerciseArr.includes(workout.volume[i].Exercise.title)) {
+          exerciseArr.push(workout.volume[i].Exercise.title)
+          obj.volume[`${exercise}`] = {
+            [`block${i}`]: {
+              weight: workout.volume[i].weight,
+              sets: workout.volume[i].sets,
+              reps: workout.volume[i].reps,
+            },
+          }
+        } else {
+          obj.volume[`${exercise}`][`block${i}`] = {
+            weight: workout.volume[i].weight,
+            sets: workout.volume[i].sets,
+            reps: workout.volume[i].reps,
+          }
+        }
       }
       workoutArray.push(obj)
-      workout.volume.map((vol, i) => {
-        console.log(obj.volume[i]);
-        if (obj.volume[i] != vol.Exercise.title || obj.volume[i] === undefined) {
-          let arr = {
-            weight: vol.weight,
-            reps: vol.reps,
-            sets: vol.sets,
-            id: vol.Exercise.id,
-          }
-          obj.volume.push(vol.Exercise.title)
-          obj.volume.push(arr)
-        } else {
-          let arr = { weight: vol.weight, reps: vol.reps, sets: vol.sets }
-          obj.volume.push(arr)
-        }
-      })
     })
 
-    workoutArray.map((workout) => {
+    
+
+    workoutArray.map((workout, count) => {
+      // console.log(workout.volume)
       arr = [
-        <div>
+        <>
           <h2>{wordDate(workout.date)}</h2>
           <table>
-            {workout.volume.map((vol, i) => {
-              let id = vol.id
-              // console.log(vol)
-              if (typeof vol != "object") {
-                return (
-                  <tr>
-                    <td>
-                      <th>{vol}</th>
-                    </td>
-                    <td>
-                      <th>
-                        <h3>weight</h3>
-                      </th>
-                    </td>
-                    <td>
-                      <th>
-                        <h3>reps</h3>
-                      </th>
-                    </td>
-                    <td>
-                      <th>
-                        <h3>sets</h3>
-                      </th>
-                    </td>
-                  </tr>
-                )
-              } else {
-                return (
-                  <tr>
-                    <td>
-                      <p></p>
-                    </td>
-                    <td>
-                      <p>{vol.weight}</p>
-                    </td>
-                    <td>
-                      <p>{vol.reps}</p>
-                    </td>
-                    <td>
-                      <p>{vol.sets}</p>
-                    </td>
-                  </tr>
-                )
-              }
-            })}
+            {
+              Object.keys(workout.volume).map((vol, i) => {
+                console.log(workout.volume[vol])
+                console.log(i)
+              })
+            }
           </table>
-        </div>,
+        </>,
       ]
-      workoutMasonryArray.push(arr)
     })
+    // workoutArray.map((workout) => {
+    //   arr = [
+    //     <div>
+    //       <h2>{wordDate(workout.date)}</h2>
+    //       <table>
+    //         {workout.volume.map((vol, i) => {
+    //           let id = vol.id
+    //           // console.log(vol)
+    //           if (typeof vol != "object") {
+    //             return (
+    //               <tr>
+    //                 <td>
+    //                   <th>{vol}</th>
+    //                 </td>
+    //                 <td>
+    //                   <th>
+    //                     <h3>weight</h3>
+    //                   </th>
+    //                 </td>
+    //                 <td>
+    //                   <th>
+    //                     <h3>reps</h3>
+    //                   </th>
+    //                 </td>
+    //                 <td>
+    //                   <th>
+    //                     <h3>sets</h3>
+    //                   </th>
+    //                 </td>
+    //               </tr>
+    //             )
+    //           } else {
+    //             return (
+    //               <tr>
+    //                 <td>
+    //                   <p></p>
+    //                 </td>
+    //                 <td>
+    //                   <p>{vol.weight}</p>
+    //                 </td>
+    //                 <td>
+    //                   <p>{vol.reps}</p>
+    //                 </td>
+    //                 <td>
+    //                   <p>{vol.sets}</p>
+    //                 </td>
+    //               </tr>
+    //             )
+    //           }
+    //         })}
+    //       </table>
+    //     </div>,
+    //   ]
+    //   workoutMasonryArray.push(arr)
+    // })
 
     return (
       <Masonry

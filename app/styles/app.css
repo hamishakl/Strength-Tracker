@@ -970,3 +970,39 @@ dd {
     width: 45%;
   }
 }
+
+.workout-card-heading__div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.workout-card-title__div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.workout-card-work__div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.workout-card__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  flex-direction: column;
+}
+
+.workout-card {
+  /* height: 80%; */
+  width: 100%;
+  padding: 2em 0 2em 0;
+}

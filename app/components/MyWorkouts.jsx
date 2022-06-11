@@ -42,7 +42,7 @@ export default function MyWorkouts({ data }) {
         workouts.push(vol)
       })
     })
-
+    console.log(workouts)
     return (
       <Masonry
         breakpointCols={3}
@@ -52,33 +52,37 @@ export default function MyWorkouts({ data }) {
         {arr.map((workout) => {
           console.log(workout)
           return [
-            <div>
+            <div className='workout-card'>
               <h4>{wordDate(workout.date)}</h4>
               {workout.volume.map((vol) => {
                 console.log(vol.exercise)
                 return (
-                  <div>
+                  <div className='workout-card__wrapper'>
                     {vol.exercise != undefined ? (
-                      <div>
-                        <p>
-                          <Link to={`exercises/${vol.exerciseId}`}>
-                            <h5>{vol.exercise}</h5>
-                          </Link>
-                        </p>
-                        <p>Weight</p>
-                        <p>Reps</p>
-                        <p>Sets</p>
+                      <div className='workout-card-heading__div'>
+                        <div>
+                          <p>
+                            <Link to={`exercises/${vol.exerciseId}`}>
+                              <h3>{vol.exercise}</h3>
+                            </Link>
+                          </p>
+                        </div>
+                        <div className='workout-card-title__div'>
+                          <p>Weight</p>
+                          <p>Reps</p>
+                          <p>Sets</p>
+                        </div>
                       </div>
                     ) : null}
-                    <div>
-                      <p>{vol.weight}</p>
+                    <div className='workout-card-work__div'>
+                      <p>{vol.weight}kg</p>
                       <p>{vol.reps}</p>
                       <p>{vol.sets}</p>
                     </div>
                   </div>
                 )
               })}
-            </div>
+            </div>,
           ]
         })}
       </Masonry>

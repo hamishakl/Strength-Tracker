@@ -29,15 +29,6 @@ function validatePassword(password) {
   }
 }
 
-// function passwordMatch(a, b, state) {
-//   if (a != b) {
-//     return 'Confirmed password does not match'
-//   } else {
-//     state = 4
-//     return 'passwords match'
-//   }
-// }
-
 export const action = async ({ request, params }) => {
   const form = await request.formData();
   const name = form.get("name");
@@ -89,8 +80,6 @@ export const action = async ({ request, params }) => {
     const newPassword = form.get("new-password")
     const confirmNewPassword = form.get("confirm-new-password")
 
-    
-    // const passwordHash = await bcrypt.hash(password, 10);
     const fields = { oldPassword };
     
     if (confirmNewPassword != newPassword){

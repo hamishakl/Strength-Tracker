@@ -5,6 +5,7 @@ import { db } from "~/utils/db.server"
 import React, { useState } from "react"
 import NewWorkoutForm from "~/components/NewWorkoutForm"
 import Navbar from "../../../components/ui/PagesNavbar"
+import NewExerciseForm from "../../../components/NewExerciseForm"
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -13,6 +14,12 @@ export const loader = async ({ request }) => {
   })
   const data = { user, exercises }
   return data
+}
+
+function validateTitle(title) {
+  if (typeof title !== "string" || title.length < 2) {
+    return "Title should be atleast 2 characters long"
+  }
 }
 
 const prArray = (dataBlock, exerciseList, user) => {
@@ -37,30 +44,33 @@ export const action = async ({ request }) => {
 
   let list = [...form]
 
-  for (let i = 0; i < list.length; i++) {
-    if (
-      list[i][0].includes("exercise") &&
-      !list[i][1].includes("Pick an exercise")
-    ) {
-      let obj = {
-        exerciseId: list[i][1],
-        weight: list[i + 1][1],
-        reps: list[i + 2][1],
-        sets: list[i + 3][1],
+  if (form.get('_method' === 'workout')) {
+    
+    
+    for (let i = 0; i < list.length; i++) {
+      if (
+        list[i][0].includes("exercise") &&
+        !list[i][1].includes("Pick an exercise")
+        ) {
+          let obj = {
+            exerciseId: list[i][1],
+            weight: list[i + 1][1],
+            reps: list[i + 2][1],
+            sets: list[i + 3][1],
+          }
+          volumeArray.push(obj)
+          exerciseList.push(list[i][1])
+        }
       }
-      volumeArray.push(obj)
-      exerciseList.push(list[i][1])
-    }
-  }
-
+      
   let date = new Date(form.get("date"))
-
+  
   let volume = {
     volume: {
       create: [],
     },
   }
-
+  
   for (let i = 0; i < exerciseList.length; i++) {
     volume.volume.create.push({
       exerciseId: "",
@@ -75,15 +85,15 @@ export const action = async ({ request }) => {
     volume.volume.create[i].sets = parseInt(volumeArray[i].sets)
     volume.volume.create[i].userId = String(user.id)
   }
-
+  
   const prArr = prArray(volumeArray, exerciseList, user)
-
+  
   for (let i = 0; i < exerciseList.length; i++) {
     let pr = await db.pr.create({
       data: prArr[i],
     })
   }
-
+  
   const workout = await db.workout.create({
     data: {
       userId: user.id,
@@ -94,11 +104,33 @@ export const action = async ({ request }) => {
       volume: true,
     },
   })
-
+  
   return redirect(`/dashboard`)
+} else if(form.get('_method') === 'exercise') {
+  const title = form.get("title")
+
+  const fields = { title }
+
+  const fieldErrors = {
+    title: validateTitle(title),
+  }
+
+  if (Object.values(fieldErrors).some(Boolean)) {
+    console.log(fieldErrors)
+    return badRequest({ fieldErrors, fields })
+  }
+
+  const exercise = await db.exercise.create({
+    data: { ...fields, userId: user.id },
+  })
+
+  return null
+}
 }
 
 export default function newWorkout() {
+  const actionData = useActionData()
+
   const [volumeArray, setCount] = useState([])
   const data = useLoaderData()
   const exercises = data.exercises
@@ -124,6 +156,7 @@ export default function newWorkout() {
     <div className=''>
       <Navbar data={["New Workout", "workouts", "Back"]} />
       <Form method='post'>
+      <input type="hidden" name="_method" value="workout" />
         <div>
           <h5>Date of workout:</h5>
           <input
@@ -185,6 +218,7 @@ export default function newWorkout() {
           Submit
         </button>
       </Form>
+      <NewExerciseForm data={[actionData, ]}/>
     </div>
   )
 }

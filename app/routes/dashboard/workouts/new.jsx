@@ -123,6 +123,7 @@ export const action = async ({ request }) => {
   const exercise = await db.exercise.create({
     data: { ...fields, userId: user.id },
   })
+  //test
 
   return null
 }

@@ -42,7 +42,7 @@ export default function MyWorkouts({ data }) {
         workouts.push(vol)
       })
     })
-    console.log(workouts)
+    
     return (
       <Masonry
         breakpointCols={3}

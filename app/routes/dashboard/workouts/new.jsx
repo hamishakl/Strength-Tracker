@@ -44,7 +44,7 @@ export const action = async ({ request }) => {
 
   let list = [...form]
 
-  if (form.get('_method' === 'workout')) {
+  if (form.get('_method') === 'workout') {
     
     
     for (let i = 0; i < list.length; i++) {
@@ -127,7 +127,10 @@ export const action = async ({ request }) => {
 
   return null
 }
+  return redirect(`/dashboard`)
+
 }
+
 
 export default function newWorkout() {
   const actionData = useActionData()

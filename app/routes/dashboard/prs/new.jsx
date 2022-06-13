@@ -86,6 +86,7 @@ export const action = async ({ request, params }) => {
   })
   const goalWeight = goals[0].weight
   const goalReps = goals[0].reps
+  const goalId = goals[0].id
 
   console.log(goals)
   const fields = { weight, reps }
@@ -102,15 +103,15 @@ export const action = async ({ request, params }) => {
 
   const results = goalCalc(weight, reps, goalWeight, goalReps)
 
-  // if (results === true) {
-  //   await db.goals.update({
-  //     where: { id: user.id, exerciseId: id },
-  //     data: {
-  //      achieved: true,
-  //     //  achievementDate: 
-  //     }
-  //   });
-  // }
+  if (results[0] === true) {
+    await db.goals.update({
+      where: { id : goalId },
+      data: {
+       achieved: true,
+       achievementDate: date
+      }
+    });
+  }
 
   const pr = await db.pr.create({
     data: { ...fields, userId: user.id, exerciseId: id, date: date },

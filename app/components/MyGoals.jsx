@@ -18,7 +18,6 @@ export default function MyGoals(data) {
         {goals.map((goal) => {
           const date = dateStr(goal.achievementGoalDate)
           const reps = goal.reps
-          const sets = goal.sets
           if (achieved === false && goal.achieved === false) {
             return (
               <>
@@ -30,7 +29,6 @@ export default function MyGoals(data) {
                     <b>{goal.weight}kg</b> for{' '}
                     <b>
                       {reps < 2 ? ` 1 rep` : ` ${reps} reps`}
-                      {sets < 2 ? `` : ` x ${sets} sets`}
                     </b>{' '}
                     by {date}
                   </p>
@@ -42,13 +40,12 @@ export default function MyGoals(data) {
               <>
                 <li key={goal.exerciseId}>
                   <p>
-                    <Link to={`exercises/${goal.exerciseId}`}>
+                    <Link to={`../dashboard/exercises/${goal.exerciseId}`}>
                       {goal.Exercise.title}
                     </Link>{' '}
                     <b>{goal.weight}kg</b> for{' '}
                     <b>
                       {reps < 2 ? ` 1 rep` : ` ${reps} reps`}
-                      {sets < 2 ? `` : ` x ${sets} sets`}
                     </b>{' '}
                     by {date}
                   </p>

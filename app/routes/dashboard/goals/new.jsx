@@ -16,23 +16,18 @@ export const action = async ({ request }) => {
   const form = await request.formData()
   const weightStr = form.get("weight")
   const repsStr = form.get("reps")
-  const setsStr = form.get("sets")
   const id = form.get("exercise")
   const weight = parseInt(weightStr)
   const user = await getUser(request)
   let reps = parseInt(repsStr)
-  let sets = parseInt(setsStr)
   const achievementGoalDateStr = form.get("date")
   const achievementGoalDate = new Date(achievementGoalDateStr)
 
   if (repsStr === null) {
     reps = 1
   }
-  if (setsStr === null) {
-    sets = 1
-  }
 
-  const fields = { weight, reps, sets, achievementGoalDate }
+  const fields = { weight, reps, achievementGoalDate }
 
   const goal = await db.goals.create({
     data: { ...fields, userId: user.id, exerciseId: id },
@@ -112,12 +107,6 @@ export default function newPr() {
               Reps
             </label>
             <input type='number' className='' id='reps' name='reps' />
-          </div>
-          <div className=''>
-            <label htmlFor='weight' className=''>
-              Sets
-            </label>
-            <input type='number' className='' id='sets' name='sets' />
           </div>
           <div>
             <h5>Date to accomplish your new goal:</h5>

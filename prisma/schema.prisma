@@ -45,7 +45,6 @@ model Goals {
   achievementGoalDate DateTime
   weight              Int
   reps                Int?
-  sets                Int?
   exerciseId          String
   Exercise            Exercise  @relation(fields: [exerciseId], references: [id])
   achievementDate     DateTime?

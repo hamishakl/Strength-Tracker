@@ -23,7 +23,7 @@ export const loader = async ({ request, params }) => {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      date: "asc",
     },
   });
   const oneRepMax = weightLoop(pr);

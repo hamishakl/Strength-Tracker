@@ -31,7 +31,7 @@ export default function ({ prs }) {
           {prs.map((pr, index) => {
             return (
               <tr key={pr.id}>
-                <td>{dateConvertor(pr.createdAt)}</td>
+                <td>{dateConvertor(pr.date)}</td>
                 <td>{pr.weight}kg</td>
                 <td>{pr.reps}</td>
                 <td>{OneRmEstimate(pr.weight, pr.reps)}kg</td>

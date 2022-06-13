@@ -18,7 +18,7 @@ export const loader = async ({ request }) => {
       },
     },
     orderBy: {
-      exerciseId: 'desc',
+      exerciseId: 'asc',
     },
   })
   const exercises = await db.exercise.findMany({

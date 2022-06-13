@@ -32,6 +32,7 @@ function validatePassword(password) {
 export const action = async ({ request, params }) => {
   const form = await request.formData();
   const name = form.get("name");
+  
 
   if (form.get("_method") === "name") {
     const user = await getUser(request);

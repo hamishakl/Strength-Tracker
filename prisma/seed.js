@@ -1,5 +1,5 @@
-const { PrismaClient } = require('@prisma/client')
-const prisma = new PrismaClient()
+import pkg from "@prisma/client";
+const prisma = new pkg.PrismaClient();
 
 async function seed() {
   const bruno = await prisma.user.create({

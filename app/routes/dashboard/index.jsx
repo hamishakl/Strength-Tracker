@@ -112,7 +112,6 @@ function ExerciseItems() {
   const data = useLoaderData()
   const workoutData = data.workouts['workouts']
   const notAchieved = [data.goals, false]
-  console.log(workoutData)
   return (
     <>
       <header className={'app-header'}>

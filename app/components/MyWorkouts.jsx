@@ -4,6 +4,7 @@ import { Link } from '@remix-run/react'
 
 export default function MyWorkouts({ data }) {
   const workoutData = data
+  console.log(workoutData)
   if (data === undefined) {
     return null
   } else {

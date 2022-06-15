@@ -5,9 +5,13 @@ import Navbar from '~/components/ui/PagesNavbar'
 import { dateStr } from '../../../components/MyGoals'
 import PrNavbar from '../../../components/ui/PrNav'
 import MyWorkouts from '../../../components/MyWorkouts'
+import IndividualWorkout from '../../../components/IndividualWorkout'
 
 export const loader = async ({ request, params }) => {
   const user = await getUser(request);
+  const exercises = await db.exercise.findMany({
+    where: { userId: user.id },
+  })
   const workout = await db.workout.findUnique({
     where: { id: params.workoutId },
     include: {
@@ -31,7 +35,7 @@ export const loader = async ({ request, params }) => {
     },
   });
 
-  return workout
+  return [workout, exercises]
 };
 
 export function weeksBetween(d1, d2) {
@@ -70,7 +74,6 @@ export function wordDate(isoDate) {
   ]
   const date = new Date(isoDate)
   const day = date.getDate()
-  const year = date.getFullYear()
   const month = date.getMonth()
   const dateStr = nth(day) + ' ' + months[month]
   return dateStr
@@ -78,11 +81,12 @@ export function wordDate(isoDate) {
 
 
 export default function $workoutId() {
-const workouts = useLoaderData()
-console.log(workouts)
+const data = useLoaderData()
+const workouts = data[0]
+const exercises = data[1]
   return (
     <>
-      <MyWorkouts data={[workouts]} />
+      <IndividualWorkout data={[workouts, exercises]} />
     </>
   )
 }

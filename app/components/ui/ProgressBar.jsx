@@ -1,11 +1,9 @@
 export default function ProgressBar(data) {
-  console.log(data)
   const name = data.data[2]
   const goal = data.data[0]
   const current = data.data[1]
   const percentage = current / goal
-  const currentWidth = 200 * percentage
-  console.log(currentWidth)
+  const currentWidth = 400 * percentage
   return (
     <div className="progress-bar__div">
         <h5>{name}</h5>

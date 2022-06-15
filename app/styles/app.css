@@ -920,29 +920,40 @@ dd {
 
 /* progress bar  */
 .progress-bar__goal {
-  width: 200px;
-  height: 50px;
-  background-color: white;
-  display: flex;
-  
+  background: rgba(255,255,255,0.1);
+  justify-content: flex-start;
+  border-radius: 100px;
+  align-items: center;
   position: relative;
-  color: #000000;
+  padding: 0 5px;
+  display: flex;
+  height: 40px;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .progress-bar__current {
-  height: 100%;
-  background-color: green;
-  position: absolute;
+  animation: load 3s normal forwards;
+  border-radius: 100px;
+  background: #fff;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .progress-bar__goal p {
   position: absolute;
-  margin-left: 150px;
+  margin-left: 330px;
   z-index: 100;
 }
 .progress-bar__current p {
   position: absolute;
-  margin-left: 10px;
+  margin-right: 20px;
+  z-index: 10;
+  color: black;
 }
 
 @media (max-width: 1000px) {
@@ -1006,3 +1017,9 @@ dd {
   width: 100%;
   padding: 2em 0 2em 0;
 }
+
+
+/* @keyframes load {
+  0% { width: 0; }
+  100% { width: 68%; }
+} */

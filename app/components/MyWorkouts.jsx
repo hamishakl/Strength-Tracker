@@ -4,6 +4,7 @@ import { Link } from '@remix-run/react'
 
 export default function MyWorkouts({ data }) {
   const workoutData = data
+  console.log(workoutData)
   if (data === undefined) {
     return null
   } else {
@@ -18,6 +19,7 @@ export default function MyWorkouts({ data }) {
       let obj = {
         date: workoutArray[i].date,
         volume: workoutVolume,
+        id: workoutArray[i].id
       }
       arr.push(obj)
     }
@@ -50,12 +52,12 @@ export default function MyWorkouts({ data }) {
         columnClassName="my-masonry-grid_column"
       >
         {arr.map((workout) => {
-          console.log(workout)
           return [
             <div className='workout-card'>
+              <Link to={`/dashboard/workouts/${workout.id}`}>
               <h4>{wordDate(workout.date)}</h4>
+              </Link>
               {workout.volume.map((vol) => {
-                console.log(vol.exercise)
                 return (
                   <div className='workout-card__wrapper'>
                     {vol.exercise != undefined ? (

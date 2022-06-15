@@ -4,8 +4,8 @@
   "description": "",
   "license": "",
   "prisma": {
-    "seed": "node prisma/seed"
-  },
+    "seed": "node prisma/seed.mjs"
+    },
   "scripts": {
     "build": " remix build",
     "dev": "concurrently \"remix dev\"",

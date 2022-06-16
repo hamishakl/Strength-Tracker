@@ -35,7 +35,7 @@ function oneRmCalc(weight, reps) {
   } else return Math.floor(weight * reps * 0.0333 + weight, 2.5)
 }
 
-function goalCalc(weight, reps, goalWeight, goalReps) {
+export function goalCalc(weight, reps, goalWeight, goalReps) {
   const preplinsTable = {
     100.0: 1,
     95.5: 2,
@@ -88,7 +88,6 @@ export const action = async ({ request, params }) => {
   const goalReps = goals[0].reps
   const goalId = goals[0].id
 
-  console.log(goals)
   const fields = { weight, reps }
 
   const fieldErrors = {

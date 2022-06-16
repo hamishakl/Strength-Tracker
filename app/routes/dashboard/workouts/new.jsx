@@ -1,11 +1,13 @@
-import { redirect } from "@remix-run/node"
-import { Form, useActionData, useLoaderData } from "@remix-run/react"
-import { getUser } from "~/utils/session.server"
-import { db } from "~/utils/db.server"
-import React, { useState } from "react"
-import NewWorkoutForm from "~/components/NewWorkoutForm"
-import Navbar from "../../../components/ui/PagesNavbar"
-import NewExerciseForm from "../../../components/NewExerciseForm"
+import { redirect } from '@remix-run/node'
+import { Form, useActionData, useLoaderData } from '@remix-run/react'
+import { getUser } from '~/utils/session.server'
+import { db } from '~/utils/db.server'
+import React, { useState } from 'react'
+import NewWorkoutForm from '~/components/NewWorkoutForm'
+import Navbar from '../../../components/ui/PagesNavbar'
+import NewExerciseForm from '../../../components/NewExerciseForm'
+import { goalCalc } from '../prs/new'
+import { OneRmEstimate } from '../prs'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -17,8 +19,8 @@ export const loader = async ({ request }) => {
 }
 
 function validateTitle(title) {
-  if (typeof title !== "string" || title.length < 2) {
-    return "Title should be atleast 2 characters long"
+  if (typeof title !== 'string' || title.length < 2) {
+    return 'Title should be atleast 2 characters long'
   }
 }
 
@@ -42,95 +44,120 @@ export const action = async ({ request }) => {
   let volumeArray = []
   const form = await request.formData()
 
+  let goals = await db.goals.findMany({
+    where: { userId: user.id, achieved: false },
+  })
+
   let list = [...form]
+  console.log(list)
 
   if (form.get('_method') === 'workout') {
-    
-    
     for (let i = 0; i < list.length; i++) {
       if (
-        list[i][0].includes("exercise") &&
-        !list[i][1].includes("Pick an exercise")
-        ) {
-          let obj = {
-            exerciseId: list[i][1],
-            weight: list[i + 1][1],
-            reps: list[i + 2][1],
-            sets: list[i + 3][1],
-          }
-          volumeArray.push(obj)
-          exerciseList.push(list[i][1])
+        list[i][0].includes('exercise') &&
+        !list[i][1].includes('Pick an exercise')
+      ) {
+        let obj = {
+          exerciseId: list[i][1],
+          weight: list[i + 1][1],
+          reps: list[i + 2][1],
+          sets: list[i + 3][1],
         }
+        volumeArray.push(obj)
+        exerciseList.push(list[i][1])
       }
-      
-  let date = new Date(form.get("date"))
-  
-  let volume = {
-    volume: {
-      create: [],
-    },
-  }
-  
-  for (let i = 0; i < exerciseList.length; i++) {
-    volume.volume.create.push({
-      exerciseId: "",
-      weight: "",
-      reps: "",
-      sets: "",
-      userId: "",
+    }
+
+    let date = new Date(form.get('date'))
+
+    let volume = {
+      volume: {
+        create: [],
+      },
+    }
+
+    for (let i = 0; i < exerciseList.length; i++) {
+      volume.volume.create.push({
+        exerciseId: '',
+        weight: '',
+        reps: '',
+        sets: '',
+        userId: '',
+      })
+      volume.volume.create[i].exerciseId = String(volumeArray[i].exerciseId)
+      volume.volume.create[i].weight = parseInt(volumeArray[i].weight)
+      volume.volume.create[i].reps = parseInt(volumeArray[i].reps)
+      volume.volume.create[i].sets = parseInt(volumeArray[i].sets)
+      volume.volume.create[i].userId = String(user.id)
+    }
+
+    const prArr = prArray(volumeArray, exerciseList, user)
+
+    for (let i = 0; i < exerciseList.length; i++) {
+      console.log('below')
+      console.log(prArr[i].exerciseId)
+      let goalWeight
+      let currentWeight
+      let goalId
+      goals.forEach(({ exerciseId, weight, reps }, x) => {
+        if (exerciseId === prArr[i].exerciseId) {
+          console.log(goals[x])
+          goalWeight = OneRmEstimate(goals[x].weight, goals[x].reps)
+          currentWeight = OneRmEstimate(prArr[i].weight, prArr[i].reps)
+          console.log([goalWeight, currentWeight])
+          goalId = goals[x].id
+        }
+      })
+      if (goalWeight < currentWeight) {
+        let goal = await db.goals.update({
+          where: {
+            id: goalId,
+          },
+          data: {
+            achieved: true,
+            achievementDate: date.toISOString(),
+          },
+        })
+      }
+      let pr = await db.pr.create({
+        data: prArr[i],
+      })
+    }
+
+    const workout = await db.workout.create({
+      data: {
+        userId: user.id,
+        date: date,
+        ...volume,
+      },
+      include: {
+        volume: true,
+      },
     })
-    volume.volume.create[i].exerciseId = String(volumeArray[i].exerciseId)
-    volume.volume.create[i].weight = parseInt(volumeArray[i].weight)
-    volume.volume.create[i].reps = parseInt(volumeArray[i].reps)
-    volume.volume.create[i].sets = parseInt(volumeArray[i].sets)
-    volume.volume.create[i].userId = String(user.id)
-  }
-  
-  const prArr = prArray(volumeArray, exerciseList, user)
-  
-  for (let i = 0; i < exerciseList.length; i++) {
-    let pr = await db.pr.create({
-      data: prArr[i],
+
+    return redirect(`/dashboard`)
+  } else if (form.get('_method') === 'exercise') {
+    const title = form.get('title')
+
+    const fields = { title }
+
+    const fieldErrors = {
+      title: validateTitle(title),
+    }
+
+    if (Object.values(fieldErrors).some(Boolean)) {
+      console.log(fieldErrors)
+      return badRequest({ fieldErrors, fields })
+    }
+
+    const exercise = await db.exercise.create({
+      data: { ...fields, userId: user.id },
     })
+
+    return null
   }
-  
-  const workout = await db.workout.create({
-    data: {
-      userId: user.id,
-      date: date,
-      ...volume,
-    },
-    include: {
-      volume: true,
-    },
-  })
-  
   return redirect(`/dashboard`)
-} else if(form.get('_method') === 'exercise') {
-  const title = form.get("title")
-
-  const fields = { title }
-
-  const fieldErrors = {
-    title: validateTitle(title),
-  }
-
-  if (Object.values(fieldErrors).some(Boolean)) {
-    console.log(fieldErrors)
-    return badRequest({ fieldErrors, fields })
-  }
-
-  const exercise = await db.exercise.create({
-    data: { ...fields, userId: user.id },
-  })
-  //test
-
-  return null
 }
-  return redirect(`/dashboard`)
-
-}
-
 
 export default function newWorkout() {
   const actionData = useActionData()
@@ -139,12 +166,12 @@ export default function newWorkout() {
   const data = useLoaderData()
   const exercises = data.exercises
   let userDate = data.user.createdAt
-  let split = userDate.split("")
+  let split = userDate.split('')
   let arr = []
   for (let i = 0; i < 10; i++) {
     arr.push(split[i])
   }
-  const userJoinDate = arr.join("")
+  const userJoinDate = arr.join('')
   const current = new Date()
   const day = current.getDate()
   let date
@@ -157,16 +184,16 @@ export default function newWorkout() {
       }-0${current.getDate()}`)
 
   return (
-    <div className=''>
-      <Navbar data={["New Workout", "workouts", "Back"]} />
-      <Form method='post'>
-      <input type="hidden" name="_method" value="workout" />
+    <div className="">
+      <Navbar data={['New Workout', 'workouts', 'Back']} />
+      <Form method="post">
+        <input type="hidden" name="_method" value="workout" />
         <div>
           <h5>Date of workout:</h5>
           <input
-            type='date'
-            id='start'
-            name='date'
+            type="date"
+            id="start"
+            name="date"
             defaultValue={date}
             min={userJoinDate}
             max={date}
@@ -179,12 +206,12 @@ export default function newWorkout() {
         <div>
           <h5>Block #1</h5>
           <select
-            aria-label='Default select example'
+            aria-label="Default select example"
             required
-            id='exercise'
-            name='exercise-1'
+            id="exercise"
+            name="exercise-1"
           >
-            <option defaultValue={"none"}>Pick an exercise</option>
+            <option defaultValue={'none'}>Pick an exercise</option>
             {exercises.map((exercise) => (
               <>
                 <option key={exercise.id} value={exercise.id}>
@@ -193,12 +220,12 @@ export default function newWorkout() {
               </>
             ))}
           </select>
-          <label htmlFor='weight'>Weight</label>
-          <input type='number' required name='weight-1' />
-          <label htmlFor='weight'>Reps</label>
-          <input type='number' required name='reps-1' />
-          <label htmlFor='sets'>Sets</label>
-          <input type='number' required name='sets-1' />
+          <label htmlFor="weight">Weight</label>
+          <input type="number" required name="weight-1" />
+          <label htmlFor="weight">Reps</label>
+          <input type="number" required name="reps-1" />
+          <label htmlFor="sets">Sets</label>
+          <input type="number" required name="sets-1" />
         </div>
         {volumeArray.map((i) => {
           return (
@@ -215,14 +242,23 @@ export default function newWorkout() {
               setCount((volumeArray) => [...volumeArray, volumeArray.length])
             }
           >
+            Repeat
+          </a>
+        </div>
+        <div>
+          <a
+            onClick={() =>
+              setCount((volumeArray) => [...volumeArray, volumeArray.length])
+            }
+          >
             New block
           </a>
         </div>
-        <button type='submit' className=''>
+        <button type="submit" className="">
           Submit
         </button>
       </Form>
-      <NewExerciseForm data={[actionData, ]}/>
+      <NewExerciseForm data={[actionData]} />
     </div>
   )
 }

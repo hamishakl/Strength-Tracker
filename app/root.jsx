@@ -45,6 +45,23 @@ export default function App(params) {
   )
 }
 
+export function ErrorBoundary(error) {
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <h1>woops g</h1>
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
 function Document({ children, title }) {
   return (
     <html lang='en'>

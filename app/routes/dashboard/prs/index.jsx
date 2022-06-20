@@ -4,6 +4,7 @@ import { getUser } from '~/utils/session.server'
 import Navbar from '~/components/ui/PagesNavbar'
 import { dateStr } from '../../../components/MyGoals'
 import PrNavbar from '../../../components/ui/PrNav'
+import { NestedError } from '../../../components/error handling/NestedError'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -29,6 +30,12 @@ export const loader = async ({ request }) => {
   return data
 }
 
+export function ErrorBoundary(error) {
+  console.error(error);
+  return (
+    <NestedError/>
+  )
+}
 export const OneRmEstimate = (weight, reps) => {
   const unRounded1RM = weight * reps * 0.0333 + weight
   return reps === 1 ? weight : Math.round(unRounded1RM / 2.5, 1) * 2.5

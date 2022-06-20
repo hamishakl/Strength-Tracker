@@ -7,6 +7,7 @@ import MyWorkouts from '~/components/MyWorkouts'
 import MyGoals from '~/components/MyGoals'
 
 import Navbar from '~/components/ui/DashboardContentNavbar'
+import { NestedError } from '../../components/error handling/NestedError'
 
 export function getSunday() {
   let sunday = new Date(today.setDate(today.getDate() - today.getDay() + 1))
@@ -106,6 +107,13 @@ export const loader = async ({ request }) => {
   const data = { exercises, prs, workouts, goals, user }
 
   return data
+}
+
+export function ErrorBoundary(error) {
+  console.error(error);
+  return (
+   <NestedError/>
+  )
 }
 
 function ExerciseItems() {

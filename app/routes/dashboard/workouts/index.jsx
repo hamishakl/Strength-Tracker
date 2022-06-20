@@ -10,6 +10,7 @@ import MyWorkouts from '../../../components/MyWorkouts'
 import { getSunday, getEndOfWeek } from '../index'
 import WorkoutNavbar from '../../../components/ui/WorkoutDateNav'
 import WorkoutChart from '../../../components/ui/WorkoutChart'
+import { NestedError } from '../../../components/error handling/NestedError'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -87,6 +88,13 @@ export function wordDate(isoDate) {
   const month = date.getMonth()
   const dateStr = nth(day) + ' ' + months[month]
   return dateStr
+}
+
+export function ErrorBoundary(error) {
+  console.error(error);
+  return (
+   <NestedError/>
+  )
 }
 
 export default function index() {

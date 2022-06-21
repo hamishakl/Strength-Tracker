@@ -13,9 +13,12 @@ import mobileCssSheet from "~/styles/mobile.css"
 import MobileNav from "./components/ui/MobileNav"
 import { useState } from "react"
 
+import styles from "./tailwind.css";
+
 
 export const links = () => {
   return [
+    { rel: "stylesheet", href: styles },
     {
       rel: "stylesheet",
       href: cssSheet,
@@ -51,7 +54,7 @@ export function ErrorBoundary(error) {
     <html>
       <head>
         <title>Oh no!</title>
-        <Meta />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <Links />
       </head>
       <body>
@@ -94,9 +97,9 @@ function Layout({ children }) {
   return (
     <>
       {user ? (
-        <div className={"app"}>
+        <div className={"app flex justifiy-between"}>
           <div className={"app-body"}>
-            <div className={"app-body-navigation"}>
+            <div className={"app-body-navigation flex justifiy-between"}>
               <div className={"app-header-logo"}>
                 <div className={"logo"}>
                   <h1 className={"logo-title"}>
@@ -142,7 +145,7 @@ function Layout({ children }) {
                 </button>
               </footer>
             </div>
-            <div className={"app-body-main-content"}>
+            <div className={"app-body-main-content flex justifiy-between flex-col min-h-full"}>
               {count === 1 ? (
                 <MobileNav user={user}>
                   <div

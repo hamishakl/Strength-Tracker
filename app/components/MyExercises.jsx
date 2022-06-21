@@ -7,7 +7,7 @@ export const OneRmEstimate = (weight, reps) => {
 
 export default function MyExercise({ exercises }) {
   return (
-    <div className='exercise-list__div'>
+    <div className='exercise-list__div w-full'>
       {exercises.map((exercise, index) => {
         let dateSplit = exercise.updatedAt.split("")
         let dateStr = dateSplit.slice(0, 10)
@@ -25,8 +25,8 @@ export default function MyExercise({ exercises }) {
             (oneRm = OneRmEstimate(weight, reps)))
 
         return (
-          <div className={"transfer"} key={exercise.id}>
-            <dl className={"transfer-details"}>
+          <div className={"transfer w-full flex justify-between"} key={exercise.id}>
+            <dl className={"transfer-details w-full"}>
               <div>
                 <Link to={`/dashboard/exercises/${exercise.id}`}>
                   {exercise.title}

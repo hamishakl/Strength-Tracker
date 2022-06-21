@@ -1,14 +1,10 @@
 module.exports = {
-  mode: 'jit',
-  purge: [
-    "app/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
-    extend: {
-      colors: {
-        'space-cadet': '#232647',
-      },
-    },
+    extend: {},
+    minHeight: {
+      '1/2': '50vh',
+    }
   },
   plugins: [],
-}
+};

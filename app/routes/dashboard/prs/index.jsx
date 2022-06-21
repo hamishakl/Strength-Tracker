@@ -115,9 +115,9 @@ export default function index() {
                           ? null
                           : dateStr(new String(individualPrs.date))}
                       </td>
-                      <td>{individualPrs.weight}</td>
+                      <td>{individualPrs.weight}kg</td>
                       <td>{individualPrs.reps}</td>
-                      <td>{individualPrs.oneRm}</td>
+                      <td>{individualPrs.oneRm}kg</td>
                     </tr>
                   )
                 })}

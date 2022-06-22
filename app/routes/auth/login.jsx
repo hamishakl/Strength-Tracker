@@ -1,6 +1,7 @@
 import { json, redirect } from '@remix-run/node'
-import { useActionData } from '@remix-run/react'
+import { Link, useActionData } from '@remix-run/react'
 import { login, register, createUserSession } from '~/utils/session.server'
+
 
 import cssSheet from '~/styles/app.css'
 import homepageCssSheet from '~/styles/homepage.css'
@@ -141,7 +142,7 @@ function Login() {
               </div>
             </form>
 
-            <p class="mt-6 text-sm text-center text-gray-400">
+            <Link to={'../auth/register'} class="mt-6 text-sm text-center text-gray-400">
               Don&#x27;t have an account yet?{' '}
               <a
                 href="#"
@@ -150,7 +151,7 @@ function Login() {
                 Sign up
               </a>
               .
-            </p>
+            </Link>
           </div>
         </div>
       </div>

@@ -13,9 +13,13 @@ import mobileCssSheet from "~/styles/mobile.css"
 import MobileNav from "./components/ui/MobileNav"
 import { useState } from "react"
 
+import styles from "./tailwind.css";
+import DashboardNavbar from "./components/ui/DashboardNavbar"
+
 
 export const links = () => {
   return [
+    { rel: "stylesheet", href: styles },
     {
       rel: "stylesheet",
       href: cssSheet,
@@ -43,6 +47,23 @@ export default function App(params) {
       </Layout>
     </Document>
   )
+}
+
+export function ErrorBoundary(error) {
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <Links />
+      </head>
+      <body>
+        <h1>woops g</h1>
+        <Scripts />
+      </body>
+    </html>
+  );
 }
 
 function Document({ children, title }) {
@@ -77,55 +98,10 @@ function Layout({ children }) {
   return (
     <>
       {user ? (
-        <div className={"app"}>
+        <div className={"app flex justifiy-between"}>
           <div className={"app-body"}>
-            <div className={"app-body-navigation"}>
-              <div className={"app-header-logo"}>
-                <div className={"logo"}>
-                  <h1 className={"logo-title"}>
-                    <span>Strength</span>
-                    <span>Tracker</span>
-                  </h1>
-                </div>
-              </div>
-
-              <nav className={"navigation"}>
-                <Link to='/dashboard'>
-                  <i className={"ph-browsers"}></i>
-                  <span>Dashboard</span>
-                </Link>
-                <Link to='/dashboard/prs'>
-                  <i className={"ph-check-square"}></i>
-                  <span>Personal Records</span>
-                </Link>
-                <Link to='dashboard/workouts'>
-                  <i className={"ph-swap"}></i>
-                  <span>Workouts</span>
-                </Link>
-                <Link to='/dashboard/exercises'>
-                  <i className={"ph-file-text"}></i>
-                  <span>Exercises</span>
-                </Link>
-                <Link to='/dashboard/goals'>
-                  <i className={"ph-file-text"}></i>
-                  <span>Goals</span>
-                </Link>
-                <Link to={`/dashboard/${user.id}/profile`}>
-                  <i className={"ph-globe"}></i>
-                  <span>Account Settings</span>
-                </Link>
-              </nav>
-              <footer className={"footer"}>
-                <button>
-                  <form action='/auth/logout' method='POST'>
-                    <button className='btn' type='submit'>
-                      Logout {user.name}
-                    </button>
-                  </form>
-                </button>
-              </footer>
-            </div>
-            <div className={"app-body-main-content"}>
+            <DashboardNavbar user={user} />
+            <div className={"app-body-main-content flex justifiy-between flex-col min-h-full"}>
               {count === 1 ? (
                 <MobileNav user={user}>
                   <div

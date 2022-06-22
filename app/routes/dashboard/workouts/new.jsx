@@ -237,13 +237,6 @@ export default function newWorkout() {
           )
         })}
         <div>
-          <a
-            onClick={() =>
-              setCount((volumeArray) => [...volumeArray, volumeArray.length])
-            }
-          >
-            Repeat
-          </a>
         </div>
         <div>
           <a

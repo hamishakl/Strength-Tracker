@@ -119,12 +119,8 @@ export const action = async ({ request, params }) => {
   return redirect(`../dashboard/exercises/${id}`)
 }
 
-export default function newPr() {
-  const data = useLoaderData()
-  const exercises = data[0]
-  const user = data[1]
 
-  const actionData = useActionData()
+export const findDate = (user) => {
 
   let userDate = user.createdAt
   let split = userDate.split("")
@@ -143,6 +139,22 @@ export default function newPr() {
     : (date = `${current.getFullYear()}-0${
         current.getMonth() + 1
       }-0${current.getDate()}`)
+
+      const data = [userJoinDate, date]
+      return data
+}
+
+export default function newPr() {
+  const data = useLoaderData()
+  const exercises = data[0]
+  const user = data[1]
+
+  const actionData = useActionData()
+
+
+const dateData = findDate(user)
+const userJoinDate = dateData[0]
+const date = dateData[1]
 
   return (
     <div className="">

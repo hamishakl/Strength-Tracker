@@ -22,8 +22,8 @@ export default function MyGoals(data) {
             return (
               <>
                 <li key={goal.exerciseId}>
-                  <p>
-                    <Link to={`exercises/${goal.exerciseId}`}>
+                  <p className=''>
+                    <Link to={`exercises/${goal.exerciseId}`} className='underline font-bold'>
                       {goal.Exercise.title}
                     </Link>{' '}
                     <b>{goal.weight}kg</b> for{' '}

@@ -4,6 +4,9 @@ module.exports = {
     extend: {},
     minHeight: {
       '1/2': '50vh',
+    }, 
+    height: {      
+      '1/2': '25vh'
     }
   },
   plugins: [],

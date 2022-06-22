@@ -1022,3 +1022,30 @@ dd {
   0% { width: 0; }
   100% { width: 68%; }
 } */
+
+  table {
+    display: inline-table !important;
+  }
+
+  thead tr:not(:first-child) {
+    display: none;
+  }
+
+
+td:not(:last-child) {
+  border-bottom: 0;
+}
+
+th:not(:last-child) {
+  border-bottom: 2px solid rgba(0, 0, 0, .1);
+}
+
+.pr-table__div {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  height: auto;
+  max-height: 20vh;
+}
+.pr-table__div::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}

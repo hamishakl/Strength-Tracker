@@ -15,6 +15,7 @@ import { useState } from "react"
 
 import styles from "./tailwind.css";
 import DashboardNavbar from "./components/ui/DashboardNavbar"
+import { Footer } from "./components/homepage/Footer"
 
 
 export const links = () => {
@@ -125,13 +126,13 @@ function Layout({ children }) {
           </div>
         </div>
       ) : (
-        <container className='homepage-container'>
-          <nav className='homepage__navbar'>
+        <container className='homepage-container w-5/6'>
+          <nav className='homepage__navbar w-full'>
             <Link className='home-logo logo--animation' to='/'>
               Strength Tracker
             </Link>
             <div className='navbar-buttons__div'>
-              <Link className='' to='/auth/register'>
+              <Link className='mr-1' to='/auth/register'>
                 Register
               </Link>
               <Link className='' to='/auth/login'>
@@ -139,8 +140,9 @@ function Layout({ children }) {
               </Link>
             </div>
           </nav>
-          <div className=''>{children}</div>
-          <HomepageFooter />
+          <div className='w-full'>{children}</div>
+          {/* <HomepageFooter /> */}
+          <Footer />
         </container>
       )}
     </>

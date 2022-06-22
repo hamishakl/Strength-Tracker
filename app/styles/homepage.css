@@ -30,8 +30,8 @@ body {
     padding-right: 5%; */
     /* position: fixed; */
     z-index: 100;
-    width: var(--homepage-width);
-    max-width: 1366px;
+    /* width: var(--homepage-width); */
+    /* max-width: 1366px; */
     background-color: rgb(255, 255, 255);
     color: #151920;
     border-bottom: 1px #151920 solid;
@@ -42,7 +42,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 10%;
+  /* width: 10%; */
 }
 
 .home-logo {
@@ -206,7 +206,8 @@ body {
 }
 
 .auth-wrapper {
-  height: 100vh;
+  height: auto;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

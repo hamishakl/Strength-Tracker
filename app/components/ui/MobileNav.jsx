@@ -5,10 +5,10 @@ export default function MobileNav({ children, user }) {
   // const count = data[0]
   // let [count, setPage] = useState(0);
   return (
-    <div className='mobile-nav-menu__wrapper'>
+    <div className='mobile-nav-menu__wrapper '>
       {children}
       <nav className={"navigation mobile-navigation"}>
-        <Link to='/dashboard'>
+        <Link to='/dashboard' className="">
           <i className={"ph-browsers"}></i>
           <span>Dashboard</span>
         </Link>

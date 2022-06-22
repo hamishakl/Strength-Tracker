@@ -7,6 +7,7 @@ import MyWorkouts from '~/components/MyWorkouts'
 import MyGoals from '~/components/MyGoals'
 
 import Navbar from '~/components/ui/DashboardContentNavbar'
+import { NestedError } from '../../components/error handling/NestedError'
 
 export function getSunday() {
   let sunday = new Date(today.setDate(today.getDate() - today.getDay() + 1))
@@ -108,23 +109,30 @@ export const loader = async ({ request }) => {
   return data
 }
 
+export function ErrorBoundary(error) {
+  console.error(error)
+  return <NestedError />
+}
+
 function ExerciseItems() {
   const data = useLoaderData()
   const workoutData = data.workouts['workouts']
   const notAchieved = [data.goals, false]
   return (
     <>
-      <header className={'app-header'}>
+      <header className={'app-header mb-5'}>
         <div className={'app-header-navigation'}>
           <div className={'tabs'}>
-            <h1 className={''}>Welcome, {data.user.name}!</h1>
-            <p>
+            <h1 className={'h-auto mb-5 font-bold text-2xl'}>
+              Welcome, {data.user.name}!
+            </h1>
+            <p className="">
               Here's what's happening with your strength progress so far. Well
               done!
             </p>
           </div>
         </div>
-        <div className={'app-header-mobile'}>
+        <div className={'app-header-mobile '}>
           <h1 className={''}>Welcome, {data.user.name}!</h1>
           <p>
             Here's what's happening with your strength progress so far. Well
@@ -132,15 +140,15 @@ function ExerciseItems() {
           </p>
         </div>
       </header>
-      <div className="">
+      <div className="h-auto mb-10">
         <Navbar data={['My Goals', 'goals/new', 'goals']} />
         <MyGoals data={notAchieved} />
       </div>
-      <div className={''}>
+      <div className={'h-auto mb-10 w-full'}>
         <Navbar data={['My Exercises', 'exercises/new', 'exercises']} />
         <MyExercise exercises={data.exercises['exercises']} />
       </div>
-      <div className="">
+      <div className="h-auto mb-10 flex justify-center flex-col">
         <Navbar data={['My Workouts This Week', 'workouts/new', 'workouts']} />
         <MyWorkouts data={workoutData} />
       </div>

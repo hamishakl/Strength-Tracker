@@ -7,6 +7,7 @@ import Navbar from '../../../components/ui/PagesNavbar'
 import GoalChart from '../../../components/ui/GoalChart'
 import { OneRmEstimate } from '../prs'
 import ProgressBar from '../../../components/ui/ProgressBar'
+import { NestedError } from '../../../components/error handling/NestedError'
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
@@ -40,6 +41,13 @@ export const loader = async ({ request }) => {
   const data = { user, goals, exercises }
 
   return data
+}
+
+export function ErrorBoundary(error) {
+  console.error(error);
+  return (
+  <NestedError/>
+  )
 }
 
 export default function index() {

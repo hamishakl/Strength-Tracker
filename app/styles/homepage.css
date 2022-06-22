@@ -206,7 +206,8 @@ body {
 }
 
 .auth-wrapper {
-  height: 100vh;
+  height: auto;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

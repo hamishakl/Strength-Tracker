@@ -2,8 +2,8 @@ import heroImg from '../../../public/images/hero-img.jpeg'
 
 export default function HeroSection() {
   return (
-    <section class="text-gray-600 body-font">
-      <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+    <section class="text-gray-600 body-font w-full">
+      <div class="container mx-auto flex py-24 md:flex-row flex-col items-center w-full">
         <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
           <h1 class="title-font sm:text-6xl text-4xl mb-4 font-black text-gray-900 italic">Measure progress
           </h1>

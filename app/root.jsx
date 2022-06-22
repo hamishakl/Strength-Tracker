@@ -140,7 +140,7 @@ function Layout({ children }) {
               </Link>
             </div>
           </nav>
-          <div className=''>{children}</div>
+          <div className='w-full'>{children}</div>
           {/* <HomepageFooter /> */}
           <Footer />
         </container>

@@ -1,7 +1,6 @@
 import { Link } from '@remix-run/react'
 
 export default function PrNavbar(data) {
-  console.log(data)
   const str = data.data[0]
   const strSplit = str.split(' ')
   const id = strSplit[strSplit.length - 1]
@@ -15,12 +14,12 @@ export default function PrNavbar(data) {
   }
 
   return (
-    <div className={'dashboard-section-navbar'}>
+    <div className={'dashboard-section-navbar mt-10 pr-15'}>
       <Link to={`../dashboard/exercises/${id}`}>
-        <h2 className="">{title}</h2>
+        <h2 className="text-xl font-bold">{title}</h2>
       </Link>
       <Link to={`../dashboard/exercises/${id}/pr-new`}>
-        <p className="">New PR</p>
+        <p className="" style={{'paddingRight': 68+'px'}}>New PR</p>
       </Link>
     </div>
   )

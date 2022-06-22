@@ -31,10 +31,8 @@ export const loader = async ({ request }) => {
 }
 
 export function ErrorBoundary(error) {
-  console.error(error);
-  return (
-    <NestedError/>
-  )
+  console.error(error)
+  return <NestedError />
 }
 export const OneRmEstimate = (weight, reps) => {
   const unRounded1RM = weight * reps * 0.0333 + weight
@@ -91,36 +89,32 @@ export default function index() {
         return (
           <>
             <PrNavbar data={[pr[0]]} />
-            <div className="pr-table">
-              <table>
-                <tr>
-                  <td>
-                    <th>Date</th>
-                  </td>
-                  <td>
-                    <th>Weight</th>
-                  </td>
-                  <td>
-                    <th>Reps</th>
-                  </td>
-                  <td>
-                    <th>Estimated 1rm</th>
-                  </td>
-                </tr>
-                {pr.map((individualPrs) => {
-                  return (
-                    <tr>
-                      <td>
-                        {individualPrs.date === undefined
-                          ? null
-                          : dateStr(new String(individualPrs.date))}
-                      </td>
-                      <td>{individualPrs.weight}kg</td>
-                      <td>{individualPrs.reps}</td>
-                      <td>{individualPrs.oneRm}kg</td>
-                    </tr>
-                  )
-                })}
+            <div className="overflow-scroll h-auto max-h-1/2 pr-table__div">
+              <table className="w-full flex flex-row flex-no-wrap rounded-lg sm:shadow-lg my-5">
+                <thead className="text-white">
+                  <tr className="bg-neutral-500	3 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                    <th className="p-3 text-left">Date</th>
+                    <th className="p-3 text-left">Weight</th>
+                    <th className="p-3 text-left">Reps</th>
+                    <th className="p-3 text-left">Estimated 1rm</th>
+                  </tr>
+                </thead>
+                <tbody className="flex-1 sm:flex-none">
+                  {pr.map((individualPrs) => {
+                    return individualPrs.weight === undefined ? null : (
+                      <tr className="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 hover:bg-neutral-500 p-3 hover:text-white">
+                        <td className="p-3">
+                          {individualPrs.date === undefined
+                            ? null
+                            : dateStr(new String(individualPrs.date))}
+                        </td>
+                        <td className="  p-3">{individualPrs.weight}kg</td>
+                        <td className=" p-3">{individualPrs.reps}</td>
+                        <td className="p-3">{individualPrs.oneRm}kg</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
               </table>
             </div>
           </>

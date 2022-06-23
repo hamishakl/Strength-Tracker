@@ -35,16 +35,18 @@
 
 .mobile-navigation {
     background-color: black;
-    width: 80%;
+    width: 50%;
     height: 100vh;
     justify-content: space-between;
     align-items: flex-end;
     padding-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .mobile-nav__button--close {
     height: 100%;
-    width: 20%;
+    width: 50%;
 }
 
 @media (max-width: 800px) {

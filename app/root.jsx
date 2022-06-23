@@ -111,10 +111,10 @@ function Layout({ children }) {
                   ></div>
                 </MobileNav>
               ) : null}
-              <nav className='mobile-nav'>
-                <h1 className={"logo-title mobile-title"}>
-                  <span>Strength</span>
-                  <span>Tracker</span>
+              <nav className='mobile-nav mb-3'>
+                <h1 className={"logo-title mobile-title mb-1"}>
+                  <span className="text-xl font-bold">Strength</span>
+                  <span className="text-xl font-bold">Tracker</span>
                 </h1>
                 <div
                   className='mobile-nav__button'

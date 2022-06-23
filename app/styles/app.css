@@ -131,6 +131,7 @@ a {
   /* width: 100%; */
   margin-left: 20vw;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .app-body-navigation {
@@ -927,7 +928,7 @@ dd {
   padding: 0 5px;
   display: flex;
   height: 40px;
-  width: 400px;
+  width: 350px;
   display: flex;
   justify-content: space-between;
 }
@@ -945,8 +946,8 @@ dd {
 
 .progress-bar__goal p {
   position: absolute;
-  margin-left: 330px;
-  z-index: 100;
+  margin-left: 280px;
+  z-index: 1;
 }
 .progress-bar__current p {
   position: absolute;

@@ -21,6 +21,7 @@
 }
 
 .mobile-nav-menu__wrapper {
+    z-index: 1;
     height: 100%;
     position: fixed;
     width: 100%;

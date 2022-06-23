@@ -831,7 +831,7 @@ dd {
   width: 100%;
   align-items: center;
   border-bottom: #ffffff solid 1px;
-  margin-bottom: 2em;
+  /* margin-bottom: 2em; */
 }
 
 .dashboard-section-navbar__links {

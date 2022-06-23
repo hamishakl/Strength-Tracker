@@ -10,27 +10,31 @@ export const dateStr = (a) => {
 }
 
 export default function MyGoals(data) {
-  const goals = data.data[0]
+  // console.log(data.data)
+  let goals
+  data.data.length === 1 ? (goals = data.data) : (goals = data.data[0])
   const achieved = data.data[1]
+  console.log(data.data[1])
   return (
     <>
-      <ul>
+      <ul className="mt-2">
         {goals.map((goal) => {
+          // console.log(goal)
           const date = dateStr(goal.achievementGoalDate)
           const reps = goal.reps
           if (achieved === false && goal.achieved === false) {
             return (
               <>
                 <li key={goal.exerciseId}>
-                  <p className=''>
-                    <Link to={`exercises/${goal.exerciseId}`} className='underline font-bold'>
+                  <p className="">
+                    <Link
+                      to={`exercises/${goal.exerciseId}`}
+                      className="underline font-bold"
+                    >
                       {goal.Exercise.title}
                     </Link>{' '}
                     <b>{goal.weight}kg</b> for{' '}
-                    <b>
-                      {reps < 2 ? ` 1 rep` : ` ${reps} reps`}
-                    </b>{' '}
-                    by {date}
+                    <b>{reps < 2 ? ` 1 rep` : ` ${reps} reps`}</b> by {date}
                   </p>
                 </li>
               </>
@@ -38,16 +42,13 @@ export default function MyGoals(data) {
           } else if (goal.achieved === true && achieved === true) {
             return (
               <>
-                <li key={goal.exerciseId}>
+                <li key={goal.exerciseId} className="mb-2">
                   <p>
                     <Link to={`../dashboard/exercises/${goal.exerciseId}`}>
                       {goal.Exercise.title}
                     </Link>{' '}
                     <b>{goal.weight}kg</b> for{' '}
-                    <b>
-                      {reps < 2 ? ` 1 rep` : ` ${reps} reps`}
-                    </b>{' '}
-                    by {date}
+                    <b>{reps < 2 ? ` 1 rep` : ` ${reps} reps`}</b> by {date}
                   </p>
                 </li>
               </>

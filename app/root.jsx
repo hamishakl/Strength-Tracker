@@ -102,7 +102,7 @@ function Layout({ children }) {
         <div className={"app flex justifiy-between"}>
           <div className={"app-body"}>
             <DashboardNavbar user={user} />
-            <div className={"app-body-main-content flex justifiy-between flex-col min-h-full"}>
+            <div className={"app-body-main-content flex justifiy-between flex-col h-full"}>
               {count === 1 ? (
                 <MobileNav user={user}>
                   <div

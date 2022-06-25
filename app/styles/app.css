@@ -1050,3 +1050,11 @@ th:not(:last-child) {
 .pr-table__div::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+
+.chart__container {
+  margin-left: -42px;
+}
+
+.recharts-legend-item-text {
+  margin-top: 5px;
+}

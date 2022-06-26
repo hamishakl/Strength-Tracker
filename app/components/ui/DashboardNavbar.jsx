@@ -1,7 +1,6 @@
 import { Link } from '@remix-run/react'
 
 export default function DashboardNavbar(user) {
-    console.log(user.user.name)
   return (
     <div className={'app-body-navigation flex justifiy-between'}>
       <div className={'app-header-logo mb-4'}>

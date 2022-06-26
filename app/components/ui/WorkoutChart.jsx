@@ -63,7 +63,6 @@ export default function WorkoutChart(data) {
     // Client-side-only code
    screenWidth = useWindowDimensions().width;
    screenHeight = useWindowDimensions().height;
-   console.log(screenHeight)
    
    return (
     <ResponsiveContainer width={'100%' } height={'95%'} className="chart__container">

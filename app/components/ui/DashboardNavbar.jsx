@@ -38,13 +38,11 @@ export default function DashboardNavbar(user) {
         </Link>
       </nav>
       <div className={'footer'}>
-        <button>
           <form action="/auth/logout" method="POST">
             <button className="btn underline" type="submit">
               Logout {user.user.name}
             </button>
           </form>
-        </button>
       </div>
     </div>
   )

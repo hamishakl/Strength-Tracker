@@ -38,7 +38,6 @@ export function useWindowDimensions() {
 
 
 const CustomTooltip = ({ active, payload, label }) => {
-  // getDate(label)
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
@@ -60,7 +59,6 @@ export default function WorkoutChart(data) {
   let screenHeight 
   let screenWidth
   if (typeof window !== "undefined") {
-    // Client-side-only code
    screenWidth = useWindowDimensions().width;
    screenHeight = useWindowDimensions().height;
    
@@ -93,7 +91,7 @@ export default function WorkoutChart(data) {
   )
 } else {
   return (
-    <>hello</>
+    <>Loading..</>
   )
 }
 }

@@ -52,7 +52,7 @@ export default function App(params) {
 export function ErrorBoundary(error) {
   console.error(error)
   return (
-    <html>
+    <html lang="en">
       <head>
         <title>Oh no!</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

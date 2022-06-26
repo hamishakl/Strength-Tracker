@@ -66,7 +66,7 @@ export default function WorkoutChart(data) {
    console.log(screenHeight)
    
    return (
-    <ResponsiveContainer width={screenWidth } height={screenHeight/2} className="chart__container">
+    <ResponsiveContainer width={'100%' } height={'95%'} className="chart__container">
       <LineChart
         width={screenWidth}
         height={screenHeight}

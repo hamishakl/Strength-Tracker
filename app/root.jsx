@@ -106,7 +106,7 @@ function Layout({ children }) {
               }
             >
               {count === 1 ? (
-                <MobileNav user={user}>
+                <MobileNav user={user} onClick={() => setPage((count = 0))}>
                   <div
                     className="mobile-nav__button--close"
                     onClick={() => setPage((count = 0))}

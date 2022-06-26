@@ -6,6 +6,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from 'recharts'
 
 export const dateConvertor = (prDate) => {
@@ -32,7 +33,7 @@ export default function Chart(pr) {
     prArray.push(container[i])
   }
   return (
-    <>
+    <ResponsiveContainer width={'100%' } height={'60%'} className="chart__container"> 
       <LineChart
         width={800}
         height={300}
@@ -49,6 +50,6 @@ export default function Chart(pr) {
         <Legend />
         <Line type='monotone' dataKey='1RM' stroke='#82ca9d' />
       </LineChart>
-    </>
+    </ResponsiveContainer>
   )
 }

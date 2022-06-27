@@ -214,74 +214,78 @@ export default function newWorkout() {
           </label>
         </div>
         <div>
-          <h4>Working sets</h4>
+          <p className="font-bold underline underline-offset-2">
+            Working sets:
+          </p>
         </div>
-        <div className="relative z-0 w-full mb-6 group">
-          <select
-            id="exercise"
-            name="exercise-1"
-            // defaultValue={'Pick an exercise'}
-            placeholder={'Pick an exercise'}
-            className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          >
-            <option disabled selected>
-              Exercise #1
-            </option>
-            {exercises.map((exercise) => (
-              <option key={exercise.id} value={exercise.id}>
-                {exercise.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
+        <div className="bg-slate-800 py-1 px-3 my-2">
           <div className="relative z-0 w-full mb-6 group">
-            <input
-              type="number"
-              name="weight-1"
-              id="weight"
+            <select
+              id="exercise"
+              name="exercise-1"
+              // defaultValue={'Pick an exercise'}
+              placeholder={'Pick an exercise'}
               className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-            />
-            <label
-              for="weight"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Weight
-            </label>
+              <option disabled selected>
+                Exercise #1
+              </option>
+              {exercises.map((exercise) => (
+                <option key={exercise.id} value={exercise.id}>
+                  {exercise.title}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className="relative z-0 w-full mb-10 group">
-            <input
-              type="number"
-              name="reps-1"
-              id="reps"
-              className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-            />
-            <label
-              for="reps"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Reps
-            </label>
-          </div>
-          <div className="relative z-0 w-full mb-10 group">
-            <input
-              type="number"
-              name="sets-1"
-              id="sets"
-              className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-            />
-            <label
-              for="sets"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Sets
-            </label>
+          <div>
+            <div className="relative z-0 w-full mb-6 group">
+              <input
+                type="number"
+                name="weight-1"
+                id="weight"
+                className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                for="weight"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Weight
+              </label>
+            </div>
+            <div className="relative z-0 w-full mb-10 group">
+              <input
+                type="number"
+                name="reps-1"
+                id="reps"
+                className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                for="reps"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Reps
+              </label>
+            </div>
+            <div className="relative z-0 w-full mb-6 group">
+              <input
+                type="number"
+                name="sets-1"
+                id="sets"
+                className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                required
+              />
+              <label
+                for="sets"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Sets
+              </label>
+            </div>
           </div>
         </div>
         {volumeArray.map((i) => {
@@ -293,7 +297,7 @@ export default function newWorkout() {
             />
           )
         })}
-        <div className="fixed bottom-0 flex justify-center flex-col items-center w-full left-0 bg-dark min-h-auto">
+        <div className="fixed bottom-0 flex justify-center flex-col items-center w-full left-0 py-3 bg-dark min-h-auto">
           <div className="flex w-full justify-center items-center rounded-md shadow-sm">
             <a
               onClick={() =>
@@ -350,7 +354,7 @@ export default function newWorkout() {
                     // onClick={() => props.onClick()}
                     aria-current="page"
                     class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-blue-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:focus:text-white"
-                    >
+                  >
                     Save
                   </button>
                   <a

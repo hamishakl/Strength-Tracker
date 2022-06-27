@@ -13,13 +13,9 @@
     "dev": "run-p dev:*",
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "remix dev",
-    "generate:css": "npx tailwindcss -o ./app/tailwind.css",
-    "start": "cross-env NODE_ENV=production node ./build/server.js",
-    "start:mocks": "cross-env NODE_ENV=production node --require ./mocks --require dotenv/config ./build/server.js"
+    "generate:css": "npx tailwindcss -o ./app/tailwind.css"
   },
   "dependencies": {
-    "@cloudinary/react": "^1.4.0",
-    "@cloudinary/url-gen": "^1.8.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@prisma/client": "^3.8.1",
@@ -27,16 +23,9 @@
     "@remix-run/react": "^1.5.1",
     "@remix-run/serve": "^1.5.1",
     "bcrypt": "^5.0.1",
-    "cloudinary": "^1.30.0",
-    "cloudinary-react": "^1.7.2",
-    "flowbite": "^1.4.7",
-    "flowbite-datepicker": "^1.2.1",
-    "flowbite-react": "^0.0.27",
-    "progressbar.js": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-masonry-css": "^1.0.16",
-    "react-progressbar.js": "^0.1.2",
     "recharts": "^2.1.8",
     "wrangler": "^0.0.0-a8c509a"
   },

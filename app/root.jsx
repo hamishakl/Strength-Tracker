@@ -60,6 +60,7 @@ export function ErrorBoundary(error) {
       </head>
       <body>
         <Scripts />
+        <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
       </body>
     </html>
   )

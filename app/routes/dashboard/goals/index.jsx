@@ -44,10 +44,8 @@ export const loader = async ({ request }) => {
 }
 
 export function ErrorBoundary(error) {
-  console.error(error);
-  return (
-  <NestedError/>
-  )
+  console.error(error)
+  return <NestedError />
 }
 
 export default function index() {
@@ -67,7 +65,6 @@ export default function index() {
   const achieved = [goals, true]
   let goalData = []
   goals.map((goal) => {
-    console.log(goal)
     if (goal.achieved === false) {
       let weight = goal.Exercise.Pr[0].weight
       let reps = goal.Exercise.Pr[0].reps
@@ -75,37 +72,39 @@ export default function index() {
         name: goal.Exercise.title,
         goal: goal.weight,
         current: OneRmEstimate(weight, reps),
+        goalData: [goal],
       }
       goalData.push(obj)
     } else {
       null
     }
-  })  
+  })
 
   return (
-    <>
-      <div>
+    <div className="">
+      <div className="">
         <Navbar data={['My Goals', 'goals/new', 'New Goal']} />
-        <MyGoals data={notAchieved} />
+        {goalData.map((data) => {
+          let goal = data.goal
+          let current = data.current
+          let name = data.name
+          return (
+            <>
+              <MyGoals data={[data.goalData, false]} />
+              <ProgressBar data={[goal, current, name]} />
+            </>
+          )
+        })}
         {achievedArr.length != 0 ? (
-          <>
-            <h2>Goals I've accomplished so far:</h2>
+          <div className="mt-4">
+            <h2 className="mb-2 font-bold underline-offset-1 underline">
+              Goals I've accomplished so far:
+            </h2>
             <MyGoals data={achieved} />
-          </>
+          </div>
         ) : null}
       </div>
-    <div className='goal-pie-chart__wrapper'>
+      {/* <div className="goal-pie-chart__wrapper"></div> */}
     </div>
-    {
-      goalData.map((data) => {
-        let goal = data.goal
-        let current = data.current
-        let name = data.name
-        return(
-          <ProgressBar data={[goal, current, name]} />
-        )
-      })
-    }
-    </>
   )
 }

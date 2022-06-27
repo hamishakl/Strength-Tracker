@@ -10,8 +10,34 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
+import { useState, useEffect } from 'react';
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+export function useWindowDimensions() {
+  
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+}
+
+
 const CustomTooltip = ({ active, payload, label }) => {
-  // getDate(label)
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
@@ -30,11 +56,17 @@ const CustomTooltip = ({ active, payload, label }) => {
 }
 
 export default function WorkoutChart(data) {
-  return (
-    <ResponsiveContainer width="100%" height="100%">
+  let screenHeight 
+  let screenWidth
+  if (typeof window !== "undefined") {
+   screenWidth = useWindowDimensions().width;
+   screenHeight = useWindowDimensions().height;
+   
+   return (
+    <ResponsiveContainer width={'100%' } height={'95%'} className="chart__container">
       <LineChart
-        width={500}
-        height={300}
+        width={screenWidth}
+        height={screenHeight}
         data={data.data}
         margin={{
           top: 5,
@@ -47,14 +79,19 @@ export default function WorkoutChart(data) {
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
-        <Legend />
+        {/* <Legend /> */}
         <Line
           type="monotone"
           dataKey="Workouts Per Week"
           stroke="#8884d8"
           activeDot={{ r: 8 }}
-        />
+          />
       </LineChart>
     </ResponsiveContainer>
   )
+} else {
+  return (
+    <>Loading..</>
+  )
+}
 }

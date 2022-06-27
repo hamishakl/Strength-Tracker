@@ -83,7 +83,9 @@ export default function index() {
 
   return (
     <div>
+      <div className="mt-2">
       <Navbar data={['My Personal Records', 'prs/new', 'New PR']} />
+      </div>
 
       {prArray.map((pr) => {
         return (
@@ -92,7 +94,7 @@ export default function index() {
             <div className="overflow-scroll h-auto max-h-1/2 pr-table__div">
               <table className="w-full flex flex-row flex-no-wrap rounded-lg sm:shadow-lg my-5">
                 <thead className="text-white">
-                  <tr className="bg-neutral-500	3 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                  <tr className="bg-neutral-500	3 flex flex-row flex-no wrap sm:table-row sm:rounded-none mb-2 sm:mb-0 justify-between">
                     <th className="p-3 text-left">Date</th>
                     <th className="p-3 text-left">Weight</th>
                     <th className="p-3 text-left">Reps</th>
@@ -102,15 +104,15 @@ export default function index() {
                 <tbody className="flex-1 sm:flex-none">
                   {pr.map((individualPrs) => {
                     return individualPrs.weight === undefined ? null : (
-                      <tr className="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 hover:bg-neutral-500 p-3 hover:text-white">
-                        <td className="p-3">
+                      <tr className="flex flex-row flex-no wrap sm:table-row sm:mb-0 hover:bg-neutral-500 sm:p-3 w-full px-2 justify-between hover:text-white">
+                        <td className="w-1/4 sm:w-auto md:p-3">
                           {individualPrs.date === undefined
                             ? null
                             : dateStr(new String(individualPrs.date))}
                         </td>
-                        <td className="  p-3">{individualPrs.weight}kg</td>
-                        <td className=" p-3">{individualPrs.reps}</td>
-                        <td className="p-3">{individualPrs.oneRm}kg</td>
+                        <td className="w-1/4 sm:w-auto   md:p-3">{individualPrs.weight}kg</td>
+                        <td className="w-1/4 sm:w-auto  md:p-3">{individualPrs.reps}</td>
+                        <td className="w-1/4 sm:w-auto md:p-3">{individualPrs.oneRm}kg</td>
                       </tr>
                     )
                   })}

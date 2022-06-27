@@ -137,10 +137,10 @@ function Layout({ children }) {
               Strength Tracker
             </Link>
             <div className="navbar-buttons__div">
-              <Link className="mr-1" to="/auth/register">
+              <Link className="mr-3 underline underline-offset-2" to="/auth/register">
                 Register
               </Link>
-              <Link className="" to="/auth/login">
+              <Link className="underline underline-offset-2" to="/auth/login">
                 Login
               </Link>
             </div>

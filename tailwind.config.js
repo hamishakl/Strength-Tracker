@@ -1,8 +1,6 @@
 module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}",
-  'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
 ],
-plugins: [require('flowbite/plugin')],
   theme: {
     extend: {
       colors: {

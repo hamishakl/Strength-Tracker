@@ -5,7 +5,9 @@ module.exports = {
 plugins: [require('flowbite/plugin')],
   theme: {
     extend: {
-
+      colors: {
+        'dark': '#1F1F1F'
+      },
       minHeight: {
         '1/2': '50vh',
         'full': '100%',

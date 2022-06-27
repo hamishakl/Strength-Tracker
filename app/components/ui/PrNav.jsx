@@ -14,7 +14,7 @@ export default function PrNavbar(data) {
   }
 
   return (
-    <div className={'dashboard-section-navbar mt-10 pr-15'}>
+    <div className={'dashboard-section-navbar mt-5 sm:mt-10 pr-15'}>
       <Link to={`../dashboard/exercises/${id}`}>
         <h2 className="text-xl font-bold">{title}</h2>
       </Link>

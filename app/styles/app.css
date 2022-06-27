@@ -131,6 +131,7 @@ a {
   /* width: 100%; */
   margin-left: 20vw;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .app-body-navigation {
@@ -831,7 +832,7 @@ dd {
   width: 100%;
   align-items: center;
   border-bottom: #ffffff solid 1px;
-  margin-bottom: 2em;
+  /* margin-bottom: 2em; */
 }
 
 .dashboard-section-navbar__links {
@@ -927,7 +928,7 @@ dd {
   padding: 0 5px;
   display: flex;
   height: 40px;
-  width: 400px;
+  width: 350px;
   display: flex;
   justify-content: space-between;
 }
@@ -945,8 +946,8 @@ dd {
 
 .progress-bar__goal p {
   position: absolute;
-  margin-left: 330px;
-  z-index: 100;
+  margin-left: 280px;
+  z-index: 1;
 }
 .progress-bar__current p {
   position: absolute;
@@ -1048,4 +1049,13 @@ th:not(:last-child) {
 }
 .pr-table__div::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
+}
+
+.chart__container {
+  margin-left: -42px;
+}
+.my-masonry-grid_column{
+  justify-content: center;
+  align-items: center;
+  padding-left: 0;
 }

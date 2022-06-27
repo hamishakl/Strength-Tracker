@@ -5,28 +5,27 @@ import {
   Outlet,
   Scripts,
   useLoaderData,
-} from "@remix-run/react"
-import { getUser } from "./utils/session.server"
-import cssSheet from "./styles/app.css"
-import HomepageFooter from "./components/ui/HomepageFooter"
-import mobileCssSheet from "~/styles/mobile.css"
-import MobileNav from "./components/ui/MobileNav"
-import { useState } from "react"
+} from '@remix-run/react'
+import { getUser } from './utils/session.server'
+import cssSheet from './styles/app.css'
+import HomepageFooter from './components/ui/HomepageFooter'
+import mobileCssSheet from '~/styles/mobile.css'
+import MobileNav from './components/ui/MobileNav'
+import { useState } from 'react'
 
-import styles from "./tailwind.css";
-import DashboardNavbar from "./components/ui/DashboardNavbar"
-import { Footer } from "./components/homepage/Footer"
-
+import styles from './tailwind.css'
+import DashboardNavbar from './components/ui/DashboardNavbar'
+import { Footer } from './components/homepage/Footer'
 
 export const links = () => {
   return [
-    { rel: "stylesheet", href: styles },
+    { rel: 'stylesheet', href: styles },
     {
-      rel: "stylesheet",
+      rel: 'stylesheet',
       href: cssSheet,
     },
     {
-      rel: "stylesheet",
+      rel: 'stylesheet',
       href: mobileCssSheet,
     },
   ]
@@ -51,41 +50,41 @@ export default function App(params) {
 }
 
 export function ErrorBoundary(error) {
-  console.error(error);
+  console.error(error)
   return (
-    <html>
+    <html lang="en">
       <head>
         <title>Oh no!</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <Links />
       </head>
       <body>
-        <h1>woops g</h1>
         <Scripts />
+        <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
       </body>
     </html>
-  );
+  )
 }
 
 function Document({ children, title }) {
   return (
-    <html lang='en'>
-      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <html lang="en">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <head>
         <Links />
         <title>Strength Tracker</title>
         <link
-          rel='stylesheet'
-          href='https://use.typekit.net/jwz3lmi.css'
+          rel="stylesheet"
+          href="https://use.typekit.net/jwz3lmi.css"
         ></link>
       </head>
       <body>
         {children}
-        {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
         <Scripts />
         <script
-          src='https://widget.cloudinary.com/v2.0/global/all.js'
-          type='text/javascript'
+          src="https://widget.cloudinary.com/v2.0/global/all.js"
+          type="text/javascript"
         ></script>
       </body>
     </html>
@@ -99,25 +98,31 @@ function Layout({ children }) {
   return (
     <>
       {user ? (
-        <div className={"app flex justifiy-between"}>
-          <div className={"app-body"}>
+        <div className={'app flex justifiy-between'}>
+          <div className={'app-body'}>
             <DashboardNavbar user={user} />
-            <div className={"app-body-main-content flex justifiy-between flex-col min-h-full"}>
+            <div
+              className={
+                'app-body-main-content flex justifiy-between flex-col h-full'
+              }
+            >
               {count === 1 ? (
-                <MobileNav user={user}>
+                <MobileNav user={user} onClick={() => setPage((count = 0))}>
                   <div
-                    className='mobile-nav__button--close'
+                    className="mobile-nav__button--close"
                     onClick={() => setPage((count = 0))}
                   ></div>
                 </MobileNav>
               ) : null}
-              <nav className='mobile-nav'>
-                <h1 className={"logo-title mobile-title"}>
-                  <span>Strength</span>
-                  <span>Tracker</span>
-                </h1>
+              <nav className="mobile-nav mb-3">
+                <Link to={'/dashboard'}>
+                  <h1 className={'logo-title mobile-title mb-1'}>
+                    <span className="text-xl font-bold">Strength</span>
+                    <span className="text-xl font-bold">Tracker</span>
+                  </h1>
+                </Link>
                 <div
-                  className='mobile-nav__button'
+                  className="mobile-nav__button"
                   onClick={() => setPage((count = 1))}
                 ></div>
               </nav>
@@ -126,21 +131,21 @@ function Layout({ children }) {
           </div>
         </div>
       ) : (
-        <container className='homepage-container w-5/6'>
-          <nav className='homepage__navbar w-full'>
-            <Link className='home-logo logo--animation' to='/'>
+        <container className="homepage-container w-5/6">
+          <nav className="homepage__navbar w-full">
+            <Link className="home-logo logo--animation" to="/">
               Strength Tracker
             </Link>
-            <div className='navbar-buttons__div'>
-              <Link className='mr-1' to='/auth/register'>
+            <div className="navbar-buttons__div">
+              <Link className="mr-1" to="/auth/register">
                 Register
               </Link>
-              <Link className='' to='/auth/login'>
+              <Link className="" to="/auth/login">
                 Login
               </Link>
             </div>
           </nav>
-          <div className='w-full'>{children}</div>
+          <div className="w-full">{children}</div>
           {/* <HomepageFooter /> */}
           <Footer />
         </container>

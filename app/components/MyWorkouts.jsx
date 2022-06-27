@@ -3,8 +3,13 @@ import { wordDate } from '../routes/dashboard/workouts'
 import { Link } from '@remix-run/react'
 
 export default function MyWorkouts({ data }) {
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1
+  };
   const workoutData = data
-  console.log(workoutData)
   if (data === undefined) {
     return null
   } else {
@@ -47,7 +52,7 @@ export default function MyWorkouts({ data }) {
     
     return (
       <Masonry
-        breakpointCols={3}
+        breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >

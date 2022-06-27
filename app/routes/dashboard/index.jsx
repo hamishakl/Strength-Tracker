@@ -132,8 +132,8 @@ function ExerciseItems() {
             </p>
           </div>
         </div>
-        <div className={'app-header-mobile '}>
-          <h1 className={''}>Welcome, {data.user.name}!</h1>
+        <div className={'app-header-mobile mb-3'}>
+          <h1 className={'mb-2 font-bold text-3xl'}>Welcome, {data.user.name}!</h1>
           <p>
             Here's what's happening with your strength progress so far. Well
             done!

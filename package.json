@@ -8,13 +8,14 @@
   },
   "scripts": {
     "build": "run-s build:*",
-    "start": "run-s build:*",
     "build:css": "npm run generate:css -- --minify",
     "build:remix": "remix build",
     "dev": "run-p dev:*",
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "remix dev",
-    "generate:css": "npx tailwindcss -o ./app/tailwind.css"
+    "generate:css": "npx tailwindcss -o ./app/tailwind.css",
+    "start": "cross-env NODE_ENV=production node ./build/server.js",
+    "start:mocks": "cross-env NODE_ENV=production node --require ./mocks --require dotenv/config ./build/server.js"
   },
   "dependencies": {
     "@cloudinary/react": "^1.4.0",

@@ -56,7 +56,7 @@
     }
 }
 
-@media (min-width: 800px){
+@media (min-width: 916px){
     .mobile-nav__button{
         display: none;
     }

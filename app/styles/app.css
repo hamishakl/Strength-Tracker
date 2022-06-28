@@ -110,6 +110,7 @@ a {
 @media (max-width: 1200px) {
   .app-header-mobile {
     display: flex;
+    flex-direction: column;
   }
 
 }
@@ -143,9 +144,9 @@ a {
   height: 90vh;
 }
 @media (max-width: 1200px) {
-  .app-body-navigation {
+  /* .app-body-navigation {
     display: none;
-  }
+  } */
 }
 
 .footer {
@@ -956,10 +957,21 @@ dd {
   color: black;
 }
 
-@media (max-width: 1000px) {
-  .app-body-main-content{
+@media (max-width: 915px){
+   .app-body-main-content{
     margin-left: 0;
   }
+
+  .app-body-navigation {
+    display: none;
+  }
+
+}
+
+@media (max-width: 1000px) {
+  /* .app-body-main-content{
+    margin-left: 0;
+  } */
 
   .app-header-mobile {
     display: flex;

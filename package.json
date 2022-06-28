@@ -18,7 +18,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@prisma/client": "^3.8.1",
+    "@prisma/client": "^3.15.2",
     "@remix-run/node": "^1.5.1",
     "@remix-run/react": "^1.5.1",
     "@remix-run/serve": "^1.5.1",
@@ -27,6 +27,7 @@
     "react-dom": "^17.0.2",
     "react-masonry-css": "^1.0.16",
     "recharts": "^2.1.8",
+    "sqlitemongo": "^1.1.14",
     "wrangler": "^0.0.0-a8c509a"
   },
   "devDependencies": {
@@ -36,7 +37,7 @@
     "concurrently": "^7.0.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.8",
-    "prisma": "^3.13.0",
+    "prisma": "^3.15.2",
     "tailwindcss": "^3.1.3"
   },
   "engines": {

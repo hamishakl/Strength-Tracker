@@ -7,8 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id           String     @id @default(uuid()) @map("_id")
+  email        String     @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  exercises    Exercise[]
+  Pr           Pr[]       @relation("userid")
+  Volume       Volume[]
+  Workout      Workout[]
+  Goals        Goals[]
+  picture      Int        @default(1)
+}
+
 model Exercise {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid()) @map("_id")
   user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String?
   title     String
@@ -22,7 +37,7 @@ model Exercise {
 }
 
 model Goals {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id                  String    @id @default(uuid()) @map("_id")
   user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId              String
   createdAt           DateTime  @default(now())
@@ -37,8 +52,8 @@ model Goals {
 }
 
 model Pr {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId     String?
+  id         String    @id @default(uuid()) @map("_id")
   weight     Int
   reps       Int
   createdAt  DateTime  @default(now())
@@ -51,28 +66,9 @@ model Pr {
 
 }
 
-model Test {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-}
-
-model User {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  /// Field referred in an index, but found no data to define the type.
-  email        String     @unique
-  name         String
-  passwordHash String
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  exercises    Exercise[]
-  Pr           Pr[]       @relation("userid")
-  Volume       Volume[]
-  Workout      Workout[]
-  Goals        Goals[]
-}
-
 model Volume {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-    userId     String
+  userId     String
+  id         String    @id @default(uuid()) @map("_id")
   weight     Int
   reps       Int
   sets       Int
@@ -87,8 +83,8 @@ model Volume {
 }
 
 model Workout {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId    String
+  id        String   @id @default(uuid()) @map("_id")
   User      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

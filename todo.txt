@@ -1,4 +1,0 @@
-- styling 
-- home page 
-- user page 
-- populate exercise suggestions with an api

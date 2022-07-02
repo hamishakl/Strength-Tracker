@@ -624,9 +624,7 @@ a {
     flex-direction: column;
   }
 }
-.transfer + * {
-  margin-top: 2rem;
-}
+
 
 .transfer-logo {
   background-color: var(--c-gray-200);
@@ -651,7 +649,7 @@ a {
   .transfer-details {
     flex-wrap: wrap;
     margin-left: 0;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -869,7 +867,6 @@ dd {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */
   display: flex;
-  margin-left: -30px; /* gutter size offset */
   width: auto;
 }
 .my-masonry-grid_column {
@@ -1019,7 +1016,7 @@ dd {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
+  width: 75%;
   flex-direction: column;
 }
 

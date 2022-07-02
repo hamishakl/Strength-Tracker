@@ -149,7 +149,9 @@ function ExerciseItems() {
         <MyExercise exercises={data.exercises['exercises']} />
       </div>
       <div className="h-auto mb-10 flex justify-center flex-col">
+        <div className='mb-5'>
         <Navbar data={['My Workouts This Week', 'workouts/new', 'workouts']} />
+        </div>
         <MyWorkouts data={workoutData} />
       </div>
     </>

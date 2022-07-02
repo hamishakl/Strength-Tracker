@@ -4,7 +4,7 @@
   "description": "",
   "license": "",
   "prisma": {
-    "seed": "node prisma/seed.mjs"
+    "seed": "node prisma/seed.js"
   },
   "scripts": {
     "build": "run-s build:*",

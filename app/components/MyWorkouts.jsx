@@ -60,7 +60,7 @@ export default function MyWorkouts({ data }) {
           return [
             <div className='workout-card'>
               <Link to={`/dashboard/workouts/${workout.id}`}>
-              <h4>{wordDate(workout.date)}</h4>
+              <h4 className='font-bold text-2xl underline underline-offset-1 mb-3'>{wordDate(workout.date)}</h4>
               </Link>
               {workout.volume.map((vol) => {
                 return (
@@ -68,20 +68,18 @@ export default function MyWorkouts({ data }) {
                     {vol.exercise != undefined ? (
                       <div className='workout-card-heading__div'>
                         <div>
-                          <p>
                             <Link to={`exercises/${vol.exerciseId}`}>
-                              <h3>{vol.exercise}</h3>
+                              <h3 className='font-bold underline text-xl'>{vol.exercise}</h3>
                             </Link>
-                          </p>
                         </div>
-                        <div className='workout-card-title__div'>
-                          <p>Weight</p>
-                          <p>Reps</p>
-                          <p>Sets</p>
+                        <div className='workout-card-title__div border-b border-t mt-2'>
+                          <p className=''>Weight</p>
+                          <p className=''>Reps</p>
+                          <p className=''>Sets</p>
                         </div>
                       </div>
                     ) : null}
-                    <div className='workout-card-work__div'>
+                    <div className='workout-card-work__div mb-5'>
                       <p>{vol.weight}kg</p>
                       <p>{vol.reps}</p>
                       <p>{vol.sets}</p>

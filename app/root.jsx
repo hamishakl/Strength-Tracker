@@ -111,7 +111,9 @@ function Layout({ children }) {
                   <div
                     className="mobile-nav__button--close"
                     onClick={() => setPage((count = 0))}
-                  ></div>
+                  >
+                   
+                  </div>
                 </MobileNav>
               ) : null}
               <nav className="mobile-nav mb-3">
@@ -122,9 +124,13 @@ function Layout({ children }) {
                   </h1>
                 </Link>
                 <div
-                  className="mobile-nav__button"
+                  className="mobile-nav__button flex justify-between flex-col"
                   onClick={() => setPage((count = 1))}
-                ></div>
+                >
+                   <div className='bg-white w-full h-1/4'></div>
+                    <div className='bg-white w-full h-1/4'></div>
+                    <div className='bg-white w-full h-1/4'></div>
+                </div>
               </nav>
               {children}
             </div>

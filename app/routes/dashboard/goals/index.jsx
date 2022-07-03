@@ -16,9 +16,6 @@ export const loader = async ({ request }) => {
     include: {
       Exercise: {
         include: {
-          title: true,
-        },
-        include: {
           Pr: {
             select: {
               weight: true,
@@ -50,6 +47,7 @@ export function ErrorBoundary(error) {
 
 export default function index() {
   const data = useLoaderData()
+  console.log(data.goals)
   const user = data.user
   const goals = data.goals
   const exercises = data.exercises
@@ -65,7 +63,9 @@ export default function index() {
   const achieved = [goals, true]
   let goalData = []
   goals.map((goal) => {
-    if (goal.achieved === false) {
+    // console.log(goal)
+    if (goal.achieved === false && goal.Exercise.Pr.length !== 0) {
+      console.log(goal.Exercise.pr)
       let weight = goal.Exercise.Pr[0].weight
       let reps = goal.Exercise.Pr[0].reps
       let obj = {

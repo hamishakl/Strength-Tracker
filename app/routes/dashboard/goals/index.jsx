@@ -47,12 +47,10 @@ export function ErrorBoundary(error) {
 
 export default function index() {
   const data = useLoaderData()
-  console.log(data.goals)
   const user = data.user
   const goals = data.goals
   const exercises = data.exercises
   const newGoalData = [user, exercises]
-
   let achievedArr = []
   for (let i = 0; i < goals.length; i++) {
     if (goals[i].achieved === true) {
@@ -62,10 +60,9 @@ export default function index() {
   const notAchieved = [goals, false]
   const achieved = [goals, true]
   let goalData = []
+  let noPrGoal = []
   goals.map((goal) => {
-    // console.log(goal)
     if (goal.achieved === false && goal.Exercise.Pr.length !== 0) {
-      console.log(goal.Exercise.pr)
       let weight = goal.Exercise.Pr[0].weight
       let reps = goal.Exercise.Pr[0].reps
       let obj = {
@@ -75,8 +72,14 @@ export default function index() {
         goalData: [goal],
       }
       goalData.push(obj)
-    } else {
-      null
+    } else if (goal.achieved === false && goal.Exercise.Pr.length === 0) {
+      let obj = {
+        name: goal.Exercise.title,
+        goal: goal.weight,
+        current: 0,
+        goalData: [goal],
+      }
+      noPrGoal.push(obj)
     }
   })
 
@@ -84,17 +87,29 @@ export default function index() {
     <div className="">
       <div className="">
         <Navbar data={['My Goals', 'goals/new', 'New Goal']} />
-        {goalData.map((data) => {
-          let goal = data.goal
-          let current = data.current
-          let name = data.name
-          return (
-            <>
-              <MyGoals data={[data.goalData, false]} />
-              <ProgressBar data={[goal, current, name]} />
-            </>
-          )
-        })}
+        {goalData.length === 0
+          ? noPrGoal.map((data) => {
+            let goal = data.goal
+            let current = data.current
+            let name = data.name
+              return (
+                <>
+                  <MyGoals data={[data.goalData, false]} />
+                  <ProgressBar data={[goal, current]} />
+                </>
+              )
+            })
+          : goalData.map((data) => {
+              let goal = data.goal
+              let current = data.current
+              let name = data.name
+              return (
+                <>
+                  <MyGoals data={[data.goalData, false]} />
+                  <ProgressBar data={[goal, current, name]} />
+                </>
+              )
+            })}
         {achievedArr.length != 0 ? (
           <div className="mt-4">
             <h2 className="mb-2 font-bold underline-offset-1 underline">

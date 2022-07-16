@@ -72,6 +72,7 @@ export const action = async ({ request }) => {
 
 function Login() {
   const actionData = useActionData()
+  const transition = useTransition()
 
   return (
     <div className="auth-wrapper">

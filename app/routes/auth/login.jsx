@@ -1,5 +1,5 @@
 import { json, redirect } from '@remix-run/node'
-import { Link, useActionData } from '@remix-run/react'
+import { Link, useActionData,  useTransition  } from '@remix-run/react'
 import { login, register, createUserSession } from '~/utils/session.server'
 
 
@@ -136,8 +136,12 @@ function Login() {
               </div>
 
               <div class="mt-6">
-                <button class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                  Sign in
+                <button
+                                  disabled={transition.submission}
+                class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+               {transition.submission
+                      ? 'Logging in...'
+                      : 'Login'}
                 </button>
               </div>
             </form>

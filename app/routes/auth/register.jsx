@@ -1,11 +1,10 @@
-import { json, redirect } from "@remix-run/node";
-import { Link, useActionData } from "@remix-run/react";
+import { json, redirect } from '@remix-run/node'
+import { Link, useActionData, useTransition } from '@remix-run/react'
 import { db } from '~/utils/db.server'
 import { register, createUserSession } from '~/utils/session.server'
 
 import cssSheet from '~/styles/app.css'
 import homepageCssSheet from '~/styles/homepage.css'
-
 
 export const links = () => {
   return [
@@ -18,13 +17,11 @@ export const links = () => {
       href: homepageCssSheet,
     },
     {
-      rel: "stylesheet",
-      href: 'https://fonts.googleapis.com/css?family=Noto Serif'
-    }
-
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css?family=Noto Serif',
+    },
   ]
 }
-
 
 function badRequest(data) {
   return json(data, { status: 400 })
@@ -55,7 +52,7 @@ export const action = async ({ request }) => {
   const email = form.get('email')
   const password = form.get('password')
   const name = form.get('name')
-  
+
   const fields = { loginType, email, name, password }
 
   const fieldErrors = {
@@ -75,7 +72,7 @@ export const action = async ({ request }) => {
   if (emailExists) {
     return badRequest({
       fields,
-      fieldErrors: {email: `the email address: ${email} already exists.`},
+      fieldErrors: { email: `the email address: ${email} already exists.` },
     })
   }
 
@@ -92,6 +89,7 @@ export const action = async ({ request }) => {
 
 function Login() {
   const actionData = useActionData()
+  const transition = useTransition()
 
   return (
     <div className="auth-wrapper">
@@ -99,7 +97,7 @@ function Login() {
         <div class="flex-1">
           <div class="text-center">
             <p class="mt-3 text-gray-500 dark:text-black">
-             Sign up to start tracking your strength today
+              Sign up to start tracking your strength today
             </p>
           </div>
           <div class="mt-8">
@@ -155,7 +153,6 @@ function Login() {
                   >
                     Password
                   </label>
-                  
                 </div>
 
                 <input
@@ -172,13 +169,18 @@ function Login() {
               </div>
 
               <div class="mt-6">
-                <button class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                  Sign in
+                <button
+                  disabled={transition.submission}
+                  class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                >
+                   {transition.submission
+                      ? 'Signing up...'
+                      : 'Sign up'}
                 </button>
               </div>
             </form>
 
-            <p  class="mt-6 text-sm text-center text-gray-400">
+            <p class="mt-6 text-sm text-center text-gray-400">
               Already have an account?{' '}
               <Link
                 to={'../auth/login'}
@@ -196,5 +198,3 @@ function Login() {
 }
 
 export default Login
-
-

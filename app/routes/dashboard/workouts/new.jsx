@@ -1,5 +1,10 @@
 import { redirect } from '@remix-run/node'
-import { Form, useActionData, useLoaderData } from '@remix-run/react'
+import {
+  Form,
+  useActionData,
+  useLoaderData,
+  useTransition,
+} from '@remix-run/react'
 import { getUser } from '~/utils/session.server'
 import { db } from '~/utils/db.server'
 import React, { useState } from 'react'
@@ -160,6 +165,7 @@ export const action = async ({ request }) => {
 }
 
 export default function newWorkout() {
+  const transition = useTransition()
   const actionData = useActionData()
 
   const [volumeArray, setCount] = useState([])
@@ -310,9 +316,12 @@ export default function newWorkout() {
             </a>
             <button
               type="submit"
+              disabled={transition.submission}
               class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-blue-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:focus:text-white"
             >
-              Save
+              {transition.submission
+                      ? 'Saving workout...'
+                      : 'Save workout'}
             </button>
             <a
               onClick={() => setPage((count = 1))}
@@ -353,9 +362,12 @@ export default function newWorkout() {
                     type="submit"
                     // onClick={() => props.onClick()}
                     aria-current="page"
+                    disabled={transition.submission}
                     class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-blue-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-blue-700 dark:focus:ring-blue-500 dark:focus:text-white"
                   >
-                    Save
+                    {transition.submission
+                      ? 'Saving workout...'
+                      : 'Save workout'}
                   </button>
                   <a
                     onClick={() => setPage((count = 0))}

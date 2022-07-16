@@ -1,5 +1,5 @@
 import { json, redirect } from '@remix-run/node'
-import { Link, useActionData,  useTransition  } from '@remix-run/react'
+import { Link, useActionData,  useTransition, Form  } from '@remix-run/react'
 import { login, register, createUserSession } from '~/utils/session.server'
 
 
@@ -84,7 +84,7 @@ function Login() {
             </p>
           </div>
           <div class="mt-8">
-            <form method="POST">
+            <Form method="POST">
               <div>
                 <label
                   for="email"
@@ -145,7 +145,7 @@ function Login() {
                       : 'Login'}
                 </button>
               </div>
-            </form>
+            </Form>
 
             <Link to={'../auth/register'} class="mt-6 text-sm text-center text-gray-400">
               Don&#x27;t have an account yet?{' '}

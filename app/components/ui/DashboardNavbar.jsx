@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react'
+import { Form, Link } from '@remix-run/react'
 
 export default function DashboardNavbar(user) {
   return (
@@ -38,11 +38,11 @@ export default function DashboardNavbar(user) {
         </Link>
       </nav>
       <div className={'footer'}>
-          <form action="/auth/logout" method="POST">
+          <Form action="/auth/logout" method="POST">
             <button className="btn underline" type="submit">
               Logout {user.user.name}
             </button>
-          </form>
+          </Form>
       </div>
     </div>
   )

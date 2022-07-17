@@ -1,8 +1,10 @@
+import { Form } from '@remix-run/react'
+
 export default function NewExerciseForm(data, children) {
   const actionData = data[0]
   return (
     <div className="page-content mt-3 pb-4">
-      <form method="POST">
+      <Form method="POST">
         <input type="hidden" name="_method" value="exercise" />
         <div className="relative z-0 w-full mb-10 group">
           <input
@@ -42,7 +44,7 @@ export default function NewExerciseForm(data, children) {
             Cancel
           </a>
         </div>
-      </form>
+      </Form>
     </div>
   )
 }

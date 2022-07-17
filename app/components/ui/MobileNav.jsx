@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link } from "@remix-run/react"
+import { Link, Form } from "@remix-run/react"
 
 export default function MobileNav({ children, user, props }) {
   return (
@@ -31,11 +31,11 @@ export default function MobileNav({ children, user, props }) {
           <span>Account Settings</span>
         </Link>
         <footer className={"footer"}>
-            <form action='/auth/logout' method='POST'>
+            <Form action='/auth/logout' method='POST'>
               <button className='btn' type='submit' onClick={() => props.onClick()}>
                 Logout {user.name}
               </button>
-            </form>
+            </Form>
         </footer>
       </nav>
     </div>

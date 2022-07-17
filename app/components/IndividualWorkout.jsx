@@ -1,5 +1,5 @@
 import { wordDate } from '../routes/dashboard/workouts'
-import { Link } from '@remix-run/react'
+import { Link, Form } from '@remix-run/react'
 import { getUser } from '~/utils/session.server'
 import { db } from '~/utils/db.server'
 
@@ -137,7 +137,7 @@ export default function IndividualWorkout({ data }) {
       <>
         {arr.map((workout) => {
           return [
-            <form className="workout-card" method='POST'>
+            <Form className="workout-card" method='POST'>
               <Link to={`/dashboard/workouts/${workout.id}`}>
                 <h4>{wordDate(workout.date)}</h4>
               </Link>
@@ -181,7 +181,7 @@ export default function IndividualWorkout({ data }) {
                 )
               })}
               <button type="submit">Save</button>
-            </form>,
+            </Form>,
           ]
         })}
       </>

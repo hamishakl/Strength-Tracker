@@ -68,7 +68,7 @@ export default function MyWorkouts({ data }) {
                     {vol.exercise != undefined ? (
                       <div className='workout-card-heading__div'>
                         <div>
-                            <Link to={`exercises/${vol.exerciseId}`}>
+                            <Link to={`../dashboard/exercises/${vol.exerciseId}`}>
                               <h3 className='font-bold underline text-xl'>{vol.exercise}</h3>
                             </Link>
                         </div>

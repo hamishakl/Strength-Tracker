@@ -1,5 +1,5 @@
 import { json, redirect } from '@remix-run/node'
-import { Form, Link, useActionData, useLoaderData, Form } from '@remix-run/react'
+import { Form, Link, useActionData, useLoaderData } from '@remix-run/react'
 import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 import { goalCalc } from '../prs/new'
@@ -92,7 +92,7 @@ function NewPr() {
         </Link>
       </div>
       <div className="">
-         method="POST">
+        <Form method="POST">
         <div>
           <h5>Date of workout:</h5>
           <input

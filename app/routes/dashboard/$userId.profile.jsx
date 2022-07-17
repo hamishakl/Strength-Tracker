@@ -1,6 +1,6 @@
 import React from 'react'
 import { json } from '@remix-run/node'
-import { useActionData, useLoaderData } from '@remix-run/react'
+import { useActionData, useLoaderData, Form } from '@remix-run/react'
 import { getUser } from '~/utils/session.server'
 import { useState } from 'react'
 import { db } from '~/utils/db.server'
@@ -127,7 +127,7 @@ export default function register() {
       {count === 1 && (
         <div className="w-full lg:w-1/2 h-1/2 flex flex-col justify-between">
           <div className="mb-20 flex flex-row justify-between items-center">
-            <form method="POST" className="w-full">
+            <Form method="POST" className="w-full">
               <input type="hidden" name="_method" value="name" />
               <div class="mb-6">
                 <label
@@ -151,7 +151,7 @@ export default function register() {
               >
                 Submit
               </button>
-            </form>
+            </Form>
           </div>
           <div className="mb-20 flex flex-row justify-between items-center">
             <h1
@@ -233,7 +233,7 @@ export default function register() {
             </a>
           </div>
           <div className="mb-20 flex flex-row justify-between items-center">
-            <form method="POST" className="w-full">
+            <Form method="POST" className="w-full">
               <input type="hidden" name="_method" value="email" />
               <div class="mb-6">
                 <label
@@ -261,7 +261,7 @@ export default function register() {
               >
                 Submit
               </button>
-            </form>
+            </Form>
           </div>
           <a className="underline" onClick={() => setPage((count = 3))}>
             Change password
@@ -297,7 +297,7 @@ export default function register() {
               Edit email
             </a>
           </div>
-          <form method="POST">
+          <Form method="POST">
             <input type="hidden" name="_method" value="password" />
             <div class="mb-6">
               <label
@@ -357,7 +357,7 @@ export default function register() {
             >
               Submit
             </button>
-          </form>
+          </Form>
         </div>
       )}
     </div>

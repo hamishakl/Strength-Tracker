@@ -1,5 +1,5 @@
 import { json, redirect } from '@remix-run/node'
-import { Link, useActionData, useLoaderData } from '@remix-run/react'
+import { Link, useActionData, useLoaderData, Form } from '@remix-run/react'
 import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 import Navbar from '../../../components/ui/PagesNavbar'
@@ -47,7 +47,7 @@ function NewExercise() {
         <Navbar data={['New Exercise', 'exercises', 'Back']} />
       </div>
       <div className="page-content">
-        <form method="POST">
+        <Form method="POST">
           <div className="relative z-0 w-full mt-5 mb-10 group">
             <input
               type="text"
@@ -76,7 +76,7 @@ function NewExercise() {
           >
             Save
           </button>
-        </form>
+        </Form>
       </div>
     </>
   )

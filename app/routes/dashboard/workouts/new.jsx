@@ -339,7 +339,7 @@ export default function newWorkout() {
           </div>
           {count === 1 ? (
             <div className="page-content mt-3 pb-4">
-              <form method="POST">
+              <Form method="POST">
                 <input type="hidden" name="_method" value="exercise" />
                 <div className="relative z-0 w-full mb-10 group">
                   <input
@@ -383,7 +383,7 @@ export default function newWorkout() {
                     Cancel
                   </a>
                 </div>
-              </form>
+              </Form>
             </div>
           ) : null}
           </div>
